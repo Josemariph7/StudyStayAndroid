@@ -17,8 +17,10 @@
         android:layout_height="61dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="252dp"
+        android:layout_marginEnd="40dp"
         android:hint="@string/hintEmail"
         app:boxBackgroundMode="outline"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -34,7 +36,9 @@
         android:layout_height="64dp"
         android:layout_marginStart="41dp"
         android:layout_marginTop="325dp"
+        android:layout_marginEnd="41dp"
         android:hint="@string/hintPassword"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -47,6 +51,7 @@
         android:id="@+id/loginButton"
         style="@style/Widget.Material3.Button.ElevatedButton"
         android:layout_width="237dp"
+        android:background="@color/LightBlue"
         android:layout_height="48dp"
         android:layout_marginBottom="19dp"
         android:text="Log In"
@@ -58,7 +63,8 @@
 
     <Button
         android:id="@+id/registerButton"
-        style="@style/Widget.Material3.Button.ElevatedButton"
+        style="@style/Widget.Material3.Button.IconButton.Outlined"
+        android:background="@color/LightBlue"
         android:layout_width="240dp"
         android:layout_height="48dp"
         android:layout_marginBottom="104dp"
@@ -72,9 +78,9 @@
         android:id="@+id/imageView"
         android:layout_width="486dp"
         android:layout_height="223dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.441"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logotransparente"

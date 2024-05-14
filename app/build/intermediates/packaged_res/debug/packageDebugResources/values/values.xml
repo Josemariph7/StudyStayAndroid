@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="DarkBlue">#05071F</color>
+    <color name="LightBlue">#2196f3</color>
+    <color name="SadBlue">#151928</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#e7e5e5</color>
+    <string name="app_name">StudyStay</string>
+    <string name="hintEmail">Email</string>
+    <string name="hintPassword">Password</string>
+    <style name="Base.Theme.StudyStayAndroid" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    </style>
+    <style name="Theme.StudyStayAndroid" parent="Base.Theme.StudyStayAndroid"/>
+</resources>
