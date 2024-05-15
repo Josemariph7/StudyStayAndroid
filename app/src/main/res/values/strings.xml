@@ -2,4 +2,9 @@
     <string name="app_name">StudyStay</string>
     <string name="hintEmail">Email</string>
     <string name="hintPassword">Password</string>
+    <string name="hintPhone">Phone</string>
+    <string name="hintSurnames">Surnames</string>
+    <string name="hintDNI">DNI</string>"
+    <string name="hintName">Name</string>"
+    <string name="hintGender">Gender</string>"
 </resources>

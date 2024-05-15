@@ -4,14 +4,14 @@
             "outputFile": "com.example.studystayandroid.app-mergeDebugResources-29:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\6003102\\AndroidStudioProjects\\StudyStay\\app\\src\\main\\res\\values-night\\themes.xml",
+                    "source": "C:\\Users\\6003102\\AndroidStudioProjects\\StudyStayAndroid\\app\\src\\main\\res\\values-night\\themes.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
-                        "startOffsets": "100",
+                        "startOffsets": "102",
                         "endLines": "5",
                         "endColumns": "12",
-                        "endOffsets": "323"
+                        "endOffsets": "328"
                     },
                     "to": {
                         "startLines": "2",
