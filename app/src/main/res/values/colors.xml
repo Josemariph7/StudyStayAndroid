@@ -3,6 +3,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#e7e5e5</color>
     <color name="DarkBlue">#05071F</color>
-    <color name="LightBlue">#2196f3</color>
-    <color name="SadBlue">#151928</color>
+    <color name="LightBlue">#0E84E3</color>
+    <color name="SadBlue">#1C254C</color>
+
+    <!--<color name="LightBlue">#2196f3</color>
+    <color name="SadBlue">#151928</color>-->
 </resources>

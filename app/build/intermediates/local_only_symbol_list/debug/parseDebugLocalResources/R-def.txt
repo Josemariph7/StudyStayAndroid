@@ -7,6 +7,7 @@ color black
 color white
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable iconayuda
 drawable logofondoazulclaro
 drawable logofondoazuloscuro
 drawable logotransparente
@@ -14,9 +15,13 @@ drawable registerradius
 id LogInButton
 id bottom_sheet
 id drag_handle
+id drawer_layout
 id editTextBirthDate
 id imageView
 id main_layout
+id nav_item1
+id nav_item2
+id nav_view
 id registerButton
 id spinnerGender
 id textFieldDNISignUp
@@ -30,7 +35,11 @@ id textFieldPhoneSignUp
 id textFieldSurnamesignUp
 id textInputLayoutBirthDate
 id textView
+id toolbar
+layout activity_dashboard
 layout activity_main
+layout nav_header
+menu nav_menu
 mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name
@@ -45,3 +54,4 @@ style Base.Theme.StudyStayAndroid
 style Theme.StudyStayAndroid
 xml backup_rules
 xml data_extraction_rules
+xml network_security_config

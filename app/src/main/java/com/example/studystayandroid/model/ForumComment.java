@@ -1,7 +1,7 @@
 package com.example.studystayandroid.model;
 
-import com.example.ejemplo.controller.ForumTopicController;
-import com.example.ejemplo.controller.UserController;
+import com.example.studystayandroid.controller.ForumTopicController;
+import com.example.studystayandroid.controller.UserController;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -20,7 +20,7 @@ public class ForumComment {
 
     public ForumComment() {
     }
-
+/*
     public ForumComment(ForumTopic topic, User author, String content, LocalDateTime dateTime) {
         this.topic = topic;
         this.author = author;
@@ -36,7 +36,7 @@ public class ForumComment {
         this.author = userController.getById(authorId);
         this.content = content;
         this.dateTime = dateTime;
-    }
+    }*/
 
     // Getters y setters
 
