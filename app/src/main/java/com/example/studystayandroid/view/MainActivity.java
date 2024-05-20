@@ -1,6 +1,8 @@
 package com.example.studystayandroid.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +21,9 @@ import com.android.volley.toolbox.Volley;
 import com.example.studystayandroid.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.textfield.TextInputLayout;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -43,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         View registerButton = findViewById(R.id.registerButton);
         loginButton = findViewById(R.id.LogInButton);
         emailEditText = findViewById(R.id.textFieldEmail);
@@ -65,9 +71,8 @@ public class MainActivity extends AppCompatActivity {
                 String phone = phoneEditTextSignUp.getEditText().getText().toString();
                 String dni = dniEditTextSignUp.getEditText().getText().toString();
                 String surnames = surnamesEditTextSignUp.getEditText().getText().toString();
-                //String birthDate = "1990-01-01";
                 String gender = spinnerGender.getSelectedItem().toString();
-                register(name, surnames,emailSignUp,passwordSignUp,phone,dni,null,gender);
+                register(name, surnames, emailSignUp, passwordSignUp, phone, dni, null, gender);
             }
         });
 
@@ -83,11 +88,9 @@ public class MainActivity extends AppCompatActivity {
         View bottomSheet = findViewById(R.id.bottom_sheet);
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
 
-        // Establecer la altura de despliegue inicial al 33% de la pantalla
         int peekHeight = (int) (getResources().getDisplayMetrics().heightPixels * 0.11);
         bottomSheetBehavior.setPeekHeight(peekHeight);
 
-        // Establecer que el BottomSheet no sea ocultable y no se pueda colapsar
         bottomSheetBehavior.setHideable(false);
         bottomSheetBehavior.setSkipCollapsed(false);
 
@@ -99,30 +102,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void login(String email, String password) {
-        // Construir la URL con los parámetros de consulta
         String url = "http://192.168.238.26/studystay/login.php?email=" + email + "&password=" + password;
 
-        // Crear la solicitud HTTP GET
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Manejar la respuesta del servidor
-                        Log.d("LoginResponse", response); // Log para verificar la respuesta
-                        if (response.trim().equals("yes")) {
-                            // Inicio de sesión exitoso, navegar a la actividad DashboardActivity
-                            Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
-                            startActivity(intent);
-                        } else {
-                            // Mostrar mensaje de error
-                            Toast.makeText(MainActivity.this, "Usuario o contraseña inválidos.", Toast.LENGTH_SHORT).show();
+                        Log.d("LoginResponse", response);
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            String status = jsonResponse.getString("status");
+                            if (status.equals("yes")) {
+                                Long userId = jsonResponse.getLong("userId");
+                                SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putLong("userId", userId);
+                                editor.apply();
+
+                                Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(MainActivity.this, "Usuario o contraseña inválidos.", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(MainActivity.this, "Error parsing response", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Manejar errores de la solicitud HTTP
                         String errorMessage = "Error: " + error.toString();
                         if (error.networkResponse != null) {
                             errorMessage += "\nStatus Code: " + error.networkResponse.statusCode;
@@ -139,14 +149,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        // Agregar la solicitud a la cola de solicitudes de Volley
         Volley.newRequestQueue(this).add(stringRequest);
     }
-
-
-
-
-
 
     private void register(String name, String lastName, String email, String password, String phone, String birthDate, String gender, String dni) {
         String url = "http://192.168.238.26/studystay/createUser.php";
@@ -155,12 +159,9 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Manejar la respuesta del servidor
                         if (response.equals("User created successfully")) {
-                            // Usuario creado con éxito, puedes mostrar un mensaje o realizar otras acciones si es necesario
                             Toast.makeText(MainActivity.this, "User created successfully", Toast.LENGTH_SHORT).show();
                         } else {
-                            // Error al crear el usuario, muestra un mensaje de error
                             Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -168,7 +169,6 @@ public class MainActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Manejar errores de la solicitud HTTP
                         Toast.makeText(MainActivity.this, "Error: " + error.toString(), Toast.LENGTH_LONG).show();
                     }
                 }) {

@@ -2997,6 +2997,8 @@ drawable abc_vector_test
 drawable aklogo
 drawable avd_hide_password
 drawable avd_show_password
+drawable bg_message_received
+drawable bg_message_sent
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -3798,6 +3800,8 @@ layout ime_secondary_split_test_activity
 layout item_accommodation
 layout item_conversation
 layout item_message
+layout item_message_received
+layout item_message_sent
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title

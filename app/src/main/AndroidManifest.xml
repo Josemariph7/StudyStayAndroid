@@ -24,11 +24,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.ProfileActivity"
-            android:exported="true"
-            android:turnScreenOn="false"
-            />
-        <activity
             android:name=".view.DashboardActivity"
             android:exported="true"
             android:turnScreenOn="false"

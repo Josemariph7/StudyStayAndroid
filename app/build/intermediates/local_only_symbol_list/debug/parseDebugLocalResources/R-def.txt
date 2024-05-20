@@ -12,6 +12,8 @@ color teal_200
 color teal_700
 color white
 drawable aklogo
+drawable bg_message_received
+drawable bg_message_sent
 drawable headerbkg
 drawable ic_launcher_background
 drawable ic_launcher_foreground
@@ -74,6 +76,8 @@ layout fragment_profile
 layout item_accommodation
 layout item_conversation
 layout item_message
+layout item_message_received
+layout item_message_sent
 layout nav_header
 menu nav_menu
 mipmap ic_launcher
