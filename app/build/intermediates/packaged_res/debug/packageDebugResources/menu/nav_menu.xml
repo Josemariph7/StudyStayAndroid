@@ -1,8 +1,55 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/iconayuda"
+            android:title="@string/home"/>
+
+        <item
+            android:id="@+id/nav_post"
+            android:icon="@drawable/iconayuda"
+            android:title="@string/post_accommodation"/>
+
+        <item
+            android:id="@+id/nav_chat"
+            android:icon="@drawable/iconayuda"
+            android:title="@string/chat"/>
+
+        <item
+            android:id="@+id/nav_forum"
+            android:icon="@drawable/iconayuda"
+            android:title="@string/forum"/>
+
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/iconayuda"
+            android:title="@string/profile"/>
+
+    </group>
+
+    <item android:title=""></item>
+    <item android:title=""></item>
+    <item android:title=""></item>
+    <item android:title=""></item>
+    <item android:title=""></item>
+    <item android:title=""></item>
+
+
+
+
+
+
     <item
-        android:id="@+id/nav_item1"
-        android:title="Item 1" />
-    <item
-        android:id="@+id/nav_item2"
-        android:title="Item 2" />
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/iconayuda"
+
+        android:title="@string/logout"/>
+
 </menu>

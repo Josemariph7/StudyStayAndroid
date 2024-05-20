@@ -2,10 +2,10 @@ package com.example.studystayandroid.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -19,9 +19,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.studystayandroid.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.textfield.TextInputLayout;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -102,27 +99,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void login(String email, String password) {
-        // URL del script PHP para el inicio de sesión
-        String url = "http://192.168.238.26/studystay/login.php";
-        // Crear la solicitud HTTP POST
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+        // Construir la URL con los parámetros de consulta
+        String url = "http://192.168.238.26/studystay/login.php?email=" + email + "&password=" + password;
+
+        // Crear la solicitud HTTP GET
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         // Manejar la respuesta del servidor
-                        try {
-                            JSONObject jsonResponse = new JSONObject(response);
-                            if (jsonResponse.has("error")) {
-                                // Mostrar mensaje de error si hay un error en la respuesta
-                                Toast.makeText(MainActivity.this, jsonResponse.getString("error"), Toast.LENGTH_SHORT).show();
-                            } else {
-                                // Inicio de sesión exitoso, navegar a la siguiente actividad
-                                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-                                startActivity(intent);
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Toast.makeText(MainActivity.this, "Error parsing response", Toast.LENGTH_SHORT).show();
+                        Log.d("LoginResponse", response); // Log para verificar la respuesta
+                        if (response.trim().equals("yes")) {
+                            // Inicio de sesión exitoso, navegar a la actividad DashboardActivity
+                            Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+                            startActivity(intent);
+                        } else {
+                            // Mostrar mensaje de error
+                            Toast.makeText(MainActivity.this, "Usuario o contraseña inválidos.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
@@ -144,18 +137,15 @@ public class MainActivity extends AppCompatActivity {
                         }
                         Toast.makeText(MainActivity.this, errorMessage, Toast.LENGTH_LONG).show();
                     }
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("email", email);
-                params.put("password", password);
-                return params;
-            }
-        };
+                });
+
         // Agregar la solicitud a la cola de solicitudes de Volley
         Volley.newRequestQueue(this).add(stringRequest);
     }
+
+
+
+
 
 
     private void register(String name, String lastName, String email, String password, String phone, String birthDate, String gender, String dni) {

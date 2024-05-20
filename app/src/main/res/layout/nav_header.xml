@@ -1,16 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="230dp"
+    android:background="@color/LightBlue"
+    android:gravity="bottom"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="bottom">
+    android:padding="12dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <ImageView
+        android:layout_width="116dp"
+        android:layout_height="109dp"
+        android:src="@drawable/aklogo"
+        android:translationX="-5dp"
+        android:translationY="-65dp" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Navigation Drawer Header"
-        android:textColor="@android:color/white"
-        android:textSize="24sp" />
+        android:text="Android Knowledge"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:translationX="12dp"
+        android:translationY="55dp" />
 
-</LinearLayout>
+    <TextView
+        android:layout_width="254dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="contact@androidknowledge.com"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:translationX="12dp"
+        android:translationY="83dp" />
+
+</RelativeLayout>

@@ -4,8 +4,18 @@
     <color name="LightBlue">#0E84E3</color>
     <color name="SadBlue">#1C254C</color>
     <color name="black">#FF000000</color>
+    <color name="lavender">#0E84E3</color>
+    <color name="purple_200">#0E84E3</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
     <color name="white">#e7e5e5</color>
     <string name="app_name">StudyStay</string>
+    <string name="chat">Chat</string>
+    <string name="close_nav">Close Navigation Drawer</string>
+    <string name="forum">Forum</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hintDNI">DNI</string>
     <string name="hintEmail">Email</string>
     <string name="hintGender">Gender</string>
@@ -13,6 +23,11 @@
     <string name="hintPassword">Password</string>
     <string name="hintPhone">Phone</string>
     <string name="hintSurnames">Surnames</string>
+    <string name="home">Home</string>
+    <string name="logout">Logout</string>
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="post_accommodation">Post Accommodation</string>
+    <string name="profile">Profile</string>
     <style name="Base.Theme.StudyStayAndroid" parent="Theme.Material3.DayNight.NoActionBar">
         
         
