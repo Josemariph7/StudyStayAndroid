@@ -27,12 +27,12 @@ import java.util.Map;
 
 public class UserController {
 
-    private static final String URL_LOGIN = "http://" + Constants.IP + "/studystay/login.php";
-    private static final String URL_REGISTER = "http://" + Constants.IP + "/studystay/createUser.php";
-    private static final String URL_GET_USER = "http://" + Constants.IP + "/studystay/getUser.php";
-    private static final String URL_UPDATE_USER = "http://" + Constants.IP + "/studystay/updateUser.php";
-    private static final String URL_DELETE_USER = "http://" + Constants.IP + "/studystay/deleteUser.php";
-    private static final String URL_GET_ALL_USERS = "http://" + Constants.IP + "/studystay/getAllUsers.php";
+    private static final String URL_LOGIN = "http://" + Constants.IP + "/studystay/user/login.php";
+    private static final String URL_REGISTER = "http://" + Constants.IP + "/studystay/user/createUser.php";
+    private static final String URL_GET_USER = "http://" + Constants.IP + "/studystay/user/getUser.php";
+    private static final String URL_UPDATE_USER = "http://" + Constants.IP + "/studystay/user/updateUser.php";
+    private static final String URL_DELETE_USER = "http://" + Constants.IP + "/studystay/user/deleteUser.php";
+    private static final String URL_GET_ALL_USERS = "http://" + Constants.IP + "/studystay/user/getAllUsers.php";
     private static final String USER_PREFS = "UserPrefs";
     private static final String USER_ID = "userId";
 
@@ -162,7 +162,6 @@ public class UserController {
                     }
                 }, error -> callback.onError(error.toString())
         );
-
         requestQueue.add(stringRequest);
     }
 
@@ -218,6 +217,9 @@ public class UserController {
 
     public interface UserCallback {
         void onSuccess(Object result);
+
+        void onSuccess(User author);
+
         void onError(String error);
     }
 

@@ -17,25 +17,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.studystayandroid.R;
+import com.example.studystayandroid.controller.ConversationController;
+import com.example.studystayandroid.controller.MessageController;
 import com.example.studystayandroid.model.Conversation;
 import com.example.studystayandroid.model.Message;
-import com.example.studystayandroid.utils.Constants;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,9 +42,8 @@ public class ChatFragment extends Fragment {
 
     private Conversation selectedConversation;
 
-    private static final String URL_CONVERSATIONS = "http://" + Constants.IP + "/studystay/getConversations.php";
-    private static final String URL_MESSAGES = "http://" + Constants.IP + "/studystay/getMessages.php";
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private MessageController messageController;
+    private ConversationController conversationController;
 
     private Long currentUserId; // ID del usuario actual
 
@@ -81,6 +68,9 @@ public class ChatFragment extends Fragment {
             Log.e("ChatFragment", "Error: Usuario no autenticado.");
             return;
         }
+
+        messageController = new MessageController(requireContext());
+        conversationController = new ConversationController(requireContext());
 
         recyclerViewConversations = view.findViewById(R.id.recyclerViewConversations);
         recyclerViewConversations.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -112,115 +102,35 @@ public class ChatFragment extends Fragment {
     }
 
     private void fetchConversations() {
-        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
-        Log.d("ChatFragment", "Fetching conversations...");
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
-                Request.Method.GET,
-                URL_CONVERSATIONS,
-                null,
-                response -> {
-                    Log.d("ChatFragment", "Response received: " + response.toString());
-                    try {
-                        for (int i = 0; i < response.length(); i++) {
-                            JSONObject conversationObject = response.getJSONObject(i);
+        conversationController.getConversations(currentUserId, new ConversationController.ConversationListCallback() {
+            @Override
+            public void onSuccess(List<Conversation> conversations) {
+                conversationList.clear();
+                conversationList.addAll(conversations);
+                conversationAdapter.notifyDataSetChanged();
+            }
 
-                            Long conversationId = conversationObject.getLong("ConversationId");
-                            Long user1Id = conversationObject.getLong("User1Id");
-                            Long user2Id = conversationObject.getLong("User2Id");
-
-                            JSONArray messagesArray = conversationObject.getJSONArray("Messages");
-                            List<Message> messages = new ArrayList<>();
-                            for (int j = 0; j < messagesArray.length(); j++) {
-                                JSONObject messageObject = messagesArray.getJSONObject(j);
-                                Long messageId = messageObject.getLong("MessageId");
-                                Long senderId = messageObject.getLong("SenderId");
-                                Long receiverId = messageObject.getLong("ReceiverId");
-                                String content = messageObject.getString("Content");
-                                String dateTimeString = messageObject.getString("DateTime");
-                                LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, DATE_TIME_FORMATTER);
-
-                                Message message = new Message(messageId, conversationId, senderId, receiverId, content, dateTime);
-                                messages.add(message);
-                            }
-                            Conversation conversation = new Conversation(conversationId, user1Id, user2Id, messages);
-                            conversationList.add(conversation);
-                            Log.d("ChatFragment", "Conversation: " + conversation);
-                        }
-                        conversationAdapter.notifyDataSetChanged();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        Log.e("ChatFragment", "JSON parsing error: " + e.getMessage());
-                    }
-                },
-                error -> {
-                    Log.e("ChatFragment", "Volley error: " + error.toString());
-                    if (error.networkResponse != null) {
-                        Log.e("ChatFragment", "Error code: " + error.networkResponse.statusCode);
-                        String responseBody = new String(error.networkResponse.data, StandardCharsets.UTF_8);
-                        Log.e("ChatFragment", "Error body: " + responseBody);
-                    }
-                }
-        );
-
-        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
-                15000, // Timeout in milliseconds
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        requestQueue.add(jsonArrayRequest);
+            @Override
+            public void onError(String error) {
+                Log.e("ChatFragment", "Error fetching conversations: " + error);
+            }
+        });
     }
 
     private void fetchMessages(Long conversationId) {
-        messageList.clear();
-        messageAdapter.notifyDataSetChanged();
+        messageController.getMessages(conversationId, new MessageController.MessageListCallback() {
+            @Override
+            public void onSuccess(List<Message> messages) {
+                messageList.clear();
+                messageList.addAll(messages);
+                messageAdapter.notifyDataSetChanged();
+            }
 
-        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
-
-        String url = URL_MESSAGES + "?conversationId=" + conversationId;
-        Log.d("ChatFragment", "Fetching messages with URL: " + url);
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
-                Request.Method.GET,
-                url,
-                null,
-                response -> {
-                    Log.d("ChatFragment", "Messages response received: " + response.toString());
-                    try {
-                        for (int i = 0; i < response.length(); i++) {
-                            JSONObject messageObject = response.getJSONObject(i);
-
-                            Long messageId = messageObject.getLong("MessageId");
-                            Long senderId = messageObject.getLong("SenderId");
-                            Long receiverId = messageObject.getLong("ReceiverId");
-                            String content = messageObject.getString("Content");
-                            String dateTimeString = messageObject.getString("DateTime");
-                            LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, DATE_TIME_FORMATTER);
-
-                            Message message = new Message(messageId, conversationId, senderId, receiverId, content, dateTime);
-                            messageList.add(message);
-                        }
-                        messageAdapter.notifyDataSetChanged();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        Log.e("ChatFragment", "JSON parsing error: " + e.getMessage());
-                    }
-                },
-                error -> {
-                    Log.e("ChatFragment", "Volley error: " + error.toString());
-                    if (error.networkResponse != null) {
-                        Log.e("ChatFragment", "Error code: " + error.networkResponse.statusCode);
-                        String responseBody = new String(error.networkResponse.data, StandardCharsets.UTF_8);
-                        Log.e("ChatFragment", "Error body: " + responseBody);
-                    }
-                }
-        );
-
-        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
-                15000, // Timeout in milliseconds
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        requestQueue.add(jsonArrayRequest);
+            @Override
+            public void onError(String error) {
+                Log.e("ChatFragment", "Error fetching messages: " + error);
+            }
+        });
     }
 
     private void sendMessage() {
@@ -229,12 +139,21 @@ public class ChatFragment extends Fragment {
             return;
         }
 
-        // Crear el mensaje y añadirlo a la lista
         Message message = new Message(null, selectedConversation.getConversationId(), currentUserId, selectedConversation.getUser2Id(), content, LocalDateTime.now());
         messageList.add(message);
         messageAdapter.notifyDataSetChanged();
         editTextMessage.setText("");
 
-        // Aquí puedes enviar el mensaje al servidor para almacenarlo en la base de datos
+        messageController.createMessage(message, new MessageController.MessageCallback() {
+            @Override
+            public void onSuccess(Object result) {
+                // Mensaje enviado con éxito
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.e("ChatFragment", "Error sending message: " + error);
+            }
+        });
     }
 }

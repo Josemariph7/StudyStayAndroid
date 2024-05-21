@@ -20,7 +20,7 @@ public class ForumComment {
 
     public ForumComment() {
     }
-/*
+
     public ForumComment(ForumTopic topic, User author, String content, LocalDateTime dateTime) {
         this.topic = topic;
         this.author = author;
@@ -28,15 +28,13 @@ public class ForumComment {
         this.dateTime = dateTime;
     }
 
-    public ForumComment(long commentId, long topicId, long authorId, String content, LocalDateTime dateTime) {
-        UserController userController = new UserController();
-        ForumTopicController topicController = new ForumTopicController();
+    public ForumComment(long commentId, ForumTopic topic, User author, String content, LocalDateTime dateTime) {
         this.commentId = commentId;
-        this.topic = topicController.getTopic(topicId);
-        this.author = userController.getById(authorId);
+        this.topic = topic;
+        this.author = author;
         this.content = content;
         this.dateTime = dateTime;
-    }*/
+    }
 
     // Getters y setters
 

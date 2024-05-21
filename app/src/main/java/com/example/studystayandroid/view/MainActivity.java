@@ -84,7 +84,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onSuccess(Object result) {
                         Toast.makeText(MainActivity.this, "User created successfully", Toast.LENGTH_SHORT).show();
                     }
-
+                    @Override
+                    public void onSuccess(User author) {}
                     @Override
                     public void onError(String error) {
                         Toast.makeText(MainActivity.this, "Error: " + error, Toast.LENGTH_LONG).show();
@@ -110,7 +111,8 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
                         startActivity(intent);
                     }
-
+                    @Override
+                    public void onSuccess(User author) {}
                     @Override
                     public void onError(String error) {
                         Toast.makeText(MainActivity.this, "Usuario o contraseña inválidos.", Toast.LENGTH_SHORT).show();
