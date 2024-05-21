@@ -9,27 +9,23 @@
 
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/iconayuda"
+            android:icon="@drawable/iconaccommodation"
             android:title="@string/home"/>
 
-        <item
-            android:id="@+id/nav_post"
-            android:icon="@drawable/iconayuda"
-            android:title="@string/post_accommodation"/>
 
         <item
             android:id="@+id/nav_chat"
-            android:icon="@drawable/iconayuda"
+            android:icon="@drawable/iconconversation"
             android:title="@string/chat"/>
 
         <item
             android:id="@+id/nav_forum"
-            android:icon="@drawable/iconayuda"
+            android:icon="@drawable/iconforum"
             android:title="@string/forum"/>
 
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/iconayuda"
+            android:icon="@drawable/iconuser"
             android:title="@string/profile"/>
 
     </group>
@@ -42,13 +38,9 @@
     <item android:title=""></item>
 
 
-
-
-
-
     <item
         android:id="@+id/nav_logout"
-        android:icon="@drawable/iconayuda"
+        android:icon="@drawable/iconsignout"
 
         android:title="@string/logout"/>
 

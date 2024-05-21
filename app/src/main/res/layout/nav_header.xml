@@ -18,7 +18,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Android Knowledge"
+        android:text="Nombre de Usuario"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:translationX="12dp"
@@ -28,7 +28,7 @@
         android:layout_width="254dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="contact@androidknowledge.com"
+        android:text="email@gmail.com"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:translationX="12dp"

@@ -2994,9 +2994,11 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable aboutusicon
 drawable aklogo
 drawable avd_hide_password
 drawable avd_show_password
+drawable back_arrow
 drawable bg_message_received
 drawable bg_message_sent
 drawable btn_checkbox_checked_mtrl
@@ -3007,6 +3009,7 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable conversation_item_background
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
@@ -3033,7 +3036,16 @@ drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_search_black_24
+drawable iconaccommodation
+drawable iconavailable
 drawable iconayuda
+drawable iconcancelar
+drawable iconconversation
+drawable iconestrella
+drawable iconexit
+drawable iconforum
+drawable iconsignout
+drawable iconuser
 drawable indeterminate_static
 drawable logofondoazulclaro
 drawable logofondoazuloscuro
@@ -3111,6 +3123,7 @@ drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable registerradius
+drawable rounded_dialog
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
@@ -3215,6 +3228,9 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id buttonBack
+id buttonCancel
+id buttonConfirm
 id buttonPanel
 id buttonSend
 id cache_measures
@@ -3269,6 +3285,8 @@ id design_menu_item_action_area
 id design_menu_item_action_area_stub
 id design_menu_item_text
 id design_navigation_view
+id dialogMessage
+id dialogTitle
 id dialog_button
 id dimensions
 id direct
@@ -3433,7 +3451,6 @@ id nav_chat
 id nav_forum
 id nav_home
 id nav_logout
-id nav_post
 id nav_profile
 id nav_view
 id navigation_bar_item_active_indicator_view
@@ -3790,6 +3807,7 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout dialog_confirm_delete
 layout fragment_chat
 layout fragment_forum
 layout fragment_home

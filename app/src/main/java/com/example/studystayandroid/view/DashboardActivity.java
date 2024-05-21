@@ -45,8 +45,6 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
         if (item.getItemId() == R.id.nav_home) {
             selectedFragment = new HomeFragment();
-        } else if (item.getItemId() == R.id.nav_post) {
-            selectedFragment = new PostFragment();
         } else if (item.getItemId() == R.id.nav_chat) {
             selectedFragment = new ChatFragment();
         } else if (item.getItemId() == R.id.nav_profile) {

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -39,6 +40,7 @@ public class ChatFragment extends Fragment {
     private LinearLayout layoutMessages;
     private EditText editTextMessage;
     private Button buttonSend;
+    private ImageButton buttonBack;
 
     private Conversation selectedConversation;
 
@@ -81,13 +83,14 @@ public class ChatFragment extends Fragment {
         layoutMessages = view.findViewById(R.id.layoutMessages);
         editTextMessage = view.findViewById(R.id.editTextMessage);
         buttonSend = view.findViewById(R.id.buttonSend);
+        buttonBack = view.findViewById(R.id.buttonBack);
 
         conversationList = new ArrayList<>();
-        conversationAdapter = new ConversationAdapter(conversationList);
+        conversationAdapter = new ConversationAdapter(conversationList,getContext());
         recyclerViewConversations.setAdapter(conversationAdapter);
 
         messageList = new ArrayList<>();
-        messageAdapter = new MessageAdapter(messageList, currentUserId);
+        messageAdapter = new MessageAdapter(messageList, currentUserId, getContext());
         recyclerViewMessages.setAdapter(messageAdapter);
 
         fetchConversations();
@@ -96,9 +99,17 @@ public class ChatFragment extends Fragment {
             selectedConversation = conversation;
             fetchMessages(conversation.getConversationId());
             layoutMessages.setVisibility(View.VISIBLE);
+            recyclerViewConversations.setVisibility(View.GONE);
+            buttonBack.setVisibility(View.VISIBLE);
         });
 
         buttonSend.setOnClickListener(v -> sendMessage());
+
+        buttonBack.setOnClickListener(v -> {
+            layoutMessages.setVisibility(View.GONE);
+            recyclerViewConversations.setVisibility(View.VISIBLE);
+            buttonBack.setVisibility(View.GONE);
+        });
     }
 
     private void fetchConversations() {
