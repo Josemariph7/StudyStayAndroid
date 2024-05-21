@@ -25,10 +25,9 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private static final int VIEW_TYPE_RECEIVED = 2;
 
     private List<Message> messageList;
-    private Long currentUserId; // ID del usuario actual
-    private MessageController messageController;
+    private Long currentUserId;
     private Context context;
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private MessageController messageController;
 
     public MessageAdapter(List<Message> messageList, Long currentUserId, Context context) {
         this.messageList = messageList;
@@ -98,7 +97,6 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 public void onSuccess(Object result) {
                     messageList.remove(position);
                     notifyItemRemoved(position);
-                    notifyItemRangeChanged(position, messageList.size());
                     alertDialog.dismiss();
                 }
 
@@ -123,15 +121,14 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             textViewDateTime = itemView.findViewById(R.id.textViewDateTime);
 
             itemView.setOnLongClickListener(v -> {
-                showDeleteDialog((Message) itemView.getTag(), getAdapterPosition());
+                showDeleteDialog(messageList.get(getAdapterPosition()), getAdapterPosition());
                 return true;
             });
         }
 
         void bind(Message message) {
-            itemView.setTag(message);
             textViewContent.setText(message.getContent());
-            textViewDateTime.setText(message.getDateTime().format(DATE_TIME_FORMATTER));
+            textViewDateTime.setText(message.getDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         }
     }
 
@@ -145,15 +142,14 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             textViewDateTime = itemView.findViewById(R.id.textViewDateTime);
 
             itemView.setOnLongClickListener(v -> {
-                showDeleteDialog((Message) itemView.getTag(), getAdapterPosition());
+                showDeleteDialog(messageList.get(getAdapterPosition()), getAdapterPosition());
                 return true;
             });
         }
 
         void bind(Message message) {
-            itemView.setTag(message);
             textViewContent.setText(message.getContent());
-            textViewDateTime.setText(message.getDateTime().format(DATE_TIME_FORMATTER));
+            textViewDateTime.setText(message.getDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         }
     }
 }

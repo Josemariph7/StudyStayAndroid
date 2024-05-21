@@ -29,7 +29,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:testOnly="true"
-        android:theme="@style/Theme.StudyStayAndroid" >
+        android:theme="@style/Base.Theme.StudyStayAndroid" >
         <activity
             android:name="com.example.studystayandroid.view.MainActivity"
             android:exported="true"

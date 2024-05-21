@@ -4,12 +4,12 @@ color DarkBlue
 color LightBlue
 color SadBlue
 color black
-color lavender
-color purple_200
-color purple_500
-color purple_700
-color teal_200
-color teal_700
+color buttonColor
+color buttonTextColor
+color colorAccent
+color colorPrimary
+color colorPrimaryDark
+color textColor
 color white
 drawable aboutusicon
 drawable aklogo
@@ -54,6 +54,7 @@ id fragment_container
 id imageView
 id layoutMessages
 id main_layout
+id messageInputLayout
 id nav_chat
 id nav_forum
 id nav_home
@@ -117,7 +118,10 @@ string logout
 string open_nav
 string post_accommodation
 string profile
+style AppTheme
 style Base.Theme.StudyStayAndroid
+style CustomButton
+style CustomTextAppearance
 style Theme.StudyStayAndroid
 xml backup_rules
 xml data_extraction_rules

@@ -6,7 +6,8 @@
     android:orientation="vertical"
     android:padding="8dp"
     android:background="@drawable/bg_message_sent"
-    android:layout_margin="4dp">
+    android:layout_margin="4dp"
+    android:gravity="end">
 
     <TextView
         android:id="@+id/textViewContent"

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         surnamesEditTextSignUp = findViewById(R.id.textFieldSurnamesignUp);
         nameEditTextSignUp = findViewById(R.id.textFieldNameSignUp);
-        passwordEditTextSignUp = findViewById(R.id.textFieldPassword);
+        passwordEditTextSignUp = findViewById(R.id.textFieldPasswordSignUp);
         emailEditTextSignUp = findViewById(R.id.textFieldEmailSignUp);
         dniEditTextSignUp = findViewById(R.id.textFieldDNISignUp);
         phoneEditTextSignUp = findViewById(R.id.textFieldPhoneSignUp);

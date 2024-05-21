@@ -43,6 +43,7 @@ public class ChatFragment extends Fragment {
     private ImageButton buttonBack;
 
     private Conversation selectedConversation;
+    private LinearLayout messageInputLayout;
 
     private MessageController messageController;
     private ConversationController conversationController;
@@ -73,6 +74,7 @@ public class ChatFragment extends Fragment {
 
         messageController = new MessageController(requireContext());
         conversationController = new ConversationController(requireContext());
+        messageInputLayout = new LinearLayout(requireContext());
 
         recyclerViewConversations = view.findViewById(R.id.recyclerViewConversations);
         recyclerViewConversations.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -80,17 +82,20 @@ public class ChatFragment extends Fragment {
         recyclerViewMessages = view.findViewById(R.id.recyclerViewMessages);
         recyclerViewMessages.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        messageInputLayout = view.findViewById(R.id.messageInputLayout);
+        messageInputLayout.setVisibility(View.GONE);
+
         layoutMessages = view.findViewById(R.id.layoutMessages);
         editTextMessage = view.findViewById(R.id.editTextMessage);
         buttonSend = view.findViewById(R.id.buttonSend);
         buttonBack = view.findViewById(R.id.buttonBack);
 
         conversationList = new ArrayList<>();
-        conversationAdapter = new ConversationAdapter(conversationList,getContext());
+        conversationAdapter = new ConversationAdapter(conversationList, requireContext());
         recyclerViewConversations.setAdapter(conversationAdapter);
 
         messageList = new ArrayList<>();
-        messageAdapter = new MessageAdapter(messageList, currentUserId, getContext());
+        messageAdapter = new MessageAdapter(messageList, currentUserId, requireContext());
         recyclerViewMessages.setAdapter(messageAdapter);
 
         fetchConversations();
@@ -101,6 +106,7 @@ public class ChatFragment extends Fragment {
             layoutMessages.setVisibility(View.VISIBLE);
             recyclerViewConversations.setVisibility(View.GONE);
             buttonBack.setVisibility(View.VISIBLE);
+            messageInputLayout.setVisibility(View.VISIBLE);
         });
 
         buttonSend.setOnClickListener(v -> sendMessage());

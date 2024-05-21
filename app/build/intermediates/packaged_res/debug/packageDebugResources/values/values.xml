@@ -4,12 +4,12 @@
     <color name="LightBlue">#0E84E3</color>
     <color name="SadBlue">#1C254C</color>
     <color name="black">#FF000000</color>
-    <color name="lavender">#0E84E3</color>
-    <color name="purple_200">#0E84E3</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <color name="buttonColor">#0E84E3</color>
+    <color name="buttonTextColor">#FFFFFF</color>
+    <color name="colorAccent">#FFC107</color>
+    <color name="colorPrimary">#0E84E3</color>
+    <color name="colorPrimaryDark">#1C254C</color>
+    <color name="textColor">#FFFFFF</color>
     <color name="white">#e7e5e5</color>
     <string name="app_name">StudyStay</string>
     <string name="chat">Chat</string>
@@ -28,9 +28,26 @@
     <string name="open_nav">Open Navigation Drawer</string>
     <string name="post_accommodation">Post Accommodation</string>
     <string name="profile">Profile</string>
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        
+        <item name="colorPrimary">@color/LightBlue</item>
+        <item name="colorPrimaryDark">@color/SadBlue</item>
+        <item name="colorAccent">@color/LightBlue</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:buttonStyle">@style/CustomButton</item>
+        <item name="android:background">@color/white</item>
+        
+    </style>
     <style name="Base.Theme.StudyStayAndroid" parent="Theme.Material3.DayNight.NoActionBar">
         
         
+    </style>
+    <style name="CustomButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:background">@color/LightBlue</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="CustomTextAppearance" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/black</item>
     </style>
     <style name="Theme.StudyStayAndroid" parent="Base.Theme.StudyStayAndroid"/>
 </resources>

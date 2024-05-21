@@ -9,8 +9,8 @@
 9        android:targetSdkVersion="34" />
 10
 11    <uses-permission android:name="android.permission.INTERNET" />
-11-->C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:33:5-67
-11-->C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:33:22-64
+11-->C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:32:5-67
+11-->C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:32:22-64
 12
 13    <permission
 13-->[androidx.core:core:1.13.0] C:\Users\6003102\.gradle\caches\transforms-4\609c50aed8b9db79efe722a7d13eee89\transformed\core-1.13.0\AndroidManifest.xml:22:5-24:47
@@ -24,7 +24,7 @@
 17-->[androidx.core:core:1.13.0] C:\Users\6003102\.gradle\caches\transforms-4\609c50aed8b9db79efe722a7d13eee89\transformed\core-1.13.0\AndroidManifest.xml:26:22-94
 18
 19    <application
-19-->C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:5:5-32:19
+19-->C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:5:5-31:19
 20        android:allowBackup="true"
 20-->C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:7:9-35
 21        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -46,8 +46,8 @@
 30        android:supportsRtl="true"
 30-->C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:13:9-35
 31        android:testOnly="true"
-32        android:theme="@style/Theme.StudyStayAndroid" >
-32-->C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:14:9-54
+32        android:theme="@style/Base.Theme.StudyStayAndroid" >
+32-->C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:14:9-59
 33        <activity
 33-->C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:16:9-25:20
 34            android:name="com.example.studystayandroid.view.MainActivity"

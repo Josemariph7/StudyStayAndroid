@@ -7,12 +7,15 @@
     <color name="SadBlue">#1C254C</color>
 
 
-        <color name="purple_200">#0E84E3</color>
-        <color name="purple_500">#FF6200EE</color>
-        <color name="purple_700">#FF3700B3</color>
-        <color name="teal_200">#FF03DAC5</color>
-        <color name="teal_700">#FF018786</color>
-        <color name="lavender">#0E84E3</color>
+
+
+
+    <color name="colorPrimary">#0E84E3</color> <!-- LightBlue -->
+    <color name="colorPrimaryDark">#1C254C</color> <!-- SadBlue -->
+    <color name="colorAccent">#FFC107</color> <!-- Amarillo para el acento -->
+    <color name="buttonColor">#0E84E3</color> <!-- LightBlue para los botones -->
+    <color name="textColor">#FFFFFF</color> <!-- Blanco para el texto -->
+    <color name="buttonTextColor">#FFFFFF</color> <!-- Blanco para el texto del botón -->
 
     <!--<color name="LightBlue">#2196f3</color>
     <color name="SadBlue">#151928</color>-->
