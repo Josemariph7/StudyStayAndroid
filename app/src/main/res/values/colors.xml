@@ -8,8 +8,6 @@
 
 
 
-
-
     <color name="colorPrimary">#0E84E3</color> <!-- LightBlue -->
     <color name="colorPrimaryDark">#1C254C</color> <!-- SadBlue -->
     <color name="colorAccent">#FFC107</color> <!-- Amarillo para el acento -->
@@ -17,6 +15,5 @@
     <color name="textColor">#FFFFFF</color> <!-- Blanco para el texto -->
     <color name="buttonTextColor">#FFFFFF</color> <!-- Blanco para el texto del botón -->
 
-    <!--<color name="LightBlue">#2196f3</color>
-    <color name="SadBlue">#151928</color>-->
+
 </resources>

@@ -1,7 +1,11 @@
 package com.example.studystayandroid.controller;
 
+import static java.time.LocalDate.now;
+
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Base64;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -13,7 +17,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.studystayandroid.model.User;
 import com.example.studystayandroid.utils.Constants;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,7 +34,7 @@ public class UserController {
 
     private static final String URL_LOGIN = "http://" + Constants.IP + "/studystay/user/login.php";
     private static final String URL_REGISTER = "http://" + Constants.IP + "/studystay/user/createUser.php";
-    private static final String URL_GET_USER = "http://" + Constants.IP + "/studystay/user/getUser.php";
+    private static final String URL_GET_USER = "http://" + Constants.IP + "/studystay/user/getUserById.php";
     private static final String URL_UPDATE_USER = "http://" + Constants.IP + "/studystay/user/updateUser.php";
     private static final String URL_DELETE_USER = "http://" + Constants.IP + "/studystay/user/deleteUser.php";
     private static final String URL_GET_ALL_USERS = "http://" + Constants.IP + "/studystay/user/getAllUsers.php";
@@ -55,17 +60,26 @@ public class UserController {
                             Long userId = response.getLong("userId");
                             saveUserId(userId);
                             callback.onSuccess(userId);
+                            Log.d("UserController", "Login successful, userId: " + userId);
                         } else {
                             callback.onError("Invalid credentials");
+                            Log.e("UserController", "Invalid credentials");
                         }
                     } catch (JSONException e) {
                         callback.onError(e.getMessage());
+                        Log.e("UserController", "JSON error: " + e.getMessage());
                     }
-                }, error -> callback.onError(error.toString())
+                }, error -> {
+            callback.onError(error.toString());
+            Log.e("UserController", "Volley error: " + error.toString());
+        }
         );
 
         requestQueue.add(jsonObjectRequest);
     }
+
+// Similar updates for register, getUserById, and other methods
+
 
     public void register(User user, final UserCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGISTER,
@@ -84,13 +98,13 @@ public class UserController {
                 params.put("email", user.getEmail());
                 params.put("password", user.getPassword());
                 params.put("phone", user.getPhone());
-                params.put("birthDate", user.getBirthDate().toString());
+                params.put("birthDate", user.getBirthDate() != null ? user.getBirthDate().toString() : "");
+                params.put("registrationDate", user.getRegistrationDate() != null ? user.getRegistrationDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) : "");
                 params.put("gender", user.getGender().name());
                 params.put("dni", user.getDni());
                 return params;
             }
         };
-
         requestQueue.add(stringRequest);
     }
 
@@ -106,14 +120,22 @@ public class UserController {
                         user.setLastName(response.getString("LastName"));
                         user.setEmail(response.getString("Email"));
                         user.setPhone(response.getString("Phone"));
-                        user.setBirthDate(LocalDate.parse(response.getString("BirthDate")));
-                        user.setRegistrationDate(LocalDateTime.parse(response.getString("RegistrationDate")));
-                        user.setGender(User.Gender.valueOf(response.getString("Gender")));
+                        user.setBirthDate(response.has("BirthDate") && !response.isNull("BirthDate") ? LocalDate.parse(response.getString("BirthDate")) : null);
+                        user.setRegistrationDate(response.has("RegistrationDate") && !response.isNull("RegistrationDate") ? LocalDateTime.parse(response.getString("RegistrationDate"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) : null);
+                        user.setGender(User.Gender.valueOf(response.getString("Gender").toUpperCase()));
                         user.setDni(response.getString("DNI"));
                         user.setBio(response.getString("Bio"));
-                        user.setAdmin(response.getBoolean("isAdmin"));
+                        int isAdminValue = response.getInt("isAdmin");
+                        user.setAdmin(isAdminValue == 1);
+                        if (response.has("ProfilePicture") && !response.isNull("ProfilePicture")) {
+                            String profilePictureBase64 = response.getString("ProfilePicture");
+                            byte[] profilePictureBytes = Base64.decode(profilePictureBase64, Base64.DEFAULT);
+                            user.setProfilePicture(profilePictureBytes);
+                        } else {
+                            user.setProfilePicture(null);
+                        }
                         callback.onSuccess(user);
-                    } catch (JSONException e) {
+                    } catch (JSONException | IllegalArgumentException e) {
                         callback.onError(e.getMessage());
                     }
                 }, error -> callback.onError(error.toString())
@@ -121,6 +143,7 @@ public class UserController {
 
         requestQueue.add(jsonObjectRequest);
     }
+
 
     public void updateUser(User user, final UserCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE_USER,

@@ -9,6 +9,7 @@ color buttonTextColor
 color colorAccent
 color colorPrimary
 color colorPrimaryDark
+color errorColor
 color textColor
 color white
 drawable aboutusicon
@@ -17,6 +18,8 @@ drawable back_arrow
 drawable bg_message_received
 drawable bg_message_sent
 drawable conversation_item_background
+drawable defaultaccommodation
+drawable defaultprofile
 drawable headerbkg
 drawable ic_launcher_background
 drawable ic_launcher_foreground
@@ -32,6 +35,7 @@ drawable iconsignout
 drawable iconuser
 drawable logofondoazulclaro
 drawable logofondoazuloscuro
+drawable logofondoazuloscurosimple
 drawable logotransparente
 drawable registerradius
 drawable rounded_dialog
@@ -60,6 +64,9 @@ id nav_forum
 id nav_home
 id nav_logout
 id nav_profile
+id nav_user_email
+id nav_user_name
+id nav_user_photo
 id nav_view
 id price
 id recyclerView
@@ -100,6 +107,8 @@ layout item_message_sent
 layout nav_header
 menu nav_menu
 mipmap ic_launcher
+mipmap ic_launcher_background
+mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 string app_name
 string chat
@@ -121,7 +130,9 @@ string profile
 style AppTheme
 style Base.Theme.StudyStayAndroid
 style CustomButton
-style CustomTextAppearance
+style CustomButtonStyle
+style CustomCalendar
+style CustomDatePickerDialog
 style Theme.StudyStayAndroid
 xml backup_rules
 xml data_extraction_rules

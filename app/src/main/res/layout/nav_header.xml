@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="230dp"
@@ -9,6 +8,7 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
+        android:id="@+id/nav_user_photo"
         android:layout_width="116dp"
         android:layout_height="109dp"
         android:src="@drawable/aklogo"
@@ -16,6 +16,7 @@
         android:translationY="-65dp" />
 
     <TextView
+        android:id="@+id/nav_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nombre de Usuario"
@@ -25,6 +26,7 @@
         android:translationY="55dp" />
 
     <TextView
+        android:id="@+id/nav_user_email"
         android:layout_width="254dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -33,5 +35,4 @@
         android:textSize="14sp"
         android:translationX="12dp"
         android:translationY="83dp" />
-
 </RelativeLayout>
