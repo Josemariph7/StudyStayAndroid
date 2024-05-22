@@ -10,6 +10,7 @@ color colorAccent
 color colorPrimary
 color colorPrimaryDark
 color errorColor
+color statusBarColor
 color textColor
 color white
 drawable aboutusicon
@@ -20,6 +21,7 @@ drawable bg_message_sent
 drawable conversation_item_background
 drawable defaultaccommodation
 drawable defaultprofile
+drawable fotoperfil
 drawable headerbkg
 drawable ic_launcher_background
 drawable ic_launcher_foreground
@@ -39,6 +41,8 @@ drawable logofondoazuloscurosimple
 drawable logotransparente
 drawable registerradius
 drawable rounded_dialog
+drawable rounded_edit_text_dark
+drawable rounded_edit_text_light
 id LogInButton
 id address
 id bottom_sheet
@@ -129,10 +133,13 @@ string post_accommodation
 string profile
 style AppTheme
 style Base.Theme.StudyStayAndroid
+style CircleImageView
 style CustomButton
 style CustomButtonStyle
 style CustomCalendar
 style CustomDatePickerDialog
+style CustomTextInputEditText
+style CustomTextInputLayout
 style Theme.StudyStayAndroid
 xml backup_rules
 xml data_extraction_rules

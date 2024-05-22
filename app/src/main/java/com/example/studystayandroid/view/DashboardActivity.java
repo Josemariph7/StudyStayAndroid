@@ -19,7 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.example.studystayandroid.R;
 import com.example.studystayandroid.controller.UserController;
 import com.example.studystayandroid.model.User;
@@ -36,11 +36,11 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        userController=new UserController(this);
-        currentUser=new User();
+        userController = new UserController(this);
+        currentUser = new User();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        getWindow().setStatusBarColor(getResources().getColor(R.color.statusBarColor));
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -72,7 +72,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                     TextView navUserEmail = headerView.findViewById(R.id.nav_user_email);
                     ImageView navUserPhoto = headerView.findViewById(R.id.nav_user_photo);
 
-                    navUserName.setText(user.getName()+" "+user.getLastName());
+                    navUserName.setText(user.getName() + " " + user.getLastName());
                     navUserEmail.setText(user.getEmail());
 
                     byte[] userPhotoBytes = user.getProfilePicture();
@@ -82,7 +82,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                         navUserPhoto.setImageBitmap(decodedByte);
                     } else {
-                        navUserPhoto.setImageResource(R.drawable.defaultprofile);
+                        navUserPhoto.setImageResource(R.drawable.fotoperfil);
                     }
                 }
 
@@ -95,7 +95,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                     TextView navUserEmail = headerView.findViewById(R.id.nav_user_email);
                     ImageView navUserPhoto = headerView.findViewById(R.id.nav_user_photo);
 
-                    navUserName.setText(user.getName()+" "+user.getLastName());
+                    navUserName.setText(user.getName() + " " + user.getLastName());
                     navUserEmail.setText(user.getEmail());
 
                     byte[] userPhotoBytes = user.getProfilePicture();
@@ -105,7 +105,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                         navUserPhoto.setImageBitmap(decodedByte);
                     } else {
-                        navUserPhoto.setImageResource(R.drawable.defaultprofile);
+                        navUserPhoto.setImageResource(R.drawable.fotoperfil);
                     }
                 }
 

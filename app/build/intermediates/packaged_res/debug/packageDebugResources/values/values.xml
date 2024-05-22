@@ -10,6 +10,7 @@
     <color name="colorPrimary">#0E84E3</color>
     <color name="colorPrimaryDark">#1C254C</color>
     <color name="errorColor">#FF0000</color>
+    <color name="statusBarColor">#0E84E3</color>
     <color name="textColor">#FFFFFF</color>
     <color name="white">#e7e5e5</color>
     <string name="app_name">StudyStay</string>
@@ -30,7 +31,7 @@
     <string name="post_accommodation">Post Accommodation</string>
     <string name="profile">Profile</string>
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        
+
         <item name="colorPrimary">@color/LightBlue</item>
         <item name="colorPrimaryDark">@color/SadBlue</item>
         <item name="colorAccent">@color/LightBlue</item>
@@ -42,6 +43,10 @@
     <style name="Base.Theme.StudyStayAndroid" parent="Theme.Material3.DayNight.NoActionBar">
         
         
+    </style>
+    <style name="CircleImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
     </style>
     <style name="CustomButton" parent="Widget.MaterialComponents.Button">
         <item name="android:background">@color/LightBlue</item>
@@ -66,5 +71,19 @@
         <item name="materialCalendarTheme">@style/CustomCalendar</item>
         <item name="materialCalendarFullscreenTheme">@style/CustomCalendar</item>
     </style>
+    <style name="CustomTextInputEditText" parent="Widget.MaterialComponents.TextInputEditText.FilledBox.Dense">
+            <item name="android:backgroundTint">@android:color/transparent</item>
+        </style>
+    <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+            <item name="boxCornerRadiusTopStart">20dp</item>
+            <item name="boxCornerRadiusTopEnd">20dp</item>
+            <item name="boxCornerRadiusBottomStart">0dp</item>
+            <item name="boxCornerRadiusBottomEnd">0dp</item>
+            <item name="android:backgroundTint">@android:color/transparent</item>
+            <item name="android:focusable">true</item>
+            <item name="android:focusableInTouchMode">true</item>
+            <item name="android:clickable">true</item>
+            <item name="android:cursorVisible">true</item>
+        </style>
     <style name="Theme.StudyStayAndroid" parent="Base.Theme.StudyStayAndroid"/>
 </resources>

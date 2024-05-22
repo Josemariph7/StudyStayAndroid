@@ -1,19 +1,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="230dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/LightBlue"
     android:gravity="bottom"
     android:orientation="vertical"
     android:padding="12dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/nav_user_photo"
-        android:layout_width="116dp"
-        android:layout_height="109dp"
-        android:src="@drawable/aklogo"
-        android:translationX="-5dp"
-        android:translationY="-65dp" />
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:src="@drawable/fotoperfil"
+        android:translationX="10dp"
+        android:translationY="-65dp"
+        app:shapeAppearanceOverlay="@style/CircleImageView" />
 
     <TextView
         android:id="@+id/nav_user_name"

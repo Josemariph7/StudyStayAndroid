@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
         phoneEditTextSignUp = findViewById(R.id.textFieldPhoneSignUp);
         birthDateEditText = findViewById(R.id.editTextBirthDate);
         spinnerGender = findViewById(R.id.spinnerGender);
+        getWindow().setStatusBarColor(getResources().getColor(R.color.statusBarColor));
+
 
         Button registerButton = findViewById(R.id.registerButton);
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -228,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
             nameEditTextSignUp.setError("Valid name is required");
             isValid = false;
         } else {
-            nameEditTextSignUp.setError(null);
+            nameEditTextSignUp.setError("A-z Characters only");
         }
 
         if (!surnamesEditTextSignUp.getEditText().getText().toString().matches("^[a-zA-Z\\s]+$")) {
