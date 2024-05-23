@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:2:1-33:12
-INJECTED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:2:1-33:12
-INJECTED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:2:1-33:12
-INJECTED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:2:1-33:12
+ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:2:1-34:12
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\6003102\.gradle\caches\transforms-4\e3402f7dde5e7c35bb350b144c0cb59c\transformed\material-1.12.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\6003102\.gradle\caches\transforms-4\6d60a0254bda9ddf6b110b3e748d9ae8\transformed\constraintlayout-2.1.4\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\6003102\.gradle\caches\transforms-4\c18ed6777d7cd8f00f14e83f1d8b6413\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:17:1-22:12
@@ -57,8 +57,8 @@ MERGED from [androidx.annotation:annotation-experimental:1.4.0] C:\Users\6003102
 	xmlns:android
 		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:2:11-69
 application
-ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:5:5-31:19
-INJECTED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:5:5-31:19
+ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:5:5-32:19
+INJECTED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:5:5-32:19
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\6003102\.gradle\caches\transforms-4\e3402f7dde5e7c35bb350b144c0cb59c\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\6003102\.gradle\caches\transforms-4\e3402f7dde5e7c35bb350b144c0cb59c\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\6003102\.gradle\caches\transforms-4\6d60a0254bda9ddf6b110b3e748d9ae8\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
@@ -88,47 +88,49 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\60
 	android:roundIcon
 		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:12:9-54
 	tools:targetApi
-		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:15:9-29
+		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:16:9-29
 	android:icon
 		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:10:9-43
 	android:allowBackup
 		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:7:9-35
 	android:theme
-		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:14:9-59
+		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:15:9-59
 	android:networkSecurityConfig
 		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:6:9-69
+	android:enableOnBackInvokedCallback
+		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:14:9-51
 	android:dataExtractionRules
 		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:8:9-65
 activity#com.example.studystayandroid.view.MainActivity
-ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:16:9-25:20
+ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:17:9-26:20
 	android:turnScreenOn
-		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:18:13-41
+		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:19:13-41
 	android:exported
-		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:19:13-36
+		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:20:13-36
 	android:name
-		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:17:13-46
+		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:18:13-46
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:21:13-24:29
+ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:22:13-25:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:22:17-69
+ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:23:17-69
 	android:name
-		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:22:25-66
+		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:23:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:23:17-77
+ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:24:17-77
 	android:name
-		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:23:27-74
+		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:24:27-74
 activity#com.example.studystayandroid.view.DashboardActivity
-ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:26:9-30:15
+ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:27:9-31:15
 	android:turnScreenOn
-		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:29:13-41
+		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:30:13-41
 	android:exported
-		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:28:13-36
+		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:29:13-36
 	android:name
-		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:27:13-51
+		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:28:13-51
 uses-permission#android.permission.INTERNET
-ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:32:5-67
+ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:33:5-67
 	android:name
-		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:32:22-64
+		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:33:22-64
 uses-sdk
 INJECTED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml

@@ -66,7 +66,9 @@ public class ChatFragment extends Fragment {
         // Obtener el ID del usuario actual desde SharedPreferences
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
         currentUserId = sharedPreferences.getLong("userId", -1);
-
+        if (getActivity() != null) {
+            getActivity().setTitle("StudyStay - Chats");
+        }
         if (currentUserId == -1) {
             Log.e("ChatFragment", "Error: Usuario no autenticado.");
             return;

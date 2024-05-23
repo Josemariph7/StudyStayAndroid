@@ -1327,6 +1327,7 @@ int attr yearTodayStyle 0x7f0304df
 int bool abc_action_bar_embed_tabs 0x7f040000
 int bool abc_config_actionMenuItemAllCaps 0x7f040001
 int bool mtrl_btn_textappearance_all_caps 0x7f040002
+int color Azulin 0x7f050312
 int color DarkBlue 0x7f050000
 int color LightBlue 0x7f050001
 int color SadBlue 0x7f050002
@@ -3000,6 +3001,8 @@ int drawable aklogo 0x7f070079
 int drawable avd_hide_password 0x7f07007a
 int drawable avd_show_password 0x7f07007b
 int drawable back_arrow 0x7f07007c
+int drawable baseline_arrow_back_ios_new_24 0x7f070104
+int drawable baseline_arrow_back_ios_new_40 0x7f070105
 int drawable bg_message_received 0x7f07007d
 int drawable bg_message_sent 0x7f07007e
 int drawable btn_checkbox_checked_mtrl 0x7f07007f
@@ -3018,6 +3021,7 @@ int drawable design_ic_visibility 0x7f070089
 int drawable design_ic_visibility_off 0x7f07008a
 int drawable design_password_eye 0x7f07008b
 int drawable design_snackbar_background 0x7f07008c
+int drawable divider 0x7f070103
 int drawable fotoperfil 0x7f070100
 int drawable headerbkg 0x7f07008d
 int drawable ic_arrow_back_black_24 0x7f07008e
@@ -3235,6 +3239,7 @@ int id bounce 0x7f080061
 int id bounceBoth 0x7f080062
 int id bounceEnd 0x7f080063
 int id bounceStart 0x7f080064
+int id button 0x7f080236
 int id buttonBack 0x7f080065
 int id buttonCancel 0x7f080066
 int id buttonConfirm 0x7f080067
@@ -3524,7 +3529,9 @@ int id radio 0x7f08017f
 int id ratio 0x7f080180
 int id rectangles 0x7f080181
 int id recyclerView 0x7f080182
+int id recyclerViewComments 0x7f08022b
 int id recyclerViewConversations 0x7f080183
+int id recyclerViewForumTopics 0x7f08022c
 int id recyclerViewMessages 0x7f080184
 int id registerButton 0x7f080185
 int id report_drawn 0x7f080186
@@ -3663,6 +3670,14 @@ int id transition_position 0x7f08020a
 int id transition_scene_layoutid_cache 0x7f08020b
 int id transition_transform 0x7f08020c
 int id triangle 0x7f08020d
+int id tvCommentAuthor 0x7f08022d
+int id tvCommentContent 0x7f08022e
+int id tvCommentDateTime 0x7f08022f
+int id tvDiscussionTitle 0x7f080230
+int id tvTopicAuthor 0x7f080233
+int id tvTopicCreationDate 0x7f080234
+int id tvTopicDescription 0x7f080231
+int id tvTopicTitle 0x7f080232
 int id unchecked 0x7f08020e
 int id uniform 0x7f08020f
 int id unlabeled 0x7f080210
@@ -3820,6 +3835,7 @@ int layout design_text_input_end_icon 0x7f0b002c
 int layout design_text_input_start_icon 0x7f0b002d
 int layout dialog_confirm_delete 0x7f0b002e
 int layout fragment_chat 0x7f0b002f
+int layout fragment_discussion 0x7f0b0079
 int layout fragment_forum 0x7f0b0030
 int layout fragment_home 0x7f0b0031
 int layout fragment_post 0x7f0b0032
@@ -3827,7 +3843,9 @@ int layout fragment_profile 0x7f0b0033
 int layout ime_base_split_test_activity 0x7f0b0034
 int layout ime_secondary_split_test_activity 0x7f0b0035
 int layout item_accommodation 0x7f0b0036
+int layout item_comment 0x7f0b007a
 int layout item_conversation 0x7f0b0037
+int layout item_forum_topic 0x7f0b007b
 int layout item_message 0x7f0b0038
 int layout item_message_received 0x7f0b0039
 int layout item_message_sent 0x7f0b003a

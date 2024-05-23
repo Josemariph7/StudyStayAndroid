@@ -1328,6 +1328,7 @@ attr yearTodayStyle
 bool abc_action_bar_embed_tabs
 bool abc_config_actionMenuItemAllCaps
 bool mtrl_btn_textappearance_all_caps
+color Azulin
 color DarkBlue
 color LightBlue
 color SadBlue
@@ -3001,6 +3002,8 @@ drawable aklogo
 drawable avd_hide_password
 drawable avd_show_password
 drawable back_arrow
+drawable baseline_arrow_back_ios_new_24
+drawable baseline_arrow_back_ios_new_40
 drawable bg_message_received
 drawable bg_message_sent
 drawable btn_checkbox_checked_mtrl
@@ -3019,6 +3022,7 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable divider
 drawable fotoperfil
 drawable headerbkg
 drawable ic_arrow_back_black_24
@@ -3236,6 +3240,7 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id button
 id buttonBack
 id buttonCancel
 id buttonConfirm
@@ -3525,7 +3530,9 @@ id radio
 id ratio
 id rectangles
 id recyclerView
+id recyclerViewComments
 id recyclerViewConversations
+id recyclerViewForumTopics
 id recyclerViewMessages
 id registerButton
 id report_drawn
@@ -3664,6 +3671,14 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id triangle
+id tvCommentAuthor
+id tvCommentContent
+id tvCommentDateTime
+id tvDiscussionTitle
+id tvTopicAuthor
+id tvTopicCreationDate
+id tvTopicDescription
+id tvTopicTitle
 id unchecked
 id uniform
 id unlabeled
@@ -3821,6 +3836,7 @@ layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout dialog_confirm_delete
 layout fragment_chat
+layout fragment_discussion
 layout fragment_forum
 layout fragment_home
 layout fragment_post
@@ -3828,7 +3844,9 @@ layout fragment_profile
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
 layout item_accommodation
+layout item_comment
 layout item_conversation
+layout item_forum_topic
 layout item_message
 layout item_message_received
 layout item_message_sent

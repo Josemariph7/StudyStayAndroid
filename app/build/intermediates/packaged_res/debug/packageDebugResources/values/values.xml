@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="Azulin">#9CACF3</color>
     <color name="DarkBlue">#05071F</color>
     <color name="LightBlue">#0E84E3</color>
     <color name="SadBlue">#1C254C</color>

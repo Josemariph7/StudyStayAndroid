@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/white"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".view.DiscussionFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
+        android:orientation="horizontal"
+        tools:context=".view.DiscussionFragment">
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="65dp"
+            android:layout_height="63dp"
+            android:backgroundTint="#00917474"
+            android:translationY="-4dp"
+            app:icon="@drawable/baseline_arrow_back_ios_new_40"
+            app:iconPadding="0dp"
+            app:iconTint="#1C254C" />
+
+        <TextView
+            android:id="@+id/tvDiscussionTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Topic Title"
+            android:textColor="@color/SadBlue"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewComments"
+        android:layout_width="match_parent"
+        android:layout_height="853dp"
+        android:clipToPadding="false"
+        android:padding="16dp" />
+
+</LinearLayout>

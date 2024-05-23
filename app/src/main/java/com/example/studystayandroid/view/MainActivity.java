@@ -138,11 +138,9 @@ public class MainActivity extends AppCompatActivity {
                                     User user = (User) result;
                                     byte[] userPhotoBytes = user.getProfilePicture();
                                     String userPhotoBase64 = "";
-
                                     if (userPhotoBytes != null) {
                                         userPhotoBase64 = Base64.encodeToString(userPhotoBytes, Base64.DEFAULT);
                                     }
-
                                     SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putLong("userId", userId);
@@ -150,9 +148,7 @@ public class MainActivity extends AppCompatActivity {
                                     editor.putString("userEmail", user.getEmail());
                                     editor.putString("userPhoto", userPhotoBase64.isEmpty() ? "default" : userPhotoBase64);
                                     editor.apply();
-
                                     Log.d("Login", "User details saved to SharedPreferences");
-
                                     Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
                                     startActivity(intent);
                                 }
@@ -162,11 +158,9 @@ public class MainActivity extends AppCompatActivity {
                                     User user = (User) author;
                                     byte[] userPhotoBytes = user.getProfilePicture();
                                     String userPhotoBase64 = "";
-
                                     if (userPhotoBytes != null) {
                                         userPhotoBase64 = Base64.encodeToString(userPhotoBytes, Base64.DEFAULT);
                                     }
-
                                     SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putLong("userId", userId);
@@ -174,14 +168,10 @@ public class MainActivity extends AppCompatActivity {
                                     editor.putString("userEmail", user.getEmail());
                                     editor.putString("userPhoto", userPhotoBase64.isEmpty() ? "default" : userPhotoBase64);
                                     editor.apply();
-
                                     Log.d("Login", "User details saved to SharedPreferences");
-
-
                                     Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
                                     startActivity(intent);
                                 }
-
                                 @Override
                                 public void onError(String error) {
                                     Log.e("Login", "Error fetching user details: " + error);
@@ -298,7 +288,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             passwordEditText.setError(null);
         }
-
         return isValid;
     }
 

@@ -1,5 +1,6 @@
 package com.example.studystayandroid.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -7,7 +8,7 @@ import java.util.Objects;
 /**
  * Clase que representa un tema en un foro.
  */
-public class ForumTopic {
+public class ForumTopic implements Serializable {
     private Long topicId; // Identificador único del tema
     private String title; // Título del tema
     private String description; // Descripción del tema

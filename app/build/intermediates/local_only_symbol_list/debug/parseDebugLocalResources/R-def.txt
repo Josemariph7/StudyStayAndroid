@@ -1,5 +1,6 @@
 R_DEF: Internal format may change without notice
 local
+color Azulin
 color DarkBlue
 color LightBlue
 color SadBlue
@@ -16,11 +17,14 @@ color white
 drawable aboutusicon
 drawable aklogo
 drawable back_arrow
+drawable baseline_arrow_back_ios_new_24
+drawable baseline_arrow_back_ios_new_40
 drawable bg_message_received
 drawable bg_message_sent
 drawable conversation_item_background
 drawable defaultaccommodation
 drawable defaultprofile
+drawable divider
 drawable fotoperfil
 drawable headerbkg
 drawable ic_launcher_background
@@ -46,6 +50,7 @@ drawable rounded_edit_text_light
 id LogInButton
 id address
 id bottom_sheet
+id button
 id buttonBack
 id buttonCancel
 id buttonConfirm
@@ -74,7 +79,9 @@ id nav_user_photo
 id nav_view
 id price
 id recyclerView
+id recyclerViewComments
 id recyclerViewConversations
+id recyclerViewForumTopics
 id recyclerViewMessages
 id registerButton
 id spinnerGender
@@ -95,16 +102,27 @@ id textViewLastMessage
 id textViewSender
 id textViewUser
 id toolbar
+id tvCommentAuthor
+id tvCommentContent
+id tvCommentDateTime
+id tvDiscussionTitle
+id tvTopicAuthor
+id tvTopicCreationDate
+id tvTopicDescription
+id tvTopicTitle
 layout activity_dashboard
 layout activity_main
 layout dialog_confirm_delete
 layout fragment_chat
+layout fragment_discussion
 layout fragment_forum
 layout fragment_home
 layout fragment_post
 layout fragment_profile
 layout item_accommodation
+layout item_comment
 layout item_conversation
+layout item_forum_topic
 layout item_message
 layout item_message_received
 layout item_message_sent
