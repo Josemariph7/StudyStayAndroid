@@ -46,6 +46,12 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
             holder.textViewLastMessage.setText(conversation.getMessages().get(conversation.getMessages().size() - 1).getContent());
         }
 
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null && holder.getAdapterPosition() != RecyclerView.NO_POSITION) {
+                listener.onItemClick(conversation);
+            }
+        });
+
         holder.itemView.setOnLongClickListener(v -> {
             showDeleteDialog(conversation, position);
             return true;
@@ -73,11 +79,6 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
             super(itemView);
             textViewUser = itemView.findViewById(R.id.textViewUser);
             textViewLastMessage = itemView.findViewById(R.id.textViewLastMessage);
-            itemView.setOnClickListener(v -> {
-                if (listener != null && getAdapterPosition() != RecyclerView.NO_POSITION) {
-                    listener.onItemClick(conversationList.get(getAdapterPosition()));
-                }
-            });
         }
     }
 

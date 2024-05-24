@@ -19,8 +19,6 @@ import com.example.studystayandroid.R;
 import com.example.studystayandroid.controller.ForumTopicController;
 import com.example.studystayandroid.model.ForumTopic;
 import com.example.studystayandroid.model.User;
-import com.example.studystayandroid.view.DiscussionFragment;
-import com.example.studystayandroid.view.ForumTopicAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +83,6 @@ public class ForumFragment extends Fragment {
             }
         });
     }
-
 
     private User getCurrentUser() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);

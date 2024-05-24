@@ -1,5 +1,6 @@
 package com.example.studystayandroid.view;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.studystayandroid.R;
 import com.example.studystayandroid.model.ForumComment;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
@@ -25,12 +27,13 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ForumComment comment = comments.get(position);
-        holder.authorTextView.setText(comment.getAuthor().getName());
+        holder.authorTextView.setText(comment.getAuthor().getName() + " " + comment.getAuthor().getLastName());
         holder.contentTextView.setText(comment.getContent());
-        holder.dateTextView.setText(comment.getDateTime().toString());
+        holder.dateTextView.setText(comment.getDateTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
     }
 
     @Override

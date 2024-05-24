@@ -1,6 +1,7 @@
 package com.example.studystayandroid.view;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.studystayandroid.R;
 import com.example.studystayandroid.controller.ForumCommentController;
 import com.example.studystayandroid.model.ForumComment;
@@ -26,6 +28,8 @@ public class DiscussionFragment extends Fragment {
     private static final String ARG_TOPIC = "arg_topic";
 
     private ForumTopic topic;
+    private TextView topicTitleTextView;
+    private TextView descriptionTextView;
     private RecyclerView recyclerView;
     private CommentAdapter commentAdapter;
     private ForumCommentController forumCommentController;
@@ -34,7 +38,7 @@ public class DiscussionFragment extends Fragment {
     public static DiscussionFragment newInstance(ForumTopic topic) {
         DiscussionFragment fragment = new DiscussionFragment();
         Bundle args = new Bundle();
-        args.putSerializable(ARG_TOPIC, (Serializable) topic);
+        args.putSerializable(ARG_TOPIC, topic);
         fragment.setArguments(args);
         return fragment;
     }
@@ -46,6 +50,7 @@ public class DiscussionFragment extends Fragment {
             topic = (ForumTopic) getArguments().getSerializable(ARG_TOPIC);
         }
         forumCommentController = new ForumCommentController(getContext());
+        Log.d("DiscussionFragment", "onCreate: Topic loaded: " + topic);
     }
 
     @Override
@@ -62,6 +67,13 @@ public class DiscussionFragment extends Fragment {
             getActivity().setTitle("StudyStay - Discussion");
         }
 
+        // Configurar el título del tema
+        topicTitleTextView = view.findViewById(R.id.tvDiscussionTitle);
+        topicTitleTextView.setText(topic.getTitle());
+
+        descriptionTextView = view.findViewById(R.id.descriptionTopic);
+        descriptionTextView.setText(topic.getDescription());
+
         // Configurar el RecyclerView
         recyclerView = view.findViewById(R.id.recyclerViewComments);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -73,17 +85,25 @@ public class DiscussionFragment extends Fragment {
     }
 
     private void loadComments() {
+        Log.d("DiscussionFragment", "loadComments: Loading comments for topic ID: " + topic.getTopicId());
         forumCommentController.getComments(topic.getTopicId(), new ForumCommentController.CommentListCallback() {
             @Override
             public void onSuccess(List<ForumComment> comments) {
                 commentList.clear();
-                commentList.addAll(comments);
+                Log.d("DiscussionFragment", "onSuccess: Comments loaded: " + comments.size());
+                for (ForumComment comment : comments) {
+                    if (comment.getTopic().getTopicId().equals(topic.getTopicId())) {
+                        commentList.add(comment);
+                    }
+                }
                 commentAdapter.notifyDataSetChanged();
+                Log.d("DiscussionFragment", "onSuccess: Comments displayed: " + commentList.size());
             }
 
             @Override
             public void onError(String error) {
                 // Manejar el error
+                Log.e("DiscussionFragment", "Error fetching comments: " + error);
             }
         });
     }

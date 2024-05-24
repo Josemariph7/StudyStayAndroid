@@ -1,12 +1,13 @@
 package com.example.studystayandroid.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
  * Clase que representa una reseña de un alojamiento.
  */
-public class AccommodationReview {
+public class AccommodationReview implements Serializable {
     private Long reviewId; // Identificador único de la reseña
     private Accommodation accommodation; // Alojamiento al que pertenece la reseña
     private User author; // Autor de la reseña

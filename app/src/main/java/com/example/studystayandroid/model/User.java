@@ -1,5 +1,6 @@
 package com.example.studystayandroid.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -9,7 +10,7 @@ import java.util.Objects;
 /**
  * Clase que representa un usuario en el sistema.
  */
-public class User {
+public class User implements Serializable {
     private Long userId; // Identificador único del usuario
     private String name; // Nombre del usuario
     private String lastName; // Apellidos del usuario

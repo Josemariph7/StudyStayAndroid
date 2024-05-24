@@ -15,7 +15,7 @@
         android:layout_marginTop="252dp"
         android:layout_marginEnd="40dp"
         android:hint="@string/hintEmail"
-        app:boxStrokeColor="@color/white"
+        app:boxStrokeColor="@color/LightBlue"
         app:cursorColor="@color/SadBlue"
         app:hintTextColor="@color/SadBlue"
         tools:ignore="ExtraText">
@@ -23,8 +23,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/SadBlue"
             android:background="@drawable/rounded_edit_text_light"
-            android:backgroundTint="@color/LightBlue"
+            android:backgroundTint="@color/white"
             android:gravity="center_vertical"
             style="@style/CustomTextInputEditText" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -38,7 +39,7 @@
         android:layout_marginTop="325dp"
         android:layout_marginEnd="41dp"
         android:hint="@string/hintPassword"
-        app:boxStrokeColor="@color/white"
+        app:boxStrokeColor="@color/LightBlue"
         app:cursorColor="@color/SadBlue"
         app:hintTextColor="@color/SadBlue">
 
@@ -46,7 +47,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_edit_text_light"
-            android:backgroundTint="@color/LightBlue"
+            android:textColor="@color/SadBlue"
+            android:backgroundTint="@color/white"
             android:gravity="center_vertical"
             style="@style/CustomTextInputEditText" />
     </com.google.android.material.textfield.TextInputLayout>

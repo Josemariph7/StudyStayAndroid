@@ -1,10 +1,11 @@
 package com.example.studystayandroid.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Conversation {
+public class Conversation implements Serializable {
     private Long conversationId; // Identificador único de la conversación
     private Long user1Id; // ID del primer usuario
     private Long user2Id; // ID del segundo usuario

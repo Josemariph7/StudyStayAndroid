@@ -1,8 +1,9 @@
 package com.example.studystayandroid.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class AccommodationPhoto {
+public class AccommodationPhoto implements Serializable {
     private Long photoId;
     private Accommodation accommodation;
     private byte[] photoData;

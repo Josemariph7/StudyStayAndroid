@@ -3,13 +3,14 @@ package com.example.studystayandroid.model;
 import com.example.studystayandroid.controller.ForumTopicController;
 import com.example.studystayandroid.controller.UserController;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
  * Clase que representa un comentario en un tema de foro.
  */
-public class ForumComment {
+public class ForumComment implements Serializable {
     private Long commentId; // Identificador único del comentario
     private ForumTopic topic; // Tema al que pertenece el comentario
     private User author; // Autor del comentario

@@ -1,9 +1,10 @@
 package com.example.studystayandroid.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Message {
+public class Message implements Serializable {
     private Long messageId; // Identificador único del mensaje
     private Long conversationId; // Identificador de la conversación a la que pertenece el mensaje
     private Long senderId; // Identificador del remitente del mensaje

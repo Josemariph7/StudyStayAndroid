@@ -1,12 +1,13 @@
 package com.example.studystayandroid.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
  * Clase que representa una reserva en el sistema.
  */
-public class Booking {
+public class Booking implements Serializable {
     private Long bookingId; // Identificador único de la reserva
     private Accommodation accommodation; // Alojamiento reservado
     private User user; // Usuario que realizó la reserva

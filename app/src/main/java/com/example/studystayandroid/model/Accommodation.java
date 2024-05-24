@@ -1,11 +1,12 @@
 package com.example.studystayandroid.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Accommodation {
+public class Accommodation implements Serializable {
     private Long accommodationId;
     private User owner;
     private String address;
