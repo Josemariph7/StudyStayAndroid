@@ -3014,6 +3014,7 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable circularimage
 drawable conversation_item_background
 drawable defaultaccommodation
 drawable defaultprofile
@@ -3211,6 +3212,7 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
+id addComment
 id address
 id alertTitle
 id aligned
@@ -3241,7 +3243,8 @@ id bounceBoth
 id bounceEnd
 id bounceStart
 id button
-id buttonBack
+id button2
+id button3
 id buttonCancel
 id buttonConfirm
 id buttonPanel
@@ -3293,6 +3296,7 @@ id default_activity_button
 id deltaRelative
 id dependency_ordering
 id description
+id descriptionTopic
 id design_bottom_sheet
 id design_menu_item_action_area
 id design_menu_item_action_area_stub
@@ -3329,6 +3333,7 @@ id editTextMessage
 id edit_query
 id edit_text_id
 id elastic
+id emailTextView
 id embed
 id end
 id endToStart
@@ -3378,6 +3383,8 @@ id ignore
 id ignoreRequest
 id image
 id imageView
+id imageView2
+id imageViewProfile
 id immediateStop
 id included
 id indeterminate
@@ -3390,7 +3397,6 @@ id jumpToEnd
 id jumpToStart
 id labeled
 id layout
-id layoutMessages
 id left
 id leftToRight
 id legacy
@@ -3461,6 +3467,7 @@ id mtrl_picker_text_input_range_start
 id mtrl_picker_title_text
 id mtrl_view_tag_bottom_padding
 id multiply
+id nameTextView
 id nav_chat
 id nav_forum
 id nav_home
@@ -3519,6 +3526,7 @@ id path
 id pathRelative
 id peekHeight
 id percent
+id phoneTextView
 id pin
 id position
 id postLayout
@@ -3839,6 +3847,7 @@ layout fragment_chat
 layout fragment_discussion
 layout fragment_forum
 layout fragment_home
+layout fragment_message
 layout fragment_post
 layout fragment_profile
 layout ime_base_split_test_activity
@@ -4396,6 +4405,7 @@ style CardView_Light
 style CircleImageView
 style CustomButton
 style CustomButtonStyle
+style CustomButtonStyle2
 style CustomCalendar
 style CustomDatePickerDialog
 style CustomTextInputEditText

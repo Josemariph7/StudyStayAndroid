@@ -2,11 +2,14 @@ package com.example.studystayandroid.view;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,7 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studystayandroid.R;
 import com.example.studystayandroid.controller.ConversationController;
+import com.example.studystayandroid.controller.UserController;
 import com.example.studystayandroid.model.Conversation;
+import com.example.studystayandroid.model.User;
 
 import java.util.List;
 
@@ -24,11 +29,13 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     private OnItemClickListener listener;
     private ConversationController conversationController;
     private Context context;
+    private Long currentUserId;
 
-    public ConversationAdapter(List<Conversation> conversationList, Context context) {
+    public ConversationAdapter(List<Conversation> conversationList, Long currentUserId, Context context) {
         this.conversationList = conversationList;
         this.context = context;
         this.conversationController = new ConversationController(context);
+        this.currentUserId = currentUserId;
     }
 
     @NonNull
@@ -41,7 +48,42 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     @Override
     public void onBindViewHolder(@NonNull ConversationViewHolder holder, int position) {
         Conversation conversation = conversationList.get(position);
-        holder.textViewUser.setText("User " + conversation.getUser2Id());
+
+        // Aquí obtenemos el ID del usuario contrario en la conversación
+        Long otherUserId = conversation.getUser2Id();
+        if (otherUserId.equals(currentUserId)) {
+            otherUserId = conversation.getUser1Id();
+        }
+
+        // Usamos el UserController para obtener la información del usuario
+        UserController userController = new UserController(context);
+        Long finalOtherUserId = otherUserId;
+        userController.getUserById(otherUserId, new UserController.UserCallback() {
+            @Override
+            public void onSuccess(Object result) {
+
+            }
+
+            @Override
+            public void onSuccess(User user) {
+                holder.textViewUser.setText(user.getName() + " " + user.getLastName());
+                byte[] profileImageBytes = user.getProfilePicture();
+                if (profileImageBytes != null && profileImageBytes.length > 0) {
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(profileImageBytes, 0, profileImageBytes.length);
+                    holder.imageViewProfile.setImageBitmap(bitmap);
+                } else {
+                    holder.imageViewProfile.setImageResource(R.drawable.defaultprofile);
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                // Manejar el error
+                holder.textViewUser.setText("User " + finalOtherUserId);
+                holder.imageViewProfile.setImageResource(R.drawable.defaultprofile);
+            }
+        });
+
         if (conversation.getMessages() != null && !conversation.getMessages().isEmpty()) {
             holder.textViewLastMessage.setText(conversation.getMessages().get(conversation.getMessages().size() - 1).getContent());
         }
@@ -74,11 +116,13 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     class ConversationViewHolder extends RecyclerView.ViewHolder {
         TextView textViewUser;
         TextView textViewLastMessage;
+        ImageView imageViewProfile;
 
         ConversationViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewUser = itemView.findViewById(R.id.textViewUser);
             textViewLastMessage = itemView.findViewById(R.id.textViewLastMessage);
+            imageViewProfile = itemView.findViewById(R.id.imageViewProfile);
         }
     }
 

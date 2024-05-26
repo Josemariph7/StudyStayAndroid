@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studystayandroid.R;
+import com.example.studystayandroid.controller.ConversationController;
 import com.example.studystayandroid.controller.ForumCommentController;
+import com.example.studystayandroid.model.Conversation;
 import com.example.studystayandroid.model.ForumComment;
 import com.example.studystayandroid.model.ForumTopic;
 
@@ -22,6 +24,7 @@ import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class DiscussionFragment extends Fragment {
 
@@ -86,6 +89,7 @@ public class DiscussionFragment extends Fragment {
 
     private void loadComments() {
         Log.d("DiscussionFragment", "loadComments: Loading comments for topic ID: " + topic.getTopicId());
+        Log.d("DiscussionFragment", topic.toString());
         forumCommentController.getComments(topic.getTopicId(), new ForumCommentController.CommentListCallback() {
             @Override
             public void onSuccess(List<ForumComment> comments) {

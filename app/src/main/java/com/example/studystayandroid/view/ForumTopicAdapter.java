@@ -58,8 +58,6 @@ public class ForumTopicAdapter extends RecyclerView.Adapter<ForumTopicAdapter.Vi
             builder.setTitle("Delete Topic")
                     .setMessage("Are you sure you want to delete this topic?")
                     .setPositiveButton("Yes", (dialog, which) -> {
-                        // Call delete method from controller
-                        // forumTopicController.deleteTopic(topic.getTopicId(), callback)
                     })
                     .setNegativeButton("No", null);
         } else {

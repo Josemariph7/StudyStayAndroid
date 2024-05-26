@@ -21,7 +21,8 @@
             android:padding="16dp"
             android:text="Forum Topics"
             android:textAlignment="center"
-            android:textColor="@color/SadBlue"
+            android:textColor="@color/white"
+            android:background="@color/SadBlue"
             android:textSize="24sp"
             android:textStyle="bold" />
 

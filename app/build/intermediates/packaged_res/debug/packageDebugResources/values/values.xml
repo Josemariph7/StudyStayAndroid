@@ -53,9 +53,13 @@
         <item name="android:background">@color/LightBlue</item>
         <item name="android:textColor">@color/white</item>
     </style>
-    <style name="CustomButtonStyle" parent="android:Widget.Material.Button.Borderless">
+    <style name="CustomButtonStyle" parent="android:Widget.Material.Button">
         <item name="android:textColor">@color/LightBlue</item>
     </style>
+    <style name="CustomButtonStyle2" parent="android:Widget.Material.Button">
+    <item name="android:textColor">@color/LightBlue</item>
+        <item name="android:background">@color/SadBlue</item>
+</style>
     <style name="CustomCalendar" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
         <item name="colorAccent">@color/LightBlue</item>
         <item name="colorPrimary">@color/SadBlue</item>

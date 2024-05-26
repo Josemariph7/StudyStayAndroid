@@ -47,6 +47,10 @@
             android:turnScreenOn="false" />
 
         <provider
+            android:name="com.squareup.picasso.PicassoProvider"
+            android:authorities="com.example.studystayandroid.com.squareup.picasso"
+            android:exported="false" />
+        <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="com.example.studystayandroid.androidx-startup"
             android:exported="false" >

@@ -1,7 +1,10 @@
 package com.example.studystayandroid.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,7 +13,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,8 +25,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studystayandroid.R;
 import com.example.studystayandroid.controller.MessageController;
+import com.example.studystayandroid.controller.UserController;
 import com.example.studystayandroid.model.Conversation;
 import com.example.studystayandroid.model.Message;
+import com.example.studystayandroid.model.User;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -39,7 +46,9 @@ public class MessageFragment extends Fragment {
     private LinearLayout messageInputLayout;
     private EditText editTextMessage;
     private Button buttonSend;
-    private ImageButton buttonBack;
+    private ImageButton button3;
+    private ImageView imageViewProfile;
+    private TextView textViewUser;
 
     private MessageController messageController;
     private Long currentUserId;
@@ -90,15 +99,18 @@ public class MessageFragment extends Fragment {
         messageInputLayout = view.findViewById(R.id.messageInputLayout);
         editTextMessage = view.findViewById(R.id.editTextMessage);
         buttonSend = view.findViewById(R.id.buttonSend);
-        buttonBack = view.findViewById(R.id.buttonBack);
+        button3 = view.findViewById(R.id.button3);
+        imageViewProfile = view.findViewById(R.id.imageView2);
+        textViewUser = view.findViewById(R.id.textViewUser);
 
         buttonSend.setOnClickListener(v -> sendMessage());
 
-        buttonBack.setOnClickListener(v -> {
+        button3.setOnClickListener(v -> {
             getParentFragmentManager().popBackStack();
         });
 
         fetchMessages(conversation.getConversationId());
+        loadUserProfile();
     }
 
     private void fetchMessages(Long conversationId) {
@@ -137,6 +149,41 @@ public class MessageFragment extends Fragment {
             @Override
             public void onError(String error) {
                 Log.e("MessageFragment", "Error sending message: " + error);
+            }
+        });
+    }
+
+    private void loadUserProfile() {
+        Long otherUserId = conversation.getUser2Id();
+        if (otherUserId.equals(currentUserId)) {
+            otherUserId = conversation.getUser1Id();
+        }
+
+        UserController userController = new UserController(getContext());
+        Long finalOtherUserId = otherUserId;
+        userController.getUserById(otherUserId, new UserController.UserCallback() {
+            @Override
+            public void onSuccess(Object result) {
+
+            }
+
+            @Override
+            public void onSuccess(User user) {
+                textViewUser.setText(user.getName() + " " + user.getLastName());
+                byte[] profileImageBytes = user.getProfilePicture();
+                if (profileImageBytes != null && profileImageBytes.length > 0) {
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(profileImageBytes, 0, profileImageBytes.length);
+                    imageViewProfile.setImageBitmap(bitmap);
+                } else {
+                    imageViewProfile.setImageResource(R.drawable.defaultprofile);
+                }
+            }
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onError(String error) {
+                textViewUser.setText("User " + finalOtherUserId);
+                imageViewProfile.setImageResource(R.drawable.defaultprofile);
             }
         });
     }

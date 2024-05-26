@@ -20,6 +20,7 @@ import com.example.studystayandroid.model.Conversation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ChatFragment extends Fragment {
 
@@ -59,7 +60,7 @@ public class ChatFragment extends Fragment {
         recyclerViewConversations.setLayoutManager(new LinearLayoutManager(getContext()));
 
         conversationList = new ArrayList<>();
-        conversationAdapter = new ConversationAdapter(conversationList, requireContext());
+        conversationAdapter = new ConversationAdapter(conversationList, currentUserId ,requireContext());
         recyclerViewConversations.setAdapter(conversationAdapter);
 
         fetchConversations();
@@ -72,7 +73,11 @@ public class ChatFragment extends Fragment {
             @Override
             public void onSuccess(List<Conversation> conversations) {
                 conversationList.clear();
-                conversationList.addAll(conversations);
+                for (Conversation conversation : conversations) {
+                    if(Objects.equals(conversation.getUser1Id(), currentUserId) || Objects.equals(conversation.getUser2Id(), currentUserId)){
+                        conversationList.add(conversation);
+                    }
+                }
                 conversationAdapter.notifyDataSetChanged();
             }
 

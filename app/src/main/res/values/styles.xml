@@ -57,9 +57,13 @@
         <item name="cornerSize">50%</item>
     </style>
 
-    <style name="CustomButtonStyle" parent="android:Widget.Material.Button.Borderless">
+    <style name="CustomButtonStyle" parent="android:Widget.Material.Button">
         <item name="android:textColor">@color/LightBlue</item>
     </style>
+    <style name="CustomButtonStyle2" parent="android:Widget.Material.Button">
+    <item name="android:textColor">@color/LightBlue</item>
+        <item name="android:background">@color/SadBlue</item>
+</style>
 
     <!-- Custom error color -->
     <color name="errorColor">#FF0000</color>

@@ -57,7 +57,7 @@ public class ForumTopicController {
                                 public void onSuccess(Object result) {}
                                 @Override
                                 public void onSuccess(User author) {
-                                    ForumTopic topic = new ForumTopic(title, description, author, dateTime);
+                                    ForumTopic topic = new ForumTopic(topicId, title, description, author, dateTime);
                                     topics.add(topic);
                                     if (topics.size() == response.length()) {
                                         callback.onSuccess(topics);
@@ -166,7 +166,7 @@ public class ForumTopicController {
                                 public void onSuccess(Object result) {}
                                 @Override
                                 public void onSuccess(User author) {
-                                    ForumTopic topic = new ForumTopic(title, description, author, dateTime);
+                                    ForumTopic topic = new ForumTopic( id, title, description, author, dateTime);
                                     callback.onSuccess(topic);
                                 }
                                 @Override

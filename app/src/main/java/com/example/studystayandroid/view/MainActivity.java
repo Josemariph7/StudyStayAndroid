@@ -219,22 +219,33 @@ public class MainActivity extends AppCompatActivity {
         if (!nameEditTextSignUp.getEditText().getText().toString().matches("^[a-zA-Z\\s]+$")) {
             nameEditTextSignUp.setError("Valid name is required");
             isValid = false;
-        } else {
-            nameEditTextSignUp.setError("A-z Characters only");
+        }else{
+            nameEditTextSignUp.setError(null);
+        }
+        if(TextUtils.isEmpty(nameEditTextSignUp.getEditText().getText().toString())) {
+            nameEditTextSignUp.setError("Name is required");
+            isValid = false;
         }
 
         if (!surnamesEditTextSignUp.getEditText().getText().toString().matches("^[a-zA-Z\\s]+$")) {
             surnamesEditTextSignUp.setError("Valid surnames are required");
             isValid = false;
-        } else {
+        }else{
             surnamesEditTextSignUp.setError(null);
+        }
+        if(TextUtils.isEmpty(surnamesEditTextSignUp.getEditText().getText().toString())) {
+            surnamesEditTextSignUp.setError("Surnames are required");
         }
 
         if (!emailEditTextSignUp.getEditText().getText().toString().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
-            emailEditTextSignUp.setError("Valid email is required");
+            emailEditTextSignUp.setError("Introduce a valid email format");
             isValid = false;
         } else {
             emailEditTextSignUp.setError(null);
+        }
+        if(TextUtils.isEmpty(emailEditTextSignUp.getEditText().getText().toString())) {
+            emailEditTextSignUp.setError("Email is required");
+            isValid = false;
         }
 
         if (passwordEditTextSignUp.getEditText().getText().toString().length() < 6) {
@@ -243,12 +254,20 @@ public class MainActivity extends AppCompatActivity {
         } else {
             passwordEditTextSignUp.setError(null);
         }
+        if(TextUtils.isEmpty(passwordEditTextSignUp.getEditText().getText().toString())) {
+            passwordEditTextSignUp.setError("Password is required");
+            isValid = false;
+        }
 
         if (!dniEditTextSignUp.getEditText().getText().toString().matches("^[0-9]{8}[A-Za-z]$")) {
-            dniEditTextSignUp.setError("Valid DNI is required");
+            dniEditTextSignUp.setError("Introduce a valid DNI format");
             isValid = false;
         } else {
             dniEditTextSignUp.setError(null);
+        }
+        if(TextUtils.isEmpty(dniEditTextSignUp.getEditText().getText().toString())) {
+            dniEditTextSignUp.setError("DNI is required");
+            isValid = false;
         }
 
         if (!phoneEditTextSignUp.getEditText().getText().toString().matches("^[0-9]{9}$")) {
@@ -256,6 +275,10 @@ public class MainActivity extends AppCompatActivity {
             isValid = false;
         } else {
             phoneEditTextSignUp.setError(null);
+        }
+        if(TextUtils.isEmpty(phoneEditTextSignUp.getEditText().getText().toString())) {
+            phoneEditTextSignUp.setError("Phone is required");
+            isValid = false;
         }
 
         if (TextUtils.isEmpty(birthDateEditText.getText().toString())) {
@@ -284,6 +307,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(passwordEditText.getEditText().getText().toString())) {
             passwordEditText.setError("Password is required");
+            isValid = false;
+        } else if(passwordEditText.getEditText().getText().toString().length() < 6) {
+            passwordEditText.setError("Password must be at least 6 characters");
             isValid = false;
         } else {
             passwordEditText.setError(null);

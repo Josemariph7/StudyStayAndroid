@@ -9,46 +9,49 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textFieldEmail"
         style="@style/CustomTextInputLayout"
-        android:layout_width="332dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="40dp"
+        android:layout_width="331dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="41dp"
         android:layout_marginTop="252dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="41dp"
         android:hint="@string/hintEmail"
-        app:boxStrokeColor="@color/white"
+        android:translationY="-7dp"
+        app:boxStrokeColor="@color/LightBlue"
         app:cursorColor="@color/SadBlue"
         app:hintTextColor="@color/SadBlue"
         tools:ignore="ExtraText">
 
         <com.google.android.material.textfield.TextInputEditText
+            style="@style/CustomTextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_edit_text_light"
-            android:backgroundTint="@color/LightBlue"
+            android:backgroundTint="@color/white"
             android:gravity="center_vertical"
-            style="@style/CustomTextInputEditText" />
+            android:textColor="@color/SadBlue" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textFieldPassword"
         style="@style/CustomTextInputLayout"
         android:layout_width="331dp"
-        android:layout_height="64dp"
+        android:layout_height="76dp"
         android:layout_marginStart="41dp"
         android:layout_marginTop="325dp"
         android:layout_marginEnd="41dp"
         android:hint="@string/hintPassword"
-        app:boxStrokeColor="@color/white"
+        app:boxStrokeColor="@color/LightBlue"
         app:cursorColor="@color/SadBlue"
         app:hintTextColor="@color/SadBlue">
 
         <com.google.android.material.textfield.TextInputEditText
+            style="@style/CustomTextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_edit_text_light"
-            android:backgroundTint="@color/LightBlue"
+            android:backgroundTint="@color/white"
             android:gravity="center_vertical"
-            style="@style/CustomTextInputEditText" />
+            android:textColor="@color/SadBlue" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
@@ -106,13 +109,14 @@
                 android:backgroundTint="@color/SadBlue"
                 android:text="Sign Up"
                 android:textColor="@color/LightBlue"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:translationY="-10dp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textFieldNameSignUp"
                 style="@style/CustomTextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_height="61dp"
+                android:layout_height="75dp"
                 android:layout_marginVertical="100dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginLeft="40dp"
@@ -120,139 +124,145 @@
                 android:layout_marginEnd="40dp"
                 android:layout_marginRight="40dp"
                 android:hint="@string/hintName"
-                android:textColorHint="@color/LightBlue"
-                app:boxStrokeColor="@color/white"
-                app:cursorColor="@color/LightBlue"
-                app:hintTextColor="@color/LightBlue"
+                android:translationY="-5dp"
+                android:textColorHint="@color/SadBlue"
+                app:boxStrokeColor="@color/SadBlue"
+                app:cursorColor="@color/SadBlue"
+                app:hintTextColor="@color/SadBlue"
                 tools:ignore="ExtraText">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_edit_text_dark"
-                    android:backgroundTint="@color/SadBlue"
-                    style="@style/CustomTextInputEditText" />
+                    android:backgroundTint="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textFieldEmailSignUp"
                 style="@style/CustomTextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_height="61dp"
+                android:layout_height="75dp"
                 android:layout_marginVertical="420dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginRight="40dp"
                 android:hint="@string/hintEmail"
-                android:textColorHint="@color/LightBlue"
-                app:boxStrokeColor="@color/white"
-                app:cursorColor="@color/LightBlue"
-                app:hintTextColor="@color/LightBlue"
+                android:translationY="-5dp"
+                android:textColorHint="@color/SadBlue"
+                app:boxStrokeColor="@color/SadBlue"
+                app:cursorColor="@color/SadBlue"
+                app:hintTextColor="@color/SadBlue"
                 tools:ignore="ExtraText">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/SadBlue"
                     android:background="@drawable/rounded_edit_text_dark"
-                    style="@style/CustomTextInputEditText" />
+                    android:backgroundTint="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textFieldSurnamesignUp"
                 style="@style/CustomTextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_height="61dp"
+                android:layout_height="75dp"
                 android:layout_marginVertical="180dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginRight="40dp"
                 android:hint="@string/hintSurnames"
-                android:textColorHint="@color/LightBlue"
-                app:boxStrokeColor="@color/white"
-                app:cursorColor="@color/LightBlue"
-                app:hintTextColor="@color/LightBlue"
+                android:translationY="-5dp"
+                android:textColorHint="@color/SadBlue"
+                app:boxStrokeColor="@color/SadBlue"
+                app:cursorColor="@color/SadBlue"
+                app:hintTextColor="@color/SadBlue"
                 tools:ignore="ExtraText">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/SadBlue"
                     android:background="@drawable/rounded_edit_text_dark"
-                    style="@style/CustomTextInputEditText" />
+                    android:backgroundTint="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textFieldPhoneSignUp"
                 style="@style/CustomTextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_height="61dp"
+                android:layout_height="75dp"
                 android:layout_marginVertical="500dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginRight="40dp"
                 android:hint="@string/hintPhone"
-                android:textColorHint="@color/LightBlue"
-                app:boxStrokeColor="@color/white"
-                app:cursorColor="@color/LightBlue"
-                app:hintTextColor="@color/LightBlue"
+                android:translationY="-5dp"
+                android:textColorHint="@color/SadBlue"
+                app:boxStrokeColor="@color/SadBlue"
+                app:cursorColor="@color/SadBlue"
+                app:hintTextColor="@color/SadBlue"
                 tools:ignore="ExtraText">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/SadBlue"
                     android:background="@drawable/rounded_edit_text_dark"
-                    style="@style/CustomTextInputEditText" />
+                    android:backgroundTint="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textFieldPasswordSignUp"
                 style="@style/CustomTextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_height="61dp"
+                android:layout_height="75dp"
                 android:layout_marginVertical="260dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="40dp"
                 android:hint="@string/hintPassword"
-                android:textColorHint="@color/LightBlue"
-                app:boxStrokeColor="@color/white"
-                app:cursorColor="@color/LightBlue"
-                app:hintTextColor="@color/LightBlue"
+                android:translationY="-5dp"
+                android:textColorHint="@color/SadBlue"
+                app:boxStrokeColor="@color/SadBlue"
+                app:cursorColor="@color/SadBlue"
+                app:hintTextColor="@color/SadBlue"
                 tools:ignore="ExtraText">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/SadBlue"
                     android:background="@drawable/rounded_edit_text_dark"
-                    style="@style/CustomTextInputEditText" />
+                    android:backgroundTint="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textFieldDNISignUp"
                 style="@style/CustomTextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_height="61dp"
+                android:layout_height="75dp"
                 android:layout_marginVertical="340dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="40dp"
                 android:hint="@string/hintDNI"
-                android:textColorHint="@color/LightBlue"
-                app:boxStrokeColor="@color/white"
-                app:cursorColor="@color/LightBlue"
-                app:hintTextColor="@color/LightBlue"
+                android:translationY="-5dp"
+                android:textColorHint="@color/SadBlue"
+                app:boxStrokeColor="@color/SadBlue"
+                app:cursorColor="@color/SadBlue"
+                app:hintTextColor="@color/SadBlue"
                 tools:ignore="ExtraText">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/SadBlue"
                     android:background="@drawable/rounded_edit_text_dark"
-                    style="@style/CustomTextInputEditText" />
+                    android:backgroundTint="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -270,24 +280,25 @@
                 android:id="@+id/textInputLayoutBirthDate"
                 style="@style/CustomTextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_height="61dp"
+                android:layout_height="75dp"
                 android:layout_marginVertical="570dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="40dp"
                 android:hint="Birth Date"
-                android:textColorHint="@color/LightBlue"
-                app:boxStrokeColor="@color/white"
-                app:cursorColor="@color/LightBlue"
-                app:hintTextColor="@color/LightBlue"
+                android:translationY="3dp"
+                android:textColorHint="@color/SadBlue"
+                app:boxStrokeColor="@color/SadBlue"
+                app:cursorColor="@color/SadBlue"
+                app:hintTextColor="@color/SadBlue"
                 tools:ignore="ExtraText">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextBirthDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:backgroundTint="@color/SadBlue"
                     android:background="@drawable/rounded_edit_text_dark"
+                    android:backgroundTint="@color/white"
+                    android:focusable="false"
                     android:textColor="@color/LightBlue"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -299,21 +310,25 @@
                 android:layout_height="48dp"
                 android:layout_marginVertical="640dp"
                 android:layout_marginLeft="100dp"
+                android:background="@drawable/rounded_edit_text_dark"
                 android:layout_marginRight="100dp"
-                android:background="@color/SadBlue"
-                android:backgroundTint="@color/SadBlue"
+                android:backgroundTint="@color/white"
                 android:hint="@string/hintGender"
-                android:textColorHint="@color/LightBlue"
-                app:boxStrokeColor="@color/LightBlue"
-                app:cursorColor="@color/LightBlue"
-                app:hintTextColor="@color/LightBlue">
+                android:translationY="7dp"
+                android:textColorHint="@color/SadBlue"
+                app:boxStrokeColor="@color/SadBlue"
+                app:cursorColor="@color/SadBlue"
+                app:hintTextColor="@color/SadBlue">
 
                 <Spinner
                     android:id="@+id/spinnerGender"
-                    android:layout_width="match_parent"
+                    android:layout_width="196dp"
                     android:layout_height="match_parent"
-                    android:backgroundTint="@color/SadBlue"
-                    android:outlineAmbientShadowColor="@color/SadBlue" />
+
+                    android:backgroundTint="@color/white"
+                    android:outlineAmbientShadowColor="@color/SadBlue"
+                    android:textAlignment="center"
+                    android:translationX="21dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

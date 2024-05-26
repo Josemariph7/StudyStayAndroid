@@ -21,7 +21,8 @@ public class ForumTopic implements Serializable {
     public ForumTopic() {
     }
 
-    public ForumTopic(String title, String description, User author, LocalDateTime dateTime) {
+    public ForumTopic(Long topicId, String title, String description, User author, LocalDateTime dateTime) {
+        this.topicId = topicId;
         this.title = title;
         this.description = description;
         this.author = author;
