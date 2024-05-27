@@ -3051,10 +3051,15 @@ drawable iconavailable
 drawable iconayuda
 drawable iconcancelar
 drawable iconconversation
+drawable icondni
+drawable iconemail
 drawable iconestrella
 drawable iconexit
+drawable iconfechadenacimiento
+drawable iconfecharegistro
 drawable iconforum
 drawable iconsignout
+drawable icontelefono
 drawable iconuser
 drawable indeterminate_static
 drawable logofondoazulclaro
@@ -3134,9 +3139,11 @@ drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable registerradius
+drawable rounded_bottom_card
 drawable rounded_dialog
 drawable rounded_edit_text_dark
 drawable rounded_edit_text_light
+drawable rounded_profile_card
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
@@ -3144,6 +3151,7 @@ id ALT
 id BOTTOM_END
 id BOTTOM_START
 id CTRL
+id ContactButton
 id FUNCTION
 id LogInButton
 id META
@@ -3235,6 +3243,7 @@ id baseline
 id beginOnFirstDraw
 id beginning
 id bestChoice
+id birthDateTextView
 id blocking
 id bottom
 id bottom_sheet
@@ -3312,6 +3321,7 @@ id disableIntraAutoTransition
 id disablePostScroll
 id disableScroll
 id disjoint
+id dniTextView
 id dragAnticlockwise
 id dragClockwise
 id dragDown
@@ -3363,6 +3373,7 @@ id frost
 id fullscreen_header
 id ghost_view
 id ghost_view_holder
+id glide_custom_view_target_tag
 id gone
 id graph
 id graph_wrap
@@ -3391,6 +3402,7 @@ id indeterminate
 id info
 id invisible
 id inward
+id is_pooling_container_tag
 id italic
 id item_touch_helper_previous_elevation
 id jumpToEnd
@@ -3467,7 +3479,7 @@ id mtrl_picker_text_input_range_start
 id mtrl_picker_title_text
 id mtrl_view_tag_bottom_padding
 id multiply
-id nameTextView
+id nameTextViewProfile
 id nav_chat
 id nav_forum
 id nav_home
@@ -3528,10 +3540,12 @@ id peekHeight
 id percent
 id phoneTextView
 id pin
+id pooling_container_listener_holder_tag
 id position
 id postLayout
 id pressed
 id price
+id profilePhoto
 id progress_circular
 id progress_horizontal
 id radio
@@ -3541,8 +3555,11 @@ id recyclerView
 id recyclerViewComments
 id recyclerViewConversations
 id recyclerViewForumTopics
+id recyclerViewListed
 id recyclerViewMessages
+id recyclerViewRented
 id registerButton
+id registerDateTextView
 id report_drawn
 id reverseSawtooth
 id right
@@ -3613,6 +3630,7 @@ id stretch
 id submenuarrow
 id submit_area
 id supportScrollUp
+id tabLayout
 id tabMode
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
@@ -3693,6 +3711,7 @@ id unlabeled
 id up
 id useLogo
 id vertical_only
+id viewPager
 id view_offset_helper
 id view_transition
 id view_tree_lifecycle_owner
@@ -3847,9 +3866,12 @@ layout fragment_chat
 layout fragment_discussion
 layout fragment_forum
 layout fragment_home
+layout fragment_listed
 layout fragment_message
 layout fragment_post
 layout fragment_profile
+layout fragment_profile_stranger
+layout fragment_rented
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
 layout item_accommodation

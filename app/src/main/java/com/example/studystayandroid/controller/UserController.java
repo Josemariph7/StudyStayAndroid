@@ -1,7 +1,5 @@
 package com.example.studystayandroid.controller;
 
-import static java.time.LocalDate.now;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Base64;
@@ -9,22 +7,19 @@ import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.studystayandroid.model.User;
 import com.example.studystayandroid.utils.Constants;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import org.json.JSONArray;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -111,6 +106,8 @@ public class UserController {
     public void getUserById(Long userId, final UserCallback callback) {
         String url = URL_GET_USER + "?userId=" + userId;
 
+        Log.d("UserController", "Getting user by ID: " + userId);
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
@@ -130,19 +127,30 @@ public class UserController {
                         if (response.has("ProfilePicture") && !response.isNull("ProfilePicture")) {
                             String profilePictureBase64 = response.getString("ProfilePicture");
                             byte[] profilePictureBytes = Base64.decode(profilePictureBase64, Base64.DEFAULT);
+                            Base64.encode()
                             user.setProfilePicture(profilePictureBytes);
+                            Log.d("UserController", "Profile picture decoded from base64");
+                            Log.d("UserController", "Profile picture: " + user.getProfilePicture());
                         } else {
                             user.setProfilePicture(null);
                         }
                         callback.onSuccess(user);
                     } catch (JSONException | IllegalArgumentException e) {
+                        Log.e("UserController", "Error parsing user details: " + e.getMessage());
                         callback.onError(e.getMessage());
                     }
-                }, error -> callback.onError(error.toString())
+                }, error -> {
+            Log.e("UserController", "Error getting user by ID: " + error.toString());
+            callback.onError(error.toString());
+        }
         );
 
         requestQueue.add(jsonObjectRequest);
     }
+
+
+
+
 
 
     public void updateUser(User user, final UserCallback callback) {

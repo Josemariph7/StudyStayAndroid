@@ -119,6 +119,8 @@ public class ConversationController {
     }
 
     public interface ConversationCallback {
+        void onSuccess(Conversation createdConversation);
+
         void onSuccess(Object result);
         void onError(String error);
     }

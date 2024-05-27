@@ -1,5 +1,14 @@
 package com.example.studystayandroid.view;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,18 +17,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.studystayandroid.R;
 import com.example.studystayandroid.controller.UserController;
 import com.example.studystayandroid.model.User;
@@ -53,6 +52,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_home);
         }
+
         loadUserDetails();
     }
 
@@ -64,48 +64,14 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             userController.getUserById(userId, new UserController.UserCallback() {
                 @Override
                 public void onSuccess(Object result) {
-                    User user = (User) result;
-
-                    View headerView = navigationView.getHeaderView(0);
-                    TextView navUserName = headerView.findViewById(R.id.nav_user_name);
-                    TextView navUserEmail = headerView.findViewById(R.id.nav_user_email);
-                    ImageView navUserPhoto = headerView.findViewById(R.id.nav_user_photo);
-
-                    navUserName.setText(user.getName() + " " + user.getLastName());
-                    navUserEmail.setText(user.getEmail());
-
-                    byte[] userPhotoBytes = user.getProfilePicture();
-                    if (userPhotoBytes != null) {
-                        String userPhotoBase64 = Base64.encodeToString(userPhotoBytes, Base64.DEFAULT);
-                        byte[] decodedString = Base64.decode(userPhotoBase64, Base64.DEFAULT);
-                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                        navUserPhoto.setImageBitmap(decodedByte);
-                    } else {
-                        navUserPhoto.setImageResource(R.drawable.fotoperfil);
-                    }
+                    currentUser = (User) result;
+                    updateUI();
                 }
 
                 @Override
                 public void onSuccess(User author) {
-                    User user = (User) author;
-
-                    View headerView = navigationView.getHeaderView(0);
-                    TextView navUserName = headerView.findViewById(R.id.nav_user_name);
-                    TextView navUserEmail = headerView.findViewById(R.id.nav_user_email);
-                    ImageView navUserPhoto = headerView.findViewById(R.id.nav_user_photo);
-
-                    navUserName.setText(user.getName() + " " + user.getLastName());
-                    navUserEmail.setText(user.getEmail());
-
-                    byte[] userPhotoBytes = user.getProfilePicture();
-                    if (userPhotoBytes != null) {
-                        String userPhotoBase64 = Base64.encodeToString(userPhotoBytes, Base64.DEFAULT);
-                        byte[] decodedString = Base64.decode(userPhotoBase64, Base64.DEFAULT);
-                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                        navUserPhoto.setImageBitmap(decodedByte);
-                    } else {
-                        navUserPhoto.setImageResource(R.drawable.fotoperfil);
-                    }
+                    currentUser = author;
+                    updateUI();
                 }
 
                 @Override
@@ -115,6 +81,30 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             });
         } else {
             Log.e("Dashboard", "User ID not found in SharedPreferences");
+        }
+    }
+
+    private void updateUI() {
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUserName = headerView.findViewById(R.id.nav_user_name);
+        TextView navUserEmail = headerView.findViewById(R.id.nav_user_email);
+        ImageView navUserPhoto = headerView.findViewById(R.id.nav_user_photo);
+
+        navUserName.setText(currentUser.getName() + " " + currentUser.getLastName());
+        navUserEmail.setText(currentUser.getEmail());
+
+        byte[] userPhotoBytes = currentUser.getProfilePicture();
+        if (userPhotoBytes != null && userPhotoBytes.length > 0) {
+            Glide.with(this)
+                    .asBitmap()
+                    .load(userPhotoBytes)
+                    .transform(new CircleCrop())
+                    .into(navUserPhoto);
+        } else {
+            Glide.with(this)
+                    .load(R.drawable.defaultprofile)
+                    .transform(new CircleCrop())
+                    .into(navUserPhoto);
         }
     }
 

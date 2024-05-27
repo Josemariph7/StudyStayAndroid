@@ -12,6 +12,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,11 +29,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
     private Button loginButton;
-    private Button registerButton;
     private TextInputLayout emailEditText;
     private TextInputLayout passwordEditText;
     private TextInputLayout surnamesEditTextSignUp;
@@ -67,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         birthDateEditText = findViewById(R.id.editTextBirthDate);
         spinnerGender = findViewById(R.id.spinnerGender);
         getWindow().setStatusBarColor(getResources().getColor(R.color.statusBarColor));
-
 
         Button registerButton = findViewById(R.id.registerButton);
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -135,43 +133,42 @@ public class MainActivity extends AppCompatActivity {
                             userController.getUserById(userId, new UserController.UserCallback() {
                                 @Override
                                 public void onSuccess(Object result) {
-                                    User user = (User) result;
-                                    byte[] userPhotoBytes = user.getProfilePicture();
-                                    String userPhotoBase64 = "";
-                                    if (userPhotoBytes != null) {
-                                        userPhotoBase64 = Base64.encodeToString(userPhotoBytes, Base64.DEFAULT);
-                                    }
-                                    SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
-                                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    editor.putLong("userId", userId);
-                                    editor.putString("userName", user.getName());
-                                    editor.putString("userEmail", user.getEmail());
-                                    editor.putString("userPhoto", userPhotoBase64.isEmpty() ? "default" : userPhotoBase64);
-                                    editor.apply();
-                                    Log.d("Login", "User details saved to SharedPreferences");
-                                    Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
-                                    startActivity(intent);
+
                                 }
 
                                 @Override
                                 public void onSuccess(User author) {
+                                    Log.d("Login", "Fetching user details successful");
                                     User user = (User) author;
                                     byte[] userPhotoBytes = user.getProfilePicture();
-                                    String userPhotoBase64 = "";
-                                    if (userPhotoBytes != null) {
-                                        userPhotoBase64 = Base64.encodeToString(userPhotoBytes, Base64.DEFAULT);
+                                    ImageView imageView = findViewById(R.id.imageView);
+
+                                    if (userPhotoBytes != null && userPhotoBytes.length > 0) {
+                                        String userPhotoBase64 = Base64.encodeToString(userPhotoBytes, Base64.DEFAULT);
+                                        Log.d("Login", "User photo encoded to base64");
+
+                                        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+                                        Log.d("Login", "Getting SharedPreferences");
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        Log.d("Login", "Getting SharedPreferences editor");
+                                        editor.putLong("userId", userId);
+                                        editor.putString("userName", user.getName());
+                                        editor.putString("userEmail", user.getEmail());
+                                        editor.putString("userPhoto", userPhotoBase64.isEmpty() ? "default" : userPhotoBase64);
+                                        Log.d("Login", "Saving photo to SharedPreferences");
+                                        editor.apply();
+                                        Log.d("Login", "User details saved to SharedPreferences");
+
+                                        Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+                                        Log.d("Login", "Creating intent for DashboardActivity");
+                                        startActivity(intent);
+                                        Log.d("Login", "Starting DashboardActivity");
+                                    } else {
+                                        Log.d("Login", "User photo is null or empty");
+                                        // Manejar el caso cuando la imagen de usuario es null o vacía
                                     }
-                                    SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
-                                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    editor.putLong("userId", userId);
-                                    editor.putString("userName", user.getName());
-                                    editor.putString("userEmail", user.getEmail());
-                                    editor.putString("userPhoto", userPhotoBase64.isEmpty() ? "default" : userPhotoBase64);
-                                    editor.apply();
-                                    Log.d("Login", "User details saved to SharedPreferences");
-                                    Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
-                                    startActivity(intent);
                                 }
+
                                 @Override
                                 public void onError(String error) {
                                     Log.e("Login", "Error fetching user details: " + error);
@@ -180,7 +177,64 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onSuccess(User author) {}
+                        public void onSuccess(User author) {
+
+                            Log.d("Login", "Login successful, userId: " + author.getUserId());
+                            userController.getUserById(author.getUserId(), new UserController.UserCallback() {
+                                @Override
+                                public void onSuccess(Object result) {
+
+                                }
+
+                                @Override
+                                public void onSuccess(User author) {
+                                    Log.d("Login", "Fetching user details successful");
+                                    byte[] userPhotoBytes = author.getProfilePicture();
+                                    ImageView imageView = findViewById(R.id.imageView);
+
+                                    if (userPhotoBytes != null && userPhotoBytes.length > 0) {
+
+                                        String userPhotoBase64 = Base64.encodeToString(userPhotoBytes, Base64.DEFAULT);
+                                        Log.d("Login", "User photo encoded to base64");
+
+                                        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+                                        Log.d("Login", "Getting SharedPreferences");
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        Log.d("Login", "Getting SharedPreferences editor");
+                                        editor.putLong("userId", author.getUserId());
+                                        editor.putString("userName", author.getName());
+                                        editor.putString("userEmail", author.getEmail());
+                                        editor.putString("userPhoto", userPhotoBase64.isEmpty() ? "default" : userPhotoBase64);
+                                        Log.d("Login", "Saving photo to SharedPreferences");
+                                        editor.apply();
+                                        Log.d("Login", "User details saved to SharedPreferences");
+
+                                        Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+                                        Log.d("Login", "Creating intent for DashboardActivity");
+                                        startActivity(intent);
+                                        Log.d("Login", "Starting DashboardActivity");
+                                    } else {
+                                        Log.d("Login", "User photo is null or empty");
+                                        // Manejar el caso cuando la imagen de usuario es null o vacía
+                                        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        editor.putLong("userId", author.getUserId());
+                                        editor.putString("userName", author.getName());
+                                        editor.putString("userEmail", author.getEmail());
+                                        editor.putString("userPhoto", "default");
+                                        editor.apply();
+
+                                        Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+                                        startActivity(intent);
+                                    }
+                                }
+
+                                @Override
+                                public void onError(String error) {
+                                    Log.e("Login", "Error fetching user details: " + error);
+                                }
+                            });
+                        }
 
                         @Override
                         public void onError(String error) {
@@ -290,7 +344,6 @@ public class MainActivity extends AppCompatActivity {
 
         return isValid;
     }
-
 
     private boolean validateLoginFields() {
         boolean isValid = true;

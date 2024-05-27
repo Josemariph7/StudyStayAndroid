@@ -18,6 +18,7 @@
         android:translationY="-7dp"
         app:boxStrokeColor="@color/LightBlue"
         app:cursorColor="@color/SadBlue"
+        android:textColorHint="@color/SadBlue"
         app:hintTextColor="@color/SadBlue"
         tools:ignore="ExtraText">
 
@@ -39,6 +40,7 @@
         android:layout_marginStart="41dp"
         android:layout_marginTop="325dp"
         android:layout_marginEnd="41dp"
+        android:textColorHint="@color/SadBlue"
         android:hint="@string/hintPassword"
         app:boxStrokeColor="@color/LightBlue"
         app:cursorColor="@color/SadBlue"

@@ -8,14 +8,14 @@
     android:padding="12dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <com.google.android.material.imageview.ShapeableImageView
+    <ImageView
         android:id="@+id/nav_user_photo"
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:src="@drawable/fotoperfil"
+        android:background="@drawable/circularimage"
         android:translationX="10dp"
         android:translationY="-65dp"
-        app:shapeAppearanceOverlay="@style/CircleImageView" />
+         />
 
     <TextView
         android:id="@+id/nav_user_name"

@@ -2,8 +2,6 @@ package com.example.studystayandroid.view;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.studystayandroid.R;
 import com.example.studystayandroid.controller.ConversationController;
 import com.example.studystayandroid.controller.UserController;
@@ -69,10 +69,16 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
                 holder.textViewUser.setText(user.getName() + " " + user.getLastName());
                 byte[] profileImageBytes = user.getProfilePicture();
                 if (profileImageBytes != null && profileImageBytes.length > 0) {
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(profileImageBytes, 0, profileImageBytes.length);
-                    holder.imageViewProfile.setImageBitmap(bitmap);
+                    Glide.with(context)
+                            .asBitmap()
+                            .load(profileImageBytes)
+                            .transform(new CircleCrop())
+                            .into(holder.imageViewProfile);
                 } else {
-                    holder.imageViewProfile.setImageResource(R.drawable.defaultprofile);
+                    Glide.with(context)
+                            .load(R.drawable.defaultprofile)
+                            .transform(new CircleCrop())
+                            .into(holder.imageViewProfile);
                 }
             }
 
@@ -146,6 +152,11 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
 
         buttonConfirm.setOnClickListener(v -> {
             conversationController.deleteConversation(conversation.getConversationId(), new ConversationController.ConversationCallback() {
+                @Override
+                public void onSuccess(Conversation createdConversation) {
+
+                }
+
                 @Override
                 public void onSuccess(Object result) {
                     conversationList.remove(position);

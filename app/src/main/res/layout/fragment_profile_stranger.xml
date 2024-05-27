@@ -4,28 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/LightBlue"
+    android:background="@color/white"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".view.ProfileFragment">
+    tools:context=".view.StrangeProfileFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="266dp">
+        android:background="@drawable/rounded_bottom_card"
+        android:layout_height="250dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="264dp"
+            android:layout_height="250dp"
+
             android:background="@drawable/rounded_profile_card"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <ImageView
                 style="@style/CircleImageView"
                 android:layout_width="120dp"
-                android:layout_height="109dp"
+                android:layout_height="120dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="45dp"
-                android:src="@drawable/defaultprofile" />
+                android:background="@drawable/circularimage"
+                android:translationY="-10dp" />
 
             <TextView
                 android:id="@+id/nameTextViewProfile"
@@ -37,15 +41,13 @@
                 android:textColor="#fff"
                 android:textSize="21sp"
                 android:textStyle="bold"
-                android:translationY="20dp" />
+                android:translationY="7dp" />
 
         </LinearLayout>
-
-
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="360dp"
+        android:layout_width="294dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="45dp"
@@ -54,13 +56,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
             android:orientation="horizontal"
             android:paddingLeft="25dp">
 
             <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@android:drawable/sym_action_email" />
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:src="@drawable/iconemail" />
 
             <TextView
                 android:id="@+id/emailTextView"
@@ -75,6 +78,27 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="25dp">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/iconfechadenacimiento" />
+
+            <TextView
+                android:id="@+id/birthDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="BirthDate"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:orientation="horizontal"
             android:paddingLeft="25dp">
@@ -82,7 +106,7 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@android:drawable/stat_sys_phone_call" />
+                android:src="@drawable/icontelefono" />
 
             <TextView
                 android:id="@+id/phoneTextView"
@@ -94,20 +118,59 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Other fields if necessary -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:paddingLeft="25dp">
 
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/iconfecharegistro" />
+
+            <TextView
+                android:id="@+id/registerDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="RegistrationDate"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:paddingLeft="25dp">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/icondni" />
+
+            <TextView
+                android:id="@+id/dniTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="Dni"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 
     <Button
         android:id="@+id/ContactButton"
         style="@style/Widget.Material3.Button.IconButton.Filled"
         android:layout_width="253dp"
-
         android:layout_height="wrap_content"
         android:backgroundTint="@color/SadBlue"
-        android:text="Contact user"
+        android:text="Contact User"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:translationY="120dp" />
-
+        android:translationY="50dp" />
 </LinearLayout>
