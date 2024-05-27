@@ -127,7 +127,6 @@ public class UserController {
                         if (response.has("ProfilePicture") && !response.isNull("ProfilePicture")) {
                             String profilePictureBase64 = response.getString("ProfilePicture");
                             byte[] profilePictureBytes = Base64.decode(profilePictureBase64, Base64.DEFAULT);
-                            Base64.encode()
                             user.setProfilePicture(profilePictureBytes);
                             Log.d("UserController", "Profile picture decoded from base64");
                             Log.d("UserController", "Profile picture: " + user.getProfilePicture());
