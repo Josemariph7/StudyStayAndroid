@@ -16,7 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studystayandroid.R;
 import com.example.studystayandroid.controller.ConversationController;
+import com.example.studystayandroid.controller.UserController;
 import com.example.studystayandroid.model.Conversation;
+import com.example.studystayandroid.model.User;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +69,7 @@ public class ChatFragment extends Fragment {
         fetchConversations();
 
         conversationAdapter.setOnItemClickListener(conversation -> openMessageFragment(conversation));
+        conversationAdapter.setOnItemLongClickListener(conversation -> showConversationOptions(conversation));
     }
 
     private void fetchConversations() {
@@ -78,12 +82,91 @@ public class ChatFragment extends Fragment {
                         conversationList.add(conversation);
                     }
                 }
+                // Ordenar por el último mensaje
+                conversationList.sort((c1, c2) -> {
+                    if (c1.getMessages().isEmpty() && c2.getMessages().isEmpty()) {
+                        return 0;
+                    } else if (c1.getMessages().isEmpty()) {
+                        return 1;
+                    } else if (c2.getMessages().isEmpty()) {
+                        return -1;
+                    } else {
+                        return c2.getMessages().get(c2.getMessages().size() - 1).getDateTime().compareTo(c1.getMessages().get(c1.getMessages().size() - 1).getDateTime());
+                    }
+                });
                 conversationAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onError(String error) {
                 Log.e("ChatFragment", "Error fetching conversations: " + error);
+            }
+        });
+    }
+
+    private void showConversationOptions(Conversation conversation) {
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Options")
+                .setItems(new String[]{"Delete Conversation", "View User Profile"}, (dialog, which) -> {
+                    switch (which) {
+                        case 0:
+                            deleteConversation(conversation);
+                            break;
+                        case 1:
+                            openUserProfile(conversation);
+                            break;
+                    }
+                })
+                .show();
+    }
+
+    private void deleteConversation(Conversation conversation) {
+        conversationController.deleteConversation(conversation.getConversationId(), new ConversationController.ConversationCallback() {
+            @Override
+            public void onSuccess(Conversation result) {
+                fetchConversations();
+            }
+
+            @Override
+            public void onSuccess(Object result) {
+                fetchConversations();
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.e("ChatFragment", "Error deleting conversation: " + error);
+            }
+        });
+    }
+
+    private void openUserProfile(Conversation conversation) {
+        Long otherUserId = conversation.getUser1Id().equals(currentUserId) ? conversation.getUser2Id() : conversation.getUser1Id();
+        UserController userController = new UserController(getContext());
+        userController.getUserById(otherUserId, new UserController.UserCallback() {
+            @Override
+            public void onSuccess(Object result) {
+                User user=(User) result;
+                StrangeProfileFragment profileFragment = StrangeProfileFragment.newInstance(user);
+                getParentFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, profileFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+
+            @Override
+            public void onSuccess(User user) {
+                StrangeProfileFragment profileFragment = StrangeProfileFragment.newInstance(user);
+                getParentFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, profileFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.e("ChatFragment", "Error fetching user profile: " + error);
             }
         });
     }
@@ -96,4 +179,6 @@ public class ChatFragment extends Fragment {
                 .addToBackStack(null)
                 .commit();
     }
+
+
 }

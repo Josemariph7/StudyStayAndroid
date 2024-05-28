@@ -50,7 +50,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_home);
+            navigationView.setCheckedItem(R.id.nav_profile);
         }
 
         loadUserDetails();
@@ -83,6 +83,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             Log.e("Dashboard", "User ID not found in SharedPreferences");
         }
     }
+
 
     private void updateUI() {
         View headerView = navigationView.getHeaderView(0);

@@ -1,25 +1,31 @@
 package com.example.studystayandroid.view;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.studystayandroid.R;
 import com.example.studystayandroid.controller.ForumTopicController;
 import com.example.studystayandroid.model.ForumTopic;
 import com.example.studystayandroid.model.User;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,23 +71,11 @@ public class ForumFragment extends Fragment {
         currentUser = getCurrentUser();
 
         forumTopicController = new ForumTopicController(getContext());
-        forumTopicController.getTopics(new ForumTopicController.TopicListCallback() {
-            @Override
-            public void onSuccess(List<ForumTopic> topics) {
-                topicsList.clear();
-                Log.d("ForumFragment", "Received topics: " + topics);
-                topicsList.addAll(topics);
-                forumTopicAdapter = new ForumTopicAdapter(topicsList, currentUser, topic -> openDiscussionFragment(topic));
-                recyclerView.setAdapter(forumTopicAdapter);
-                forumTopicAdapter.notifyDataSetChanged();
-            }
+        loadTopics();
 
-            @Override
-            public void onError(String error) {
-                // Handle error
-                Log.e("ForumFragment", "Error fetching topics: " + error);
-            }
-        });
+        // Configurar el botón para abrir el diálogo
+        Button buttonAddTopic = view.findViewById(R.id.button2);
+        buttonAddTopic.setOnClickListener(v -> showNewTopicDialog());
     }
 
     private User getCurrentUser() {
@@ -102,5 +96,89 @@ public class ForumFragment extends Fragment {
                 .replace(R.id.fragment_container, discussionFragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    private void showNewTopicDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_new_topic, null);
+        builder.setView(dialogView);
+
+        EditText editTextTitle = dialogView.findViewById(R.id.editTextTopicTitle);
+        EditText editTextDescription = dialogView.findViewById(R.id.editTextTopicDescription);
+
+        builder.setPositiveButton("Create", (dialog, which) -> {
+            String title = editTextTitle.getText().toString();
+            String description = editTextDescription.getText().toString();
+
+            if (title.isEmpty() || description.isEmpty()) {
+                // Manejar campos vacíos
+                AlertDialog.Builder errorBuilder = new AlertDialog.Builder(getContext());
+                errorBuilder.setTitle("Error")
+                        .setMessage("Both title and description must be provided.")
+                        .setPositiveButton("OK", null)
+                        .show();
+                return;
+            }
+
+            // Crear y guardar el nuevo tema
+            ForumTopic newTopic = new ForumTopic();
+            newTopic.setTitle(title);
+            newTopic.setDescription(description);
+            newTopic.setAuthor(currentUser);
+            newTopic.setDateTime(LocalDateTime.now());
+
+            Log.d("ForumFragment", "New Topic: " + newTopic);
+
+            forumTopicController.createTopic(newTopic, new ForumTopicController.TopicCallback() {
+                @Override
+                public void onSuccess(ForumTopic topic) {
+                    if (topic != null) {
+                        reloadTopics();
+                        Log.d("ForumFragment", "Topic created: " + topic);
+                    } else {
+                        reloadTopics();
+                        Log.e("ForumFragment", "Created topic is null");
+                    }
+                }
+
+                @Override
+                public void onSuccess(Object result) {
+
+                }
+
+                @Override
+                public void onError(String error) {
+                    Log.e("ForumFragment", "Error creating topic: " + error);
+                }
+            });
+        });
+
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+        builder.create().show();
+    }
+
+    private void loadTopics() {
+        forumTopicController.getTopics(new ForumTopicController.TopicListCallback() {
+            @Override
+            public void onSuccess(List<ForumTopic> topics) {
+                topicsList.clear();
+                Log.d("ForumFragment", "Received topics: " + topics);
+                topicsList.addAll(topics);
+                forumTopicAdapter = new ForumTopicAdapter(topicsList, currentUser, topic -> openDiscussionFragment(topic), ForumFragment.this);
+                recyclerView.setAdapter(forumTopicAdapter);
+                forumTopicAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(String error) {
+                // Handle error
+                Log.e("ForumFragment", "Error fetching topics: " + error);
+            }
+        });
+    }
+
+    public void reloadTopics() {
+        loadTopics();
     }
 }

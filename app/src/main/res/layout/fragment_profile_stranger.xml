@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@android:color/white"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".view.StrangeProfileFragment">
@@ -17,10 +17,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="250dp"
-
             android:background="@drawable/rounded_profile_card"
             android:gravity="center_horizontal"
             android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:background="@drawable/baseline_arrow_back_ios_new_40"
+                android:backgroundTint="@color/white"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="5dp"
+                android:textColor="@color/SadBlue"
+                android:translationX="-170dp"
+                android:translationY="17dp" />
 
             <ImageView
                 style="@style/CircleImageView"
@@ -29,7 +41,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="45dp"
                 android:background="@drawable/circularimage"
-                android:translationY="-10dp" />
+                android:translationY="-50dp" />
 
             <TextView
                 android:id="@+id/nameTextViewProfile"
@@ -41,7 +53,7 @@
                 android:textColor="#fff"
                 android:textSize="21sp"
                 android:textStyle="bold"
-                android:translationY="7dp" />
+                android:translationY="-30dp" />
 
         </LinearLayout>
     </RelativeLayout>
@@ -69,8 +81,9 @@
                 android:id="@+id/emailTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/SadBlue"
                 android:layout_gravity="center_vertical"
-                android:paddingLeft="20dp"
+                android:paddingLeft="15dp"
                 android:text="Email"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -84,12 +97,14 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/iconfechadenacimiento" />
+                android:src="@drawable/iconfechadenacimiento"
+                android:translationX="4dp" />
 
             <TextView
                 android:id="@+id/birthDateTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/SadBlue"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="20dp"
                 android:text="BirthDate"
@@ -106,13 +121,15 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/icontelefono" />
+                android:src="@drawable/icontelefono"
+                android:translationX="4dp" />
 
             <TextView
                 android:id="@+id/phoneTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:textColor="@color/SadBlue"
                 android:paddingLeft="20dp"
                 android:text="Phone"
                 android:textStyle="bold" />
@@ -128,39 +145,20 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/iconfecharegistro" />
+                android:src="@drawable/iconbiography"
+                android:translationX="6dp" />
 
             <TextView
-                android:id="@+id/registerDateTextView"
+                android:id="@+id/bioTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:textColor="@color/SadBlue"
                 android:paddingLeft="20dp"
-                android:text="RegistrationDate"
+                android:text="Bio"
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal"
-            android:paddingLeft="25dp">
-
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/icondni" />
-
-            <TextView
-                android:id="@+id/dniTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:text="Dni"
-                android:textStyle="bold" />
-        </LinearLayout>
     </LinearLayout>
 
     <Button
@@ -172,5 +170,5 @@
         android:text="Contact User"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:translationY="50dp" />
+        android:translationY="130dp" />
 </LinearLayout>

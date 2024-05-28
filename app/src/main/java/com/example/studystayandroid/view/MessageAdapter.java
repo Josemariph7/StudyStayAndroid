@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.studystayandroid.R;
 import com.example.studystayandroid.controller.MessageController;
 import com.example.studystayandroid.model.Message;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -61,11 +62,26 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Message message = messageList.get(position);
-        if (holder.getItemViewType() == VIEW_TYPE_SENT) {
+        if (holder instanceof SentMessageViewHolder) {
             ((SentMessageViewHolder) holder).bind(message);
         } else {
             ((ReceivedMessageViewHolder) holder).bind(message);
         }
+
+        holder.itemView.setOnLongClickListener(v -> {
+            if (message.getSenderId().equals(currentUserId)) {
+                new MaterialAlertDialogBuilder(context)
+                        .setTitle("Delete Message")
+                        .setMessage("Are you sure you want to delete this message?")
+                        .setPositiveButton("Yes", (dialog, which) -> {
+                            // Delete the message
+                            deleteMessage(message);
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+            return true;
+        });
     }
 
     @Override
@@ -109,6 +125,22 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         });
 
         alertDialog.show();
+    }
+
+    private void deleteMessage(Message message) {
+        MessageController messageController = new MessageController(context);
+        messageController.deleteMessage(message.getMessageId(), new MessageController.MessageCallback() {
+            @Override
+            public void onSuccess(Object result) {
+                messageList.remove(message);
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.e("MessageAdapter", "Error deleting message: " + error);
+            }
+        });
     }
 
     class SentMessageViewHolder extends RecyclerView.ViewHolder {

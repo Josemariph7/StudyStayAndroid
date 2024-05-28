@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@android:color/white"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".view.ForumFragment">
 
@@ -10,19 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:backgroundTint="@color/white"
         android:orientation="horizontal">
-
 
         <TextView
             android:id="@+id/tvDiscussionTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/SadBlue"
             android:padding="16dp"
             android:text="Forum Topics"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:background="@color/SadBlue"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -36,7 +35,6 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewForumTopics"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="16dp"
@@ -48,17 +46,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="209dp"
-        android:background="@color/white"
-        android:backgroundTint="@color/white"
+        android:background="@android:color/white"
+        android:gravity="center_horizontal"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="match_parent"
+            android:layout_width="212dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/SadBlue"
             android:padding="0dp"
             android:paddingTop="0dp"
-            android:text="Post a discussion topic" />
+            android:text="Post a discussion topic"
+            android:textColor="@color/white" />
+
     </LinearLayout>
 
 </LinearLayout>

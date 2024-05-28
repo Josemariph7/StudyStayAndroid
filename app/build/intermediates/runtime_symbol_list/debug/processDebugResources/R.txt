@@ -3048,6 +3048,7 @@ int drawable ic_search_black_24 0x7f0700a8
 int drawable iconaccommodation 0x7f0700a9
 int drawable iconavailable 0x7f0700aa
 int drawable iconayuda 0x7f0700ab
+int drawable iconbiography 0x7f07010e
 int drawable iconcancelar 0x7f0700ac
 int drawable iconconversation 0x7f0700ad
 int drawable icondni 0x7f0700ae
@@ -3242,6 +3243,7 @@ int id baseline 0x7f08005c
 int id beginOnFirstDraw 0x7f08005d
 int id beginning 0x7f08005e
 int id bestChoice 0x7f08005f
+int id bioTextView 0x7f08024a
 int id birthDateTextView 0x7f080060
 int id blocking 0x7f080061
 int id bottom 0x7f080062
@@ -3250,7 +3252,6 @@ int id bounce 0x7f080064
 int id bounceBoth 0x7f080065
 int id bounceEnd 0x7f080066
 int id bounceStart 0x7f080067
-int id button 0x7f080068
 int id button2 0x7f080069
 int id button3 0x7f08006a
 int id buttonCancel 0x7f08006b
@@ -3280,6 +3281,7 @@ int id clip_vertical 0x7f080082
 int id clockwise 0x7f080083
 int id closest 0x7f080084
 int id collapseActionView 0x7f080085
+int id commentInThisTopic 0x7f080246
 int id compress 0x7f080086
 int id confirm_button 0x7f080087
 int id constraint 0x7f080088
@@ -3338,7 +3340,10 @@ int id easeOut 0x7f0800bc
 int id east 0x7f0800bd
 int id edge 0x7f0800be
 int id editTextBirthDate 0x7f0800bf
+int id editTextCommentContent 0x7f080247
 int id editTextMessage 0x7f0800c0
+int id editTextTopicDescription 0x7f080248
+int id editTextTopicTitle 0x7f080249
 int id edit_query 0x7f0800c1
 int id edit_text_id 0x7f0800c2
 int id elastic 0x7f0800c3
@@ -3861,6 +3866,8 @@ int layout design_navigation_menu_item 0x7f0b002b
 int layout design_text_input_end_icon 0x7f0b002c
 int layout design_text_input_start_icon 0x7f0b002d
 int layout dialog_confirm_delete 0x7f0b002e
+int layout dialog_new_comment 0x7f0b0080
+int layout dialog_new_topic 0x7f0b0081
 int layout fragment_chat 0x7f0b002f
 int layout fragment_discussion 0x7f0b0030
 int layout fragment_forum 0x7f0b0031

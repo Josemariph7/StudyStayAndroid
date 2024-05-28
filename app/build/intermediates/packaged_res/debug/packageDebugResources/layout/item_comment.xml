@@ -10,33 +10,31 @@
 
     <ImageView
         android:id="@+id/imageViewProfile"
-        style="@style/CircleImageView"
-        android:layout_width="65dp"
+        android:layout_width="57dp"
         android:layout_height="57dp"
-        android:layout_weight="1"
-        android:paddingStart="4dp"
-        android:src="@drawable/defaultprofile" />
+        android:scaleType="centerCrop"
+        android:translationX="15dp" />
 
     <LinearLayout
-        android:layout_width="304dp"
-        android:layout_height="wrap_content"
+        android:layout_width="318dp"
+        android:layout_height="93dp"
         android:orientation="vertical"
         android:paddingEnd="10dp"
         android:paddingRight="10dp"
-        android:translationX="0dp"
-        android:translationY="3dp">
+        android:translationX="30dp">
 
         <TextView
             android:id="@+id/tvCommentContent"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Comment Content"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingTop="8dp">
 

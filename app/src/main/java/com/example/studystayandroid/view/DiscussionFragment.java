@@ -1,10 +1,16 @@
 package com.example.studystayandroid.view;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,17 +20,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studystayandroid.R;
-import com.example.studystayandroid.controller.ConversationController;
 import com.example.studystayandroid.controller.ForumCommentController;
-import com.example.studystayandroid.model.Conversation;
 import com.example.studystayandroid.model.ForumComment;
 import com.example.studystayandroid.model.ForumTopic;
+import com.example.studystayandroid.model.User;
 
-import java.io.Serializable;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class DiscussionFragment extends Fragment {
 
@@ -35,8 +38,11 @@ public class DiscussionFragment extends Fragment {
     private TextView descriptionTextView;
     private RecyclerView recyclerView;
     private CommentAdapter commentAdapter;
+    private ImageButton button3;
+    private Button buttonAddComment;
     private ForumCommentController forumCommentController;
     private List<ForumComment> commentList = new ArrayList<>();
+    private User currentUser;
 
     public static DiscussionFragment newInstance(ForumTopic topic) {
         DiscussionFragment fragment = new DiscussionFragment();
@@ -54,6 +60,8 @@ public class DiscussionFragment extends Fragment {
         }
         forumCommentController = new ForumCommentController(getContext());
         Log.d("DiscussionFragment", "onCreate: Topic loaded: " + topic);
+
+        currentUser = getCurrentUser();
     }
 
     @Override
@@ -74,20 +82,28 @@ public class DiscussionFragment extends Fragment {
         topicTitleTextView = view.findViewById(R.id.tvDiscussionTitle);
         topicTitleTextView.setText(topic.getTitle());
 
+        button3 = view.findViewById(R.id.button3);
+
         descriptionTextView = view.findViewById(R.id.descriptionTopic);
         descriptionTextView.setText(topic.getDescription());
+
+        buttonAddComment = view.findViewById(R.id.addComment);
 
         // Configurar el RecyclerView
         recyclerView = view.findViewById(R.id.recyclerViewComments);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        commentAdapter = new CommentAdapter(commentList);
+        commentAdapter = new CommentAdapter(getContext(), commentList, currentUser, this);
         recyclerView.setAdapter(commentAdapter);
+
+        button3.setOnClickListener(v -> getParentFragmentManager().popBackStack());
+
+        buttonAddComment.setOnClickListener(v -> showNewCommentDialog());
 
         // Cargar los comentarios
         loadComments();
     }
 
-    private void loadComments() {
+    void loadComments() {
         Log.d("DiscussionFragment", "loadComments: Loading comments for topic ID: " + topic.getTopicId());
         Log.d("DiscussionFragment", topic.toString());
         forumCommentController.getComments(topic.getTopicId(), new ForumCommentController.CommentListCallback() {
@@ -112,45 +128,74 @@ public class DiscussionFragment extends Fragment {
         });
     }
 
-    private static class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
+    private void showNewCommentDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_new_comment, null);
+        builder.setView(dialogView);
 
-        private List<ForumComment> comments;
+        EditText editTextContent = dialogView.findViewById(R.id.editTextCommentContent);
 
-        public CommentAdapter(List<ForumComment> comments) {
-            this.comments = comments;
-        }
+        builder.setPositiveButton("Post", (dialog, which) -> {
+            String content = editTextContent.getText().toString();
 
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_comment, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            ForumComment comment = comments.get(position);
-            holder.commentTextView.setText(comment.getContent());
-            holder.authorTextView.setText(comment.getAuthor().getName() + " " + comment.getAuthor().getLastName());
-            holder.dateTimeTextView.setText(comment.getDateTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
-        }
-
-        @Override
-        public int getItemCount() {
-            return comments.size();
-        }
-
-        public static class ViewHolder extends RecyclerView.ViewHolder {
-            public TextView commentTextView;
-            public TextView authorTextView;
-            public TextView dateTimeTextView;
-
-            public ViewHolder(View itemView) {
-                super(itemView);
-                commentTextView = itemView.findViewById(R.id.tvCommentContent);
-                authorTextView = itemView.findViewById(R.id.tvCommentAuthor);
-                dateTimeTextView = itemView.findViewById(R.id.tvCommentDateTime);
+            if (content.isEmpty()) {
+                // Manejar contenido vacío
+                AlertDialog.Builder errorBuilder = new AlertDialog.Builder(getContext());
+                errorBuilder.setTitle("Error")
+                        .setMessage("Content must be provided.")
+                        .setPositiveButton("OK", null)
+                        .show();
+                return;
             }
-        }
+
+            // Crear y guardar el nuevo comentario
+            ForumComment newComment = new ForumComment();
+            newComment.setContent(content);
+            newComment.setAuthor(currentUser);
+            newComment.setTopic(topic);
+            newComment.setDateTime(LocalDateTime.now());
+
+            forumCommentController.createComment(newComment, new ForumCommentController.CommentCallback() {
+                @Override
+                public void onSuccess(ForumComment comment) {
+                    loadComments(); // Recargar los comentarios
+                    Log.d("DiscussionFragment", "Comment created: " + comment);
+                }
+
+                @Override
+                public void onSuccess(Object result) {
+
+                }
+
+                @Override
+                public void onError(String error) {
+                    Log.e("DiscussionFragment", "Error creating comment: " + error);
+                }
+            });
+        });
+
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+        builder.create().show();
+    }
+
+    private User getCurrentUser() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+        User user = new User();
+        user.setUserId(sharedPreferences.getLong("userId", -1));
+        user.setName(sharedPreferences.getString("userName", ""));
+        user.setLastName(sharedPreferences.getString("userLastName", ""));
+        user.setEmail(sharedPreferences.getString("userEmail", ""));
+        // Si hay más campos necesarios, añádelos aquí
+        return user;
+    }
+
+    public void openStrangeProfile(User user) {
+        StrangeProfileFragment strangeProfileFragment = StrangeProfileFragment.newInstance(user);
+        getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, strangeProfileFragment)
+                .addToBackStack(null)
+                .commit();
     }
 }

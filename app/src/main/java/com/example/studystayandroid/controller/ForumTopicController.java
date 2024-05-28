@@ -188,6 +188,8 @@ public class ForumTopicController {
     }
 
     public interface TopicCallback {
+        void onSuccess(ForumTopic topic);
+
         void onSuccess(Object result);
         void onError(String error);
     }

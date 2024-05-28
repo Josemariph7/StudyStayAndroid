@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:divider="@color/black"
+    android:divider="#57595A"
     android:orientation="vertical"
-
     android:paddingStart="6dp"
+    android:background="@android:color/white"
     android:paddingEnd="6dp"
     android:paddingBottom="10dp">
 
@@ -50,7 +50,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvTopicDescription"
+        android:id="@+id/commentInThisTopic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="4dp"

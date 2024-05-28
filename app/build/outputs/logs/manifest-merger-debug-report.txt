@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:2:1-34:12
-INJECTED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:2:1-34:12
-INJECTED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:2:1-34:12
-INJECTED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:2:1-34:12
+ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:2:1-35:12
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\6003102\.gradle\caches\transforms-4\ed326cdd2eb01d8c9b30db925ae495bc\transformed\material-1.12.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\6003102\.gradle\caches\transforms-4\8590edf39957343a7ec8c82e53b60f8d\transformed\constraintlayout-2.1.4\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\6003102\.gradle\caches\transforms-4\807f49215b0ab07a421594c3e9a3fbc7\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:17:1-22:12
@@ -62,8 +62,8 @@ MERGED from [androidx.annotation:annotation-experimental:1.4.0] C:\Users\6003102
 	xmlns:android
 		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:2:11-69
 application
-ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:5:5-32:19
-INJECTED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:5:5-32:19
+ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:5:5-33:19
+INJECTED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:5:5-33:19
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\6003102\.gradle\caches\transforms-4\ed326cdd2eb01d8c9b30db925ae495bc\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\6003102\.gradle\caches\transforms-4\ed326cdd2eb01d8c9b30db925ae495bc\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\6003102\.gradle\caches\transforms-4\8590edf39957343a7ec8c82e53b60f8d\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
@@ -114,10 +114,12 @@ MERGED from [com.github.bumptech.glide:gifdecoder:4.11.0] C:\Users\6003102\.grad
 		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:8:9-65
 activity#com.example.studystayandroid.view.MainActivity
 ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:17:9-26:20
+	android:screenOrientation
+		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:19:13-49
 	android:turnScreenOn
-		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:19:13-41
+		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:20:13-41
 	android:exported
-		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:20:13-36
+		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:21:13-36
 	android:name
 		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:18:13-46
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
@@ -131,17 +133,19 @@ ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\
 	android:name
 		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:24:27-74
 activity#com.example.studystayandroid.view.DashboardActivity
-ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:27:9-31:15
+ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:27:9-32:15
+	android:screenOrientation
+		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:30:13-49
 	android:turnScreenOn
-		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:30:13-41
+		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:31:13-41
 	android:exported
 		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:29:13-36
 	android:name
 		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:28:13-51
 uses-permission#android.permission.INTERNET
-ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:33:5-67
+ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:34:5-67
 	android:name
-		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:33:22-64
+		ADDED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml:34:22-64
 uses-sdk
 INJECTED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\AndroidManifest.xml

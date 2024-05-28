@@ -2,43 +2,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical"
     tools:context=".view.MessageFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="2dp"
-        android:backgroundTint="@android:color/white"
-        android:elevation="2dp"
+        android:layout_height="71dp"
+
         android:background="@color/SadBlue"
+        android:backgroundTint="@color/SadBlue"
+        android:elevation="2dp"
         android:foregroundTint="@color/SadBlue"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="6dp">
+        android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/button3"
-            android:layout_width="52dp"
-            android:layout_height="45dp"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
 
             android:background="@drawable/baseline_arrow_back_ios_new_40"
-            android:backgroundTint="@color/SadBlue"
+            android:backgroundTint="@color/white"
+            android:paddingStart="8dp"
+            android:paddingLeft="8dp"
             android:paddingRight="5dp"
             android:textColor="@color/SadBlue"
-            app:iconSize="25dp" />
+            android:translationX="7dp" />
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="59dp"
             android:layout_height="57dp"
-            android:background="@drawable/circularimage"
-            android:paddingStart="5dp" />
+            android:paddingStart="5dp"
+            android:translationX="13dp" />
 
         <LinearLayout
             android:layout_width="279dp"
@@ -46,7 +43,8 @@
             android:gravity="center_vertical"
             android:orientation="vertical"
             android:paddingStart="7dp"
-            android:paddingLeft="7dp">
+            android:paddingLeft="7dp"
+            android:translationX="17dp">
 
             <TextView
                 android:id="@+id/textViewUser"
@@ -55,7 +53,7 @@
                 android:paddingLeft="7dp"
                 android:text="User Name"
                 android:textAlignment="textStart"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -65,14 +63,17 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewMessages"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="785dp"
         android:layout_marginTop="8dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:translationY="-7dp" />
 
     <LinearLayout
         android:id="@+id/messageInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:orientation="horizontal"
         android:padding="6dp">
 
@@ -81,8 +82,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/SadBlue"
+            android:backgroundTint="@color/LightBlue"
             android:hint="Type a message"
+            android:textColor="@color/SadBlue"
+            android:textColorHint="@color/SadBlue"
+            android:textSize="16sp"
             android:translationY="3dp" />
 
         <Button

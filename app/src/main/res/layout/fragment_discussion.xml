@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@android:color/white"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:padding="0dp"
     tools:context=".view.DiscussionFragment">
 
     <LinearLayout
@@ -23,56 +23,67 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="8dp">
+            android:paddingBottom="8dp"
+            android:translationY="1dp">
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="57dp"
-                android:layout_height="60dp"
-                android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/baseline_arrow_back_ios_new_24"
-                app:iconPadding="0dp"
-                app:iconTint="@color/black" />
+
+            <ImageButton
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+
+                android:background="@drawable/baseline_arrow_back_ios_new_40"
+                android:backgroundTint="@color/white"
+                android:paddingStart="8dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="5dp"
+                android:textColor="@color/SadBlue"
+                android:translationX="7dp"
+                android:translationY="3dp" />
 
             <TextView
                 android:id="@+id/tvDiscussionTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="351dp"
+                android:layout_height="59dp"
+                android:gravity="center_vertical"
                 android:paddingStart="10dp"
                 android:text="Topic Title"
                 android:textColor="@color/LightBlue"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:translationX="17dp"
+                android:translationY="3dp" />
 
         </LinearLayout>
 
         <TextView
             android:id="@+id/descriptionTopic"
             android:layout_width="match_parent"
-            android:layout_height="57dp"
+            android:layout_height="55dp"
             android:padding="5dp"
             android:paddingStart="7dp"
             android:paddingBottom="8dp"
             android:text="Topic Description"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:translationY="-5dp" />
     </LinearLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewComments"
         android:layout_width="match_parent"
-        android:layout_height="758dp"
-        android:layout_weight="1"
+        android:layout_height="545dp"
         android:clipToPadding="false" />
 
     <Button
         android:id="@+id/addComment"
-        android:layout_width="match_parent"
+        android:layout_width="217dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/SadBlue"
         android:padding="8dp"
+        android:paddingTop="8dp"
         android:text="Post a Comment"
         android:textColor="@color/white" />
 </LinearLayout>

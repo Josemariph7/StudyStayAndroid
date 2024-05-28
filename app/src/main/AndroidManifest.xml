@@ -16,9 +16,9 @@
         tools:targetApi="33" >
         <activity
             android:name=".view.MainActivity"
+            android:screenOrientation="portrait"
             android:turnScreenOn="false"
             android:exported="true" >
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -27,6 +27,7 @@
         <activity
             android:name=".view.DashboardActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:turnScreenOn="false"
             />
     </application>

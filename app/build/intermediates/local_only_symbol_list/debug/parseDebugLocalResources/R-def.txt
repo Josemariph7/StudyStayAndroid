@@ -33,6 +33,7 @@ drawable ic_launcher_foreground
 drawable iconaccommodation
 drawable iconavailable
 drawable iconayuda
+drawable iconbiography
 drawable iconcancelar
 drawable iconconversation
 drawable icondni
@@ -59,15 +60,16 @@ id ContactButton
 id LogInButton
 id addComment
 id address
+id bioTextView
 id birthDateTextView
 id bottom_sheet
-id button
 id button2
 id button3
 id buttonCancel
 id buttonConfirm
 id buttonSend
 id city
+id commentInThisTopic
 id description
 id descriptionTopic
 id dialogMessage
@@ -76,7 +78,10 @@ id dniTextView
 id drag_handle
 id drawer_layout
 id editTextBirthDate
+id editTextCommentContent
 id editTextMessage
+id editTextTopicDescription
+id editTextTopicTitle
 id emailTextView
 id fragment_container
 id imageView
@@ -137,6 +142,8 @@ id viewPager
 layout activity_dashboard
 layout activity_main
 layout dialog_confirm_delete
+layout dialog_new_comment
+layout dialog_new_topic
 layout fragment_chat
 layout fragment_discussion
 layout fragment_forum

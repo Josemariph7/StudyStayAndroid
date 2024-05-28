@@ -1,10 +1,9 @@
 package com.example.studystayandroid.controller;
 
 import android.content.Context;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -13,7 +12,6 @@ import com.example.studystayandroid.model.ForumTopic;
 import com.example.studystayandroid.model.User;
 import com.example.studystayandroid.utils.Constants;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -64,6 +62,15 @@ public class ForumCommentController {
                                 @Override
                                 public void onSuccess(User author) {
                                     forumTopicController.getTopicById(topicId1, new ForumTopicController.TopicCallback() {
+                                        @Override
+                                        public void onSuccess(ForumTopic topic) {
+                                            ForumComment comment = new ForumComment(commentId, topic, author, content, dateTime);
+                                            comments.add(comment);
+                                            if (comments.size() == response.length()) {
+                                                callback.onSuccess(comments);
+                                            }
+                                        }
+
                                         @Override
                                         public void onSuccess(Object result) {
                                             ForumTopic topic = (ForumTopic) result;
@@ -118,6 +125,12 @@ public class ForumCommentController {
                                 public void onSuccess(User author) {
                                     ForumTopicController forumTopicController = new ForumTopicController(context);
                                     forumTopicController.getTopicById(topicId, new ForumTopicController.TopicCallback() {
+                                        @Override
+                                        public void onSuccess(ForumTopic topic) {
+                                            ForumComment comment = new ForumComment(id, topic, author, content, dateTime);
+                                            callback.onSuccess(comment);
+                                        }
+
                                         @Override
                                         public void onSuccess(Object result) {
                                             ForumTopic topic = (ForumTopic) result;
@@ -216,6 +229,8 @@ public class ForumCommentController {
     }
 
     public interface CommentCallback {
+        void onSuccess(ForumComment comment);
+
         void onSuccess(Object result);
         void onError(String error);
     }

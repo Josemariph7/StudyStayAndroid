@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -101,7 +102,9 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         });
 
         holder.itemView.setOnLongClickListener(v -> {
-            showDeleteDialog(conversation, position);
+            if (longClickListener != null) {
+                longClickListener.onItemLongClick(conversation);
+            }
             return true;
         });
     }
@@ -115,6 +118,19 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         this.listener = listener;
     }
 
+    public interface OnItemLongClickListener {
+        void onItemLongClick(Conversation conversation);
+    }
+
+    private OnItemLongClickListener longClickListener;
+
+    public void setOnItemLongClickListener(OnItemLongClickListener listener) {
+        this.longClickListener = listener;
+    }
+
+    public void setOnItemLongClickListener(AdapterView.OnItemLongClickListener listener) {
+        this.longClickListener = (OnItemLongClickListener) listener;
+    }
     public interface OnItemClickListener {
         void onItemClick(Conversation conversation);
     }
@@ -154,7 +170,10 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
             conversationController.deleteConversation(conversation.getConversationId(), new ConversationController.ConversationCallback() {
                 @Override
                 public void onSuccess(Conversation createdConversation) {
-
+                    conversationList.remove(position);
+                    notifyItemRemoved(position);
+                    notifyItemRangeChanged(position, conversationList.size());
+                    alertDialog.dismiss();
                 }
 
                 @Override

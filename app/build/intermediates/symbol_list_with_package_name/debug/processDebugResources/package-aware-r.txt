@@ -3049,6 +3049,7 @@ drawable ic_search_black_24
 drawable iconaccommodation
 drawable iconavailable
 drawable iconayuda
+drawable iconbiography
 drawable iconcancelar
 drawable iconconversation
 drawable icondni
@@ -3243,6 +3244,7 @@ id baseline
 id beginOnFirstDraw
 id beginning
 id bestChoice
+id bioTextView
 id birthDateTextView
 id blocking
 id bottom
@@ -3251,7 +3253,6 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
-id button
 id button2
 id button3
 id buttonCancel
@@ -3281,6 +3282,7 @@ id clip_vertical
 id clockwise
 id closest
 id collapseActionView
+id commentInThisTopic
 id compress
 id confirm_button
 id constraint
@@ -3339,7 +3341,10 @@ id easeOut
 id east
 id edge
 id editTextBirthDate
+id editTextCommentContent
 id editTextMessage
+id editTextTopicDescription
+id editTextTopicTitle
 id edit_query
 id edit_text_id
 id elastic
@@ -3862,6 +3867,8 @@ layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout dialog_confirm_delete
+layout dialog_new_comment
+layout dialog_new_topic
 layout fragment_chat
 layout fragment_discussion
 layout fragment_forum
