@@ -91,9 +91,15 @@ public class ForumTopicAdapter extends RecyclerView.Adapter<ForumTopicAdapter.Vi
                     })
                     .setNegativeButton("No", null);
         } else {
-            builder.setTitle("Cannot Delete Topic")
-                    .setMessage("You cannot delete this topic because you did not create it.")
-                    .setPositiveButton("OK", null);
+            //.setTitle("Cannot Delete Topic")
+               //     .setMessage("You cannot delete this topic because you did not create it.")
+                 //   .setPositiveButton("OK", null);
+            builder.setTitle("Comment Options")
+                    .setItems(new String[]{"View User Profile"}, (dialog, which) -> {
+                        if (which == 0) {
+                            forumFragment.openStrangeProfile(topic.getAuthor());
+                        }
+                    });
         }
         builder.show();
     }

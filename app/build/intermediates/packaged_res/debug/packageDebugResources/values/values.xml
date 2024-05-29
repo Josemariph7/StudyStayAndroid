@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="Azulin">#9CACF3</color>
-    <color name="DarkBlue">#05071F</color>
+    <color name="DarkBlue">#1C254C</color>
     <color name="LightBlue">#0E84E3</color>
     <color name="SadBlue">#1C254C</color>
     <color name="black">#FF000000</color>
@@ -14,6 +14,7 @@
     <color name="statusBarColor">#0E84E3</color>
     <color name="textColor">#FFFFFF</color>
     <color name="white">#e7e5e5</color>
+    <item name="profileImageView" type="id"/>
     <string name="app_name">StudyStay</string>
     <string name="chat">Chat</string>
     <string name="close_nav">Close Navigation Drawer</string>

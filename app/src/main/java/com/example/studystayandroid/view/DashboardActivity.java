@@ -49,7 +49,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         toggle.syncState();
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_profile);
         }
 
@@ -113,7 +113,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment selectedFragment = null;
 
-        if (item.getItemId() == R.id.nav_home) {
+        if (item.getItemId() == R.id.Accommodations) {
             selectedFragment = new HomeFragment();
         } else if (item.getItemId() == R.id.nav_chat) {
             selectedFragment = new ChatFragment();

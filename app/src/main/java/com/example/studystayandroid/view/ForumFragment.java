@@ -178,6 +178,15 @@ public class ForumFragment extends Fragment {
         });
     }
 
+    public void openStrangeProfile(User user) {
+        StrangeProfileFragment strangeProfileFragment = StrangeProfileFragment.newInstance(user);
+        getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, strangeProfileFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
     public void reloadTopics() {
         loadTopics();
     }

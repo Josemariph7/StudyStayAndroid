@@ -11,6 +11,7 @@ color colorAccent
 color colorPrimary
 color colorPrimaryDark
 color errorColor
+color selector_nav_item_color
 color statusBarColor
 color textColor
 color white
@@ -43,6 +44,7 @@ drawable iconexit
 drawable iconfechadenacimiento
 drawable iconfecharegistro
 drawable iconforum
+drawable iconsalida
 drawable iconsignout
 drawable icontelefono
 drawable iconuser
@@ -56,6 +58,7 @@ drawable rounded_dialog
 drawable rounded_edit_text_dark
 drawable rounded_edit_text_light
 drawable rounded_profile_card
+id Accommodations
 id ContactButton
 id LogInButton
 id addComment
@@ -70,6 +73,7 @@ id buttonConfirm
 id buttonSend
 id city
 id commentInThisTopic
+id currentPasswordEditText
 id description
 id descriptionTopic
 id dialogMessage
@@ -91,16 +95,19 @@ id main_layout
 id messageInputLayout
 id nameTextViewProfile
 id nav_chat
+id nav_closeapp
 id nav_forum
-id nav_home
 id nav_logout
 id nav_profile
 id nav_user_email
 id nav_user_name
 id nav_user_photo
 id nav_view
+id newPasswordEditText
+id passwordEditText
 id phoneTextView
 id price
+id profileImageView
 id profilePhoto
 id recyclerView
 id recyclerViewComments
@@ -141,7 +148,9 @@ id tvTopicTitle
 id viewPager
 layout activity_dashboard
 layout activity_main
+layout dialog_change_password
 layout dialog_confirm_delete
+layout dialog_delete_account
 layout dialog_new_comment
 layout dialog_new_topic
 layout fragment_chat

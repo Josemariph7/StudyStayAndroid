@@ -33,6 +33,7 @@ public class UserController {
     private static final String URL_UPDATE_USER = "http://" + Constants.IP + "/studystay/user/updateUser.php";
     private static final String URL_DELETE_USER = "http://" + Constants.IP + "/studystay/user/deleteUser.php";
     private static final String URL_GET_ALL_USERS = "http://" + Constants.IP + "/studystay/user/getAllUsers.php";
+    private static final String URL_UPDATE_USER_PROFILE_PICTURE = "http://" + Constants.IP + "/studystay/user/updateUserProfilePicture.php";
     private static final String USER_PREFS = "UserPrefs";
     private static final String USER_ID = "userId";
 
@@ -147,11 +148,6 @@ public class UserController {
         requestQueue.add(jsonObjectRequest);
     }
 
-
-
-
-
-
     public void updateUser(User user, final UserCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE_USER,
                 response -> {
@@ -224,6 +220,27 @@ public class UserController {
         );
 
         requestQueue.add(jsonArrayRequest);
+    }
+
+    public void updateUserProfilePicture(Long userId, String profilePicture, final UserCallback callback) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE_USER_PROFILE_PICTURE,
+                response -> {
+                    if ("Profile picture updated successfully".equals(response)) {
+                        callback.onSuccess(null);
+                    } else {
+                        callback.onError(response);
+                    }
+                }, error -> callback.onError(error.toString())) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("userId", userId.toString());
+                params.put("profilePicture", profilePicture);
+                return params;
+            }
+        };
+
+        requestQueue.add(stringRequest);
     }
 
     public void saveUserId(Long userId) {

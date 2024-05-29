@@ -4,29 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group
-        android:checkableBehavior="single">
+    <group android:checkableBehavior="single">
+
+
 
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/Accommodations"
             android:icon="@drawable/iconaccommodation"
-            android:title="@string/home"/>
+            android:title="   Accommodations" />
 
 
         <item
             android:id="@+id/nav_chat"
             android:icon="@drawable/iconconversation"
-            android:title="@string/chat"/>
+            android:title="   Chat" />
 
         <item
             android:id="@+id/nav_forum"
             android:icon="@drawable/iconforum"
-            android:title="@string/forum"/>
-
+            android:title="   Forum" />
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/iconuser"
-            android:title="@string/profile"/>
+            android:title="   Profile" />
 
     </group>
 
@@ -42,6 +42,11 @@
         android:id="@+id/nav_logout"
         android:icon="@drawable/iconsignout"
 
-        android:title="@string/logout"/>
+        android:title="   Logout"/>
+    <item
+        android:id="@+id/nav_closeapp"
+        android:icon="@drawable/iconsalida"
+
+        android:title="   Close App"/>
 
 </menu>

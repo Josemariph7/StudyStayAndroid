@@ -2104,6 +2104,7 @@ color secondary_text_default_material_dark
 color secondary_text_default_material_light
 color secondary_text_disabled_material_dark
 color secondary_text_disabled_material_light
+color selector_nav_item_color
 color statusBarColor
 color switch_thumb_disabled_material_dark
 color switch_thumb_disabled_material_light
@@ -3059,6 +3060,7 @@ drawable iconexit
 drawable iconfechadenacimiento
 drawable iconfecharegistro
 drawable iconforum
+drawable iconsalida
 drawable iconsignout
 drawable icontelefono
 drawable iconuser
@@ -3149,6 +3151,7 @@ drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 id ALT
+id Accommodations
 id BOTTOM_END
 id BOTTOM_START
 id CTRL
@@ -3295,6 +3298,7 @@ id coordinator
 id cos
 id counterclockwise
 id cradle
+id currentPasswordEditText
 id currentState
 id custom
 id customPanel
@@ -3486,8 +3490,8 @@ id mtrl_view_tag_bottom_padding
 id multiply
 id nameTextViewProfile
 id nav_chat
+id nav_closeapp
 id nav_forum
-id nav_home
 id nav_logout
 id nav_profile
 id nav_user_email
@@ -3504,6 +3508,7 @@ id navigation_header_container
 id never
 id neverCompleteToEnd
 id neverCompleteToStart
+id newPasswordEditText
 id noScroll
 id noState
 id none
@@ -3538,6 +3543,7 @@ id parent
 id parentPanel
 id parentRelative
 id parent_matrix
+id passwordEditText
 id password_toggle
 id path
 id pathRelative
@@ -3550,6 +3556,7 @@ id position
 id postLayout
 id pressed
 id price
+id profileImageView
 id profilePhoto
 id progress_circular
 id progress_horizontal
@@ -3866,7 +3873,9 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout dialog_change_password
 layout dialog_confirm_delete
+layout dialog_delete_account
 layout dialog_new_comment
 layout dialog_new_topic
 layout fragment_chat

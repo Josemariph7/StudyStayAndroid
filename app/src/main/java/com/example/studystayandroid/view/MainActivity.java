@@ -164,8 +164,9 @@ public class MainActivity extends AppCompatActivity {
                                         startActivity(intent);
                                         Log.d("Login", "Starting DashboardActivity");
                                     } else {
-                                        Log.d("Login", "User photo is null or empty");
-                                        // Manejar el caso cuando la imagen de usuario es null o vacía
+                                        Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+                                        Log.d("Login", "Creating intent for DashboardActivity");
+                                        startActivity(intent);
                                     }
                                 }
 

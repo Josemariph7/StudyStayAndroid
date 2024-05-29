@@ -11,12 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.studystayandroid.R;
 import com.example.studystayandroid.controller.ConversationController;
 import com.example.studystayandroid.model.Conversation;
@@ -36,6 +39,7 @@ public class StrangeProfileFragment extends Fragment {
     private TextView phoneTextView;
     private TextView birthDateTextView;
     private TextView bioTextView;
+    private ImageView profileImageView;
     private Button contactButton;
     private Long currentUserId;
 
@@ -72,6 +76,7 @@ public class StrangeProfileFragment extends Fragment {
         phoneTextView = view.findViewById(R.id.phoneTextView);
         birthDateTextView = view.findViewById(R.id.birthDateTextView);
         bioTextView = view.findViewById(R.id.bioTextView);
+        profileImageView = view.findViewById(R.id.profileImageView);
         contactButton = view.findViewById(R.id.ContactButton);
         ImageButton backButton = view.findViewById(R.id.button3);
 
@@ -100,7 +105,26 @@ public class StrangeProfileFragment extends Fragment {
             emailTextView.setText(otherUser.getEmail());
             phoneTextView.setText(otherUser.getPhone());
             birthDateTextView.setText(otherUser.getBirthDate() != null ? otherUser.getBirthDate().toString() : "N/A");
-            bioTextView.setText(otherUser.getBio() != null ? otherUser.getBio() : "N/A");
+
+            if (otherUser.getBio() != null && !otherUser.getBio().isEmpty() && otherUser.getBio().length() > 0 && otherUser.getBio() != "null") {
+                bioTextView.setText(otherUser.getBio());
+            } else {
+                bioTextView.setTextColor(getResources().getColor(android.R.color.darker_gray));
+            }
+
+            byte[] profileImageBytes = otherUser.getProfilePicture();
+            if (profileImageBytes != null && profileImageBytes.length > 0) {
+                Glide.with(requireContext())
+                        .asBitmap()
+                        .load(profileImageBytes)
+                        .transform(new CircleCrop())
+                        .into(profileImageView);
+            } else {
+                Glide.with(requireContext())
+                        .load(R.drawable.defaultprofile)
+                        .transform(new CircleCrop())
+                        .into(profileImageView);
+            }
         }
     }
 
@@ -181,6 +205,4 @@ public class StrangeProfileFragment extends Fragment {
                 .addToBackStack(null)
                 .commit();
     }
-
-
 }

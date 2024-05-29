@@ -115,7 +115,6 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     notifyItemRemoved(position);
                     alertDialog.dismiss();
                 }
-
                 @Override
                 public void onError(String error) {
                     Log.e("MessageAdapter", "Error deleting message: " + error);
@@ -123,7 +122,6 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 }
             });
         });
-
         alertDialog.show();
     }
 
