@@ -1,5 +1,6 @@
 R_DEF: Internal format may change without notice
 local
+array gender_array
 color Azulin
 color DarkBlue
 color LightBlue
@@ -63,6 +64,7 @@ id ContactButton
 id LogInButton
 id addComment
 id address
+id bioEditText
 id bioTextView
 id birthDateTextView
 id bottom_sheet
@@ -86,13 +88,17 @@ id editTextCommentContent
 id editTextMessage
 id editTextTopicDescription
 id editTextTopicTitle
+id emailEditText
 id emailTextView
 id fragment_container
+id genderSpinner
 id imageView
 id imageView2
 id imageViewProfile
+id lastNameEditText
 id main_layout
 id messageInputLayout
+id nameEditText
 id nameTextViewProfile
 id nav_chat
 id nav_closeapp
@@ -105,6 +111,7 @@ id nav_user_photo
 id nav_view
 id newPasswordEditText
 id passwordEditText
+id phoneEditText
 id phoneTextView
 id price
 id profileImageView
@@ -153,6 +160,7 @@ layout dialog_confirm_delete
 layout dialog_delete_account
 layout dialog_new_comment
 layout dialog_new_topic
+layout dialog_update_user_info
 layout fragment_chat
 layout fragment_discussion
 layout fragment_forum

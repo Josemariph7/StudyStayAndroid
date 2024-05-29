@@ -1,6 +1,7 @@
 package com.example.studystayandroid.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -84,7 +86,6 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         }
     }
 
-
     private void updateUI() {
         View headerView = navigationView.getHeaderView(0);
         TextView navUserName = headerView.findViewById(R.id.nav_user_name);
@@ -113,20 +114,27 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment selectedFragment = null;
 
-        if (item.getItemId() == R.id.Accommodations) {
-            selectedFragment = new HomeFragment();
-        } else if (item.getItemId() == R.id.nav_chat) {
-            selectedFragment = new ChatFragment();
-        } else if (item.getItemId() == R.id.nav_profile) {
-            selectedFragment = new ProfileFragment();
-        } else if (item.getItemId() == R.id.nav_forum) {
-            selectedFragment = new ForumFragment();
-        } else if (item.getItemId() == R.id.nav_logout) {
-            Log.d("Dashboard", "User logged out");
-            drawerLayout.closeDrawer(GravityCompat.START);
-            return true;
-        } else {
-            throw new IllegalStateException("Unexpected value: " + item.getItemId());
+        switch (item.getItemId()) {
+            case R.id.Accommodations:
+                selectedFragment = new HomeFragment();
+                break;
+            case R.id.nav_chat:
+                selectedFragment = new ChatFragment();
+                break;
+            case R.id.nav_profile:
+                selectedFragment = new ProfileFragment();
+                break;
+            case R.id.nav_forum:
+                selectedFragment = new ForumFragment();
+                break;
+            case R.id.nav_logout:
+                showLogoutConfirmationDialog();
+                break;
+            case R.id.nav_closeapp:
+                showExitConfirmationDialog();
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + item.getItemId());
         }
 
         if (selectedFragment != null) {
@@ -136,6 +144,44 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void showLogoutConfirmationDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Confirm Logout")
+                .setMessage("Are you sure you want to log out?")
+                .setPositiveButton("Yes", (dialog, which) -> logout())
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+    private void logout() {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("userId");
+        editor.apply();
+
+        Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void showExitConfirmationDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Confirm Exit")
+                .setMessage("Are you sure you want to exit the app?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    // Cerrar la aplicación
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra("EXIT", true);
+                    startActivity(intent);
+                    finish(); // Esto asegura que la actividad actual se cierre
+                    System.exit(0); // Esto fuerza la salida de la aplicación
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
 
     @Override
     public void onBackPressed() {

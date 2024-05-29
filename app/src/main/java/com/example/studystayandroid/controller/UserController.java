@@ -31,6 +31,7 @@ public class UserController {
     private static final String URL_REGISTER = "http://" + Constants.IP + "/studystay/user/createUser.php";
     private static final String URL_GET_USER = "http://" + Constants.IP + "/studystay/user/getUserById.php";
     private static final String URL_UPDATE_USER = "http://" + Constants.IP + "/studystay/user/updateUser.php";
+    private static final String URL_UPDATE_USER_PASSWORD = "http://" + Constants.IP + "/studystay/user/updateUserPassword.php";
     private static final String URL_DELETE_USER = "http://" + Constants.IP + "/studystay/user/deleteUser.php";
     private static final String URL_GET_ALL_USERS = "http://" + Constants.IP + "/studystay/user/getAllUsers.php";
     private static final String URL_UPDATE_USER_PROFILE_PICTURE = "http://" + Constants.IP + "/studystay/user/updateUserProfilePicture.php";
@@ -73,9 +74,6 @@ public class UserController {
 
         requestQueue.add(jsonObjectRequest);
     }
-
-// Similar updates for register, getUserById, and other methods
-
 
     public void register(User user, final UserCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGISTER,
@@ -152,7 +150,7 @@ public class UserController {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE_USER,
                 response -> {
                     if ("User updated successfully".equals(response)) {
-                        callback.onSuccess(null);
+                        callback.onSuccess(user);
                     } else {
                         callback.onError(response);
                     }
@@ -172,7 +170,26 @@ public class UserController {
                 return params;
             }
         };
+        requestQueue.add(stringRequest);
+    }
 
+    public void updateUserPassword(Long userId, String newPassword, final UserCallback callback) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE_USER_PASSWORD,
+                response -> {
+                    if ("Password updated successfully".equals(response)) {
+                        callback.onSuccess(null);
+                    } else {
+                        callback.onError(response);
+                    }
+                }, error -> callback.onError(error.toString())) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("userId", userId.toString());
+                params.put("newPassword", newPassword);
+                return params;
+            }
+        };
         requestQueue.add(stringRequest);
     }
 
@@ -222,25 +239,34 @@ public class UserController {
         requestQueue.add(jsonArrayRequest);
     }
 
-    public void updateUserProfilePicture(Long userId, String profilePicture, final UserCallback callback) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE_USER_PROFILE_PICTURE,
+    public void updateUserProfilePicture(Long userId, byte[] profilePicture, final UserCallback callback) {
+        VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, URL_UPDATE_USER_PROFILE_PICTURE,
                 response -> {
-                    if ("Profile picture updated successfully".equals(response)) {
+                    String resultResponse = new String(response.data);
+                    if ("Profile picture updated successfully".equals(resultResponse)) {
                         callback.onSuccess(null);
                     } else {
-                        callback.onError(response);
+                        callback.onError(resultResponse);
                     }
-                }, error -> callback.onError(error.toString())) {
+                },
+                error -> callback.onError(error.toString())) {
+
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("userId", userId.toString());
-                params.put("profilePicture", profilePicture);
+                return params;
+            }
+
+            @Override
+            protected Map<String, DataPart> getByteData() {
+                Map<String, DataPart> params = new HashMap<>();
+                params.put("profilePicture", new DataPart("profile_picture.jpg", profilePicture));
                 return params;
             }
         };
 
-        requestQueue.add(stringRequest);
+        requestQueue.add(volleyMultipartRequest);
     }
 
     public void saveUserId(Long userId) {

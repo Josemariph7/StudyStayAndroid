@@ -266,6 +266,10 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinner = findViewById(R.id.spinnerGender);
         spinner.setAdapter(adapter);
+
+        if (getIntent().getBooleanExtra("EXIT", false)) {
+            finish();
+        }
     }
 
     private boolean validateSignUpFields() {
