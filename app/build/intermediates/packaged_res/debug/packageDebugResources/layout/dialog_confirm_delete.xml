@@ -33,15 +33,21 @@
 
         <Button
             android:id="@+id/buttonCancel"
-            android:layout_width="wrap_content"
+            style="@style/Widget.Material3.Button.IconButton.Filled"
+            android:layout_width="94dp"
             android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:layout_marginEnd="10dp"/>
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/SadBlue"
+            android:stateListAnimator="@android:anim/linear_interpolator"
+            android:text="Cancel" />
 
         <Button
             android:id="@+id/buttonConfirm"
-            android:layout_width="wrap_content"
+            style="@style/Widget.Material3.Button.IconButton.Filled"
+            android:layout_width="94dp"
             android:layout_height="wrap_content"
-            android:text="Confirm"/>
+            android:backgroundTint="@color/SadBlue"
+            android:stateListAnimator="@android:anim/linear_interpolator"
+            android:text="Confirm" />
     </LinearLayout>
 </LinearLayout>

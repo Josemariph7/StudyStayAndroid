@@ -20,4 +20,65 @@
     <string name="logout">Logout</string>
     <string name="profile">Profile</string>
 
+
+
+        <string-array name="cities_array">
+            <item>All</item>
+            <item>Albacete</item>
+            <item>Alicante</item>
+            <item>Almería</item>
+            <item>Ávila</item>
+            <item>Badajoz</item>
+            <item>Barcelona</item>
+            <item>Burgos</item>
+            <item>Cáceres</item>
+            <item>Cádiz</item>
+            <item>Castellón de la Plana</item>
+            <item>Ciudad Real</item>
+            <item>Córdoba</item>
+            <item>Cuenca</item>
+            <item>Girona</item>
+            <item>Granada</item>
+            <item>Guadalajara</item>
+            <item>Huelva</item>
+            <item>Huesca</item>
+            <item>Jaén</item>
+            <item>León</item>
+            <item>Lleida</item>
+            <item>Logroño</item>
+            <item>Las Palmas de Gran Canaria</item>
+            <item>Madrid</item>
+            <item>Málaga</item>
+            <item>Murcia</item>
+            <item>Palencia</item>
+            <item>Pontevedra</item>
+            <item>Salamanca</item>
+            <item>Santa Cruz de Tenerife</item>
+            <item>Segovia</item>
+            <item>Sevilla</item>
+            <item>Soria</item>
+            <item>Tarazona</item>
+            <item>Teruel</item>
+            <item>Toledo</item>
+            <item>Valencia</item>
+            <item>Valladolid</item>
+            <item>Vitoria-Gasteiz</item>
+            <item>Zamora</item>
+            <item>Zaragoza</item>
+        </string-array>
+
+        <string-array name="capacity_array">
+            <item>All</item>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+            <item>4</item>
+            <item>5</item>
+            <item>6</item>
+            <item>7</item>
+            <item>8</item>
+            <item>9</item>
+            <item>10</item>
+        </string-array>
+
 </resources>

@@ -116,7 +116,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
         switch (item.getItemId()) {
             case R.id.Accommodations:
-                selectedFragment = new HomeFragment();
+                selectedFragment = new AccommodationsFragment();
                 break;
             case R.id.nav_chat:
                 selectedFragment = new ChatFragment();

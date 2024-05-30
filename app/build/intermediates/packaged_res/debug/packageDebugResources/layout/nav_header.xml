@@ -37,4 +37,12 @@
         android:textSize="14sp"
         android:translationX="12dp"
         android:translationY="83dp" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="131dp"
+        android:layout_height="94dp"
+        android:background="@drawable/simpletransparente"
+        android:translationX="155dp"
+        android:translationY="-63dp" />
 </RelativeLayout>

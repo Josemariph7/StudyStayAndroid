@@ -121,7 +121,7 @@ public class Accommodation implements Serializable {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 
