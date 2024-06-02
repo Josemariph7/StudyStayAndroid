@@ -187,7 +187,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/SadBlue"
                 android:text="Account Settings"
-                android:textColor="@color/white"
+                android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:translationY="25dp" />
 

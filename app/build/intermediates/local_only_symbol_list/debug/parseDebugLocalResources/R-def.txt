@@ -19,6 +19,7 @@ color statusBarColor
 color textColor
 color white
 drawable aboutusicon
+drawable accommodation
 drawable aklogo
 drawable back_arrow
 drawable baseline_arrow_back_ios_new_24
@@ -70,7 +71,6 @@ id add_accommodation_button
 id address
 id address_edit_text
 id apply_filters_button
-id availability_check_box
 id bioEditText
 id bioTextView
 id birthDateTextView
@@ -161,6 +161,9 @@ id textFieldPhoneSignUp
 id textFieldSurnamesignUp
 id textInputLayoutBirthDate
 id textView
+id textView2
+id textView3
+id textView4
 id textViewContent
 id textViewDateTime
 id textViewLastMessage

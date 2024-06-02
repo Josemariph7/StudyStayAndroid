@@ -57,7 +57,7 @@ public class AccommodationAdapter extends RecyclerView.Adapter<AccommodationAdap
             Glide.with(holder.itemView.getContext())
                     .asBitmap()
                     .load(photoBytes)
-                    .placeholder(R.drawable.defaultaccommodation)
+                    .placeholder(R.drawable.accommodation)
                     .into(holder.carouselImageView);
         }
     }

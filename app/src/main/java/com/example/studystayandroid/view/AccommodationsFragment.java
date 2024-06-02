@@ -36,6 +36,7 @@ public class AccommodationsFragment extends Fragment {
     private List<Accommodation> accommodationList;
     private AccommodationController accommodationController;
     private UserController userController;
+    private User currentUser;
 
     private Spinner filterCitySpinner;
     private Spinner filterCapacitySpinner;
@@ -92,8 +93,14 @@ public class AccommodationsFragment extends Fragment {
         fetchAccommodations();
 
         // Configurar OnItemLongClickListener
-        adapter.setOnItemLongClickListener(accommodation -> showAccommodationOptionsDialog(accommodation));
+        adapter.setOnItemLongClickListener(this::showAccommodationOptionsDialog);
+
+        // Retrieve currentUser from arguments
+        if (getArguments() != null) {
+            currentUser = (User) getArguments().getSerializable("currentUser");
+        }
     }
+
 
 
     private void toggleFiltersVisibility() {
@@ -140,17 +147,28 @@ public class AccommodationsFragment extends Fragment {
 
     private void applyFilters() {
         String selectedCity = filterCitySpinner.getSelectedItem().toString();
-        int selectedCapacity = Integer.parseInt(filterCapacitySpinner.getSelectedItem().toString());
+        String selectedCapacityStr = filterCapacitySpinner.getSelectedItem().toString();
         boolean isAvailable = filterAvailability.isChecked();
 
+        Integer selectedCapacity = null;
+        if (!selectedCapacityStr.equals("All")) { // Assuming "All" is an option in your spinner
+            try {
+                selectedCapacity = Integer.parseInt(selectedCapacityStr);
+            } catch (NumberFormatException e) {
+                selectedCapacity = null; // If parsing fails, treat as if "All" was selected
+            }
+        }
+
         // Apply filters to fetch and display filtered accommodations
+        Integer finalSelectedCapacity = selectedCapacity;
         accommodationController.getAccommodations(new AccommodationController.AccommodationListCallback() {
             @Override
             public void onSuccess(List<Accommodation> accommodations) {
                 List<Accommodation> filteredList = new ArrayList<>();
                 for (Accommodation accommodation : accommodations) {
+
                     boolean matchesCity = selectedCity.equals("All") || accommodation.getCity().equals(selectedCity);
-                    boolean matchesCapacity = accommodation.getCapacity() == selectedCapacity;
+                    boolean matchesCapacity = finalSelectedCapacity == null || accommodation.getCapacity() == finalSelectedCapacity;
                     boolean matchesAvailability = accommodation.isAvailability() == isAvailable;
 
                     if (matchesCity && matchesCapacity && matchesAvailability) {
@@ -168,6 +186,7 @@ public class AccommodationsFragment extends Fragment {
             }
         });
     }
+
 
     private void openMap() {
         MapDialogFragment mapDialogFragment = new MapDialogFragment(accommodationList);

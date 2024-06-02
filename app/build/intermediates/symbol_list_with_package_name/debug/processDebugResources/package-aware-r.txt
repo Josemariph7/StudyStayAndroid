@@ -3048,6 +3048,7 @@ drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable aboutusicon
+drawable accommodation
 drawable aklogo
 drawable avd_hide_password
 drawable avd_show_password
@@ -3318,7 +3319,6 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
-id availability_check_box
 id barrier
 id baseline
 id beginOnFirstDraw
@@ -3780,6 +3780,9 @@ id textSpacerNoTitle
 id textStart
 id textTop
 id textView
+id textView2
+id textView3
+id textView4
 id textViewContent
 id textViewDateTime
 id textViewLastMessage

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.example.studystayandroid.controller.AccommodationController;
 import com.example.studystayandroid.controller.AccommodationPhotoController;
 import com.example.studystayandroid.model.Accommodation;
 import com.example.studystayandroid.model.AccommodationPhoto;
+import com.example.studystayandroid.model.User;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -30,6 +32,7 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class AddAccommodationFragment extends Fragment {
 
@@ -40,6 +43,7 @@ public class AddAccommodationFragment extends Fragment {
     private Button submitButton, uploadPhotosButton;
     private AccommodationController accommodationController;
     private List<Uri> selectedImagesUris;
+    private User currentUser; // Add this line
 
     public AddAccommodationFragment() {
         // Required empty public constructor
@@ -61,7 +65,6 @@ public class AddAccommodationFragment extends Fragment {
         descriptionEditText = view.findViewById(R.id.description_edit_text);
         capacitySpinner = view.findViewById(R.id.capacity_spinner);
         servicesEditText = view.findViewById(R.id.services_edit_text);
-        availabilityCheckBox = view.findViewById(R.id.availability_check_box);
         submitButton = view.findViewById(R.id.submit_button);
         uploadPhotosButton = view.findViewById(R.id.upload_photos_button);
 
@@ -72,6 +75,11 @@ public class AddAccommodationFragment extends Fragment {
 
         uploadPhotosButton.setOnClickListener(v -> openImagePicker());
         submitButton.setOnClickListener(v -> submitAccommodation());
+
+        // Retrieve currentUser from arguments
+        if (getArguments() != null) {
+            currentUser = (User) getArguments().getSerializable("currentUser");
+        }
     }
 
     private void setupSpinners() {
@@ -123,9 +131,31 @@ public class AddAccommodationFragment extends Fragment {
         String description = descriptionEditText.getText().toString().trim();
         int capacity = Integer.parseInt(capacitySpinner.getSelectedItem().toString());
         String services = servicesEditText.getText().toString().trim();
-        boolean availability = availabilityCheckBox.isChecked();
+
+        // Validate inputs
+        if (!isValidAddress(address)) {
+            Toast.makeText(getContext(), "Invalid address. Please enter a valid address.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!isValidPrice(price)) {
+            Toast.makeText(getContext(), "Invalid price. Please enter a valid number.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!isValidText(description)) {
+            Toast.makeText(getContext(), "Invalid description. Please avoid special characters.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!isValidText(services)) {
+            Toast.makeText(getContext(), "Invalid services. Please avoid special characters.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         Accommodation accommodation = new Accommodation();
+        Log.d("Owner", currentUser.toString());
+        accommodation.setOwner(currentUser);
         accommodation.setAddress(address);
         accommodation.setCity(city);
         accommodation.setPrice(new BigDecimal(price));
@@ -133,7 +163,7 @@ public class AddAccommodationFragment extends Fragment {
         accommodation.setCapacity(capacity);
         accommodation.setServices(services);
         accommodation.setAvailability(true);
-        accommodation.setRating(null);
+        accommodation.setRating(0.0);
 
         accommodationController.createAccommodation(accommodation, new AccommodationController.SimpleCallback() {
             @Override
@@ -186,5 +216,27 @@ public class AddAccommodationFragment extends Fragment {
             Log.e("AddAccommodationFragment", "Error converting URI to byte array", e);
             return new byte[0];
         }
+    }
+
+    // Validation methods
+    private boolean isValidAddress(String address) {
+        // Address should be street followed by number, e.g., "Street 123"
+        String addressPattern = "^[a-zA-Z0-9\\s]+(\\s\\d+)?$";
+        return Pattern.matches(addressPattern, address);
+    }
+
+    private boolean isValidPrice(String price) {
+        try {
+            new BigDecimal(price);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private boolean isValidText(String text) {
+        // No special characters allowed
+        String textPattern = "^[a-zA-Z0-9\\s]+$";
+        return Pattern.matches(textPattern, text);
     }
 }

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -9,56 +11,143 @@
         android:id="@+id/address_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Address" />
+        android:backgroundTint="@color/LightBlue"
+        android:gravity="center_horizontal"
+        android:hint="Address"
+        android:paddingTop="10dp"
+        android:textColor="@color/SadBlue"
+        android:textColorHint="@color/SadBlue"
+        android:translationY="30dp" />
 
-    <Spinner
-        android:id="@+id/city_spinner"
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="53dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:translationY="50dp">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="47dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/SadBlue"
+            android:text="City"
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/city_spinner"
+            android:layout_width="178dp"
+            android:layout_height="45dp"
+            android:backgroundTint="@color/LightBlue"
+            android:gravity="center_horizontal"
+            android:hint="City"
+            android:textAlignment="center"
+
+            android:textColor="@color/SadBlue"
+            android:textColorHint="@color/SadBlue" />
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="City" />
+        android:orientation="horizontal"
+        android:translationY="60dp">
 
-    <EditText
-        android:id="@+id/price_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Price (€)"
-        android:inputType="numberDecimal" />
+        <EditText
+            android:id="@+id/price_edit_text"
+            android:layout_width="345dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/LightBlue"
+            android:gravity="center_horizontal"
+            android:hint="Price"
+            android:inputType="numberDecimal"
+            android:paddingTop="20dp"
+            android:textColor="@color/SadBlue"
+            android:textColorHint="@color/SadBlue" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="23dp"
+            android:layout_height="wrap_content"
+
+            android:text="€"
+            android:textColor="@color/SadBlue"
+            android:textSize="20sp" />
+    </LinearLayout>
 
     <EditText
         android:id="@+id/description_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Description" />
-
-    <Spinner
-        android:id="@+id/capacity_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Capacity" />
+        android:backgroundTint="@color/LightBlue"
+        android:gravity="center_horizontal"
+        android:hint="Description"
+        android:paddingTop="20dp"
+        android:textColor="@color/SadBlue"
+        android:textColorHint="@color/SadBlue"
+        android:translationY="90dp" />
 
     <EditText
         android:id="@+id/services_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Services" />
+        android:backgroundTint="@color/LightBlue"
+        android:gravity="center_horizontal"
+        android:hint="Services"
+        android:paddingTop="20dp"
+        android:textColor="@color/SadBlue"
+        android:textColorHint="@color/SadBlue"
+        android:translationY="110dp" />
 
-    <CheckBox
-        android:id="@+id/availability_check_box"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:buttonTint="@color/SadBlue"
-        android:checked="true"
-        android:text="Available" />
+        android:layout_height="53dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+
+        android:translationY="130dp">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="66dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/SadBlue"
+            android:text="Capacity"
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/capacity_spinner"
+            android:layout_width="178dp"
+            android:layout_height="45dp"
+            android:backgroundTint="@color/LightBlue"
+            android:gravity="center_horizontal|center_vertical"
+            android:hint="Capacity"
+            android:textAlignment="center"
+            android:textColor="@color/SadBlue"
+            android:textColorHint="@color/SadBlue" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/upload_photos_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Upload Photos" />
+        style="@style/Widget.Material3.Button.IconButton.Filled"
+        android:layout_width="283dp"
+        android:layout_height="51dp"
+        android:backgroundTint="@color/SadBlue"
+        android:text="Upload Photos"
+        android:textColor="@android:color/white"
+        android:translationY="250dp" />
 
     <Button
         android:id="@+id/submit_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Submit" />
+        style="@style/Widget.Material3.Button.IconButton.Filled"
+        android:layout_width="283dp"
+        android:layout_height="51dp"
+        android:backgroundTint="@color/SadBlue"
+        android:text="Submit"
+        android:textColor="@android:color/white"
+        android:translationY="260dp" />
 </LinearLayout>

@@ -113,6 +113,8 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment selectedFragment = null;
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("currentUser", currentUser); // Pass the currentUser object
 
         switch (item.getItemId()) {
             case R.id.Accommodations:
@@ -138,12 +140,14 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         }
 
         if (selectedFragment != null) {
+            selectedFragment.setArguments(bundle); // Set the arguments to the fragment
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
     private void showLogoutConfirmationDialog() {
         new AlertDialog.Builder(this)
