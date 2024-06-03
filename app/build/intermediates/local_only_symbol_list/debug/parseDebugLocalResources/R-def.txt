@@ -14,6 +14,7 @@ color colorAccent
 color colorPrimary
 color colorPrimaryDark
 color errorColor
+color red
 color selector_nav_item_color
 color statusBarColor
 color textColor
@@ -62,6 +63,7 @@ drawable rounded_dialog
 drawable rounded_edit_text_dark
 drawable rounded_edit_text_light
 drawable rounded_profile_card
+drawable separator
 drawable simpletransparente
 id Accommodations
 id ContactButton
@@ -75,6 +77,7 @@ id bioEditText
 id bioTextView
 id birthDateTextView
 id bottom_sheet
+id button
 id button2
 id button3
 id buttonCancel
@@ -164,6 +167,8 @@ id textView
 id textView2
 id textView3
 id textView4
+id textView5
+id textView6
 id textViewContent
 id textViewDateTime
 id textViewLastMessage
@@ -207,6 +212,8 @@ layout item_message
 layout item_message_received
 layout item_message_sent
 layout nav_header
+layout spinner_dropdown_item
+layout spinner_item
 menu nav_menu
 mipmap ic_launcher
 mipmap ic_launcher_background

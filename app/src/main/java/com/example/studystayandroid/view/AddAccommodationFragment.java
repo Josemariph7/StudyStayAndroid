@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,6 +74,23 @@ public class AddAccommodationFragment extends Fragment {
 
         uploadPhotosButton.setOnClickListener(v -> openImagePicker());
         submitButton.setOnClickListener(v -> submitAccommodation());
+
+        // Setup spinners with custom styles
+        ArrayAdapter<CharSequence> cityAdapter = ArrayAdapter.createFromResource(
+                getContext(),
+                R.array.cities_array,
+                R.layout.spinner_item);  // Using custom layout
+
+        cityAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);  // Using custom dropdown layout
+        citySpinner.setAdapter(cityAdapter);
+
+        ArrayAdapter<CharSequence> capacityAdapter = ArrayAdapter.createFromResource(
+                getContext(),
+                R.array.capacity_array,
+                R.layout.spinner_item);  // Using custom layout
+
+        capacityAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);  // Using custom dropdown layout
+        capacitySpinner.setAdapter(capacityAdapter);
 
         // Retrieve currentUser from arguments
         if (getArguments() != null) {

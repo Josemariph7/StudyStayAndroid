@@ -4,7 +4,7 @@
             "outputFile": "com.example.studystayandroid.app-mergeDebugResources-35:/values-w360dp-port-v13/values-w360dp-port-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\josem\\.gradle\\caches\\transforms-4\\ed326cdd2eb01d8c9b30db925ae495bc\\transformed\\material-1.12.0\\res\\values-w360dp-port-v13\\values-w360dp-port-v13.xml",
+                    "source": "C:\\Users\\6003102\\.gradle\\caches\\transforms-4\\ed326cdd2eb01d8c9b30db925ae495bc\\transformed\\material-1.12.0\\res\\values-w360dp-port-v13\\values-w360dp-port-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",

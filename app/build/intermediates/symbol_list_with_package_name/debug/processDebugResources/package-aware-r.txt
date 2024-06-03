@@ -2147,6 +2147,7 @@ color primary_text_default_material_dark
 color primary_text_default_material_light
 color primary_text_disabled_material_dark
 color primary_text_disabled_material_light
+color red
 color ripple_material_dark
 color ripple_material_light
 color secondary_text_default_material_dark
@@ -3218,6 +3219,7 @@ drawable rounded_dialog
 drawable rounded_edit_text_dark
 drawable rounded_edit_text_light
 drawable rounded_profile_card
+drawable separator
 drawable simpletransparente
 drawable test_level_drawable
 drawable tooltip_frame_dark
@@ -3334,6 +3336,7 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id button
 id button2
 id button3
 id buttonCancel
@@ -3783,6 +3786,8 @@ id textView
 id textView2
 id textView3
 id textView4
+id textView5
+id textView6
 id textViewContent
 id textViewDateTime
 id textViewLastMessage
@@ -4071,6 +4076,8 @@ layout notification_template_part_time
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
+layout spinner_dropdown_item
+layout spinner_item
 layout support_simple_spinner_dropdown_item
 menu nav_menu
 mipmap ic_launcher

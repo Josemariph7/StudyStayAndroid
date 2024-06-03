@@ -92,6 +92,22 @@ public class AccommodationsFragment extends Fragment {
         setupSpinners();
         fetchAccommodations();
 
+        ArrayAdapter<CharSequence> cityAdapter = ArrayAdapter.createFromResource(
+                getContext(),
+                R.array.cities_array,
+                R.layout.spinner_item);  // Usando el diseño personalizado
+
+        cityAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);  // Usando el diseño personalizado
+        filterCitySpinner.setAdapter(cityAdapter);
+
+        ArrayAdapter<CharSequence> capacityAdapter = ArrayAdapter.createFromResource(
+                getContext(),
+                R.array.capacity_array,
+                R.layout.spinner_item);  // Usando el diseño personalizado
+
+        capacityAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);  // Usando el diseño personalizado
+        filterCapacitySpinner.setAdapter(capacityAdapter);
+
         // Configurar OnItemLongClickListener
         adapter.setOnItemLongClickListener(this::showAccommodationOptionsDialog);
 
@@ -100,8 +116,6 @@ public class AccommodationsFragment extends Fragment {
             currentUser = (User) getArguments().getSerializable("currentUser");
         }
     }
-
-
 
     private void toggleFiltersVisibility() {
         if (filtersContainer.getVisibility() == View.VISIBLE) {

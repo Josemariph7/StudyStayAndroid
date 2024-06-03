@@ -16,6 +16,11 @@
         android:layout_marginEnd="41dp"
         android:hint="@string/hintEmail"
         android:translationY="-7dp"
+        app:errorTextColor="@color/red"
+        app:cursorErrorColor="@color/red"
+        app:boxStrokeErrorColor="@color/red"
+        app:errorIconTintMode="src_in"
+        app:errorIconTint="@color/red"
         app:boxStrokeColor="@color/LightBlue"
         app:cursorColor="@color/SadBlue"
         android:textColorHint="@color/SadBlue"
@@ -39,6 +44,11 @@
         android:layout_height="76dp"
         android:layout_marginStart="41dp"
         android:layout_marginTop="325dp"
+        app:errorTextColor="@color/red"
+        app:cursorErrorColor="@color/red"
+        app:boxStrokeErrorColor="@color/red"
+        app:errorIconTintMode="src_in"
+        app:errorIconTint="@color/red"
         android:layout_marginEnd="41dp"
         android:textColorHint="@color/SadBlue"
         android:hint="@string/hintPassword"
@@ -125,17 +135,22 @@
                 android:layout_marginTop="252dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginRight="40dp"
+                app:errorTextColor="@color/red"
+                app:cursorErrorColor="@color/red"
+                app:boxStrokeErrorColor="@color/red"
+                app:errorIconTintMode="src_in"
+                app:errorIconTint="@color/red"
                 android:hint="@string/hintName"
                 android:translationY="-5dp"
                 android:textColorHint="@color/SadBlue"
                 app:boxStrokeColor="@color/SadBlue"
                 app:cursorColor="@color/SadBlue"
-                app:hintTextColor="@color/SadBlue"
-                tools:ignore="ExtraText">
+                app:hintTextColor="@color/SadBlue">
 
                 <com.google.android.material.textfield.TextInputEditText
                     style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
+                    android:textColor="@color/SadBlue"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_edit_text_dark"
                     android:backgroundTint="@color/white" />
@@ -151,6 +166,11 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginRight="40dp"
+                app:errorTextColor="@color/red"
+                app:cursorErrorColor="@color/red"
+                app:boxStrokeErrorColor="@color/red"
+                app:errorIconTintMode="src_in"
+                app:errorIconTint="@color/red"
                 android:hint="@string/hintEmail"
                 android:translationY="-5dp"
                 android:textColorHint="@color/SadBlue"
@@ -163,6 +183,7 @@
                     style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/SadBlue"
                     android:background="@drawable/rounded_edit_text_dark"
                     android:backgroundTint="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -176,6 +197,11 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginEnd="40dp"
+                app:errorTextColor="@color/red"
+                app:cursorErrorColor="@color/red"
+                app:boxStrokeErrorColor="@color/red"
+                app:errorIconTintMode="src_in"
+                app:errorIconTint="@color/red"
                 android:layout_marginRight="40dp"
                 android:hint="@string/hintSurnames"
                 android:translationY="-5dp"
@@ -189,6 +215,7 @@
                     style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/SadBlue"
                     android:background="@drawable/rounded_edit_text_dark"
                     android:backgroundTint="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -202,6 +229,11 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginEnd="40dp"
+                app:errorTextColor="@color/red"
+                app:cursorErrorColor="@color/red"
+                app:boxStrokeErrorColor="@color/red"
+                app:errorIconTintMode="src_in"
+                app:errorIconTint="@color/red"
                 android:layout_marginRight="40dp"
                 android:hint="@string/hintPhone"
                 android:translationY="-5dp"
@@ -215,6 +247,7 @@
                     style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/SadBlue"
                     android:background="@drawable/rounded_edit_text_dark"
                     android:backgroundTint="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -227,6 +260,11 @@
                 android:layout_marginVertical="260dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="40dp"
+                app:errorTextColor="@color/red"
+                app:cursorErrorColor="@color/red"
+                app:boxStrokeErrorColor="@color/red"
+                app:errorIconTintMode="src_in"
+                app:errorIconTint="@color/red"
                 android:hint="@string/hintPassword"
                 android:translationY="-5dp"
                 android:textColorHint="@color/SadBlue"
@@ -239,6 +277,7 @@
                     style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/SadBlue"
                     android:background="@drawable/rounded_edit_text_dark"
                     android:backgroundTint="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -250,11 +289,16 @@
                 android:layout_height="75dp"
                 android:layout_marginVertical="340dp"
                 android:layout_marginStart="40dp"
+                app:errorTextColor="@color/red"
+                app:cursorErrorColor="@color/red"
+                app:boxStrokeErrorColor="@color/red"
+                app:errorIconTintMode="src_in"
+                app:errorIconTint="@color/red"
                 android:layout_marginEnd="40dp"
                 android:hint="@string/hintDNI"
                 android:translationY="-5dp"
                 android:textColorHint="@color/SadBlue"
-                app:boxStrokeColor="@color/SadBlue"
+                app:boxStrokeColor="@color/LightBlue"
                 app:cursorColor="@color/SadBlue"
                 app:hintTextColor="@color/SadBlue"
                 tools:ignore="ExtraText">
@@ -262,6 +306,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
+                    android:textColor="@color/SadBlue"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_edit_text_dark"
                     android:backgroundTint="@color/white" />
@@ -301,7 +346,7 @@
                     android:background="@drawable/rounded_edit_text_dark"
                     android:backgroundTint="@color/white"
                     android:focusable="false"
-                    android:textColor="@color/LightBlue"
+                    android:textColor="@color/SadBlue"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -326,7 +371,7 @@
                     android:id="@+id/spinnerGender"
                     android:layout_width="196dp"
                     android:layout_height="match_parent"
-
+                    android:textColor="@color/SadBlue"
                     android:backgroundTint="@color/white"
                     android:outlineAmbientShadowColor="@color/SadBlue"
                     android:textAlignment="center"
