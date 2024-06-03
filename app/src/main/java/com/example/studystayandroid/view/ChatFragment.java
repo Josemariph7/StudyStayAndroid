@@ -7,9 +7,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -105,38 +108,76 @@ public class ChatFragment extends Fragment {
     }
 
     private void showConversationOptions(Conversation conversation) {
-        new MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Options")
-                .setItems(new String[]{"Delete Conversation", "View User Profile"}, (dialog, which) -> {
-                    switch (which) {
-                        case 0:
-                            deleteConversation(conversation);
-                            break;
-                        case 1:
-                            openUserProfile(conversation);
-                            break;
-                    }
-                })
-                .show();
+        LayoutInflater inflater = LayoutInflater.from(requireContext());
+        View dialogView = inflater.inflate(R.layout.dialog_options, null);
+
+        TextView dialogTitle = dialogView.findViewById(R.id.dialogTitle);
+        dialogTitle.setText("Options");
+
+        Button buttonDelete = dialogView.findViewById(R.id.buttonOption1);
+        buttonDelete.setText("Delete Conversation");
+        Button buttonViewProfile = dialogView.findViewById(R.id.buttonOption2);
+        buttonViewProfile.setText("View User Profile");
+        Button buttonCancel = dialogView.findViewById(R.id.buttonCancel);
+
+        AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
+                .setView(dialogView)
+                .create();
+
+        buttonDelete.setOnClickListener(v -> {
+            deleteConversation(conversation);
+            dialog.dismiss();
+        });
+
+        buttonViewProfile.setOnClickListener(v -> {
+            openUserProfile(conversation);
+            dialog.dismiss();
+        });
+
+        buttonCancel.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
     }
 
     private void deleteConversation(Conversation conversation) {
-        conversationController.deleteConversation(conversation.getConversationId(), new ConversationController.ConversationCallback() {
-            @Override
-            public void onSuccess(Conversation result) {
-                fetchConversations();
-            }
+        LayoutInflater inflater = LayoutInflater.from(requireContext());
+        View dialogView = inflater.inflate(R.layout.dialog_delete_confirmation, null);
 
-            @Override
-            public void onSuccess(Object result) {
-                fetchConversations();
-            }
+        TextView dialogTitle = dialogView.findViewById(R.id.dialogTitle);
+        dialogTitle.setText("Delete Conversation");
+        TextView dialogMessage = dialogView.findViewById(R.id.dialogMessage);
+        dialogMessage.setText("Are you sure you want to delete this conversation?");
+        Button buttonCancel = dialogView.findViewById(R.id.buttonCancel);
+        Button buttonConfirm = dialogView.findViewById(R.id.buttonConfirm);
 
-            @Override
-            public void onError(String error) {
-                Log.e("ChatFragment", "Error deleting conversation: " + error);
-            }
+        AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
+                .setView(dialogView)
+                .create();
+
+        buttonCancel.setOnClickListener(v -> dialog.dismiss());
+        buttonConfirm.setOnClickListener(v -> {
+            conversationController.deleteConversation(conversation.getConversationId(), new ConversationController.ConversationCallback() {
+                @Override
+                public void onSuccess(Conversation result) {
+                    fetchConversations();
+                    dialog.dismiss();
+                }
+
+                @Override
+                public void onSuccess(Object result) {
+                    fetchConversations();
+                    dialog.dismiss();
+                }
+
+                @Override
+                public void onError(String error) {
+                    Log.e("ChatFragment", "Error deleting conversation: " + error);
+                    dialog.dismiss();
+                }
+            });
         });
+
+        dialog.show();
     }
 
     private void openUserProfile(Conversation conversation) {

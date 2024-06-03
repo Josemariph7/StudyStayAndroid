@@ -2,22 +2,57 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/rounded_dialog"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="20dp">
 
     <TextView
+        android:id="@+id/dialogTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
         android:text="New Comment"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:gravity="center"/>
+        android:textColor="@color/SadBlue"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/editTextCommentContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Comment"
+        android:textColorHint="@color/SadBlue"
+        android:textColor="@color/SadBlue"
+        android:padding="10dp"
+        android:backgroundTint="@color/SadBlue"
         android:inputType="textMultiLine" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="20dp">
+
+        <Button
+            android:id="@+id/buttonCancel"
+            style="@style/Widget.Material3.Button.IconButton.Filled"
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/SadBlue"
+            android:text="Cancel"
+            android:textColor="@android:color/white"
+            android:stateListAnimator="@android:anim/linear_interpolator" />
+
+        <Button
+            android:id="@+id/buttonPost"
+            style="@style/Widget.Material3.Button.IconButton.Filled"
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/SadBlue"
+            android:text="Post"
+            android:textColor="@android:color/white"
+            android:stateListAnimator="@android:anim/linear_interpolator" />
+    </LinearLayout>
 </LinearLayout>

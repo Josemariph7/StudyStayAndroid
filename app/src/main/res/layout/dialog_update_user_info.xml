@@ -1,42 +1,114 @@
-<!-- res/layout/dialog_update_user_info.xml -->
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/rounded_dialog"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/dialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Update User Info"
+        android:textColor="@color/SadBlue"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/nameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Name" />
+        android:hint="Name"
+        android:outlineAmbientShadowColor="@color/SadBlue"
+        android:outlineSpotShadowColor="@color/SadBlue"
+        android:textColorHint="@color/SadBlue"
+        android:textColorHighlight="@color/SadBlue"
+        android:textColorLink="@color/SadBlue"
+        android:backgroundTint="@color/SadBlue"
+        android:padding="10dp"
+        android:textColor="@color/SadBlue" />
 
     <EditText
         android:id="@+id/lastNameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Last Name" />
+        android:layout_marginTop="8dp"
+        android:hint="Last Name"
+        android:textColorHint="@color/SadBlue"
+        android:backgroundTint="@color/SadBlue"
+        android:padding="10dp"
+        android:textColor="@color/SadBlue" />
 
     <EditText
         android:id="@+id/emailEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email" />
+        android:layout_marginTop="8dp"
+        android:hint="Email"
+        android:textColorHint="@color/SadBlue"
+        android:backgroundTint="@color/SadBlue"
+        android:padding="10dp"
+        android:textColor="@color/SadBlue" />
 
     <EditText
         android:id="@+id/phoneEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Phone" />
+        android:layout_marginTop="8dp"
+        android:hint="Phone"
+        android:textColorHint="@color/SadBlue"
+        android:backgroundTint="@color/SadBlue"
+        android:padding="10dp"
+        android:textColor="@color/SadBlue" />
 
     <EditText
         android:id="@+id/bioEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Bio" />
+        android:layout_marginTop="8dp"
+        android:hint="Bio"
+        android:textColorHint="@color/SadBlue"
+        android:backgroundTint="@color/SadBlue"
+        android:padding="10dp"
+        android:textColor="@color/SadBlue" />
 
     <Spinner
         android:id="@+id/genderSpinner"
+        android:layout_width="187dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/SadBlue"
+        android:layout_marginTop="8dp"
+        android:padding="10dp" />
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="20dp">
+
+        <Button
+            android:id="@+id/buttonCancel"
+            style="@style/Widget.Material3.Button.IconButton.Filled"
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/SadBlue"
+            android:stateListAnimator="@android:anim/linear_interpolator"
+            android:text="Cancel"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/buttonConfirm"
+            style="@style/Widget.Material3.Button.IconButton.Filled"
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/SadBlue"
+            android:stateListAnimator="@android:anim/linear_interpolator"
+            android:text="Update"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
 </LinearLayout>

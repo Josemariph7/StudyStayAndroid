@@ -18,10 +18,19 @@ import java.util.List;
 public class AccommodationAdapter extends RecyclerView.Adapter<AccommodationAdapter.AccommodationViewHolder> {
 
     private static List<Accommodation> accommodationList;
+    private OnItemClickListener listener;
     private OnItemLongClickListener longClickListener;
 
     public AccommodationAdapter(List<Accommodation> accommodationList) {
         this.accommodationList = accommodationList;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Accommodation accommodation);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     public interface OnItemLongClickListener {
@@ -36,7 +45,7 @@ public class AccommodationAdapter extends RecyclerView.Adapter<AccommodationAdap
     @Override
     public AccommodationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_accommodation, parent, false);
-        return new AccommodationViewHolder(view, longClickListener);
+        return new AccommodationViewHolder(view, listener, longClickListener);
     }
 
     @Override
@@ -46,12 +55,11 @@ public class AccommodationAdapter extends RecyclerView.Adapter<AccommodationAdap
         holder.city.setText(accommodation.getCity());
         holder.description.setText(accommodation.getDescription());
         holder.price.setText(String.format("$%.2f", accommodation.getPrice()));
-        // Cargar la imagen por defecto
+
         Glide.with(holder.itemView.getContext())
                 .load(R.drawable.defaultaccommodation)
                 .into(holder.carouselImageView);
 
-        // Cargar la imagen del carrusel
         if (accommodation.getPhotos() != null && !accommodation.getPhotos().isEmpty()) {
             byte[] photoBytes = accommodation.getPhotos().get(0).getPhotoData();
             Glide.with(holder.itemView.getContext())
@@ -71,13 +79,20 @@ public class AccommodationAdapter extends RecyclerView.Adapter<AccommodationAdap
         TextView address, city, description, price;
         ImageView carouselImageView;
 
-        AccommodationViewHolder(@NonNull View itemView, OnItemLongClickListener longClickListener) {
+        AccommodationViewHolder(@NonNull View itemView, OnItemClickListener listener, OnItemLongClickListener longClickListener) {
             super(itemView);
             address = itemView.findViewById(R.id.address);
             city = itemView.findViewById(R.id.city);
             description = itemView.findViewById(R.id.description);
             price = itemView.findViewById(R.id.price);
             carouselImageView = itemView.findViewById(R.id.carousel_image_view);
+
+            itemView.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (listener != null && position != RecyclerView.NO_POSITION) {
+                    listener.onItemClick(accommodationList.get(position));
+                }
+            });
 
             itemView.setOnLongClickListener(v -> {
                 if (longClickListener != null) {

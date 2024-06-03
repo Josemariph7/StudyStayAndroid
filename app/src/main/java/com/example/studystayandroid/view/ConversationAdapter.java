@@ -1,6 +1,5 @@
 package com.example.studystayandroid.view;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -21,6 +21,7 @@ import com.example.studystayandroid.controller.ConversationController;
 import com.example.studystayandroid.controller.UserController;
 import com.example.studystayandroid.model.Conversation;
 import com.example.studystayandroid.model.User;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.List;
 
@@ -148,24 +149,88 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         }
     }
 
-    private void showDeleteDialog(Conversation conversation, int position) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+    private void showOptionsDialog(Conversation conversation, int position) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View dialogView = inflater.inflate(R.layout.dialog_confirm_delete, null);
-        builder.setView(dialogView);
+        View dialogView = inflater.inflate(R.layout.dialog_options, null);
 
         TextView dialogTitle = dialogView.findViewById(R.id.dialogTitle);
+        dialogTitle.setText("Options");
+
+        Button buttonDelete = dialogView.findViewById(R.id.buttonOption1);
+        buttonDelete.setText("Delete Conversation");
+        Button buttonViewProfile = dialogView.findViewById(R.id.buttonOption2);
+        buttonViewProfile.setText("View User Profile");
+        Button buttonCancel = dialogView.findViewById(R.id.buttonCancel);
+
+        AlertDialog dialog = new MaterialAlertDialogBuilder(context)
+                .setView(dialogView)
+                .create();
+
+        buttonDelete.setOnClickListener(v -> {
+            showDeleteDialog(conversation, position);
+            dialog.dismiss();
+        });
+
+        buttonViewProfile.setOnClickListener(v -> {
+            openUserProfile(conversation);
+            dialog.dismiss();
+        });
+
+        buttonCancel.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
+    }
+
+    private void openUserProfile(Conversation conversation) {
+        Long otherUserId = conversation.getUser1Id().equals(currentUserId) ? conversation.getUser2Id() : conversation.getUser1Id();
+        UserController userController = new UserController(context);
+        userController.getUserById(otherUserId, new UserController.UserCallback() {
+            @Override
+            public void onSuccess(Object result) {
+                User user = (User) result;
+                StrangeProfileFragment profileFragment = StrangeProfileFragment.newInstance(user);
+                // Assuming you have a method in the activity to handle fragment transactions
+                ((DashboardActivity) context).getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, profileFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+
+            @Override
+            public void onSuccess(User user) {
+                StrangeProfileFragment profileFragment = StrangeProfileFragment.newInstance(user);
+                ((DashboardActivity) context).getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, profileFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.e("ConversationAdapter", "Error fetching user profile: " + error);
+            }
+        });
+    }
+
+
+    private void showDeleteDialog(Conversation conversation, int position) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View dialogView = inflater.inflate(R.layout.dialog_delete_confirmation, null);
+
+        TextView dialogTitle = dialogView.findViewById(R.id.dialogTitle);
+        dialogTitle.setText("Delete Conversation");
         TextView dialogMessage = dialogView.findViewById(R.id.dialogMessage);
+        dialogMessage.setText("Are you sure you want to delete this conversation?");
         Button buttonCancel = dialogView.findViewById(R.id.buttonCancel);
         Button buttonConfirm = dialogView.findViewById(R.id.buttonConfirm);
 
-        dialogTitle.setText("Delete Conversation");
-        dialogMessage.setText("Are you sure you want to delete this conversation?");
+        androidx.appcompat.app.AlertDialog dialog = new MaterialAlertDialogBuilder(context)
+                .setView(dialogView)
+                .create();
 
-        AlertDialog alertDialog = builder.create();
-
-        buttonCancel.setOnClickListener(v -> alertDialog.dismiss());
-
+        buttonCancel.setOnClickListener(v -> dialog.dismiss());
         buttonConfirm.setOnClickListener(v -> {
             conversationController.deleteConversation(conversation.getConversationId(), new ConversationController.ConversationCallback() {
                 @Override
@@ -173,7 +238,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
                     conversationList.remove(position);
                     notifyItemRemoved(position);
                     notifyItemRangeChanged(position, conversationList.size());
-                    alertDialog.dismiss();
+                    dialog.dismiss();
                 }
 
                 @Override
@@ -181,17 +246,18 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
                     conversationList.remove(position);
                     notifyItemRemoved(position);
                     notifyItemRangeChanged(position, conversationList.size());
-                    alertDialog.dismiss();
+                    dialog.dismiss();
                 }
 
                 @Override
                 public void onError(String error) {
                     Log.e("ConversationAdapter", "Error deleting conversation: " + error);
-                    alertDialog.dismiss();
+                    dialog.dismiss();
                 }
             });
         });
 
-        alertDialog.show();
+        dialog.show();
     }
+
 }

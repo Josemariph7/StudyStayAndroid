@@ -135,17 +135,32 @@ public class DiscussionFragment extends Fragment {
         builder.setView(dialogView);
 
         EditText editTextContent = dialogView.findViewById(R.id.editTextCommentContent);
+        Button buttonCancel = dialogView.findViewById(R.id.buttonCancel);
+        Button buttonPost = dialogView.findViewById(R.id.buttonPost);
 
-        builder.setPositiveButton("Post", (dialog, which) -> {
+        AlertDialog dialog = builder.create();
+
+        buttonCancel.setOnClickListener(v -> dialog.dismiss());
+        buttonPost.setOnClickListener(v -> {
             String content = editTextContent.getText().toString();
 
             if (content.isEmpty()) {
                 // Manejar contenido vacío
                 AlertDialog.Builder errorBuilder = new AlertDialog.Builder(getContext());
-                errorBuilder.setTitle("Error")
-                        .setMessage("Content must be provided.")
-                        .setPositiveButton("OK", null)
-                        .show();
+                LayoutInflater errorInflater = getLayoutInflater();
+                View errorDialogView = errorInflater.inflate(R.layout.dialog_error, null);
+                errorBuilder.setView(errorDialogView);
+
+                TextView errorTitle = errorDialogView.findViewById(R.id.dialogTitle);
+                TextView errorMessage = errorDialogView.findViewById(R.id.dialogMessage);
+                Button errorButton = errorDialogView.findViewById(R.id.buttonConfirm);
+
+                errorTitle.setText("Error");
+                errorMessage.setText("Content must be provided.");
+
+                AlertDialog errorDialog = errorBuilder.create();
+                errorButton.setOnClickListener(ev -> errorDialog.dismiss());
+                errorDialog.show();
                 return;
             }
 
@@ -161,22 +176,22 @@ public class DiscussionFragment extends Fragment {
                 public void onSuccess(ForumComment comment) {
                     loadComments(); // Recargar los comentarios
                     Log.d("DiscussionFragment", "Comment created: " + comment);
+                    dialog.dismiss();
                 }
 
                 @Override
                 public void onSuccess(Object result) {
-
                 }
 
                 @Override
                 public void onError(String error) {
                     Log.e("DiscussionFragment", "Error creating comment: " + error);
+                    dialog.dismiss();
                 }
             });
         });
 
-        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
-        builder.create().show();
+        dialog.show();
     }
 
     private User getCurrentUser() {

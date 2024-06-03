@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -150,13 +152,31 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
 
     private void showLogoutConfirmationDialog() {
-        new AlertDialog.Builder(this)
-                .setTitle("Confirm Logout")
-                .setMessage("Are you sure you want to log out?")
-                .setPositiveButton("Yes", (dialog, which) -> logout())
-                .setNegativeButton("No", null)
-                .show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_confirmation, null);
+        builder.setView(dialogView);
+
+        TextView dialogTitle = dialogView.findViewById(R.id.dialogTitle);
+        TextView dialogMessage = dialogView.findViewById(R.id.dialogMessage);
+        Button buttonCancel = dialogView.findViewById(R.id.buttonCancel);
+        Button buttonConfirm = dialogView.findViewById(R.id.buttonConfirm);
+
+        dialogTitle.setText("Confirm Logout");
+        dialogMessage.setText("Are you sure you want to log out?");
+        buttonConfirm.setText("Yes");
+
+        AlertDialog dialog = builder.create();
+
+        buttonCancel.setOnClickListener(v -> dialog.dismiss());
+        buttonConfirm.setOnClickListener(v -> {
+            logout();
+            dialog.dismiss();
+        });
+
+        dialog.show();
     }
+
 
     private void logout() {
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
@@ -170,21 +190,35 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     }
 
     private void showExitConfirmationDialog() {
-        new AlertDialog.Builder(this)
-                .setTitle("Confirm Exit")
-                .setMessage("Are you sure you want to exit the app?")
-                .setPositiveButton("Yes", (dialog, which) -> {
-                    // Cerrar la aplicación
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.putExtra("EXIT", true);
-                    startActivity(intent);
-                    finish(); // Esto asegura que la actividad actual se cierre
-                    System.exit(0); // Esto fuerza la salida de la aplicación
-                })
-                .setNegativeButton("No", null)
-                .show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_confirmation, null);
+        builder.setView(dialogView);
+
+        TextView dialogTitle = dialogView.findViewById(R.id.dialogTitle);
+        TextView dialogMessage = dialogView.findViewById(R.id.dialogMessage);
+        Button buttonCancel = dialogView.findViewById(R.id.buttonCancel);
+        Button buttonConfirm = dialogView.findViewById(R.id.buttonConfirm);
+
+        dialogTitle.setText("Confirm Exit");
+        dialogMessage.setText("Are you sure you want to exit the app?");
+        buttonConfirm.setText("Yes");
+
+        AlertDialog dialog = builder.create();
+
+        buttonCancel.setOnClickListener(v -> dialog.dismiss());
+        buttonConfirm.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("EXIT", true);
+            startActivity(intent);
+            finish();
+            System.exit(0);
+        });
+
+        dialog.show();
     }
+
 
 
     @Override

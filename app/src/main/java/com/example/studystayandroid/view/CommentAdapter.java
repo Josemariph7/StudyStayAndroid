@@ -1,16 +1,17 @@
 package com.example.studystayandroid.view;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -19,6 +20,7 @@ import com.example.studystayandroid.R;
 import com.example.studystayandroid.controller.ForumCommentController;
 import com.example.studystayandroid.model.ForumComment;
 import com.example.studystayandroid.model.User;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -78,40 +80,76 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     }
 
     private void showOptionsDialog(ForumComment comment) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
         if (comment.getAuthor().getUserId().equals(currentUser.getUserId())) {
-            builder.setTitle("Delete Comment")
-                    .setMessage("Are you sure you want to delete this comment?")
-                    .setPositiveButton("Yes", (dialog, which) -> {
-                        ForumCommentController commentController = new ForumCommentController(context);
-                        commentController.deleteComment(comment.getCommentId(), new ForumCommentController.CommentCallback() {
-                            @Override
-                            public void onSuccess(ForumComment comment) {
-                                discussionFragment.loadComments(); // Recargar los comentarios
-                            }
-
-                            @Override
-                            public void onSuccess(Object result) {
-                                discussionFragment.loadComments(); // Recargar los comentarios
-                            }
-
-                            @Override
-                            public void onError(String error) {
-                                Log.e("CommentAdapter", "Error deleting comment: " + error);
-                            }
-                        });
-
-                    })
-                    .setNegativeButton("No", null);
+            showDeleteCommentDialog(comment);
         } else {
-            builder.setTitle("Comment Options")
-                    .setItems(new String[]{"View User Profile"}, (dialog, which) -> {
-                        if (which == 0) {
-                            discussionFragment.openStrangeProfile(comment.getAuthor());
-                        }
-                    });
+            showViewProfileDialog(comment.getAuthor());
         }
-        builder.show();
+    }
+
+    private void showDeleteCommentDialog(ForumComment comment) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View dialogView = inflater.inflate(R.layout.dialog_delete_confirmation, null);
+
+        TextView dialogTitle = dialogView.findViewById(R.id.dialogTitle);
+        dialogTitle.setText("Delete Comment");
+        TextView dialogMessage = dialogView.findViewById(R.id.dialogMessage);
+        dialogMessage.setText("Are you sure you want to delete this comment?");
+        Button buttonCancel = dialogView.findViewById(R.id.buttonCancel);
+        Button buttonConfirm = dialogView.findViewById(R.id.buttonConfirm);
+
+        AlertDialog dialog = new MaterialAlertDialogBuilder(context)
+                .setView(dialogView)
+                .create();
+
+        buttonCancel.setOnClickListener(v -> dialog.dismiss());
+        buttonConfirm.setOnClickListener(v -> {
+            ForumCommentController commentController = new ForumCommentController(context);
+            commentController.deleteComment(comment.getCommentId(), new ForumCommentController.CommentCallback() {
+                @Override
+                public void onSuccess(ForumComment comment) {
+                    discussionFragment.loadComments();
+                    dialog.dismiss();
+                }
+
+                @Override
+                public void onSuccess(Object result) {
+                    discussionFragment.loadComments();
+                    dialog.dismiss();
+                }
+
+                @Override
+                public void onError(String error) {
+                    Log.e("CommentAdapter", "Error deleting comment: " + error);
+                    dialog.dismiss();
+                }
+            });
+        });
+
+        dialog.show();
+    }
+
+    private void showViewProfileDialog(User author) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View dialogView = inflater.inflate(R.layout.dialog_view_profile, null);
+
+        TextView dialogTitle = dialogView.findViewById(R.id.dialogTitle);
+        dialogTitle.setText("Comment Options");
+        Button buttonViewProfile = dialogView.findViewById(R.id.buttonViewProfile);
+        Button buttonCancel = dialogView.findViewById(R.id.buttonCancel);
+
+        AlertDialog dialog = new MaterialAlertDialogBuilder(context)
+                .setView(dialogView)
+                .create();
+
+        buttonViewProfile.setOnClickListener(v -> {
+            discussionFragment.openStrangeProfile(author);
+            dialog.dismiss();
+        });
+
+        buttonCancel.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
     }
 
     @Override

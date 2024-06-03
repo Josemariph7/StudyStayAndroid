@@ -1,21 +1,23 @@
 package com.example.studystayandroid.view;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studystayandroid.R;
 import com.example.studystayandroid.controller.ForumTopicController;
 import com.example.studystayandroid.model.ForumTopic;
 import com.example.studystayandroid.model.User;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -56,7 +58,7 @@ public class ForumTopicAdapter extends RecyclerView.Adapter<ForumTopicAdapter.Vi
             holder.itemView.setOnClickListener(v -> listener.onTopicClick(topic));
 
             holder.itemView.setOnLongClickListener(v -> {
-                showDeleteDialog(holder.itemView.getContext(), topic);
+                showOptionsDialog(holder.itemView.getContext(), topic);
                 return true;
             });
         } else {
@@ -64,45 +66,79 @@ public class ForumTopicAdapter extends RecyclerView.Adapter<ForumTopicAdapter.Vi
         }
     }
 
-    private void showDeleteDialog(Context context, ForumTopic topic) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+    private void showOptionsDialog(Context context, ForumTopic topic) {
         if (topic.getAuthor().getUserId().equals(currentUser.getUserId())) {
-            builder.setTitle("Delete Topic")
-                    .setMessage("Are you sure you want to delete this topic?")
-                    .setPositiveButton("Yes", (dialog, which) -> {
-                        ForumTopicController topicController = new ForumTopicController(context);
-                        topicController.deleteTopic(topic.getTopicId(), new ForumTopicController.TopicCallback() {
-                            @Override
-                            public void onSuccess(ForumTopic topic) {
-                                forumFragment.reloadTopics();
-                            }
-
-                            @Override
-                            public void onSuccess(Object result) {
-                                forumFragment.reloadTopics();
-                            }
-
-                            @Override
-                            public void onError(String error) {
-                                Log.e("ForumTopicAdapter", "Error deleting topic: " + error);
-                            }
-                        });
-
-                    })
-                    .setNegativeButton("No", null);
+            showDeleteTopicDialog(context, topic);
         } else {
-            //.setTitle("Cannot Delete Topic")
-               //     .setMessage("You cannot delete this topic because you did not create it.")
-                 //   .setPositiveButton("OK", null);
-            builder.setTitle("Comment Options")
-                    .setItems(new String[]{"View User Profile"}, (dialog, which) -> {
-                        if (which == 0) {
-                            forumFragment.openStrangeProfile(topic.getAuthor());
-                        }
-                    });
+            showViewProfileDialog(context, topic.getAuthor());
         }
-        builder.show();
     }
+
+    private void showDeleteTopicDialog(Context context, ForumTopic topic) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View dialogView = inflater.inflate(R.layout.dialog_delete_confirmation, null);
+
+        TextView dialogTitle = dialogView.findViewById(R.id.dialogTitle);
+        dialogTitle.setText("Delete Topic");
+        TextView dialogMessage = dialogView.findViewById(R.id.dialogMessage);
+        dialogMessage.setText("Are you sure you want to delete this topic?");
+        Button buttonCancel = dialogView.findViewById(R.id.buttonCancel);
+        Button buttonConfirm = dialogView.findViewById(R.id.buttonConfirm);
+
+        AlertDialog dialog = new MaterialAlertDialogBuilder(context)
+                .setView(dialogView)
+                .create();
+
+        buttonCancel.setOnClickListener(v -> dialog.dismiss());
+        buttonConfirm.setOnClickListener(v -> {
+            ForumTopicController topicController = new ForumTopicController(context);
+            topicController.deleteTopic(topic.getTopicId(), new ForumTopicController.TopicCallback() {
+                @Override
+                public void onSuccess(ForumTopic topic) {
+                    forumFragment.reloadTopics();
+                    dialog.dismiss();
+                }
+
+                @Override
+                public void onSuccess(Object result) {
+                    forumFragment.reloadTopics();
+                    dialog.dismiss();
+                }
+
+                @Override
+                public void onError(String error) {
+                    Log.e("ForumTopicAdapter", "Error deleting topic: " + error);
+                    dialog.dismiss();
+                }
+            });
+        });
+
+        dialog.show();
+    }
+
+    private void showViewProfileDialog(Context context, User author) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View dialogView = inflater.inflate(R.layout.dialog_view_profile, null);
+
+        TextView dialogTitle = dialogView.findViewById(R.id.dialogTitle);
+        dialogTitle.setText("Topic Options");
+        Button buttonViewProfile = dialogView.findViewById(R.id.buttonViewProfile);
+        Button buttonCancel = dialogView.findViewById(R.id.buttonCancel);
+
+        AlertDialog dialog = new MaterialAlertDialogBuilder(context)
+                .setView(dialogView)
+                .create();
+
+        buttonViewProfile.setOnClickListener(v -> {
+            forumFragment.openStrangeProfile(author);
+            dialog.dismiss();
+        });
+
+        buttonCancel.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
+    }
+
 
     @Override
     public int getItemCount() {

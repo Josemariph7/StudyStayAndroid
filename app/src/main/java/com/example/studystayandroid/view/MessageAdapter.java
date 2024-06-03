@@ -1,6 +1,5 @@
 package com.example.studystayandroid.view;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studystayandroid.R;
@@ -70,15 +70,7 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         holder.itemView.setOnLongClickListener(v -> {
             if (message.getSenderId().equals(currentUserId)) {
-                new MaterialAlertDialogBuilder(context)
-                        .setTitle("Delete Message")
-                        .setMessage("Are you sure you want to delete this message?")
-                        .setPositiveButton("Yes", (dialog, which) -> {
-                            // Delete the message
-                            deleteMessage(message);
-                        })
-                        .setNegativeButton("No", null)
-                        .show();
+                showDeleteDialog(message, position);
             }
             return true;
         });
@@ -90,39 +82,39 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     private void showDeleteDialog(Message message, int position) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
-        View dialogView = inflater.inflate(R.layout.dialog_confirm_delete, null);
-        builder.setView(dialogView);
+        View dialogView = inflater.inflate(R.layout.dialog_delete_confirmation, null);
 
         TextView dialogTitle = dialogView.findViewById(R.id.dialogTitle);
+        dialogTitle.setText("Delete Message");
         TextView dialogMessage = dialogView.findViewById(R.id.dialogMessage);
+        dialogMessage.setText("Are you sure you want to delete this message?");
         Button buttonCancel = dialogView.findViewById(R.id.buttonCancel);
         Button buttonConfirm = dialogView.findViewById(R.id.buttonConfirm);
 
-        dialogTitle.setText("Delete Message");
-        dialogMessage.setText("Are you sure you want to delete this message?");
+        AlertDialog dialog = new MaterialAlertDialogBuilder(context)
+                .setView(dialogView)
+                .create();
 
-        AlertDialog alertDialog = builder.create();
-
-        buttonCancel.setOnClickListener(v -> alertDialog.dismiss());
-
+        buttonCancel.setOnClickListener(v -> dialog.dismiss());
         buttonConfirm.setOnClickListener(v -> {
             messageController.deleteMessage(message.getMessageId(), new MessageController.MessageCallback() {
                 @Override
                 public void onSuccess(Object result) {
                     messageList.remove(position);
                     notifyItemRemoved(position);
-                    alertDialog.dismiss();
+                    dialog.dismiss();
                 }
+
                 @Override
                 public void onError(String error) {
                     Log.e("MessageAdapter", "Error deleting message: " + error);
-                    alertDialog.dismiss();
+                    dialog.dismiss();
                 }
             });
         });
-        alertDialog.show();
+
+        dialog.show();
     }
 
     private void deleteMessage(Message message) {

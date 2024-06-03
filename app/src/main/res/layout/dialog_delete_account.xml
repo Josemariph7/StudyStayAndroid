@@ -1,14 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:background="@drawable/rounded_dialog"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/dialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/SadBlue"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Delete Account"/>
 
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Password"
-        android:inputType="textPassword" />
+        android:textColor="@color/SadBlue"
+        android:hint="Enter your password"
+        android:inputType="textPassword"
+        android:textColorHint="@color/SadBlue"
+        android:backgroundTint="@color/SadBlue"
+        android:padding="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="20dp">
+
+        <Button
+            android:id="@+id/buttonCancel"
+            style="@style/Widget.Material3.Button.IconButton.Filled"
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/SadBlue"
+            android:textColor="@android:color/white"
+            android:stateListAnimator="@android:anim/linear_interpolator"
+            android:text="Cancel" />
+
+        <Button
+            android:id="@+id/buttonConfirm"
+            style="@style/Widget.Material3.Button.IconButton.Filled"
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/SadBlue"
+            android:textColor="@android:color/white"
+            android:stateListAnimator="@android:anim/linear_interpolator"
+            android:text="Delete" />
+    </LinearLayout>
 </LinearLayout>

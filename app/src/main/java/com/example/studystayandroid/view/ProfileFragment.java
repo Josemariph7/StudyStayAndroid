@@ -170,26 +170,43 @@ public class ProfileFragment extends Fragment {
     }
 
     private void showProfileSettingsDialog() {
-        new MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Account Settings")
-                .setItems(new String[]{"Change Profile Picture", "Change Password", "Update Info", "Delete Account"}, (dialog, which) -> {
-                    switch (which) {
-                        case 0:
-                            changeProfilePicture();
-                            break;
-                        case 1:
-                            changePassword();
-                            break;
-                        case 2:
-                            updateUserInfo();
-                            break;
-                        case 3:
-                            deleteAccount();
-                            break;
-                    }
-                })
-                .show();
+        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_profile_settings, null);
+        AlertDialog settingsDialog = new AlertDialog.Builder(requireContext())
+                .setView(dialogView)
+                .create();
+
+        Button changeProfilePictureButton = dialogView.findViewById(R.id.changeProfilePictureButton);
+        Button changePasswordButton = dialogView.findViewById(R.id.changePasswordButton);
+        Button updateUserInfoButton = dialogView.findViewById(R.id.updateUserInfoButton);
+        Button deleteAccountButton = dialogView.findViewById(R.id.deleteAccountButton);
+        Button cancelButton = dialogView.findViewById(R.id.cancelButton);
+
+        changeProfilePictureButton.setOnClickListener(v -> {
+            settingsDialog.dismiss();
+            changeProfilePicture();
+        });
+
+        changePasswordButton.setOnClickListener(v -> {
+            settingsDialog.dismiss();
+            changePassword();
+        });
+
+        updateUserInfoButton.setOnClickListener(v -> {
+            settingsDialog.dismiss();
+            updateUserInfo();
+        });
+
+        deleteAccountButton.setOnClickListener(v -> {
+            settingsDialog.dismiss();
+            deleteAccount();
+        });
+
+        cancelButton.setOnClickListener(v -> settingsDialog.dismiss());
+
+        settingsDialog.show();
     }
+
+
 
     private void changeProfilePicture() {
         Intent intent = new Intent();
@@ -199,73 +216,70 @@ public class ProfileFragment extends Fragment {
     }
 
     private void changePassword() {
-        LayoutInflater inflater = LayoutInflater.from(requireContext());
-        View view = inflater.inflate(R.layout.dialog_change_password, null);
-        EditText currentPasswordEditText = view.findViewById(R.id.currentPasswordEditText);
-        EditText newPasswordEditText = view.findViewById(R.id.newPasswordEditText);
+        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_change_password, null);
+        AlertDialog changePasswordDialog = new AlertDialog.Builder(requireContext())
+                .setView(dialogView)
+                .create();
 
-        MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Change Password")
-                .setView(view)
-                .setPositiveButton("Change", null)
-                .setNegativeButton("Cancel", null);
+        EditText currentPasswordEditText = dialogView.findViewById(R.id.currentPasswordEditText);
+        EditText newPasswordEditText = dialogView.findViewById(R.id.newPasswordEditText);
+        Button buttonCancel = dialogView.findViewById(R.id.buttonCancel);
+        Button buttonConfirm = dialogView.findViewById(R.id.buttonConfirm);
 
-        AlertDialog changePasswordDialog = dialogBuilder.create();
-        changePasswordDialog.setOnShowListener(dialog -> {
-            Button changeButton = changePasswordDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-            changeButton.setOnClickListener(v -> {
-                String currentPassword = currentPasswordEditText.getText().toString();
-                String newPassword = newPasswordEditText.getText().toString();
+        buttonCancel.setOnClickListener(v -> changePasswordDialog.dismiss());
+        buttonConfirm.setOnClickListener(v -> {
+            String currentPassword = currentPasswordEditText.getText().toString();
+            String newPassword = newPasswordEditText.getText().toString();
 
-                if (currentUser.getPassword() == null || !currentUser.getPassword().equals(currentPassword)) {
-                    showErrorDialog("Current password is incorrect");
-                } else if (newPassword.length() < 6) {
-                    showErrorDialog("New password must be at least 6 characters long");
-                } else {
-                    userController.updateUserPassword(currentUser.getUserId(), newPassword, new UserController.UserCallback() {
-                        @Override
-                        public void onSuccess(Object result) {
-                            changePasswordDialog.dismiss();
-                            showSuccessDialog("Password changed successfully");
-                        }
+            if (currentUser.getPassword() == null || !currentUser.getPassword().equals(currentPassword)) {
+                showErrorDialog("Current password is incorrect");
+            } else if (newPassword.length() < 6) {
+                showErrorDialog("New password must be at least 6 characters long");
+            } else {
+                userController.updateUserPassword(currentUser.getUserId(), newPassword, new UserController.UserCallback() {
+                    @Override
+                    public void onSuccess(Object result) {
+                        changePasswordDialog.dismiss();
+                        showSuccessDialog("Password changed successfully");
+                    }
 
-                        @Override
-                        public void onSuccess(User user) {
-                            changePasswordDialog.dismiss();
-                            showSuccessDialog("Password changed successfully");
-                        }
+                    @Override
+                    public void onSuccess(User user) {
+                        changePasswordDialog.dismiss();
+                        showSuccessDialog("Password changed successfully");
+                    }
 
-                        @Override
-                        public void onError(String error) {
-                            showErrorDialog("Error changing password: " + error);
-                        }
-                    });
-                }
-            });
+                    @Override
+                    public void onError(String error) {
+                        showErrorDialog("Error changing password: " + error);
+                    }
+                });
+            }
         });
 
         changePasswordDialog.show();
     }
 
     private void updateUserInfo() {
-        LayoutInflater inflater = LayoutInflater.from(requireContext());
-        View view = inflater.inflate(R.layout.dialog_update_user_info, null);
-        EditText nameEditText = view.findViewById(R.id.nameEditText);
-        EditText lastNameEditText = view.findViewById(R.id.lastNameEditText);
-        EditText emailEditText = view.findViewById(R.id.emailEditText);
-        EditText phoneEditText = view.findViewById(R.id.phoneEditText);
-        EditText bioEditText = view.findViewById(R.id.bioEditText);
-        Spinner genderSpinner = view.findViewById(R.id.genderSpinner);
+        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_update_user_info, null);
+        AlertDialog updateUserInfoDialog = new AlertDialog.Builder(requireContext())
+                .setView(dialogView)
+                .create();
+
+        EditText nameEditText = dialogView.findViewById(R.id.nameEditText);
+        EditText lastNameEditText = dialogView.findViewById(R.id.lastNameEditText);
+        EditText emailEditText = dialogView.findViewById(R.id.emailEditText);
+        EditText phoneEditText = dialogView.findViewById(R.id.phoneEditText);
+        EditText bioEditText = dialogView.findViewById(R.id.bioEditText);
+        Spinner genderSpinner = dialogView.findViewById(R.id.genderSpinner);
+        Button buttonCancel = dialogView.findViewById(R.id.buttonCancel);
+        Button buttonConfirm = dialogView.findViewById(R.id.buttonConfirm);
 
         nameEditText.setText(currentUser.getName());
         lastNameEditText.setText(currentUser.getLastName());
         emailEditText.setText(currentUser.getEmail());
         phoneEditText.setText(currentUser.getPhone());
-        if (currentUser.getBio() != null) {
-            bioEditText.setText(currentUser.getBio());
-        }else{
-            bioEditText.setText("");
-        }
+        bioEditText.setText(currentUser.getBio() != null ? currentUser.getBio() : "");
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.gender_array, android.R.layout.simple_spinner_item);
@@ -276,40 +290,39 @@ public class ProfileFragment extends Fragment {
             genderSpinner.setSelection(spinnerPosition);
         }
 
-        new MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Update User Info")
-                .setView(view)
-                .setPositiveButton("Update", (dialog, which) -> {
-                    currentUser.setName(nameEditText.getText().toString());
-                    currentUser.setLastName(lastNameEditText.getText().toString());
-                    currentUser.setEmail(emailEditText.getText().toString());
-                    currentUser.setPhone(phoneEditText.getText().toString());
-                    currentUser.setBio(bioEditText.getText().toString());
-                    currentUser.setGender(User.Gender.valueOf(genderSpinner.getSelectedItem().toString().toUpperCase()));
+        buttonCancel.setOnClickListener(v -> updateUserInfoDialog.dismiss());
+        buttonConfirm.setOnClickListener(v -> {
+            currentUser.setName(nameEditText.getText().toString());
+            currentUser.setLastName(lastNameEditText.getText().toString());
+            currentUser.setEmail(emailEditText.getText().toString());
+            currentUser.setPhone(phoneEditText.getText().toString());
+            currentUser.setBio(bioEditText.getText().toString());
+            currentUser.setGender(User.Gender.valueOf(genderSpinner.getSelectedItem().toString().toUpperCase()));
 
-                    userController.updateUser(currentUser, new UserController.UserCallback() {
-                        @Override
-                        public void onSuccess(Object result) {
-                            updateProfileUI();
-                            showSuccessDialog("User info updated successfully");
-                        }
+            userController.updateUser(currentUser, new UserController.UserCallback() {
+                @Override
+                public void onSuccess(Object result) {
+                    updateProfileUI();
+                    updateUserInfoDialog.dismiss();
+                    showSuccessDialog("User info updated successfully");
+                }
 
-                        @Override
-                        public void onSuccess(User user) {
-                            updateProfileUI();
-                            showSuccessDialog("User info updated successfully");
-                        }
+                @Override
+                public void onSuccess(User user) {
+                    updateProfileUI();
+                    updateUserInfoDialog.dismiss();
+                    showSuccessDialog("User info updated successfully");
+                }
 
-                        @Override
-                        public void onError(String error) {
-                            showErrorDialog("Error updating user info: " + error);
-                        }
-                    });
-                })
-                .setNegativeButton("Cancel", null)
-                .show();
+                @Override
+                public void onError(String error) {
+                    showErrorDialog("Error updating user info: " + error);
+                }
+            });
+        });
+
+        updateUserInfoDialog.show();
     }
-
 
     private void showErrorDialog(String message) {
         new MaterialAlertDialogBuilder(requireContext())
@@ -328,54 +341,59 @@ public class ProfileFragment extends Fragment {
     }
 
     private void deleteAccount() {
-        LayoutInflater inflater = LayoutInflater.from(requireContext());
-        View view = inflater.inflate(R.layout.dialog_delete_account, null);
-        EditText passwordEditText = view.findViewById(R.id.passwordEditText);
+        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_delete_account, null);
+        AlertDialog deleteAccountDialog = new AlertDialog.Builder(requireContext())
+                .setView(dialogView)
+                .create();
 
-        new MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Delete Account")
-                .setView(view)
-                .setPositiveButton("Delete", (dialog, which) -> {
-                    String password = passwordEditText.getText().toString();
+        EditText passwordEditText = dialogView.findViewById(R.id.passwordEditText);
+        Button buttonCancel = dialogView.findViewById(R.id.buttonCancel);
+        Button buttonConfirm = dialogView.findViewById(R.id.buttonConfirm);
 
-                    if (currentUser.getPassword().equals(password)) {
-                        userController.deleteUser(currentUser.getUserId(), new UserController.UserCallback() {
-                            @Override
-                            public void onSuccess(Object result) {
-                                SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.remove("userId");
-                                editor.apply();
+        buttonCancel.setOnClickListener(v -> deleteAccountDialog.dismiss());
+        buttonConfirm.setOnClickListener(v -> {
+            String password = passwordEditText.getText().toString();
 
-                                Intent intent = new Intent(requireContext(), MainActivity.class);
-                                startActivity(intent);
-                                requireActivity().finish();
-                            }
+            if (currentUser.getPassword().equals(password)) {
+                userController.deleteUser(currentUser.getUserId(), new UserController.UserCallback() {
+                    @Override
+                    public void onSuccess(Object result) {
+                        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.remove("userId");
+                        editor.apply();
 
-                            @Override
-                            public void onSuccess(User user) {
-                                SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.remove("userId");
-                                editor.apply();
-
-                                Intent intent = new Intent(requireContext(), MainActivity.class);
-                                startActivity(intent);
-                                requireActivity().finish();
-                            }
-
-                            @Override
-                            public void onError(String error) {
-                                showErrorDialog("Error deleting account: " + error);
-                            }
-                        });
-                    } else {
-                        showErrorDialog("Password is incorrect");
+                        Intent intent = new Intent(requireContext(), MainActivity.class);
+                        startActivity(intent);
+                        requireActivity().finish();
                     }
-                })
-                .setNegativeButton("Cancel", null)
-                .show();
+
+                    @Override
+                    public void onSuccess(User user) {
+                        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.remove("userId");
+                        editor.apply();
+
+                        Intent intent = new Intent(requireContext(), MainActivity.class);
+                        startActivity(intent);
+                        requireActivity().finish();
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        showErrorDialog("Error deleting account: " + error);
+                    }
+                });
+            } else {
+                showErrorDialog("Password is incorrect");
+            }
+        });
+
+        deleteAccountDialog.show();
     }
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

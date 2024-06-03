@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:textColor="@android:color/white"
+    android:background="@drawable/rounded_dialog"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/dialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Account Settings"
+        android:textColor="@color/SadBlue"
+        android:textSize="20sp"
+        android:translationY="-4dp" />
+
+    <Button
+        android:id="@+id/changeProfilePictureButton"
+        style="@style/Widget.Material3.Button.IconButton.Filled"
+        android:layout_width="match_parent"
+        android:textColor="@android:color/white"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/SadBlue"
+        android:text="Change Profile Picture" />
+
+    <Button
+        android:id="@+id/changePasswordButton"
+        style="@style/Widget.Material3.Button.IconButton.Filled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/SadBlue"
+        android:text="Change Password"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/updateUserInfoButton"
+        style="@style/Widget.Material3.Button.IconButton.Filled"
+        android:layout_width="match_parent"
+        android:textColor="@android:color/white"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/SadBlue"
+        android:text="Update Info"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/deleteAccountButton"
+        style="@style/Widget.Material3.Button.IconButton.Filled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/SadBlue"
+        android:text="Delete Account"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        style="@style/Widget.Material3.Button.IconButton.Filled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/SadBlue"
+        android:text="Cancel"
+        android:layout_marginTop="16dp" />
+</LinearLayout>

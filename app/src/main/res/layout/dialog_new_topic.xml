@@ -3,28 +3,64 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="20dp"
+    android:background="@drawable/rounded_dialog">
 
     <TextView
+        android:id="@+id/dialogTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
         android:text="New Topic"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:gravity="center"/>
+        android:textColor="@color/SadBlue"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/editTextTopicTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Title"
-        android:inputType="text" />
+        android:textColor="@color/SadBlue"
+        android:textColorHint="@color/SadBlue"
+        android:padding="10dp" />
 
     <EditText
         android:id="@+id/editTextTopicDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Description"
-        android:inputType="textMultiLine" />
+        android:textColor="@color/SadBlue"
+        android:textColorHint="@color/SadBlue"
+        android:padding="10dp"
+        android:layout_marginTop="8dp" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="20dp">
+
+        <Button
+            android:id="@+id/buttonCancel"
+            style="@style/Widget.Material3.Button.IconButton.Filled"
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/SadBlue"
+            android:text="Cancel"
+            android:textColor="@android:color/white"
+            android:stateListAnimator="@android:anim/linear_interpolator" />
+
+        <Button
+            android:id="@+id/buttonPost"
+            style="@style/Widget.Material3.Button.IconButton.Filled"
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/SadBlue"
+            android:text="Post"
+            android:textColor="@android:color/white"
+            android:stateListAnimator="@android:anim/linear_interpolator" />
+    </LinearLayout>
 </LinearLayout>

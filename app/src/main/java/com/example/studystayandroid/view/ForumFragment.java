@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -106,18 +107,33 @@ public class ForumFragment extends Fragment {
 
         EditText editTextTitle = dialogView.findViewById(R.id.editTextTopicTitle);
         EditText editTextDescription = dialogView.findViewById(R.id.editTextTopicDescription);
+        Button buttonCancel = dialogView.findViewById(R.id.buttonCancel);
+        Button buttonPost = dialogView.findViewById(R.id.buttonPost);
 
-        builder.setPositiveButton("Create", (dialog, which) -> {
+        AlertDialog dialog = builder.create();
+
+        buttonCancel.setOnClickListener(v -> dialog.dismiss());
+        buttonPost.setOnClickListener(v -> {
             String title = editTextTitle.getText().toString();
             String description = editTextDescription.getText().toString();
 
             if (title.isEmpty() || description.isEmpty()) {
                 // Manejar campos vacíos
                 AlertDialog.Builder errorBuilder = new AlertDialog.Builder(getContext());
-                errorBuilder.setTitle("Error")
-                        .setMessage("Both title and description must be provided.")
-                        .setPositiveButton("OK", null)
-                        .show();
+                LayoutInflater errorInflater = getLayoutInflater();
+                View errorDialogView = errorInflater.inflate(R.layout.dialog_error, null);
+                errorBuilder.setView(errorDialogView);
+
+                TextView errorTitle = errorDialogView.findViewById(R.id.dialogTitle);
+                TextView errorMessage = errorDialogView.findViewById(R.id.dialogMessage);
+                Button errorButton = errorDialogView.findViewById(R.id.buttonConfirm);
+
+                errorTitle.setText("Error");
+                errorMessage.setText("Both title and description must be provided.");
+
+                AlertDialog errorDialog = errorBuilder.create();
+                errorButton.setOnClickListener(ev -> errorDialog.dismiss());
+                errorDialog.show();
                 return;
             }
 
@@ -140,22 +156,22 @@ public class ForumFragment extends Fragment {
                         reloadTopics();
                         Log.e("ForumFragment", "Created topic is null");
                     }
+                    dialog.dismiss();
                 }
 
                 @Override
                 public void onSuccess(Object result) {
-
                 }
 
                 @Override
                 public void onError(String error) {
                     Log.e("ForumFragment", "Error creating topic: " + error);
+                    dialog.dismiss();
                 }
             });
         });
 
-        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
-        builder.create().show();
+        dialog.show();
     }
 
     private void loadTopics() {

@@ -58,6 +58,7 @@
             <item>Zaragoza</item>
         </string-array>
     <string-array name="gender_array">
+        <item>Select your gender</item>
         <item>Male</item>
         <item>Female</item>
         <item>Other</item>
@@ -73,6 +74,7 @@
     <color name="colorPrimary">#0E84E3</color>
     <color name="colorPrimaryDark">#1C254C</color>
     <color name="errorColor">#FF0000</color>
+    <color name="red">#FF0000</color>
     <color name="statusBarColor">#0E84E3</color>
     <color name="textColor">#FFFFFF</color>
     <color name="white">#e7e5e5</color>
