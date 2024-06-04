@@ -52,6 +52,7 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_SENT) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_sent, parent, false);
+
             return new SentMessageViewHolder(view);
         } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_received, parent, false);
@@ -141,7 +142,6 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             super(itemView);
             textViewContent = itemView.findViewById(R.id.textViewContent);
             textViewDateTime = itemView.findViewById(R.id.textViewDateTime);
-
             itemView.setOnLongClickListener(v -> {
                 showDeleteDialog(messageList.get(getAdapterPosition()), getAdapterPosition());
                 return true;

@@ -7,19 +7,40 @@
     android:background="@drawable/rounded_dialog"
     android:gravity="center">
 
-    <Button
-        android:id="@+id/callButton"
+    <TextView
+        android:id="@+id/dialogTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Call"
-        style="@style/Widget.Material3.Button.IconButton.Filled" />
+        android:gravity="center"
+        android:padding="10dp"
+        android:paddingBottom="15dp"
+        android:text="Contact Options"
+        android:textColor="@color/SadBlue"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/callButton"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/SadBlue"
+        android:padding="8dp"
+        android:paddingTop="15dp"
+        android:text="Phone Call"
+        android:textColor="@color/white"
+        android:translationY="4dp" />
+
 
     <Button
         android:id="@+id/chatButton"
-        android:layout_width="match_parent"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
-        android:text="Chat"
-        style="@style/Widget.Material3.Button.IconButton.Filled"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/SadBlue"
+        android:padding="8dp"
+        android:paddingTop="10dp"
+        android:text="StudyStay Chat"
+        android:textColor="@color/white"
+        android:translationY="4dp" />
 
 </LinearLayout>

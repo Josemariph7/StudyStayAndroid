@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/SadBlue">
@@ -19,26 +20,39 @@
 
             <Button
                 android:id="@+id/filter_button"
-                android:layout_width="0dp"
+                android:layout_width="331dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/SadBlue"
                 android:text="Filters"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                app:icon="@drawable/iconfiltro"
+                app:iconGravity="textEnd"
+                app:iconSize="21dp"
+                app:iconTint="#FFFFFF"
+                app:iconTintMode="src_in" />
 
             <Button
                 android:id="@+id/button"
-                android:layout_width="1dp"
+                android:layout_width="2dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/LightBlue"/>
 
             <Button
                 android:id="@+id/map_button"
-                android:layout_width="wrap_content"
+                android:layout_width="62dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/SadBlue"
-                android:text="Map"
-                android:textColor="@android:color/white" />
+
+                android:textColor="@android:color/white"
+                android:translationX="5dp"
+                app:icon="@drawable/iconmapa"
+                app:iconGravity="textEnd"
+                app:iconPadding="0dp"
+                app:iconSize="33dp"
+                app:iconTint="#FFFFFF"
+                app:iconTintMode="src_in" />
         </LinearLayout>
 
         <!-- Contenedor de filtros -->

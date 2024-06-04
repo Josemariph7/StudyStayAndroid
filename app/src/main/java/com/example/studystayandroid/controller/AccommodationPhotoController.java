@@ -1,10 +1,9 @@
 package com.example.studystayandroid.controller;
 
 import android.content.Context;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -12,7 +11,6 @@ import com.example.studystayandroid.model.Accommodation;
 import com.example.studystayandroid.model.AccommodationPhoto;
 import com.example.studystayandroid.utils.Constants;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -50,6 +48,17 @@ public class AccommodationPhotoController {
                             byte[] photoData = photoObject.getString("PhotoData").getBytes();
 
                             accommodationController.getAccommodationById(accommodationId, new AccommodationController.AccommodationCallback() {
+                                @Override
+                                public void onSuccess(Object result) {
+                                    Accommodation accommodation = (Accommodation) result;
+                                    AccommodationPhoto photo = new AccommodationPhoto(accommodation, photoData);
+                                    photo.setPhotoId(photoId);
+                                    photos.add(photo);
+                                    if (photos.size() == response.length()) {
+                                        callback.onSuccess(photos);
+                                    }
+                                }
+
                                 @Override
                                 public void onSuccess(Accommodation accommodation) {
                                     AccommodationPhoto photo = new AccommodationPhoto(accommodation, photoData);
@@ -90,6 +99,14 @@ public class AccommodationPhotoController {
 
                             AccommodationController accommodationController = new AccommodationController(context);
                             accommodationController.getAccommodationById(accommodationId, new AccommodationController.AccommodationCallback() {
+                                @Override
+                                public void onSuccess(Object result) {
+                                    Accommodation accommodation = (Accommodation) result;
+                                    AccommodationPhoto photo = new AccommodationPhoto(accommodation, photoData);
+                                    photo.setPhotoId(id);
+                                    callback.onSuccess(photo);
+                                }
+
                                 @Override
                                 public void onSuccess(Accommodation accommodation) {
                                     AccommodationPhoto photo = new AccommodationPhoto(accommodation, photoData);

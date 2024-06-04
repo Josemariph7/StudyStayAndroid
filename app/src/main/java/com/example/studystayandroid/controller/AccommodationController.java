@@ -41,6 +41,8 @@ public class AccommodationController {
     }
 
     public interface AccommodationCallback {
+        void onSuccess(Object result);
+
         void onSuccess(Accommodation accommodation);
         void onError(String error);
     }
@@ -193,10 +195,10 @@ public class AccommodationController {
         requestQueue.add(stringRequest);
     }
 
-    public void deleteAccommodation(Long id, final SimpleCallback callback) {
+    public void deleteAccommodation(Long id, final AccommodationCallback callback) {
         String url = URL_DELETE_ACCOMMODATION + "?accommodationId=" + id;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                response -> callback.onSuccess(),
+                response -> callback.onSuccess(new Accommodation()),
                 error -> callback.onError(error.toString()));
         requestQueue.add(stringRequest);
     }

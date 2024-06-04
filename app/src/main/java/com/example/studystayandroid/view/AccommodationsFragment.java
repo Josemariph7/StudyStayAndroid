@@ -1,6 +1,6 @@
 package com.example.studystayandroid.view;
 
-import android.app.AlertDialog;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,7 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.studystayandroid.R;
 import com.example.studystayandroid.controller.AccommodationController;
@@ -220,12 +219,14 @@ public class AccommodationsFragment extends Fragment {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View dialogView = inflater.inflate(R.layout.dialog_accommodation_detail, null);
 
-        ImageButton backButton = dialogView.findViewById(R.id.backButton);
-        ViewPager imageCarousel = dialogView.findViewById(R.id.imageCarousel);
+        Button backButton = dialogView.findViewById(R.id.back_button);
+        ViewPager2 imageCarousel = dialogView.findViewById(R.id.imageCarousel);
         TextView addressTextView = dialogView.findViewById(R.id.address);
-        TextView cityTextView = dialogView.findViewById(R.id.city);
         TextView descriptionTextView = dialogView.findViewById(R.id.description);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) TextView rating=dialogView.findViewById(R.id.rating);
+        TextView availabilityTextView = dialogView.findViewById(R.id.availability);
         TextView priceTextView = dialogView.findViewById(R.id.price);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) TextView ownerTextView = dialogView.findViewById(R.id.ownerName);
         Button bookButton = dialogView.findViewById(R.id.bookButton);
         Button contactButton = dialogView.findViewById(R.id.contactButton);
 
@@ -235,11 +236,12 @@ public class AccommodationsFragment extends Fragment {
         }
         ImageCarouselAdapter adapter = new ImageCarouselAdapter(photos, getContext());
         imageCarousel.setAdapter(adapter);
-
-        addressTextView.setText(accommodation.getAddress());
-        cityTextView.setText(accommodation.getCity());
+        rating.setText(String.valueOf(accommodation.getRating()));
+        availabilityTextView.setText(accommodation.isAvailability() ? "Available" : "Not Available");
+        ownerTextView.setText("Owned by "+accommodation.getOwner().getName()+" "+accommodation.getOwner().getLastName());
+        addressTextView.setText(accommodation.getAddress()+", "+accommodation.getCity());
         descriptionTextView.setText(accommodation.getDescription());
-        priceTextView.setText(String.format("$%.2f", accommodation.getPrice()));
+        priceTextView.setText(String.format("€%.2f", accommodation.getPrice()));
 
         androidx.appcompat.app.AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
                 .setView(dialogView)
@@ -248,7 +250,6 @@ public class AccommodationsFragment extends Fragment {
         backButton.setOnClickListener(v -> dialog.dismiss());
 
         bookButton.setOnClickListener(v -> {
-            // Open the booking fragment
             getParentFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new BookingFragment())
                     .addToBackStack(null)
@@ -256,25 +257,92 @@ public class AccommodationsFragment extends Fragment {
             dialog.dismiss();
         });
 
-        contactButton.setOnClickListener(v -> showContactOptions(accommodation.getOwner()));
+        contactButton.setOnClickListener(v -> {
+            showContactOptions(accommodation.getOwner(), dialog);
+        });
 
         dialog.show();
     }
 
     private void showAccommodationOptionsDialog(Accommodation accommodation) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setTitle("Choose an option")
-                .setItems(new String[]{"View Owner Profile", "View on Map"}, (dialog, which) -> {
-                    switch (which) {
-                        case 0:
-                            openOwnerProfile(accommodation.getOwner());
-                            break;
-                        case 1:
-                            showAccommodationOnMap(accommodation);
-                            break;
-                    }
-                });
-        builder.create().show();
+        if (accommodation.getOwner().getUserId().equals(currentUser.getUserId())) {
+            showDeleteConfirmationDialog(accommodation);
+        } else {
+            showOptionsDialog(accommodation);
+        }
+    }
+
+    private void showOptionsDialog(Accommodation accommodation) {
+        LayoutInflater inflater = LayoutInflater.from(requireContext());
+        View dialogView = inflater.inflate(R.layout.dialog_accommodation_options, null);
+
+        TextView dialogTitle = dialogView.findViewById(R.id.dialogTitle);
+        Button viewProfileButton = dialogView.findViewById(R.id.viewProfileButton);
+        Button viewMapButton = dialogView.findViewById(R.id.viewMapButton);
+
+        dialogTitle.setText("Choose an option");
+
+        androidx.appcompat.app.AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
+                .setView(dialogView)
+                .create();
+
+        viewProfileButton.setOnClickListener(v -> {
+            openOwnerProfile(accommodation.getOwner());
+            dialog.dismiss();
+        });
+
+        viewMapButton.setOnClickListener(v -> {
+            showAccommodationOnMap(accommodation);
+            dialog.dismiss();
+        });
+
+        dialog.show();
+    }
+
+    private void showDeleteConfirmationDialog(Accommodation accommodation) {
+        LayoutInflater inflater = LayoutInflater.from(requireContext());
+        View dialogView = inflater.inflate(R.layout.dialog_delete_confirmation, null);
+
+        TextView dialogTitle = dialogView.findViewById(R.id.dialogTitle);
+        TextView dialogMessage = dialogView.findViewById(R.id.dialogMessage);
+        Button buttonCancel = dialogView.findViewById(R.id.buttonCancel);
+        Button buttonConfirm = dialogView.findViewById(R.id.buttonConfirm);
+
+        dialogTitle.setText("Confirm Delete");
+        dialogMessage.setText("Are you sure you want to delete this accommodation?");
+
+        androidx.appcompat.app.AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
+                .setView(dialogView)
+                .create();
+
+        buttonCancel.setOnClickListener(v -> dialog.dismiss());
+
+        buttonConfirm.setOnClickListener(v -> {
+            deleteAccommodation(accommodation);
+            dialog.dismiss();
+        });
+
+        dialog.show();
+    }
+
+
+    private void deleteAccommodation(Accommodation accommodation) {
+        accommodationController.deleteAccommodation(accommodation.getAccommodationId(), new AccommodationController.AccommodationCallback() {
+            @Override
+            public void onSuccess(Object result) {
+                fetchAccommodations(); // Refresh the list after deletion
+            }
+
+            @Override
+            public void onSuccess(Accommodation accommodation) {
+                fetchAccommodations();
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.e("AccommodationsFragment", "Error deleting accommodation: " + error);
+            }
+        });
     }
 
     private void openOwnerProfile(User owner) {
@@ -292,7 +360,7 @@ public class AccommodationsFragment extends Fragment {
         mapDialogFragment.show(getParentFragmentManager(), "MapDialogFragment");
     }
 
-    private void showContactOptions(User owner) {
+    private void showContactOptions(User owner, androidx.appcompat.app.AlertDialog parentDialog) {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View dialogView = inflater.inflate(R.layout.dialog_contact_options, null);
 
@@ -304,22 +372,22 @@ public class AccommodationsFragment extends Fragment {
                 .create();
 
         callButton.setOnClickListener(v -> {
-            // Code to initiate a call
             Intent intent = new Intent(Intent.ACTION_DIAL);
             intent.setData(Uri.parse("tel:" + owner.getPhone()));
             startActivity(intent);
             dialog.dismiss();
+            parentDialog.dismiss(); // Close the parent dialog as well
         });
 
         chatButton.setOnClickListener(v -> {
-            createConversationAndOpenMessageFragment(owner);
+            createConversationAndOpenMessageFragment(owner, parentDialog);
             dialog.dismiss();
         });
 
         dialog.show();
     }
 
-    private void createConversationAndOpenMessageFragment(User owner) {
+    private void createConversationAndOpenMessageFragment(User owner, androidx.appcompat.app.AlertDialog parentDialog) {
         ConversationController conversationController = new ConversationController(getContext());
         conversationController.getConversations(currentUser.getUserId(), new ConversationController.ConversationListCallback() {
             @Override
@@ -327,38 +395,35 @@ public class AccommodationsFragment extends Fragment {
                 for (Conversation conversation : conversations) {
                     if ((conversation.getUser1Id().equals(currentUser.getUserId()) && conversation.getUser2Id().equals(owner.getUserId())) ||
                             (conversation.getUser1Id().equals(owner.getUserId()) && conversation.getUser2Id().equals(currentUser.getUserId()))) {
-                        navigateToMessageFragment(conversation);
+                        openMessageFragment(conversation);
+                        parentDialog.dismiss(); // Close the parent dialog
                         return;
                     }
                 }
-                // If no existing conversation, create a new one
-                createNewConversation(owner);
+                createNewConversation(owner, parentDialog);
             }
 
             @Override
             public void onError(String error) {
                 Log.e("AccommodationsFragment", "Error fetching conversations: " + error);
-                createNewConversation(owner);
+                createNewConversation(owner, parentDialog);
             }
         });
     }
 
-    private void createNewConversation(User owner) {
-        Conversation newConversation = new Conversation();
-        newConversation.setUser1Id(currentUser.getUserId());
-        newConversation.setUser2Id(owner.getUserId());
-        newConversation.setMessages(new ArrayList<>());
-
-        ConversationController conversationController = new ConversationController(requireContext());
+    private void createNewConversation(User owner, androidx.appcompat.app.AlertDialog parentDialog) {
+        Conversation newConversation = new Conversation(null, currentUser.getUserId(), owner.getUserId(), new ArrayList<>());
+        ConversationController conversationController = new ConversationController(getContext());
         conversationController.createConversation(newConversation, new ConversationController.ConversationCallback() {
             @Override
             public void onSuccess(Conversation createdConversation) {
-                navigateToMessageFragment(createdConversation);
+                openMessageFragment(createdConversation);
+                parentDialog.dismiss(); // Close the parent dialog
             }
 
             @Override
             public void onSuccess(Object result) {
-                // Handle the generic case if needed
+                // Handle any additional logic if needed
             }
 
             @Override
@@ -368,7 +433,7 @@ public class AccommodationsFragment extends Fragment {
         });
     }
 
-    private void navigateToMessageFragment(Conversation conversation) {
+    private void openMessageFragment(Conversation conversation) {
         MessageFragment messageFragment = MessageFragment.newInstance(conversation);
         getParentFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, messageFragment)

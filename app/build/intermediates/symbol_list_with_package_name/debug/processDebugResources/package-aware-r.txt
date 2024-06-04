@@ -3131,7 +3131,9 @@ drawable iconestrella
 drawable iconexit
 drawable iconfechadenacimiento
 drawable iconfecharegistro
+drawable iconfiltro
 drawable iconforum
+drawable iconmapa
 drawable iconsalida
 drawable iconsignout
 drawable icontelefono
@@ -3321,6 +3323,8 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
+id availability
+id back_button
 id barrier
 id baseline
 id beginOnFirstDraw
@@ -3330,6 +3334,7 @@ id bioEditText
 id bioTextView
 id birthDateTextView
 id blocking
+id bookButton
 id bottom
 id bottom_sheet
 id bounce
@@ -3348,6 +3353,7 @@ id buttonPost
 id buttonSend
 id buttonViewProfile
 id cache_measures
+id callButton
 id callMeasure
 id cancelButton
 id cancel_button
@@ -3365,6 +3371,7 @@ id chain2
 id chains
 id changePasswordButton
 id changeProfilePictureButton
+id chatButton
 id checkbox
 id checked
 id chronometer
@@ -3379,8 +3386,10 @@ id closest
 id collapseActionView
 id commentInThisTopic
 id compress
+id confirmBookingButton
 id confirm_button
 id constraint
+id contactButton
 id container
 id content
 id contentPanel
@@ -3506,8 +3515,10 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
+id imageCarousel
 id imageView
 id imageView2
+id imageView3
 id imageViewProfile
 id immediateStop
 id included
@@ -3647,6 +3658,7 @@ id open_search_view_toolbar_container
 id outline
 id outward
 id overshoot
+id ownerName
 id packed
 id parallax
 id parent
@@ -3673,6 +3685,7 @@ id profilePhoto
 id progress_circular
 id progress_horizontal
 id radio
+id rating
 id ratio
 id rectangles
 id recyclerView
@@ -3846,7 +3859,9 @@ id updateUserInfoButton
 id upload_photos_button
 id useLogo
 id vertical_only
+id viewMapButton
 id viewPager
+id viewProfileButton
 id view_offset_helper
 id view_transition
 id view_tree_lifecycle_owner
@@ -3998,9 +4013,12 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout dialog_accommodation_detail
+layout dialog_accommodation_options
 layout dialog_change_password
 layout dialog_confirm_delete
 layout dialog_confirmation
+layout dialog_contact_options
 layout dialog_delete_account
 layout dialog_delete_confirmation
 layout dialog_error
@@ -4013,6 +4031,7 @@ layout dialog_update_user_info
 layout dialog_view_profile
 layout fragment_accommodations
 layout fragment_add_accommodation
+layout fragment_booking
 layout fragment_chat
 layout fragment_discussion
 layout fragment_forum
@@ -4027,6 +4046,7 @@ layout item_accommodation
 layout item_comment
 layout item_conversation
 layout item_forum_topic
+layout item_image_carousel
 layout item_message
 layout item_message_received
 layout item_message_sent

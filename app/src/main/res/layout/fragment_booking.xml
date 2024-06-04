@@ -5,26 +5,15 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- Add your UI components for the booking fragment here -->
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Booking Fragment"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <!-- Example UI elements -->
-    <EditText
-        android:id="@+id/bookingDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Select Date" />
+        android:text="Booking Details"
+        android:textSize="24sp"
+        android:paddingBottom="16dp"
+        android:textAlignment="center" />
 
-    <EditText
-        android:id="@+id/bookingTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Select Time" />
+    <!-- Add more UI elements as needed for booking details -->
 
     <Button
         android:id="@+id/confirmBookingButton"

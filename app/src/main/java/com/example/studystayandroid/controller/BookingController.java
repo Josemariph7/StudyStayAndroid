@@ -1,10 +1,9 @@
 package com.example.studystayandroid.controller;
 
 import android.content.Context;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -13,7 +12,6 @@ import com.example.studystayandroid.model.Booking;
 import com.example.studystayandroid.model.User;
 import com.example.studystayandroid.utils.Constants;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -67,6 +65,17 @@ public class BookingController {
                                 @Override
                                 public void onSuccess(User user) {
                                     accommodationController.getAccommodationById(accommodationId, new AccommodationController.AccommodationCallback() {
+                                        @Override
+                                        public void onSuccess(Object result) {
+                                            Accommodation accommodation = (Accommodation) result;
+                                            Booking booking = new Booking(accommodation, user, startDate, endDate, status);
+                                            booking.setBookingId(bookingId);
+                                            bookings.add(booking);
+                                            if (bookings.size() == response.length()) {
+                                                callback.onSuccess(bookings);
+                                            }
+                                        }
+
                                         @Override
                                         public void onSuccess(Accommodation accommodation) {
                                             Booking booking = new Booking(accommodation, user, startDate, endDate, status);
@@ -127,6 +136,14 @@ public class BookingController {
                                 public void onSuccess(User user) {
                                     AccommodationController accommodationController = new AccommodationController(context);
                                     accommodationController.getAccommodationById(accommodationId, new AccommodationController.AccommodationCallback() {
+                                        @Override
+                                        public void onSuccess(Object result) {
+                                            Accommodation accommodation = (Accommodation) result;
+                                            Booking booking = new Booking(accommodation, user, startDate, endDate, status);
+                                            booking.setBookingId(id);
+                                            callback.onSuccess(booking);
+                                        }
+
                                         @Override
                                         public void onSuccess(Accommodation accommodation) {
                                             Booking booking = new Booking(accommodation, user, startDate, endDate, status);

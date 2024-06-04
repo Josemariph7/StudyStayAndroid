@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 if (position == 0) {
-                    ((TextView) parentView.getChildAt(0)).setTextColor(Color.GRAY); // Color gris para el texto por defecto
+                    ((TextView) parentView.getChildAt(0)).setTextColor(Color.GRAY);
                 } else {
                     ((TextView) parentView.getChildAt(0)).setTextColor(getResources().getColor(R.color.SadBlue));
                 }
