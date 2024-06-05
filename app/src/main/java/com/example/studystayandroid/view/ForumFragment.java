@@ -28,6 +28,7 @@ import com.example.studystayandroid.model.User;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ForumFragment extends Fragment {
@@ -180,6 +181,11 @@ public class ForumFragment extends Fragment {
             public void onSuccess(List<ForumTopic> topics) {
                 topicsList.clear();
                 Log.d("ForumFragment", "Received topics: " + topics);
+
+                // Ordenar los temas por fecha de creación de forma descendente
+                Collections.sort(topics, (t1, t2) -> t2.getDateTime().compareTo(t1.getDateTime()));
+
+                // Añadir los temas ordenados a la lista principal
                 topicsList.addAll(topics);
                 forumTopicAdapter = new ForumTopicAdapter(topicsList, currentUser, topic -> openDiscussionFragment(topic), ForumFragment.this);
                 recyclerView.setAdapter(forumTopicAdapter);
@@ -193,6 +199,7 @@ public class ForumFragment extends Fragment {
             }
         });
     }
+
 
     public void openStrangeProfile(User user) {
         StrangeProfileFragment strangeProfileFragment = StrangeProfileFragment.newInstance(user);

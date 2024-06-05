@@ -73,7 +73,6 @@
     <color name="colorAccent">#FFC107</color>
     <color name="colorPrimary">#0E84E3</color>
     <color name="colorPrimaryDark">#1C254C</color>
-    <color name="errorColor">#FF0000</color>
     <color name="red">#FF0000</color>
     <color name="statusBarColor">#0E84E3</color>
     <color name="textColor">#FFFFFF</color>
@@ -98,7 +97,7 @@
     <string name="post_accommodation">Post Accommodation</string>
     <string name="profile">Profile</string>
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-
+        
         <item name="colorPrimary">@color/LightBlue</item>
         <item name="colorPrimaryDark">@color/SadBlue</item>
         <item name="colorAccent">@color/LightBlue</item>

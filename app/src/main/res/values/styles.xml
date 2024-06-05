@@ -1,7 +1,7 @@
 <resources>
     <!-- Base application theme -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-
+        <!-- Otros atributos del tema -->
         <item name="colorPrimary">@color/LightBlue</item>
         <item name="colorPrimaryDark">@color/SadBlue</item>
         <item name="colorAccent">@color/LightBlue</item>
@@ -65,7 +65,5 @@
         <item name="android:background">@color/SadBlue</item>
 </style>
 
-    <!-- Custom error color -->
-    <color name="errorColor">#FF0000</color>
 
 </resources>

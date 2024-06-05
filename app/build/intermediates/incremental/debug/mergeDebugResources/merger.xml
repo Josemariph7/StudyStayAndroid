@@ -11671,7 +11671,7 @@
             <item>9</item>
             <item>10</item>
         </string-array></file><file path="C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\res\values\styles.xml" qualifiers=""><style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-
+        
         <item name="colorPrimary">@color/LightBlue</item>
         <item name="colorPrimaryDark">@color/SadBlue</item>
         <item name="colorAccent">@color/LightBlue</item>
@@ -11716,7 +11716,7 @@
     </style><style name="CustomButtonStyle2" parent="android:Widget.Material.Button">
     <item name="android:textColor">@color/LightBlue</item>
         <item name="android:background">@color/SadBlue</item>
-</style><color name="errorColor">#FF0000</color></file><file path="C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\res\values\themes.xml" qualifiers=""><style name="Base.Theme.StudyStayAndroid" parent="Theme.Material3.DayNight.NoActionBar">
+</style></file><file path="C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\res\values\themes.xml" qualifiers=""><style name="Base.Theme.StudyStayAndroid" parent="Theme.Material3.DayNight.NoActionBar">
         
         
     </style><style name="Theme.StudyStayAndroid" parent="Base.Theme.StudyStayAndroid"/></file><file path="C:\Users\6003102\AndroidStudioProjects\StudyStayAndroid\app\src\main\res\values-night\themes.xml" qualifiers="night-v8"><style name="Base.Theme.StudyStayAndroid" parent="Theme.Material3.DayNight.NoActionBar">

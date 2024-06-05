@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,12 +20,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.studystayandroid.R;
 import com.example.studystayandroid.controller.UserController;
 import com.example.studystayandroid.model.User;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.time.LocalDate;
@@ -105,18 +108,22 @@ public class MainActivity extends AppCompatActivity {
                     userController.register(newUser, new UserController.UserCallback() {
                         @Override
                         public void onSuccess(Object result) {
-                            Toast.makeText(MainActivity.this, "You have been successfully registered.", Toast.LENGTH_SHORT).show();
+                            showSuccessDialog("You have been successfully registered.");
                             clearSignUpFields();
                         }
 
                         @Override
-                        public void onSuccess(User author) {}
+                        public void onSuccess(User author) {
+                            showSuccessDialog("You have been successfully registered.");
+                            clearSignUpFields();
+                        }
 
                         @Override
                         public void onError(String error) {
                             Toast.makeText(MainActivity.this, "Error: " + error, Toast.LENGTH_LONG).show();
                         }
                     });
+
                 }
             }
         });
@@ -242,7 +249,9 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onError(String error) {
                             Log.e("Login", "Invalid credentials: " + error);
+                            showErrorDialog("Invalid email or password. Please try again.");
                         }
+
                     });
                 }
             }
@@ -299,6 +308,48 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
     }
+
+    private void showSuccessDialog(String message) {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View dialogView = inflater.inflate(R.layout.dialog_error, null);
+
+        TextView dialogTitle = dialogView.findViewById(R.id.dialogTitle);
+        TextView dialogMessage = dialogView.findViewById(R.id.dialogMessage);
+        Button buttonConfirm = dialogView.findViewById(R.id.buttonConfirm);
+
+        dialogTitle.setText("Success");
+        dialogMessage.setText(message);
+
+        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
+                .setView(dialogView)
+                .create();
+
+        buttonConfirm.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
+    }
+
+
+    private void showErrorDialog(String message) {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View dialogView = inflater.inflate(R.layout.dialog_error, null);
+
+        TextView dialogTitle = dialogView.findViewById(R.id.dialogTitle);
+        TextView dialogMessage = dialogView.findViewById(R.id.dialogMessage);
+        Button buttonConfirm = dialogView.findViewById(R.id.buttonConfirm);
+
+        dialogTitle.setText("Error");
+        dialogMessage.setText(message);
+
+        androidx.appcompat.app.AlertDialog dialog = new MaterialAlertDialogBuilder(this)
+                .setView(dialogView)
+                .create();
+
+        buttonConfirm.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
+    }
+
 
     private boolean validateSignUpFields() {
         boolean isValid = true;

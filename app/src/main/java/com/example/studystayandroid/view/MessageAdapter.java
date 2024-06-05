@@ -52,7 +52,6 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_SENT) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_sent, parent, false);
-
             return new SentMessageViewHolder(view);
         } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_received, parent, false);
@@ -118,22 +117,6 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         dialog.show();
     }
 
-    private void deleteMessage(Message message) {
-        MessageController messageController = new MessageController(context);
-        messageController.deleteMessage(message.getMessageId(), new MessageController.MessageCallback() {
-            @Override
-            public void onSuccess(Object result) {
-                messageList.remove(message);
-                notifyDataSetChanged();
-            }
-
-            @Override
-            public void onError(String error) {
-                Log.e("MessageAdapter", "Error deleting message: " + error);
-            }
-        });
-    }
-
     class SentMessageViewHolder extends RecyclerView.ViewHolder {
         TextView textViewContent;
         TextView textViewDateTime;
@@ -142,10 +125,6 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             super(itemView);
             textViewContent = itemView.findViewById(R.id.textViewContent);
             textViewDateTime = itemView.findViewById(R.id.textViewDateTime);
-            itemView.setOnLongClickListener(v -> {
-                showDeleteDialog(messageList.get(getAdapterPosition()), getAdapterPosition());
-                return true;
-            });
         }
 
         void bind(Message message) {
@@ -162,11 +141,6 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             super(itemView);
             textViewContent = itemView.findViewById(R.id.textViewContent);
             textViewDateTime = itemView.findViewById(R.id.textViewDateTime);
-
-            itemView.setOnLongClickListener(v -> {
-                showDeleteDialog(messageList.get(getAdapterPosition()), getAdapterPosition());
-                return true;
-            });
         }
 
         void bind(Message message) {

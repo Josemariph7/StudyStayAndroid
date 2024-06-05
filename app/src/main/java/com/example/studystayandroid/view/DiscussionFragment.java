@@ -27,6 +27,7 @@ import com.example.studystayandroid.model.User;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DiscussionFragment extends Fragment {
@@ -116,6 +117,8 @@ public class DiscussionFragment extends Fragment {
                         commentList.add(comment);
                     }
                 }
+                // Ordenar los comentarios por fecha de forma descendente
+                Collections.sort(commentList, (c1, c2) -> c2.getDateTime().compareTo(c1.getDateTime()));
                 commentAdapter.notifyDataSetChanged();
                 Log.d("DiscussionFragment", "onSuccess: Comments displayed: " + commentList.size());
             }
@@ -127,6 +130,7 @@ public class DiscussionFragment extends Fragment {
             }
         });
     }
+
 
     private void showNewCommentDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="end"
+    android:gravity="end"
     android:orientation="vertical"
     android:padding="8dp"
-    android:layout_margin="4dp"
-    android:gravity="end"
-   >
+    android:layout_margin="4dp">
 
     <TextView
         android:id="@+id/textViewContent"
@@ -15,10 +14,9 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_message_sent"
         android:padding="8dp"
-        android:paddingLeft="25dp"
         android:text="Test Message"
-
-        android:textAlignment="textEnd"
+        android:textAlignment="viewEnd"
+        android:gravity="end"
         android:textColor="@android:color/white" />
 
     <TextView

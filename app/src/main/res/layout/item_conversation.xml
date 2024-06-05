@@ -38,7 +38,7 @@
             android:id="@+id/textViewLastMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Last message content"
+            android:text="No messages yes"
             android:textColor="#8C8B8B" />
     </LinearLayout>
 
