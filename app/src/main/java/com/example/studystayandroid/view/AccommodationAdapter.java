@@ -3,17 +3,20 @@ package com.example.studystayandroid.view;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
-import com.bumptech.glide.Glide;
 import com.example.studystayandroid.R;
 import com.example.studystayandroid.model.Accommodation;
+import com.example.studystayandroid.model.AccommodationPhoto;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import me.relex.circleindicator.CircleIndicator3;
 
 public class AccommodationAdapter extends RecyclerView.Adapter<AccommodationAdapter.AccommodationViewHolder> {
 
@@ -56,18 +59,13 @@ public class AccommodationAdapter extends RecyclerView.Adapter<AccommodationAdap
         holder.description.setText(accommodation.getDescription());
         holder.price.setText(String.format("$%.2f", accommodation.getPrice()));
 
-        Glide.with(holder.itemView.getContext())
-                .load(R.drawable.defaultaccommodation)
-                .into(holder.carouselImageView);
-
-        if (accommodation.getPhotos() != null && !accommodation.getPhotos().isEmpty()) {
-            byte[] photoBytes = accommodation.getPhotos().get(0).getPhotoData();
-            Glide.with(holder.itemView.getContext())
-                    .asBitmap()
-                    .load(photoBytes)
-                    .placeholder(R.drawable.accommodation)
-                    .into(holder.carouselImageView);
+        List<byte[]> photos = new ArrayList<>();
+        for (AccommodationPhoto photo : accommodation.getPhotos()) {
+            photos.add(photo.getPhotoData());
         }
+        ImageCarouselAdapter adapter = new ImageCarouselAdapter(photos, holder.itemView.getContext());
+        holder.carouselViewPager.setAdapter(adapter);
+        holder.indicator.setViewPager(holder.carouselViewPager);
     }
 
     @Override
@@ -77,7 +75,8 @@ public class AccommodationAdapter extends RecyclerView.Adapter<AccommodationAdap
 
     static class AccommodationViewHolder extends RecyclerView.ViewHolder {
         TextView address, city, description, price;
-        ImageView carouselImageView;
+        ViewPager2 carouselViewPager;
+        CircleIndicator3 indicator;
 
         AccommodationViewHolder(@NonNull View itemView, OnItemClickListener listener, OnItemLongClickListener longClickListener) {
             super(itemView);
@@ -85,7 +84,8 @@ public class AccommodationAdapter extends RecyclerView.Adapter<AccommodationAdap
             city = itemView.findViewById(R.id.city);
             description = itemView.findViewById(R.id.description);
             price = itemView.findViewById(R.id.price);
-            carouselImageView = itemView.findViewById(R.id.carousel_image_view);
+            carouselViewPager = itemView.findViewById(R.id.carousel_view_pager);
+            indicator = itemView.findViewById(R.id.indicator);
 
             itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();

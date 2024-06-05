@@ -1,6 +1,5 @@
 package com.example.studystayandroid.view;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -223,10 +222,10 @@ public class AccommodationsFragment extends Fragment {
         ViewPager2 imageCarousel = dialogView.findViewById(R.id.imageCarousel);
         TextView addressTextView = dialogView.findViewById(R.id.address);
         TextView descriptionTextView = dialogView.findViewById(R.id.description);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) TextView rating=dialogView.findViewById(R.id.rating);
+        TextView rating = dialogView.findViewById(R.id.rating);
         TextView availabilityTextView = dialogView.findViewById(R.id.availability);
         TextView priceTextView = dialogView.findViewById(R.id.price);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) TextView ownerTextView = dialogView.findViewById(R.id.ownerName);
+        TextView ownerTextView = dialogView.findViewById(R.id.ownerName);
         Button bookButton = dialogView.findViewById(R.id.bookButton);
         Button contactButton = dialogView.findViewById(R.id.contactButton);
 
@@ -236,10 +235,11 @@ public class AccommodationsFragment extends Fragment {
         }
         ImageCarouselAdapter adapter = new ImageCarouselAdapter(photos, getContext());
         imageCarousel.setAdapter(adapter);
+
         rating.setText(String.valueOf(accommodation.getRating()));
         availabilityTextView.setText(accommodation.isAvailability() ? "Available" : "Not Available");
-        ownerTextView.setText("Owned by "+accommodation.getOwner().getName()+" "+accommodation.getOwner().getLastName());
-        addressTextView.setText(accommodation.getAddress()+", "+accommodation.getCity());
+        ownerTextView.setText("Owned by " + accommodation.getOwner().getName() + " " + accommodation.getOwner().getLastName());
+        addressTextView.setText(accommodation.getAddress() + ", " + accommodation.getCity());
         descriptionTextView.setText(accommodation.getDescription());
         priceTextView.setText(String.format("€%.2f", accommodation.getPrice()));
 
@@ -263,6 +263,7 @@ public class AccommodationsFragment extends Fragment {
 
         dialog.show();
     }
+
 
     private void showAccommodationOptionsDialog(Accommodation accommodation) {
         if (accommodation.getOwner().getUserId().equals(currentUser.getUserId())) {

@@ -13,7 +13,6 @@ color buttonTextColor
 color colorAccent
 color colorPrimary
 color colorPrimaryDark
-color errorColor
 color red
 color selector_nav_item_color
 color statusBarColor
@@ -46,15 +45,21 @@ drawable icondni
 drawable iconemail
 drawable iconestrella
 drawable iconexit
+drawable iconfacebook
 drawable iconfechadenacimiento
 drawable iconfecharegistro
 drawable iconfiltro
 drawable iconforum
+drawable icongoogle
 drawable iconmapa
 drawable iconsalida
 drawable iconsignout
+drawable iconstwitter
 drawable icontelefono
 drawable iconuser
+drawable indicator_drawable
+drawable indicator_drawable_selected
+drawable indicator_drawable_unselected
 drawable logofondoazulclaro
 drawable logofondoazuloscuro
 drawable logofondoazuloscurosimple
@@ -95,8 +100,7 @@ id buttonViewProfile
 id callButton
 id cancelButton
 id capacity_spinner
-id carousel_image_view
-id carousel_item_container
+id carousel_view_pager
 id changePasswordButton
 id changeProfilePictureButton
 id chatButton
@@ -122,6 +126,9 @@ id editTextTopicDescription
 id editTextTopicTitle
 id emailEditText
 id emailTextView
+id emptyViewListed
+id emptyViewRented
+id facebook_button
 id filter_availability
 id filter_button
 id filter_capacity_spinner
@@ -129,11 +136,13 @@ id filter_city_spinner
 id filters_container
 id fragment_container
 id genderSpinner
+id google_button
 id imageCarousel
 id imageView
 id imageView2
 id imageView3
 id imageViewProfile
+id indicator
 id lastNameEditText
 id logo
 id main_layout
@@ -170,6 +179,7 @@ id recyclerViewMessages
 id recyclerViewRented
 id registerButton
 id registerDateTextView
+id reviewButton
 id services_edit_text
 id spinnerGender
 id submit_button
@@ -204,6 +214,7 @@ id tvTopicAuthor
 id tvTopicCreationDate
 id tvTopicDescription
 id tvTopicTitle
+id twitter_button
 id updateUserInfoButton
 id upload_photos_button
 id viewMapButton
@@ -246,6 +257,7 @@ layout item_image_carousel
 layout item_message
 layout item_message_received
 layout item_message_sent
+layout item_simple_accommodation
 layout nav_header
 layout spinner_dropdown_item
 layout spinner_item

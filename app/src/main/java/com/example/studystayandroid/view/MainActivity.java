@@ -1,10 +1,13 @@
 package com.example.studystayandroid.view;
 
+import static java.time.LocalDateTime.now;
+
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Base64;
@@ -101,8 +104,9 @@ public class MainActivity extends AppCompatActivity {
                     newUser.setDni(dni);
                     newUser.setGender(User.Gender.valueOf(gender));
                     newUser.setBirthDate(birthDate);
+                    newUser.setRegistrationDate(now());
 
-                    LocalDateTime currentDateTime = LocalDateTime.now();
+                    LocalDateTime currentDateTime = now();
                     newUser.setRegistrationDate(currentDateTime);
 
                     userController.register(newUser, new UserController.UserCallback() {
@@ -307,6 +311,37 @@ public class MainActivity extends AppCompatActivity {
         if (getIntent().getBooleanExtra("EXIT", false)) {
             finish();
         }
+
+        // Adding click listeners to the social media buttons
+        Button facebookButton = findViewById(R.id.facebook_button);
+        Button googleButton = findViewById(R.id.google_button);
+        Button twitterButton = findViewById(R.id.twitter_button);
+
+        facebookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openBrowser("https://es-es.facebook.com/login.php/");
+            }
+        });
+
+        googleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openBrowser("https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fmail.google.com%2Fmail%2Fu%2F0%2F&emr=1&followup=https%3A%2F%2Fmail.google.com%2Fmail%2Fu%2F0%2F&ifkv=AS5LTASIBZMRuFfgwSnzuUR_9FPkFKTDebo8nwk4mIxtA1ru8i4m8X8zH5ZPNj6PpMaBNjLnwhYOiA&osid=1&passive=1209600&service=mail&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S-301459993%3A1717603272656550&ddm=0");
+            }
+        });
+
+        twitterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openBrowser("https://twitter.com/login/");
+            }
+        });
+    }
+
+    private void openBrowser(String url) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browserIntent);
     }
 
     private void showSuccessDialog(String message) {

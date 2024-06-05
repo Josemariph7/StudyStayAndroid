@@ -16,22 +16,24 @@
         android:orientation="horizontal"
         android:padding="16dp">
 
-        <com.google.android.material.carousel.MaskableFrameLayout
-            android:id="@+id/carousel_item_container"
+        <LinearLayout
             android:layout_width="150dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
-            android:foreground="?attr/selectableItemBackground"
-            app:shapeAppearance="?attr/shapeAppearanceCornerExtraLarge">
+            android:orientation="vertical"
+            android:padding="4dp">
 
-            <ImageView
-                android:id="@+id/carousel_image_view"
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/carousel_view_pager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:scaleType="centerCrop" />
-        </com.google.android.material.carousel.MaskableFrameLayout>
+                android:layout_height="wrap_content" />
+
+            <me.relex.circleindicator.CircleIndicator3
+                android:id="@+id/indicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

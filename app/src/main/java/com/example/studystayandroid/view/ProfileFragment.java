@@ -70,13 +70,6 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        navigationView = getActivity().findViewById(R.id.nav_view);
-
-        // Cambiar el título de la ActionBar
-        if (getActivity() != null) {
-            getActivity().setTitle("StudyStay - Profile");
-        }
-
         // Inicializar vistas
         nameTextView = view.findViewById(R.id.nameTextViewProfile);
         emailTextView = view.findViewById(R.id.emailTextView);
@@ -93,17 +86,14 @@ public class ProfileFragment extends Fragment {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity());
         viewPager.setAdapter(adapter);
 
-        new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                switch (position) {
-                    case 0:
-                        tab.setText("Rented");
-                        break;
-                    case 1:
-                        tab.setText("Listed");
-                        break;
-                }
+        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
+            switch (position) {
+                case 0:
+                    tab.setText("Rented");
+                    break;
+                case 1:
+                    tab.setText("Listed");
+                    break;
             }
         }).attach();
 
@@ -122,12 +112,14 @@ public class ProfileFragment extends Fragment {
             public void onSuccess(Object result) {
                 currentUser = (User) result;
                 updateProfileUI();
+                adapter.setUser(currentUser); // Pasar el usuario al adaptador del ViewPager
             }
 
             @Override
             public void onSuccess(User user) {
                 currentUser = user;
                 updateProfileUI();
+                adapter.setUser(currentUser); // Pasar el usuario al adaptador del ViewPager
             }
 
             @Override
@@ -138,6 +130,7 @@ public class ProfileFragment extends Fragment {
 
         contactButton.setOnClickListener(v -> showProfileSettingsDialog());
     }
+
 
     private void updateProfileUI() {
         if (currentUser != null) {

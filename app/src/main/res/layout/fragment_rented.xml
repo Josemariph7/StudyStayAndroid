@@ -9,4 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp" />
+
+    <TextView
+        android:id="@+id/emptyViewRented"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="The user hasn't rented any accommodations yet."
+        android:visibility="gone"
+        android:textColor="@android:color/black" />
 </LinearLayout>

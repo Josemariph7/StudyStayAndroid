@@ -1,462 +1,494 @@
 [
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_accommodation.PNG.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/accommodation.PNG"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_rounded_edit_text_dark.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\rounded_edit_text_dark.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_rounded_edit_text_light.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/rounded_edit_text_light.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_conversation_item_background.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\conversation_item_background.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/color_selector_nav_item_color.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/color/selector_nav_item_color.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_dialog_update_user_info.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\dialog_update_user_info.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_fragment_add_accommodation.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/fragment_add_accommodation.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_iconaccommodation.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\iconaccommodation.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/mipmap-mdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.example.studystayandroid.app-main-39:/mipmap-mdpi/ic_launcher_foreground.webp"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_fotoperfil.jpg.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\fotoperfil.jpg"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_dialog_error.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/dialog_error.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_iconfacebook.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\iconfacebook.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_iconbiography.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/iconbiography.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-xhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-xhdpi\\ic_launcher_foreground.webp"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_back_arrow.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/back_arrow.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-xxxhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_iconconversation.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/iconconversation.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_separator.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\separator.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_iconfiltro.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/iconfiltro.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-mdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-mdpi\\ic_launcher_foreground.webp"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_fragment_discussion.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/fragment_discussion.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_rounded_profile_card.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\rounded_profile_card.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_conversation_item_background.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/conversation_item_background.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_iconayuda.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\iconayuda.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_item_message_received.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/item_message_received.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\color_selector_nav_item_color.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\color\\selector_nav_item_color.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.studystayandroid.app-main-39:/mipmap-xxxhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_divider.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\divider.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_dialog_map.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/dialog_map.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_rounded_dialog.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/rounded_dialog.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_iconuser.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\iconuser.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_iconemail.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/iconemail.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_iconmapa.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\iconmapa.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_activity_dashboard.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/activity_dashboard.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-xxhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_circularimage.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/circularimage.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_iconfiltro.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\iconfiltro.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.studystayandroid.app-main-39:/mipmap-xhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-hdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_bg_message_received.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/bg_message_received.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_rounded_dialog.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\rounded_dialog.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_headerbkg.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/headerbkg.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_dialog_profile_settings.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\dialog_profile_settings.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_fragment_chat.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/fragment_chat.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_spinner_dropdown_item.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\spinner_dropdown_item.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_fotoperfil.jpg.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/fotoperfil.jpg"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_simpletransparente.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\simpletransparente.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_fragment_forum.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/fragment_forum.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_spinner_item.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\spinner_item.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_dialog_confirm_delete.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/dialog_confirm_delete.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_logofondoazuloscurosimple.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\logofondoazuloscurosimple.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_dialog_delete_account.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/dialog_delete_account.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-xhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_iconexit.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/iconexit.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_iconavailable.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\iconavailable.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_dialog_delete_confirmation.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/dialog_delete_confirmation.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_fragment_profile_stranger.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\fragment_profile_stranger.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_fragment_profile_stranger.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/fragment_profile_stranger.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-xxhdpi\\ic_launcher_foreground.webp"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_logofondoazuloscuro.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/logofondoazuloscuro.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_dialog_new_comment.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\dialog_new_comment.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.studystayandroid.app-main-39:/mipmap-xxhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_defaultaccommodation.jpg.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\defaultaccommodation.jpg"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/mipmap-xxhdpi_ic_launcher_background.webp.flat",
-        "source": "com.example.studystayandroid.app-main-39:/mipmap-xxhdpi/ic_launcher_background.webp"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_fragment_rented.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\fragment_rented.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_iconsalida.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/iconsalida.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\ic_launcher_foreground.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_iconavailable.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/iconavailable.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_dialog_delete_confirmation.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\dialog_delete_confirmation.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_registerradius.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\registerradius.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_dialog_new_topic.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/dialog_new_topic.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_dialog_options.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\dialog_options.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_simpletransparente.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/simpletransparente.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_bg_message_sent.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\bg_message_sent.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_iconfechadenacimiento.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/iconfechadenacimiento.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-mdpi_ic_launcher_background.webp.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-mdpi\\ic_launcher_background.webp"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_iconfecharegistro.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/iconfecharegistro.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\activity_main.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_fragment_listed.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/fragment_listed.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_iconsalida.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\iconsalida.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_divider.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/divider.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_dialog_delete_account.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\dialog_delete_account.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_iconestrella.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/iconestrella.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_dialog_new_topic.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\dialog_new_topic.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_dialog_contact_options.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/dialog_contact_options.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_iconcancelar.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\iconcancelar.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_dialog_confirmation.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/dialog_confirmation.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\menu_nav_menu.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\menu\\nav_menu.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_fragment_rented.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/fragment_rented.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_baseline_arrow_back_ios_new_24.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\baseline_arrow_back_ios_new_24.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_dialog_accommodation_options.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/dialog_accommodation_options.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-xhdpi_ic_launcher_background.webp.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-xhdpi\\ic_launcher_background.webp"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_dialog_change_password.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/dialog_change_password.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-mdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_separator.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/separator.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_back_arrow.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\back_arrow.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_defaultprofile.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/defaultprofile.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_headerbkg.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\headerbkg.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_iconforum.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/iconforum.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_indicator_drawable.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\indicator_drawable.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_activity_main.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/activity_main.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_iconsignout.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\iconsignout.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/mipmap-xhdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.example.studystayandroid.app-main-39:/mipmap-xhdpi/ic_launcher_foreground.webp"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_item_message_received.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\item_message_received.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_baseline_arrow_back_ios_new_40.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/baseline_arrow_back_ios_new_40.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.studystayandroid.app-main-39:/mipmap-mdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_defaultprofile.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\defaultprofile.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_item_conversation.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/item_conversation.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-hdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-hdpi\\ic_launcher_foreground.webp"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_fragment_message.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/fragment_message.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_fragment_message.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\fragment_message.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/mipmap-mdpi_ic_launcher_background.webp.flat",
-        "source": "com.example.studystayandroid.app-main-39:/mipmap-mdpi/ic_launcher_background.webp"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_rounded_edit_text_light.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\rounded_edit_text_light.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/xml_backup_rules.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/xml/backup_rules.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_iconstwitter.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\iconstwitter.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_icondni.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/icondni.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_logotransparente.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\logotransparente.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_nav_header.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\nav_header.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.studystayandroid.app-main-39:/mipmap-xxhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_item_message.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\item_message.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_item_message_sent.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/item_message_sent.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_dialog_view_profile.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\dialog_view_profile.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_dialog_view_profile.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/dialog_view_profile.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_icondni.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\icondni.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_iconsignout.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/iconsignout.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_iconfechadenacimiento.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\iconfechadenacimiento.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_item_accommodation.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/item_accommodation.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_fragment_add_accommodation.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\fragment_add_accommodation.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.studystayandroid.app-main-39:/mipmap-hdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_fragment_discussion.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\fragment_discussion.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/xml_data_extraction_rules.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/xml/data_extraction_rules.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_aklogo.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\aklogo.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "com.example.studystayandroid.app-main-39:/mipmap-hdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_dialog_contact_options.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\dialog_contact_options.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_dialog_profile_settings.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/dialog_profile_settings.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_dialog_change_password.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\dialog_change_password.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_registerradius.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/registerradius.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\xml_network_security_config.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\xml\\network_security_config.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_iconuser.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/iconuser.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_logofondoazuloscuro.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\logofondoazuloscuro.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_dialog_accommodation_detail.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/dialog_accommodation_detail.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_aboutusicon.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\aboutusicon.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_defaultaccommodation.jpg.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/defaultaccommodation.jpg"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_iconestrella.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\iconestrella.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_item_message.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/item_message.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-xhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/mipmap-hdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.example.studystayandroid.app-main-39:/mipmap-hdpi/ic_launcher_foreground.webp"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_accommodation.PNG.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\accommodation.PNG"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_fragment_profile.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/fragment_profile.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_iconbiography.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\iconbiography.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_bg_message_sent.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/bg_message_sent.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\xml\\data_extraction_rules.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_dialog_options.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/dialog_options.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_icontelefono.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\icontelefono.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_iconaccommodation.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/iconaccommodation.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-xxxhdpi\\ic_launcher_foreground.webp"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_iconmapa.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/iconmapa.png"
+        "merged": "com.example.studystayandroid.app-debug-38:/layout_fragment_listed.xml.flat",
+        "source": "com.example.studystayandroid.app-main-40:/layout/fragment_listed.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_dialog_update_user_info.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/dialog_update_user_info.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\ic_launcher_background.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_logotransparente.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/logotransparente.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_iconforum.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\iconforum.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.example.studystayandroid.app-main-39:/mipmap-xxxhdpi/ic_launcher_foreground.webp"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_rounded_bottom_card.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\rounded_bottom_card.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "com.example.studystayandroid.app-main-39:/mipmap-xhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_dialog_accommodation_detail.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\dialog_accommodation_detail.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_ic_launcher_background.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/ic_launcher_background.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-xxxhdpi_ic_launcher_background.webp.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-xxxhdpi\\ic_launcher_background.webp"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/mipmap-hdpi_ic_launcher_background.webp.flat",
-        "source": "com.example.studystayandroid.app-main-39:/mipmap-hdpi/ic_launcher_background.webp"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_dialog_confirm_delete.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\dialog_confirm_delete.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_logofondoazuloscurosimple.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/logofondoazuloscurosimple.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_fragment_accommodations.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\fragment_accommodations.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_fragment_accommodations.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/fragment_accommodations.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_icongoogle.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\icongoogle.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_aklogo.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/aklogo.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_indicator_drawable_selected.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\indicator_drawable_selected.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/mipmap-xxxhdpi_ic_launcher_background.webp.flat",
-        "source": "com.example.studystayandroid.app-main-39:/mipmap-xxxhdpi/ic_launcher_background.webp"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_dialog_map.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\dialog_map.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_item_image_carousel.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/item_image_carousel.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_logofondoazulclaro.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\logofondoazulclaro.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
-        "source": "com.example.studystayandroid.app-main-39:/mipmap-xxhdpi/ic_launcher_foreground.webp"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_fragment_forum.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\fragment_forum.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_baseline_arrow_back_ios_new_24.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/baseline_arrow_back_ios_new_24.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-xxhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_rounded_bottom_card.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/rounded_bottom_card.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_fragment_chat.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\fragment_chat.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_rounded_edit_text_dark.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/rounded_edit_text_dark.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_dialog_accommodation_options.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\dialog_accommodation_options.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_nav_header.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/nav_header.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-hdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_spinner_dropdown_item.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/spinner_dropdown_item.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_baseline_arrow_back_ios_new_40.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\baseline_arrow_back_ios_new_40.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_dialog_new_comment.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/dialog_new_comment.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_fragment_listed.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\fragment_listed.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/menu_nav_menu.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/menu/nav_menu.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-xxhdpi_ic_launcher_background.webp.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-xxhdpi\\ic_launcher_background.webp"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_icontelefono.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/icontelefono.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_bg_message_received.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\bg_message_received.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_rounded_profile_card.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/rounded_profile_card.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_iconfecharegistro.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\iconfecharegistro.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_spinner_item.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/spinner_item.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_item_comment.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\item_comment.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_logofondoazulclaro.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/logofondoazulclaro.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_circularimage.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\circularimage.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_item_forum_topic.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/item_forum_topic.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_fragment_booking.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\fragment_booking.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_aboutusicon.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/aboutusicon.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_dialog_confirmation.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\dialog_confirmation.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/ic_launcher_foreground.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_item_image_carousel.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\item_image_carousel.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_fragment_booking.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/fragment_booking.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_iconemail.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\iconemail.png"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/xml_network_security_config.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/xml/network_security_config.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-mdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_iconayuda.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/iconayuda.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_dialog_error.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\dialog_error.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/drawable_iconcancelar.png.flat",
-        "source": "com.example.studystayandroid.app-main-39:/drawable/iconcancelar.png"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\xml\\backup_rules.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/mipmap-xhdpi_ic_launcher_background.webp.flat",
-        "source": "com.example.studystayandroid.app-main-39:/mipmap-xhdpi/ic_launcher_background.webp"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_fragment_profile.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\fragment_profile.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "com.example.studystayandroid.app-main-39:/mipmap-mdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-hdpi_ic_launcher_background.webp.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-hdpi\\ic_launcher_background.webp"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/layout_item_comment.xml.flat",
-        "source": "com.example.studystayandroid.app-main-39:/layout/item_comment.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-37:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.studystayandroid.app-main-39:/mipmap-xxxhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_iconconversation.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\iconconversation.png"
+    },
+    {
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_item_accommodation.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\item_accommodation.xml"
+    },
+    {
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_activity_dashboard.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\activity_dashboard.xml"
+    },
+    {
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_item_forum_topic.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\item_forum_topic.xml"
+    },
+    {
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_item_conversation.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\item_conversation.xml"
+    },
+    {
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_iconexit.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\iconexit.png"
+    },
+    {
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_item_message_sent.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\item_message_sent.xml"
+    },
+    {
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_indicator_drawable_unselected.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\indicator_drawable_unselected.xml"
+    },
+    {
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_item_simple_accommodation.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\item_simple_accommodation.xml"
     }
 ]

@@ -5,9 +5,18 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.studystayandroid.model.User;
+
 public class ViewPagerAdapter extends FragmentStateAdapter {
+
+    private User currentUser;
+
     public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
+    }
+
+    public void setUser(User user) {
+        this.currentUser = user;
     }
 
     @NonNull

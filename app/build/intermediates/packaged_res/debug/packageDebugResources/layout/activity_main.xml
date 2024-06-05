@@ -89,6 +89,52 @@
         android:textColor="@color/SadBlue"
         android:textSize="20sp" />
 
+    <Button
+        android:id="@+id/facebook_button"
+        android:layout_width="48dp"
+        android:layout_height="42dp"
+        android:backgroundTint="@android:color/transparent"
+        android:textColor="@color/DarkBlue"
+        android:translationX="172dp"
+        android:translationY="518dp"
+        app:icon="@drawable/iconfacebook"
+        app:iconGravity="textEnd"
+        app:iconPadding="0dp"
+        app:iconSize="40dp"
+        app:iconTint="@color/white"
+        app:iconTintMode="src_in" />
+
+    <Button
+        android:id="@+id/google_button"
+        android:layout_width="50dp"
+        android:layout_height="51dp"
+        android:backgroundTint="@android:color/transparent"
+        android:paddingBottom="10dp"
+        android:textColor="@color/DarkBlue"
+        android:translationX="79dp"
+        android:translationY="517dp"
+        app:icon="@drawable/icongoogle"
+        app:iconGravity="textEnd"
+        app:iconPadding="0dp"
+        app:iconSize="40dp"
+        app:iconTint="@color/white"
+        app:iconTintMode="src_in" />
+
+    <Button
+        android:id="@+id/twitter_button"
+        android:layout_width="48dp"
+        android:layout_height="42dp"
+        android:backgroundTint="@android:color/transparent"
+        android:textColor="@color/DarkBlue"
+        android:translationX="268dp"
+        android:translationY="518dp"
+        app:icon="@drawable/iconstwitter"
+        app:iconGravity="textEnd"
+        app:iconPadding="0dp"
+        app:iconSize="42dp"
+        app:iconTint="@color/white"
+        app:iconTintMode="src_in" />
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/main_layout"
         android:layout_width="match_parent"
@@ -135,25 +181,25 @@
                 android:layout_marginTop="252dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginRight="40dp"
-                app:errorTextColor="@color/red"
-                app:cursorErrorColor="@color/red"
-                app:boxStrokeErrorColor="@color/red"
-                app:errorIconTintMode="src_in"
-                app:errorIconTint="@color/red"
                 android:hint="@string/hintName"
-                android:translationY="-5dp"
                 android:textColorHint="@color/SadBlue"
+                android:translationY="-5dp"
                 app:boxStrokeColor="@color/SadBlue"
+                app:boxStrokeErrorColor="@color/red"
                 app:cursorColor="@color/SadBlue"
+                app:cursorErrorColor="@color/red"
+                app:errorIconTint="@color/red"
+                app:errorIconTintMode="src_in"
+                app:errorTextColor="@color/red"
                 app:hintTextColor="@color/SadBlue">
 
                 <com.google.android.material.textfield.TextInputEditText
                     style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
-                    android:textColor="@color/SadBlue"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_edit_text_dark"
-                    android:backgroundTint="@color/white" />
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/SadBlue" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -166,16 +212,16 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginRight="40dp"
-                app:errorTextColor="@color/red"
-                app:cursorErrorColor="@color/red"
-                app:boxStrokeErrorColor="@color/red"
-                app:errorIconTintMode="src_in"
-                app:errorIconTint="@color/red"
                 android:hint="@string/hintEmail"
-                android:translationY="-5dp"
                 android:textColorHint="@color/SadBlue"
+                android:translationY="-5dp"
                 app:boxStrokeColor="@color/SadBlue"
+                app:boxStrokeErrorColor="@color/red"
                 app:cursorColor="@color/SadBlue"
+                app:cursorErrorColor="@color/red"
+                app:errorIconTint="@color/red"
+                app:errorIconTintMode="src_in"
+                app:errorTextColor="@color/red"
                 app:hintTextColor="@color/SadBlue"
                 tools:ignore="ExtraText">
 
@@ -183,9 +229,9 @@
                     style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/SadBlue"
                     android:background="@drawable/rounded_edit_text_dark"
-                    android:backgroundTint="@color/white" />
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/SadBlue" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -197,17 +243,17 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginEnd="40dp"
-                app:errorTextColor="@color/red"
-                app:cursorErrorColor="@color/red"
-                app:boxStrokeErrorColor="@color/red"
-                app:errorIconTintMode="src_in"
-                app:errorIconTint="@color/red"
                 android:layout_marginRight="40dp"
                 android:hint="@string/hintSurnames"
-                android:translationY="-5dp"
                 android:textColorHint="@color/SadBlue"
+                android:translationY="-5dp"
                 app:boxStrokeColor="@color/SadBlue"
+                app:boxStrokeErrorColor="@color/red"
                 app:cursorColor="@color/SadBlue"
+                app:cursorErrorColor="@color/red"
+                app:errorIconTint="@color/red"
+                app:errorIconTintMode="src_in"
+                app:errorTextColor="@color/red"
                 app:hintTextColor="@color/SadBlue"
                 tools:ignore="ExtraText">
 
@@ -215,9 +261,9 @@
                     style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/SadBlue"
                     android:background="@drawable/rounded_edit_text_dark"
-                    android:backgroundTint="@color/white" />
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/SadBlue" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -229,17 +275,17 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginEnd="40dp"
-                app:errorTextColor="@color/red"
-                app:cursorErrorColor="@color/red"
-                app:boxStrokeErrorColor="@color/red"
-                app:errorIconTintMode="src_in"
-                app:errorIconTint="@color/red"
                 android:layout_marginRight="40dp"
                 android:hint="@string/hintPhone"
-                android:translationY="-5dp"
                 android:textColorHint="@color/SadBlue"
+                android:translationY="-5dp"
                 app:boxStrokeColor="@color/SadBlue"
+                app:boxStrokeErrorColor="@color/red"
                 app:cursorColor="@color/SadBlue"
+                app:cursorErrorColor="@color/red"
+                app:errorIconTint="@color/red"
+                app:errorIconTintMode="src_in"
+                app:errorTextColor="@color/red"
                 app:hintTextColor="@color/SadBlue"
                 tools:ignore="ExtraText">
 
@@ -247,9 +293,9 @@
                     style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/SadBlue"
                     android:background="@drawable/rounded_edit_text_dark"
-                    android:backgroundTint="@color/white" />
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/SadBlue" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -260,16 +306,16 @@
                 android:layout_marginVertical="260dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="40dp"
-                app:errorTextColor="@color/red"
-                app:cursorErrorColor="@color/red"
-                app:boxStrokeErrorColor="@color/red"
-                app:errorIconTintMode="src_in"
-                app:errorIconTint="@color/red"
                 android:hint="@string/hintPassword"
-                android:translationY="-5dp"
                 android:textColorHint="@color/SadBlue"
+                android:translationY="-5dp"
                 app:boxStrokeColor="@color/SadBlue"
+                app:boxStrokeErrorColor="@color/red"
                 app:cursorColor="@color/SadBlue"
+                app:cursorErrorColor="@color/red"
+                app:errorIconTint="@color/red"
+                app:errorIconTintMode="src_in"
+                app:errorTextColor="@color/red"
                 app:hintTextColor="@color/SadBlue"
                 tools:ignore="ExtraText">
 
@@ -277,9 +323,9 @@
                     style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/SadBlue"
                     android:background="@drawable/rounded_edit_text_dark"
-                    android:backgroundTint="@color/white" />
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/SadBlue" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -289,27 +335,27 @@
                 android:layout_height="75dp"
                 android:layout_marginVertical="340dp"
                 android:layout_marginStart="40dp"
-                app:errorTextColor="@color/red"
-                app:cursorErrorColor="@color/red"
-                app:boxStrokeErrorColor="@color/red"
-                app:errorIconTintMode="src_in"
-                app:errorIconTint="@color/red"
                 android:layout_marginEnd="40dp"
                 android:hint="@string/hintDNI"
-                android:translationY="-5dp"
                 android:textColorHint="@color/SadBlue"
+                android:translationY="-5dp"
                 app:boxStrokeColor="@color/SadBlue"
+                app:boxStrokeErrorColor="@color/red"
                 app:cursorColor="@color/SadBlue"
+                app:cursorErrorColor="@color/red"
+                app:errorIconTint="@color/red"
+                app:errorIconTintMode="src_in"
+                app:errorTextColor="@color/red"
                 app:hintTextColor="@color/SadBlue"
                 tools:ignore="ExtraText">
 
                 <com.google.android.material.textfield.TextInputEditText
                     style="@style/CustomTextInputEditText"
                     android:layout_width="match_parent"
-                    android:textColor="@color/SadBlue"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_edit_text_dark"
-                    android:backgroundTint="@color/white" />
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/SadBlue" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -332,8 +378,8 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="40dp"
                 android:hint="Birth Date"
-                android:translationY="3dp"
                 android:textColorHint="@color/SadBlue"
+                android:translationY="3dp"
                 app:boxStrokeColor="@color/SadBlue"
                 app:cursorColor="@color/SadBlue"
                 app:hintTextColor="@color/SadBlue"
@@ -357,12 +403,12 @@
                 android:layout_height="48dp"
                 android:layout_marginVertical="640dp"
                 android:layout_marginLeft="100dp"
-                android:background="@drawable/rounded_edit_text_dark"
                 android:layout_marginRight="100dp"
+                android:background="@drawable/rounded_edit_text_dark"
                 android:backgroundTint="@color/white"
                 android:hint="@string/hintGender"
-                android:translationY="7dp"
                 android:textColorHint="@color/SadBlue"
+                android:translationY="7dp"
                 app:boxStrokeColor="@color/SadBlue"
                 app:cursorColor="@color/SadBlue"
                 app:hintTextColor="@color/SadBlue">
@@ -371,10 +417,10 @@
                     android:id="@+id/spinnerGender"
                     android:layout_width="196dp"
                     android:layout_height="match_parent"
-                    android:textColor="@color/SadBlue"
                     android:backgroundTint="@color/white"
                     android:outlineAmbientShadowColor="@color/SadBlue"
                     android:textAlignment="center"
+                    android:textColor="@color/SadBlue"
                     android:translationX="21dp" />
 
             </com.google.android.material.textfield.TextInputLayout>

@@ -23,9 +23,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/SadBlue"
-        android:textColor="@android:color/white"
         android:stateListAnimator="@android:anim/linear_interpolator"
-        android:text="View Profile" />
+        android:text="View Profile"
+        android:textColor="@android:color/white" />
 
     <Button
         android:id="@+id/buttonCancel"
