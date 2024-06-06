@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -14,6 +15,7 @@ import com.example.studystayandroid.utils.Constants;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -154,25 +156,40 @@ public class AccommodationPhotoController {
     }
 
     public void createPhoto(AccommodationPhoto photo, final PhotoCallback callback) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CREATE_PHOTO,
+        VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(Request.Method.POST, URL_CREATE_PHOTO,
                 response -> {
-                    if ("Photo created successfully".equals(response)) {
-                        callback.onSuccess(null);
-                    } else {
-                        callback.onError(response);
+                    try {
+                        String result = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+                        if ("Photo created successfully".equals(result)) {
+                            callback.onSuccess(null);
+                        } else {
+                            callback.onError(result);
+                        }
+                    } catch (UnsupportedEncodingException e) {
+                        callback.onError(e.getMessage());
                     }
                 },
                 error -> callback.onError(error.toString())) {
+
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("accommodationId", photo.getAccommodation().getAccommodationId().toString());
-                params.put("photoData", new String(photo.getPhotoData()));
+                return params;
+            }
+
+            @Override
+            protected Map<String, DataPart> getByteData() {
+                Map<String, DataPart> params = new HashMap<>();
+                params.put("photoData", new DataPart("image.jpg", photo.getPhotoData(), "image/jpeg"));
                 return params;
             }
         };
-        requestQueue.add(stringRequest);
+
+        requestQueue.add(multipartRequest);
     }
+
+
 
     public void deletePhoto(Long photoId, final PhotoCallback callback) {
         String url = URL_DELETE_PHOTO + "?photoId=" + photoId;
@@ -191,6 +208,7 @@ public class AccommodationPhotoController {
 
     public interface PhotoCallback {
         void onSuccess(Object result);
+
         void onError(String error);
     }
 

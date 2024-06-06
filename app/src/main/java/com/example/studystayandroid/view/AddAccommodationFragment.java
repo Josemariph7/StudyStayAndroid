@@ -1,8 +1,10 @@
 package com.example.studystayandroid.view;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +29,6 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,12 +48,11 @@ public class AddAccommodationFragment extends Fragment {
     private TextInputLayout textFieldServices;
     private TextInputEditText servicesEditText;
     private Spinner capacitySpinner;
-    private Button submitButton, uploadPhotosButton;
+    private Button submitButton, uploadPhotosButton, backButton;
 
     private AccommodationController accommodationController;
     private List<Uri> selectedImagesUris;
     private User currentUser;
-
 
     public AddAccommodationFragment() {
         // Required empty public constructor
@@ -79,7 +79,10 @@ public class AddAccommodationFragment extends Fragment {
         servicesEditText = (TextInputEditText) textFieldServices.getEditText();
         capacitySpinner = view.findViewById(R.id.capacity_spinner);
         submitButton = view.findViewById(R.id.submit_button);
-        uploadPhotosButton = view.findViewById(R.id.show_reviews);
+        uploadPhotosButton = view.findViewById(R.id.upload_photos_button);
+        backButton = view.findViewById(R.id.back_button);
+
+        backButton.setOnClickListener(v -> getParentFragmentManager().popBackStack());
 
         accommodationController = new AccommodationController(requireContext());
         selectedImagesUris = new ArrayList<>();
@@ -92,6 +95,7 @@ public class AddAccommodationFragment extends Fragment {
         // Retrieve currentUser from arguments
         if (getArguments() != null) {
             currentUser = (User) getArguments().getSerializable("currentUser");
+            Log.d("AddAccommodationFragment", "Current user: " + currentUser);
         }
     }
 
@@ -141,121 +145,160 @@ public class AddAccommodationFragment extends Fragment {
 
     private void submitAccommodation() {
         String address = addressEditText.getText().toString().trim();
-        String city = citySpinner.getSelectedItem().toString();
+        String city = citySpinner.getSelectedItem() != null ? citySpinner.getSelectedItem().toString() : "All";
         String price = priceEditText.getText().toString().trim();
         String description = descriptionEditText.getText().toString().trim();
-        int capacity = Integer.parseInt(capacitySpinner.getSelectedItem().toString());
+        String capacityStr = capacitySpinner.getSelectedItem() != null ? capacitySpinner.getSelectedItem().toString() : "All";
+        int capacity = capacityStr.equals("All") ? -1 : Integer.parseInt(capacityStr);
         String services = servicesEditText.getText().toString().trim();
 
-        // Validate inputs
-        if (!isValidAddress(address)) {
-            Toast.makeText(getContext(), "Invalid address. Please enter a valid address.", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        boolean isValid = validateInputs(address, city, price, description, capacity, services);
 
-        if (!isValidPrice(price)) {
-            Toast.makeText(getContext(), "Invalid price. Please enter a valid number.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (!isValidText(description)) {
-            Toast.makeText(getContext(), "Invalid description. Please avoid special characters.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (!isValidText(services)) {
-            Toast.makeText(getContext(), "Invalid services. Please avoid special characters.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Accommodation accommodation = new Accommodation();
-        Log.d("Owner", currentUser.toString());
-        accommodation.setOwner(currentUser);
-        accommodation.setAddress(address);
-        accommodation.setCity(city);
-        accommodation.setPrice(new BigDecimal(price));
-        accommodation.setDescription(description);
-        accommodation.setCapacity(capacity);
-        accommodation.setServices(services);
-        accommodation.setAvailability(true);
-        accommodation.setRating(0.0);
-
-        accommodationController.createAccommodation(accommodation, new AccommodationController.SimpleCallback() {
-            @Override
-            public void onSuccess(Accommodation createdAccommodation) {
-                uploadPhotos(createdAccommodation);
-                Log.d("AddAccommodationFragment", "Accommodation created successfully");
-                // Clear form or navigate back
-                clearForm();
-                Toast.makeText(getContext(), "Accommodation created successfully", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onSuccess() {
-            }
-
-            @Override
-            public void onError(String error) {
-                Log.e("AddAccommodationFragment", "Error creating accommodation: " + error);
-                Toast.makeText(getContext(), "Error creating accommodation: " + error, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void uploadPhotos(Accommodation accommodation) {
-        AccommodationPhotoController photoController = new AccommodationPhotoController(requireContext());
-        for (Uri uri : selectedImagesUris) {
-            byte[] photoData = convertUriToByteArray(uri);
-            AccommodationPhoto photo = new AccommodationPhoto(accommodation, photoData);
-            photoController.createPhoto(photo, new AccommodationPhotoController.PhotoCallback() {
+        if (isValid) {
+            // Check if the accommodation already exists
+            accommodationController.getAccommodations(new AccommodationController.AccommodationListCallback() {
                 @Override
-                public void onSuccess(Object result) {
-                    Log.d("AddAccommodationFragment", "Photo uploaded successfully");
+                public void onSuccess(List<Accommodation> accommodations) {
+                    for (Accommodation existingAccommodation : accommodations) {
+                        if (existingAccommodation.getOwner().getUserId().equals(currentUser.getUserId()) &&
+                                existingAccommodation.getAddress().equalsIgnoreCase(address)) {
+                            Toast.makeText(getContext(), "Accommodation already exists at this address.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
+
+                    // Create new accommodation
+                    Accommodation accommodation = new Accommodation();
+                    accommodation.setOwner(currentUser);
+                    accommodation.setAddress(address);
+                    accommodation.setCity(city);
+                    accommodation.setPrice(new BigDecimal(price));
+                    accommodation.setDescription(description);
+                    accommodation.setCapacity(capacity);
+                    accommodation.setServices(services);
+                    accommodation.setAvailability(true);
+                    accommodation.setRating(0.0);
+
+                    accommodationController.createAccommodation(accommodation, new AccommodationController.SimpleCallback() {
+                        @Override
+                        public void onSuccess(Accommodation createdAccommodation) {
+                            if (selectedImagesUris.isEmpty()) {
+                                clearForm();
+                                navigateBackWithSuccess();
+                                Toast.makeText(getContext(), "Accommodation created successfully", Toast.LENGTH_SHORT).show();
+                            } else {
+                                uploadPhotos(createdAccommodation);
+                            }
+                        }
+
+                        @Override
+                        public void onSuccess() {
+                        }
+
+                        @Override
+                        public void onError(String error) {
+                            Log.e("AddAccommodationFragment", "Error creating accommodation: " + error);
+                            Toast.makeText(getContext(), "Error creating accommodation: " + error, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
 
                 @Override
                 public void onError(String error) {
-                    Log.e("AddAccommodationFragment", "Error uploading photo: " + error);
+                    Log.e("AddAccommodationFragment", "Error checking accommodations: " + error);
                 }
             });
         }
     }
 
-    private byte[] convertUriToByteArray(Uri uri) {
-        try (InputStream inputStream = getContext().getContentResolver().openInputStream(uri);
-             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                byteArrayOutputStream.write(buffer, 0, bytesRead);
-            }
-            return byteArrayOutputStream.toByteArray();
-        } catch (IOException e) {
-            Log.e("AddAccommodationFragment", "Error converting URI to byte array", e);
-            return new byte[0];
+    private boolean validateInputs(String address, String city, String price, String description, int capacity, String services) {
+        boolean isValid = true;
+
+        if (address.isEmpty() || !Pattern.matches("^[a-zA-Z0-9\\sáéíóúÁÉÍÓÚñÑ,]+$", address)) {
+            textFieldAddress.setError("Invalid address. Please enter a valid address.");
+            isValid = false;
+        } else {
+            textFieldAddress.setError(null);
         }
-    }
 
-    // Validation methods
-    private boolean isValidAddress(String address) {
-        // Address should be street followed by number, e.g., "Street 123"
-        String addressPattern = "^[a-zA-Z0-9\\s]+(\\s\\d+)?$";
-        return Pattern.matches(addressPattern, address);
-    }
+        if (city.equals("All")) {
+            Toast.makeText(getContext(), "Please select a city.", Toast.LENGTH_SHORT).show();
+            isValid = false;
+        }
 
-    private boolean isValidPrice(String price) {
         try {
-            new BigDecimal(price);
-            return true;
+            BigDecimal priceDecimal = new BigDecimal(price);
+            if (priceDecimal.compareTo(BigDecimal.ZERO) <= 0) {
+                textFieldPrice.setError("Price must be greater than 0.");
+                isValid = false;
+            } else {
+                textFieldPrice.setError(null);
+            }
         } catch (NumberFormatException e) {
-            return false;
+            textFieldPrice.setError("Invalid price. Please enter a valid number.");
+            isValid = false;
+        }
+
+        if (description.isEmpty() || !Pattern.matches("^[a-zA-Z0-9\\sáéíóúÁÉÍÓÚñÑ,]+$", description)) {
+            textFieldDescription.setError("Invalid description. Please avoid special characters.");
+            isValid = false;
+        } else {
+            textFieldDescription.setError(null);
+        }
+
+        if (services.isEmpty() || !Pattern.matches("^[a-zA-Z0-9\\sáéíóúÁÉÍÓÚñÑ,]+$", services)) {
+            textFieldServices.setError("Invalid services. Please avoid special characters.");
+            isValid = false;
+        } else {
+            textFieldServices.setError(null);
+        }
+
+        if (capacity <= 0) {
+            Toast.makeText(getContext(), "Please select a valid capacity.", Toast.LENGTH_SHORT).show();
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    private void uploadPhotos(Accommodation accommodation) {
+        AccommodationPhotoController photoController = new AccommodationPhotoController(requireContext());
+
+        for (Uri uri : selectedImagesUris) {
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), uri);
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream); // Adjust compression as needed
+                byte[] photoData = byteArrayOutputStream.toByteArray();
+
+                AccommodationPhoto photo = new AccommodationPhoto(accommodation, photoData);
+                photoController.createPhoto(photo, new AccommodationPhotoController.PhotoCallback() {
+                    @Override
+                    public void onSuccess(Object result) {
+                        Log.d("AddAccommodationFragment", "Photo uploaded successfully");
+                        if (selectedImagesUris.indexOf(uri) == selectedImagesUris.size() - 1) {
+                            clearForm();
+                            navigateBackWithSuccess();
+                            Toast.makeText(getContext(), "Accommodation and photos created successfully", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        Log.e("AddAccommodationFragment", "Error uploading photo: " + error);
+                        Toast.makeText(getContext(), "Error uploading photo: " + error, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (IOException e) {
+                Log.e("AddAccommodationFragment", "Error processing image", e);
+            }
         }
     }
 
-    private boolean isValidText(String text) {
-        // No special characters allowed
-        String textPattern = "^[a-zA-Z0-9\\s]+$";
-        return Pattern.matches(textPattern, text);
+    private void navigateBackWithSuccess() {
+        getParentFragmentManager().popBackStack();
+        // Notify the AccommodationsFragment to show success dialog
+        getParentFragmentManager().setFragmentResult("accommodationResult", new Bundle());
     }
 
     private void clearForm() {
@@ -263,6 +306,8 @@ public class AddAccommodationFragment extends Fragment {
         priceEditText.setText("");
         descriptionEditText.setText("");
         servicesEditText.setText("");
+        citySpinner.setSelection(0);
+        capacitySpinner.setSelection(0);
         selectedImagesUris.clear();
     }
 }

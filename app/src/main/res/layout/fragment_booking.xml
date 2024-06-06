@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@android:color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
@@ -8,16 +11,111 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Booking Details"
-        android:textSize="24sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
         android:paddingBottom="16dp"
-        android:textAlignment="center" />
+        android:text="Booking Details"
+        android:textAlignment="center"
+        android:textColor="@color/SadBlue"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
-    <!-- Add more UI elements as needed for booking details -->
 
-    <Button
-        android:id="@+id/confirmBookingButton"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutStartDate"
+        style="@style/CustomTextInputLayout"
+        app:boxStrokeColor="@color/SadBlue"
+        app:cursorColor="@color/SadBlue"
+        app:hintTextColor="@color/SadBlue"
+        tools:ignore="ExtraText"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:hint="Start Date"
+        android:textColorHint="@color/SadBlue">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextStartDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_edit_text_dark"
+            android:backgroundTint="@color/white"
+            android:focusable="false"
+            android:textColor="@color/SadBlue"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutEndDate"
+        style="@style/CustomTextInputLayout"
+        app:boxStrokeColor="@color/SadBlue"
+        app:cursorColor="@color/SadBlue"
+        app:hintTextColor="@color/SadBlue"
+        tools:ignore="ExtraText"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:hint="End Date"
+        android:textColorHint="@color/SadBlue">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextEndDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_edit_text_dark"
+            android:backgroundTint="@color/white"
+            android:focusable="false"
+            android:textColor="@color/SadBlue"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/invoiceTextView"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:padding="16dp"
+        android:textAlignment="center"
+        android:textColor="@color/SadBlue"
+        android:textSize="16sp" />
+
+    <RadioGroup
+        android:id="@+id/paymentRadioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Confirm Booking" />
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp">
+
+        <RadioButton
+            android:id="@+id/fullPaymentRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pay Full Amount"
+            android:textColor="@color/SadBlue"
+            android:buttonTint="@color/SadBlue" />
+
+        <RadioButton
+            android:id="@+id/depositPaymentRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pay Deposit + First Month"
+            android:textColor="@color/SadBlue"
+            android:buttonTint="@color/SadBlue"
+            android:layout_marginTop="10dp" />
+    </RadioGroup>
+    <Button
+        android:id="@+id/confirmBookingButton"
+        style="@style/Widget.Material3.Button.IconButton.Filled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginRight="40dp"
+        android:backgroundTint="@color/SadBlue"
+        android:text="Confirm Booking"
+        android:textColor="@android:color/white" />
 </LinearLayout>

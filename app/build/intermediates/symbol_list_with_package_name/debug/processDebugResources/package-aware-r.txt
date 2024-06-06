@@ -3318,6 +3318,7 @@ id activity_chooser_view_content
 id add
 id addComment
 id add_accommodation_button
+id add_review_button
 id address
 id adjust_height
 id adjust_width
@@ -3427,6 +3428,7 @@ id default_activity_button
 id deleteAccountButton
 id deltaRelative
 id dependency_ordering
+id depositPaymentRadioButton
 id description
 id descriptionTopic
 id design_bottom_sheet
@@ -3463,7 +3465,10 @@ id east
 id edge
 id editTextBirthDate
 id editTextCommentContent
+id editTextEndDate
 id editTextMessage
+id editTextReviewContent
+id editTextStartDate
 id editTextTopicDescription
 id editTextTopicTitle
 id edit_query
@@ -3505,6 +3510,7 @@ id forever
 id fragment_container
 id fragment_container_view_tag
 id frost
+id fullPaymentRadioButton
 id fullscreen_header
 id genderSpinner
 id ghost_view
@@ -3544,6 +3550,7 @@ id indeterminate
 id indicator
 id info
 id invisible
+id invoiceTextView
 id inward
 id is_pooling_container_tag
 id italic
@@ -3567,6 +3574,7 @@ id m3_side_sheet
 id main_layout
 id mapView
 id map_button
+id map_button2
 id marquee
 id masked
 id match_constraint
@@ -3688,6 +3696,7 @@ id passwordEditText
 id password_toggle
 id path
 id pathRelative
+id paymentRadioGroup
 id peekHeight
 id percent
 id phoneEditText
@@ -3704,6 +3713,8 @@ id progress_circular
 id progress_horizontal
 id radio
 id rating
+id ratingBar
+id rating_bar
 id ratio
 id rectangles
 id recyclerView
@@ -3718,6 +3729,9 @@ id registerDateTextView
 id report_drawn
 id reverseSawtooth
 id reviewButton
+id review_content
+id review_list_view
+id reviewer_name
 id right
 id rightToLeft
 id right_icon
@@ -3754,7 +3768,6 @@ id shortcut
 id showCustom
 id showHome
 id showTitle
-id show_reviews
 id sin
 id skipCollapsed
 id skipped
@@ -3786,6 +3799,7 @@ id staticPostLayout
 id stop
 id stretch
 id submenuarrow
+id submitReviewButton
 id submit_area
 id submit_button
 id supportScrollUp
@@ -3822,6 +3836,8 @@ id textFieldPrice
 id textFieldServices
 id textFieldSurnamesignUp
 id textInputLayoutBirthDate
+id textInputLayoutEndDate
+id textInputLayoutStartDate
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
@@ -3878,6 +3894,7 @@ id uniform
 id unlabeled
 id up
 id updateUserInfoButton
+id upload_photos_button
 id useLogo
 id vertical
 id vertical_only
@@ -4037,6 +4054,7 @@ layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout dialog_accommodation_detail
 layout dialog_accommodation_options
+layout dialog_add_review
 layout dialog_change_password
 layout dialog_confirm_delete
 layout dialog_confirmation
@@ -4049,6 +4067,7 @@ layout dialog_new_comment
 layout dialog_new_topic
 layout dialog_options
 layout dialog_profile_settings
+layout dialog_success
 layout dialog_update_user_info
 layout dialog_view_profile
 layout fragment_accommodations
@@ -4062,6 +4081,7 @@ layout fragment_message
 layout fragment_profile
 layout fragment_profile_stranger
 layout fragment_rented
+layout fragment_reviews
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
 layout item_accommodation
@@ -4072,6 +4092,7 @@ layout item_image_carousel
 layout item_message
 layout item_message_received
 layout item_message_sent
+layout item_review
 layout item_simple_accommodation
 layout m3_alert_dialog
 layout m3_alert_dialog_actions

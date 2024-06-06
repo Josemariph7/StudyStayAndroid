@@ -1,5 +1,6 @@
 package com.example.studystayandroid.view;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,6 +52,7 @@ public class AccommodationsFragment extends Fragment {
     private Button filterButton;
     private Button mapButton;
     private Button addAccommodationButton;
+    private Button reviewButton;
     private Button applyFiltersButton;
     private LinearLayout filtersContainer;
 
@@ -64,12 +67,21 @@ public class AccommodationsFragment extends Fragment {
         if (getActivity() != null) {
             getActivity().setTitle("StudyStay - Accommodations");
         }
+        getParentFragmentManager().setFragmentResultListener("accommodationResult", this, (requestKey, result) -> {
+            showSuccessDialog("Accommodation posted successfully.");
+        });
+
         return inflater.inflate(R.layout.fragment_accommodations, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        if (getArguments() != null) {
+            currentUser = (User) getArguments().getSerializable("currentUser");
+            Log.d("AccommodationsFragment", "User: " + currentUser.toString());
+        }
 
         accommodationController = new AccommodationController(requireContext());
         userController = new UserController(requireContext());
@@ -90,9 +102,10 @@ public class AccommodationsFragment extends Fragment {
         applyFiltersButton = view.findViewById(R.id.apply_filters_button);
         filtersContainer = view.findViewById(R.id.filters_container);
 
+
         filterButton.setOnClickListener(v -> toggleFiltersVisibility());
         mapButton.setOnClickListener(v -> openMap());
-        addAccommodationButton.setOnClickListener(v -> openAddAccommodationFragment());
+        addAccommodationButton.setOnClickListener(v -> openAddAccommodationFragment(currentUser));
         applyFiltersButton.setOnClickListener(v -> applyFilters());
 
         setupSpinners();
@@ -117,9 +130,7 @@ public class AccommodationsFragment extends Fragment {
         adapter.setOnItemClickListener(this::showAccommodationDetailDialog);
         adapter.setOnItemLongClickListener(this::showAccommodationOptionsDialog);
 
-        if (getArguments() != null) {
-            currentUser = (User) getArguments().getSerializable("currentUser");
-        }
+
     }
 
     private void toggleFiltersVisibility() {
@@ -162,6 +173,26 @@ public class AccommodationsFragment extends Fragment {
         });
     }
 
+    private void showSuccessDialog(String message) {
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        View dialogView = inflater.inflate(R.layout.dialog_success, null);
+
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) TextView dialogTitle = dialogView.findViewById(R.id.dialogTitle);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) TextView dialogMessage = dialogView.findViewById(R.id.dialogMessage);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button buttonConfirm = dialogView.findViewById(R.id.buttonConfirm);
+
+        dialogTitle.setText("Success");
+        dialogMessage.setText(message);
+
+        AlertDialog dialog = new AlertDialog.Builder(requireContext())
+                .setView(dialogView)
+                .create();
+
+        buttonConfirm.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
+    }
+
     private void applyFilters() {
         String selectedCity = filterCitySpinner.getSelectedItem().toString();
         String selectedCapacityStr = filterCapacitySpinner.getSelectedItem().toString();
@@ -200,6 +231,7 @@ public class AccommodationsFragment extends Fragment {
                 Log.e("AccommodationsFragment", "Error applying filters: " + error);
             }
         });
+        toggleFiltersVisibility();
     }
 
     private void openMap() {
@@ -207,12 +239,21 @@ public class AccommodationsFragment extends Fragment {
         mapDialogFragment.show(getParentFragmentManager(), "MapDialogFragment");
     }
 
-    private void openAddAccommodationFragment() {
+    private void openAddAccommodationFragment(User currentUser) {
+        AddAccommodationFragment fragment = new AddAccommodationFragment();
+
+        // Crear un Bundle para pasar el User al fragmento
+        Bundle args = new Bundle();
+        args.putSerializable("currentUser", currentUser);
+        fragment.setArguments(args);
+
+        // Reemplazar el fragmento
         getParentFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, new AddAccommodationFragment())
+                .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
                 .commit();
     }
+
 
     private void showAccommodationDetailDialog(Accommodation accommodation) {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
@@ -228,6 +269,8 @@ public class AccommodationsFragment extends Fragment {
         TextView ownerTextView = dialogView.findViewById(R.id.ownerName);
         Button bookButton = dialogView.findViewById(R.id.bookButton);
         Button contactButton = dialogView.findViewById(R.id.contactButton);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button mapButton = dialogView.findViewById(R.id.map_button2);
+        reviewButton = dialogView.findViewById(R.id.reviewButton);
 
         List<byte[]> photos = new ArrayList<>();
         for (AccommodationPhoto photo : accommodation.getPhotos()) {
@@ -249,13 +292,36 @@ public class AccommodationsFragment extends Fragment {
 
         backButton.setOnClickListener(v -> dialog.dismiss());
 
-        bookButton.setOnClickListener(v -> {
+        mapButton.setOnClickListener(v ->         showAccommodationOnMap(accommodation));
+
+        reviewButton.setOnClickListener(v -> {
+            ReviewFragment reviewFragment = new ReviewFragment();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("accommodation", accommodation);
+            bundle.putSerializable("currentUser", currentUser);
+            reviewFragment.setArguments(bundle);
             getParentFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new BookingFragment())
+                    .replace(R.id.fragment_container, reviewFragment)
                     .addToBackStack(null)
                     .commit();
             dialog.dismiss();
         });
+
+
+        bookButton.setOnClickListener(v -> {
+            BookingFragment bookingFragment = new BookingFragment();
+            Bundle args = new Bundle();
+            args.putSerializable("accommodation", accommodation);
+            args.putSerializable("currentUser", currentUser);
+            bookingFragment.setArguments(args);
+
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, bookingFragment)
+                    .addToBackStack(null)
+                    .commit();
+            dialog.dismiss();
+        });
+
 
         contactButton.setOnClickListener(v -> {
             showContactOptions(accommodation.getOwner(), dialog);
@@ -424,7 +490,7 @@ public class AccommodationsFragment extends Fragment {
 
             @Override
             public void onSuccess(Object result) {
-                // Handle any additional logic if needed
+                // Handle any optional logic if needed
             }
 
             @Override

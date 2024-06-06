@@ -77,6 +77,7 @@ id ContactButton
 id LogInButton
 id addComment
 id add_accommodation_button
+id add_review_button
 id address
 id apply_filters_button
 id availability
@@ -110,6 +111,7 @@ id confirmBookingButton
 id contactButton
 id currentPasswordEditText
 id deleteAccountButton
+id depositPaymentRadioButton
 id description
 id descriptionTopic
 id dialogMessage
@@ -119,7 +121,10 @@ id drag_handle
 id drawer_layout
 id editTextBirthDate
 id editTextCommentContent
+id editTextEndDate
 id editTextMessage
+id editTextReviewContent
+id editTextStartDate
 id editTextTopicDescription
 id editTextTopicTitle
 id emailEditText
@@ -133,6 +138,7 @@ id filter_capacity_spinner
 id filter_city_spinner
 id filters_container
 id fragment_container
+id fullPaymentRadioButton
 id genderSpinner
 id google_button
 id imageCarousel
@@ -141,11 +147,13 @@ id imageView2
 id imageView3
 id imageViewProfile
 id indicator
+id invoiceTextView
 id lastNameEditText
 id logo
 id main_layout
 id mapView
 id map_button
+id map_button2
 id messageInputLayout
 id nameEditText
 id nameTextViewProfile
@@ -161,12 +169,15 @@ id nav_view
 id newPasswordEditText
 id ownerName
 id passwordEditText
+id paymentRadioGroup
 id phoneEditText
 id phoneTextView
 id price
 id profileImageView
 id profilePhoto
 id rating
+id ratingBar
+id rating_bar
 id recyclerView
 id recyclerViewComments
 id recyclerViewConversations
@@ -177,8 +188,11 @@ id recyclerViewRented
 id registerButton
 id registerDateTextView
 id reviewButton
-id show_reviews
+id review_content
+id review_list_view
+id reviewer_name
 id spinnerGender
+id submitReviewButton
 id submit_button
 id tabLayout
 id textFieldAddress
@@ -195,6 +209,8 @@ id textFieldPrice
 id textFieldServices
 id textFieldSurnamesignUp
 id textInputLayoutBirthDate
+id textInputLayoutEndDate
+id textInputLayoutStartDate
 id textView
 id textView2
 id textView5
@@ -215,6 +231,7 @@ id tvTopicDescription
 id tvTopicTitle
 id twitter_button
 id updateUserInfoButton
+id upload_photos_button
 id viewMapButton
 id viewPager
 id viewProfileButton
@@ -222,6 +239,7 @@ layout activity_dashboard
 layout activity_main
 layout dialog_accommodation_detail
 layout dialog_accommodation_options
+layout dialog_add_review
 layout dialog_change_password
 layout dialog_confirm_delete
 layout dialog_confirmation
@@ -234,6 +252,7 @@ layout dialog_new_comment
 layout dialog_new_topic
 layout dialog_options
 layout dialog_profile_settings
+layout dialog_success
 layout dialog_update_user_info
 layout dialog_view_profile
 layout fragment_accommodations
@@ -247,6 +266,7 @@ layout fragment_message
 layout fragment_profile
 layout fragment_profile_stranger
 layout fragment_rented
+layout fragment_reviews
 layout item_accommodation
 layout item_comment
 layout item_conversation
@@ -255,6 +275,7 @@ layout item_image_carousel
 layout item_message
 layout item_message_received
 layout item_message_sent
+layout item_review
 layout item_simple_accommodation
 layout nav_header
 layout spinner_dropdown_item

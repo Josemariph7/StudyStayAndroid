@@ -193,7 +193,7 @@ public class BookingController {
                 params.put("userId", booking.getUser().getUserId().toString());
                 params.put("startDate", booking.getStartDate().format(DATE_TIME_FORMATTER));
                 params.put("endDate", booking.getEndDate().format(DATE_TIME_FORMATTER));
-                params.put("status", booking.getStatus().name());
+                params.put("status", "PENDING");
                 return params;
             }
         };
