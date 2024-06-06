@@ -80,7 +80,15 @@ public class AccommodationController {
                             boolean finalAvailability = availability;
                             userController.getUserById(ownerId, new UserController.UserCallback() {
                                 @Override
-                                public void onSuccess(Object result) {}
+                                public void onSuccess(Object result) {
+                                    User user=(User)result;
+                                    Accommodation accommodation = new Accommodation(user, address, city, price, description, capacity, services);
+                                    accommodation.setAccommodationId(accommodationId);
+                                    accommodation.setAvailability(finalAvailability);
+                                    accommodation.setRating(rating);
+                                    accommodations.add(accommodation);
+                                    callback.onSuccess(accommodations);
+                                }
                                 @Override
                                 public void onSuccess(User user) {
                                     Accommodation accommodation = new Accommodation(user, address, city, price, description, capacity, services);
@@ -88,7 +96,7 @@ public class AccommodationController {
                                     accommodation.setAvailability(finalAvailability);
                                     accommodation.setRating(rating);
                                     accommodations.add(accommodation);
-                                    callback.onSuccess(accommodations);  // Ensure this is called after fetching user
+                                    callback.onSuccess(accommodations);
                                 }
                                 @Override
                                 public void onError(String error) {
@@ -120,16 +128,29 @@ public class AccommodationController {
                             String description = accommodationObject.getString("Description");
                             int capacity = accommodationObject.getInt("Capacity");
                             String services = accommodationObject.getString("Services");
-                            boolean availability = accommodationObject.getBoolean("Availability");
+                            boolean availability = false;
+                            if (accommodationObject.getInt("Availability")==1) {
+                                availability=true;
+                            }else if(accommodationObject.getInt("Availability")==0){
+                                availability=false;
+                            }
                             double rating = accommodationObject.getDouble("Rating");
+                            boolean finalAvailability = availability;
                             userController.getUserById(ownerId, new UserController.UserCallback() {
                                 @Override
-                                public void onSuccess(Object result) {}
+                                public void onSuccess(Object result) {
+                                    User user=(User) result;
+                                    Accommodation accommodation = new Accommodation(user, address, city, price, description, capacity, services);
+                                    accommodation.setAccommodationId(accommodationId);
+                                    accommodation.setAvailability(finalAvailability);
+                                    accommodation.setRating(rating);
+                                    callback.onSuccess(accommodation);
+                                }
                                 @Override
                                 public void onSuccess(User user) {
                                     Accommodation accommodation = new Accommodation(user, address, city, price, description, capacity, services);
                                     accommodation.setAccommodationId(accommodationId);
-                                    accommodation.setAvailability(availability);
+                                    accommodation.setAvailability(finalAvailability);
                                     accommodation.setRating(rating);
                                     callback.onSuccess(accommodation);
                                 }

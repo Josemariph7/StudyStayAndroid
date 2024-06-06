@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -24,6 +22,8 @@ import com.example.studystayandroid.controller.AccommodationPhotoController;
 import com.example.studystayandroid.model.Accommodation;
 import com.example.studystayandroid.model.AccommodationPhoto;
 import com.example.studystayandroid.model.User;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -36,13 +36,23 @@ import java.util.regex.Pattern;
 public class AddAccommodationFragment extends Fragment {
 
     private static final int PICK_IMAGES_REQUEST = 1;
-    private EditText addressEditText, priceEditText, descriptionEditText, servicesEditText;
-    private Spinner citySpinner, capacitySpinner;
-    private CheckBox availabilityCheckBox;
+
+    private TextInputLayout textFieldAddress;
+    private TextInputEditText addressEditText;
+    private Spinner citySpinner;
+    private TextInputLayout textFieldPrice;
+    private TextInputEditText priceEditText;
+    private TextInputLayout textFieldDescription;
+    private TextInputEditText descriptionEditText;
+    private TextInputLayout textFieldServices;
+    private TextInputEditText servicesEditText;
+    private Spinner capacitySpinner;
     private Button submitButton, uploadPhotosButton;
+
     private AccommodationController accommodationController;
     private List<Uri> selectedImagesUris;
-    private User currentUser; // Add this line
+    private User currentUser;
+
 
     public AddAccommodationFragment() {
         // Required empty public constructor
@@ -58,14 +68,18 @@ public class AddAccommodationFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        addressEditText = view.findViewById(R.id.address_edit_text);
+        textFieldAddress = view.findViewById(R.id.textFieldAddress);
+        addressEditText = (TextInputEditText) textFieldAddress.getEditText();
         citySpinner = view.findViewById(R.id.city_spinner);
-        priceEditText = view.findViewById(R.id.price_edit_text);
-        descriptionEditText = view.findViewById(R.id.description_edit_text);
+        textFieldPrice = view.findViewById(R.id.textFieldPrice);
+        priceEditText = (TextInputEditText) textFieldPrice.getEditText();
+        textFieldDescription = view.findViewById(R.id.textFieldDescription);
+        descriptionEditText = (TextInputEditText) textFieldDescription.getEditText();
+        textFieldServices = view.findViewById(R.id.textFieldServices);
+        servicesEditText = (TextInputEditText) textFieldServices.getEditText();
         capacitySpinner = view.findViewById(R.id.capacity_spinner);
-        servicesEditText = view.findViewById(R.id.services_edit_text);
         submitButton = view.findViewById(R.id.submit_button);
-        uploadPhotosButton = view.findViewById(R.id.upload_photos_button);
+        uploadPhotosButton = view.findViewById(R.id.show_reviews);
 
         accommodationController = new AccommodationController(requireContext());
         selectedImagesUris = new ArrayList<>();
@@ -75,7 +89,14 @@ public class AddAccommodationFragment extends Fragment {
         uploadPhotosButton.setOnClickListener(v -> openImagePicker());
         submitButton.setOnClickListener(v -> submitAccommodation());
 
-        // Setup spinners with custom styles
+        // Retrieve currentUser from arguments
+        if (getArguments() != null) {
+            currentUser = (User) getArguments().getSerializable("currentUser");
+        }
+    }
+
+    private void setupSpinners() {
+        // Set up city spinner with custom styles
         ArrayAdapter<CharSequence> cityAdapter = ArrayAdapter.createFromResource(
                 getContext(),
                 R.array.cities_array,
@@ -84,35 +105,13 @@ public class AddAccommodationFragment extends Fragment {
         cityAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);  // Using custom dropdown layout
         citySpinner.setAdapter(cityAdapter);
 
+        // Set up capacity spinner with custom styles
         ArrayAdapter<CharSequence> capacityAdapter = ArrayAdapter.createFromResource(
                 getContext(),
                 R.array.capacity_array,
                 R.layout.spinner_item);  // Using custom layout
 
         capacityAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);  // Using custom dropdown layout
-        capacitySpinner.setAdapter(capacityAdapter);
-
-        // Retrieve currentUser from arguments
-        if (getArguments() != null) {
-            currentUser = (User) getArguments().getSerializable("currentUser");
-        }
-    }
-
-    private void setupSpinners() {
-        // Set up city spinner
-        ArrayAdapter<CharSequence> cityAdapter = ArrayAdapter.createFromResource(
-                getContext(),
-                R.array.cities_array, // Assuming you have a string array resource named "cities_array"
-                android.R.layout.simple_spinner_item);
-        cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        citySpinner.setAdapter(cityAdapter);
-
-        // Set up capacity spinner
-        ArrayAdapter<CharSequence> capacityAdapter = ArrayAdapter.createFromResource(
-                getContext(),
-                R.array.capacity_array, // Assuming you have a string array resource named "capacity_array"
-                android.R.layout.simple_spinner_item);
-        capacityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         capacitySpinner.setAdapter(capacityAdapter);
     }
 
@@ -186,7 +185,9 @@ public class AddAccommodationFragment extends Fragment {
             public void onSuccess(Accommodation createdAccommodation) {
                 uploadPhotos(createdAccommodation);
                 Log.d("AddAccommodationFragment", "Accommodation created successfully");
-                // Navigate back or clear form
+                // Clear form or navigate back
+                clearForm();
+                Toast.makeText(getContext(), "Accommodation created successfully", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -196,6 +197,7 @@ public class AddAccommodationFragment extends Fragment {
             @Override
             public void onError(String error) {
                 Log.e("AddAccommodationFragment", "Error creating accommodation: " + error);
+                Toast.makeText(getContext(), "Error creating accommodation: " + error, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -254,5 +256,13 @@ public class AddAccommodationFragment extends Fragment {
         // No special characters allowed
         String textPattern = "^[a-zA-Z0-9\\s]+$";
         return Pattern.matches(textPattern, text);
+    }
+
+    private void clearForm() {
+        addressEditText.setText("");
+        priceEditText.setText("");
+        descriptionEditText.setText("");
+        servicesEditText.setText("");
+        selectedImagesUris.clear();
     }
 }

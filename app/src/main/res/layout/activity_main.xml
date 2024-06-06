@@ -54,7 +54,9 @@
         android:hint="@string/hintPassword"
         app:boxStrokeColor="@color/LightBlue"
         app:cursorColor="@color/SadBlue"
-        app:hintTextColor="@color/SadBlue">
+        app:hintTextColor="@color/SadBlue"
+        app:endIconMode="password_toggle"
+        app:endIconTint="@color/SadBlue">
 
         <com.google.android.material.textfield.TextInputEditText
             style="@style/CustomTextInputEditText"
@@ -63,8 +65,11 @@
             android:background="@drawable/rounded_edit_text_light"
             android:backgroundTint="@color/white"
             android:gravity="center_vertical"
-            android:textColor="@color/SadBlue" />
+            android:textColor="@color/SadBlue"
+            android:inputType="textPassword" />
+
     </com.google.android.material.textfield.TextInputLayout>
+
 
     <ImageView
         android:id="@+id/imageView"

@@ -3318,7 +3318,6 @@ int id add 0x7f090049
 int id addComment 0x7f09004a
 int id add_accommodation_button 0x7f09004b
 int id address 0x7f09004c
-int id address_edit_text 0x7f09004d
 int id adjust_height 0x7f09004e
 int id adjust_width 0x7f09004f
 int id alertTitle 0x7f090050
@@ -3429,7 +3428,6 @@ int id deltaRelative 0x7f0900b9
 int id dependency_ordering 0x7f0900ba
 int id description 0x7f0900bb
 int id descriptionTopic 0x7f0900bc
-int id description_edit_text 0x7f0900bd
 int id design_bottom_sheet 0x7f0900be
 int id design_menu_item_action_area 0x7f0900bf
 int id design_menu_item_action_area_stub 0x7f0900c0
@@ -3699,7 +3697,6 @@ int id position 0x7f0901c3
 int id postLayout 0x7f0901c4
 int id pressed 0x7f0901c5
 int id price 0x7f0901c6
-int id price_edit_text 0x7f0901c7
 int id profileImageView 0x7f0901c8
 int id profilePhoto 0x7f0901c9
 int id progress_circular 0x7f0901ca
@@ -3750,13 +3747,13 @@ int id search_voice_btn 0x7f0901f5
 int id select_dialog_listview 0x7f0901f6
 int id selected 0x7f0901f7
 int id selection_type 0x7f0901f8
-int id services_edit_text 0x7f0901f9
 int id sharedValueSet 0x7f0901fa
 int id sharedValueUnset 0x7f0901fb
 int id shortcut 0x7f0901fc
 int id showCustom 0x7f0901fd
 int id showHome 0x7f0901fe
 int id showTitle 0x7f0901ff
+int id show_reviews 0x7f09029c
 int id sin 0x7f090200
 int id skipCollapsed 0x7f090201
 int id skipped 0x7f090202
@@ -3810,7 +3807,9 @@ int id terrain 0x7f090231
 int id text 0x7f090232
 int id text2 0x7f090233
 int id textEnd 0x7f090234
+int id textFieldAddress 0x7f090298
 int id textFieldDNISignUp 0x7f090235
+int id textFieldDescription 0x7f090299
 int id textFieldEmail 0x7f090236
 int id textFieldEmailSignUp 0x7f090237
 int id textFieldGender 0x7f090238
@@ -3818,6 +3817,8 @@ int id textFieldNameSignUp 0x7f090239
 int id textFieldPassword 0x7f09023a
 int id textFieldPasswordSignUp 0x7f09023b
 int id textFieldPhoneSignUp 0x7f09023c
+int id textFieldPrice 0x7f09029a
+int id textFieldServices 0x7f09029b
 int id textFieldSurnamesignUp 0x7f09023d
 int id textInputLayoutBirthDate 0x7f09023e
 int id textSpacerNoButtons 0x7f09023f
@@ -3826,8 +3827,6 @@ int id textStart 0x7f090241
 int id textTop 0x7f090242
 int id textView 0x7f090243
 int id textView2 0x7f090244
-int id textView3 0x7f090245
-int id textView4 0x7f090246
 int id textView5 0x7f090247
 int id textView6 0x7f090248
 int id textViewContent 0x7f090249
@@ -3878,7 +3877,6 @@ int id uniform 0x7f090274
 int id unlabeled 0x7f090275
 int id up 0x7f090276
 int id updateUserInfoButton 0x7f090277
-int id upload_photos_button 0x7f090278
 int id useLogo 0x7f090279
 int id vertical 0x7f09027a
 int id vertical_only 0x7f09027b

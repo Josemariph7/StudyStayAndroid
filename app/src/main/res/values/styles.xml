@@ -48,6 +48,7 @@
             <item name="android:cursorVisible">true</item>
         </style>
 
+
         <style name="CustomTextInputEditText" parent="Widget.MaterialComponents.TextInputEditText.FilledBox.Dense">
             <item name="android:backgroundTint">@android:color/transparent</item>
         </style>

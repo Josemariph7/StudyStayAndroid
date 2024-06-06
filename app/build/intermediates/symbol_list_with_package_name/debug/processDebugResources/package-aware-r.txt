@@ -3319,7 +3319,6 @@ id add
 id addComment
 id add_accommodation_button
 id address
-id address_edit_text
 id adjust_height
 id adjust_width
 id alertTitle
@@ -3430,7 +3429,6 @@ id deltaRelative
 id dependency_ordering
 id description
 id descriptionTopic
-id description_edit_text
 id design_bottom_sheet
 id design_menu_item_action_area
 id design_menu_item_action_area_stub
@@ -3700,7 +3698,6 @@ id position
 id postLayout
 id pressed
 id price
-id price_edit_text
 id profileImageView
 id profilePhoto
 id progress_circular
@@ -3751,13 +3748,13 @@ id search_voice_btn
 id select_dialog_listview
 id selected
 id selection_type
-id services_edit_text
 id sharedValueSet
 id sharedValueUnset
 id shortcut
 id showCustom
 id showHome
 id showTitle
+id show_reviews
 id sin
 id skipCollapsed
 id skipped
@@ -3811,7 +3808,9 @@ id terrain
 id text
 id text2
 id textEnd
+id textFieldAddress
 id textFieldDNISignUp
+id textFieldDescription
 id textFieldEmail
 id textFieldEmailSignUp
 id textFieldGender
@@ -3819,6 +3818,8 @@ id textFieldNameSignUp
 id textFieldPassword
 id textFieldPasswordSignUp
 id textFieldPhoneSignUp
+id textFieldPrice
+id textFieldServices
 id textFieldSurnamesignUp
 id textInputLayoutBirthDate
 id textSpacerNoButtons
@@ -3827,8 +3828,6 @@ id textStart
 id textTop
 id textView
 id textView2
-id textView3
-id textView4
 id textView5
 id textView6
 id textViewContent
@@ -3879,7 +3878,6 @@ id uniform
 id unlabeled
 id up
 id updateUserInfoButton
-id upload_photos_button
 id useLogo
 id vertical
 id vertical_only

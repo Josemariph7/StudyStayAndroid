@@ -78,7 +78,6 @@ id LogInButton
 id addComment
 id add_accommodation_button
 id address
-id address_edit_text
 id apply_filters_button
 id availability
 id back_button
@@ -113,7 +112,6 @@ id currentPasswordEditText
 id deleteAccountButton
 id description
 id descriptionTopic
-id description_edit_text
 id dialogMessage
 id dialogTitle
 id dniTextView
@@ -166,7 +164,6 @@ id passwordEditText
 id phoneEditText
 id phoneTextView
 id price
-id price_edit_text
 id profileImageView
 id profilePhoto
 id rating
@@ -180,11 +177,13 @@ id recyclerViewRented
 id registerButton
 id registerDateTextView
 id reviewButton
-id services_edit_text
+id show_reviews
 id spinnerGender
 id submit_button
 id tabLayout
+id textFieldAddress
 id textFieldDNISignUp
+id textFieldDescription
 id textFieldEmail
 id textFieldEmailSignUp
 id textFieldGender
@@ -192,12 +191,12 @@ id textFieldNameSignUp
 id textFieldPassword
 id textFieldPasswordSignUp
 id textFieldPhoneSignUp
+id textFieldPrice
+id textFieldServices
 id textFieldSurnamesignUp
 id textInputLayoutBirthDate
 id textView
 id textView2
-id textView3
-id textView4
 id textView5
 id textView6
 id textViewContent
@@ -216,7 +215,6 @@ id tvTopicDescription
 id tvTopicTitle
 id twitter_button
 id updateUserInfoButton
-id upload_photos_button
 id viewMapButton
 id viewPager
 id viewProfileButton
