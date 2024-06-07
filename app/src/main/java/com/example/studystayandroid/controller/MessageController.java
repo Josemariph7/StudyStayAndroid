@@ -3,16 +3,12 @@ package com.example.studystayandroid.controller;
 import android.content.Context;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.studystayandroid.model.Message;
 import com.example.studystayandroid.utils.Constants;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,6 +19,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controlador para gestionar las operaciones relacionadas con los mensajes.
+ */
 public class MessageController {
 
     private static final String URL_GET_MESSAGES = "http://" + Constants.IP + "/studystay/message/getMessages.php";
@@ -33,11 +32,22 @@ public class MessageController {
     private RequestQueue requestQueue;
     private Context context;
 
+    /**
+     * Constructor para inicializar el controlador de mensajes.
+     *
+     * @param context el contexto de la aplicación
+     */
     public MessageController(Context context) {
         this.context = context;
         this.requestQueue = Volley.newRequestQueue(context);
     }
 
+    /**
+     * Obtiene la lista de mensajes de una conversación específica desde el servidor.
+     *
+     * @param conversationId el ID de la conversación
+     * @param callback       el callback para manejar la respuesta
+     */
     public void getMessages(Long conversationId, final MessageListCallback callback) {
         String url = URL_GET_MESSAGES + "?conversationId=" + conversationId;
 
@@ -68,6 +78,12 @@ public class MessageController {
         requestQueue.add(jsonArrayRequest);
     }
 
+    /**
+     * Crea un nuevo mensaje.
+     *
+     * @param message  el mensaje a ser creado
+     * @param callback el callback para manejar la respuesta
+     */
     public void createMessage(Message message, final MessageCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CREATE_MESSAGE,
                 response -> {
@@ -93,6 +109,12 @@ public class MessageController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Elimina un mensaje por su ID.
+     *
+     * @param messageId el ID del mensaje a ser eliminado
+     * @param callback  el callback para manejar la respuesta
+     */
     public void deleteMessage(Long messageId, final MessageCallback callback) {
         String url = URL_DELETE_MESSAGE + "?messageId=" + messageId;
 
@@ -110,11 +132,17 @@ public class MessageController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Interfaz para manejar un solo mensaje.
+     */
     public interface MessageCallback {
         void onSuccess(Object result);
         void onError(String error);
     }
 
+    /**
+     * Interfaz para manejar la lista de mensajes.
+     */
     public interface MessageListCallback {
         void onSuccess(List<Message> messages);
         void onError(String error);

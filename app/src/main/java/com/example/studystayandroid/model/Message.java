@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * Clase que representa un mensaje en una conversación.
+ */
 public class Message implements Serializable {
     private Long messageId; // Identificador único del mensaje
     private Long conversationId; // Identificador de la conversación a la que pertenece el mensaje
@@ -13,10 +16,23 @@ public class Message implements Serializable {
     private LocalDateTime dateTime; // Fecha y hora de envío del mensaje
 
     // Constructor
+
+    /**
+     * Constructor por defecto.
+     */
     public Message() {
     }
 
-    // Constructor parametrizado
+    /**
+     * Constructor parametrizado.
+     *
+     * @param messageId      el identificador único del mensaje
+     * @param conversationId el identificador de la conversación a la que pertenece el mensaje
+     * @param senderId       el identificador del remitente del mensaje
+     * @param receiverId     el identificador del destinatario del mensaje
+     * @param content        el contenido del mensaje
+     * @param dateTime       la fecha y hora de envío del mensaje
+     */
     public Message(Long messageId, Long conversationId, Long senderId, Long receiverId, String content, LocalDateTime dateTime) {
         this.messageId = messageId;
         this.conversationId = conversationId;
@@ -27,6 +43,7 @@ public class Message implements Serializable {
     }
 
     // Getters y setters
+
     public Long getMessageId() {
         return messageId;
     }
@@ -76,6 +93,7 @@ public class Message implements Serializable {
     }
 
     // equals, hashCode y toString
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

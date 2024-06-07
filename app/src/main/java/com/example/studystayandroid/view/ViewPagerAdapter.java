@@ -11,11 +11,8 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
 
     private User currentUser;
 
-    public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
+    public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity, User user) {
         super(fragmentActivity);
-    }
-
-    public void setUser(User user) {
         this.currentUser = user;
     }
 
@@ -24,11 +21,11 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new RentedFragment();
+                return RentedFragment.newInstance(currentUser);
             case 1:
-                return new ListedFragment();
+                return ListedFragment.newInstance(currentUser);
             default:
-                return new RentedFragment();
+                return RentedFragment.newInstance(currentUser);
         }
     }
 

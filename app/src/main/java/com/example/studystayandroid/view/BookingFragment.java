@@ -254,7 +254,7 @@ public class BookingFragment extends Fragment {
 
     private void simulatePaymentAndConfirmBooking() {
         // Simulate payment process
-        new AlertDialog.Builder(requireContext())
+        AlertDialog progressDialog = new AlertDialog.Builder(requireContext())
                 .setTitle("Processing Payment")
                 .setMessage("Redirecting to payment gateway...")
                 .setCancelable(false)
@@ -263,8 +263,7 @@ public class BookingFragment extends Fragment {
         // Delay to simulate payment process
         new Handler().postDelayed(() -> {
             // Close payment simulation dialog
-            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-            fragmentManager.popBackStack();
+            progressDialog.dismiss();
 
             // Create booking
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
@@ -276,14 +275,48 @@ public class BookingFragment extends Fragment {
                 @Override
                 public void onSuccess(Object result) {
                     clearForm();
+
+                    // Show success dialog and redirect to accommodation fragment
+                    showSuccessDialog();
                 }
 
                 @Override
                 public void onError(String error) {
+                    showErrorDialog("Error creating booking: " + error);
                 }
             });
-        }, 5000);
+        }, 7000); // Increased delay to 7 seconds
     }
+
+    private void showSuccessDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        @SuppressLint("InflateParams")
+        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_success, null);
+
+        TextView dialogTitle = dialogView.findViewById(R.id.dialogTitle);
+        TextView dialogMessage = dialogView.findViewById(R.id.dialogMessage);
+        Button buttonConfirm = dialogView.findViewById(R.id.buttonConfirm);
+
+        dialogTitle.setText("Success");
+        dialogMessage.setText("The payment was processed successfully!");
+
+        builder.setView(dialogView);
+        AlertDialog successDialog = builder.create();
+
+        buttonConfirm.setOnClickListener(v -> {
+            successDialog.dismiss();
+            // Redirect to accommodation fragment
+            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+            fragmentManager.popBackStack();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, new AccommodationsFragment())
+                    .addToBackStack(null)
+                    .commit();
+        });
+
+        successDialog.show();
+    }
+
 
     private void clearForm() {
         startDateEditText.setText("");

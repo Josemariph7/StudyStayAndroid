@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Clase que representa una conversación entre dos usuarios.
+ */
 public class Conversation implements Serializable {
     private Long conversationId; // Identificador único de la conversación
     private Long user1Id; // ID del primer usuario
@@ -12,11 +15,22 @@ public class Conversation implements Serializable {
     private List<Message> messages; // Lista de mensajes en la conversación
 
     // Constructor
+
+    /**
+     * Constructor por defecto.
+     */
     public Conversation() {
         this.messages = new ArrayList<>();
     }
 
-    // Constructor parametrizado
+    /**
+     * Constructor parametrizado.
+     *
+     * @param conversationId el identificador único de la conversación
+     * @param user1Id        el ID del primer usuario
+     * @param user2Id        el ID del segundo usuario
+     * @param messages       la lista de mensajes en la conversación
+     */
     public Conversation(Long conversationId, Long user1Id, Long user2Id, List<Message> messages) {
         this.conversationId = conversationId;
         this.user1Id = user1Id;
@@ -25,6 +39,7 @@ public class Conversation implements Serializable {
     }
 
     // Getters y setters
+
     public Long getConversationId() {
         return conversationId;
     }
@@ -58,6 +73,7 @@ public class Conversation implements Serializable {
     }
 
     // equals, hashCode y toString
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

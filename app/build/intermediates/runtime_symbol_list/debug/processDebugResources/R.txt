@@ -3385,7 +3385,6 @@ int id chain2 0x7f09008b
 int id chains 0x7f09008c
 int id changePasswordButton 0x7f09008d
 int id changeProfilePictureButton 0x7f09008e
-int id chatButton 0x7f09008f
 int id checkbox 0x7f090090
 int id checked 0x7f090091
 int id chronometer 0x7f090092
@@ -3435,6 +3434,7 @@ int id design_menu_item_action_area 0x7f0900bc
 int id design_menu_item_action_area_stub 0x7f0900bd
 int id design_menu_item_text 0x7f0900be
 int id design_navigation_view 0x7f0900bf
+int id detailedAccommodationButton 0x7f0902a6
 int id dialogMessage 0x7f0900c0
 int id dialogTitle 0x7f0900c1
 int id dialog_button 0x7f0900c2
@@ -4061,11 +4061,13 @@ int layout dialog_contact_options 0x7f0c0033
 int layout dialog_delete_account 0x7f0c0034
 int layout dialog_delete_confirmation 0x7f0c0035
 int layout dialog_error 0x7f0c0036
+int layout dialog_listed_accommodation_detail 0x7f0c009a
 int layout dialog_map 0x7f0c0037
 int layout dialog_new_comment 0x7f0c0038
 int layout dialog_new_topic 0x7f0c0039
 int layout dialog_options 0x7f0c003a
 int layout dialog_profile_settings 0x7f0c003b
+int layout dialog_rented_accommodation_detail 0x7f0c009b
 int layout dialog_success 0x7f0c0094
 int layout dialog_update_user_info 0x7f0c003c
 int layout dialog_view_profile 0x7f0c003d

@@ -22,6 +22,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controlador para gestionar las operaciones relacionadas con las reseñas de alojamiento.
+ */
 public class AccommodationReviewController {
 
     private static final String URL_GET_REVIEWS = "http://" + Constants.IP + "/studystay/review/getReviews.php";
@@ -34,11 +37,21 @@ public class AccommodationReviewController {
     private RequestQueue requestQueue;
     private Context context;
 
+    /**
+     * Constructor para inicializar el controlador de reseñas de alojamiento.
+     *
+     * @param context el contexto de la aplicación
+     */
     public AccommodationReviewController(Context context) {
         this.context = context;
         this.requestQueue = Volley.newRequestQueue(context);
     }
 
+    /**
+     * Obtiene la lista de reseñas desde el servidor.
+     *
+     * @param callback el callback para manejar la respuesta
+     */
     public void getReviews(final ReviewListCallback callback) {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URL_GET_REVIEWS, null,
                 response -> {
@@ -102,6 +115,12 @@ public class AccommodationReviewController {
         requestQueue.add(jsonArrayRequest);
     }
 
+    /**
+     * Obtiene una reseña específica por su ID.
+     *
+     * @param reviewId el ID de la reseña
+     * @param callback el callback para manejar la respuesta
+     */
     public void getReviewById(Long reviewId, final ReviewCallback callback) {
         String url = URL_GET_REVIEW_BY_ID + "?reviewId=" + reviewId;
 
@@ -162,6 +181,12 @@ public class AccommodationReviewController {
         requestQueue.add(jsonArrayRequest);
     }
 
+    /**
+     * Crea una nueva reseña.
+     *
+     * @param review la reseña a ser creada
+     * @param callback el callback para manejar la respuesta
+     */
     public void createReview(AccommodationReview review, final ReviewCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CREATE_REVIEW,
                 response -> {
@@ -186,6 +211,12 @@ public class AccommodationReviewController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Actualiza una reseña existente.
+     *
+     * @param review la reseña a ser actualizada
+     * @param callback el callback para manejar la respuesta
+     */
     public void updateReview(AccommodationReview review, final ReviewCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE_REVIEW,
                 response -> {
@@ -212,6 +243,12 @@ public class AccommodationReviewController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Elimina una reseña por su ID.
+     *
+     * @param reviewId el ID de la reseña a ser eliminada
+     * @param callback el callback para manejar la respuesta
+     */
     public void deleteReview(Long reviewId, final ReviewCallback callback) {
         String url = URL_DELETE_REVIEW + "?reviewId=" + reviewId;
 
@@ -229,11 +266,17 @@ public class AccommodationReviewController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Interfaz para manejar una sola reseña.
+     */
     public interface ReviewCallback {
         void onSuccess(Object result);
         void onError(String error);
     }
 
+    /**
+     * Interfaz para manejar la lista de reseñas.
+     */
     public interface ReviewListCallback {
         void onSuccess(List<AccommodationReview> reviews);
         void onError(String error);

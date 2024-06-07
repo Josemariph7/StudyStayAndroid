@@ -18,10 +18,10 @@ public class User implements Serializable {
     private String password; // Contraseña del usuario
     private String phone; // Número de teléfono del usuario
     private LocalDate birthDate; // Fecha de nacimiento del usuario
-    private LocalDateTime registrationDate; // Fecha de nacimiento del usuario
+    private LocalDateTime registrationDate; // Fecha de registro del usuario
     private Gender gender; // Género del usuario
     private String dni; // Documento nacional de identidad del usuario
-    private byte[] profilePicture; // URL de la imagen de perfil del usuario
+    private byte[] profilePicture; // Imagen de perfil del usuario
     private String bio; // Descripción o biografía del usuario
     private boolean isAdmin; // Indica si el usuario es administrador del sistema
     private List<Booking> bookings; // Lista de reservas realizadas por el usuario
@@ -40,9 +40,25 @@ public class User implements Serializable {
 
     // Constructores
 
+    /**
+     * Constructor por defecto.
+     */
     public User() {
     }
 
+    /**
+     * Constructor con parámetros.
+     *
+     * @param name      el nombre del usuario
+     * @param lastName  los apellidos del usuario
+     * @param email     el correo electrónico del usuario
+     * @param password  la contraseña del usuario
+     * @param phone     el número de teléfono del usuario
+     * @param birthDate la fecha de nacimiento del usuario
+     * @param gender    el género del usuario
+     * @param dni       el documento nacional de identidad del usuario
+     * @param admin     indica si el usuario es administrador
+     */
     public User(String name, String lastName, String email, String password, String phone, LocalDate birthDate, Gender gender, String dni, boolean admin) {
         this.name = name;
         this.lastName = lastName;
@@ -55,6 +71,22 @@ public class User implements Serializable {
         this.isAdmin = admin;
     }
 
+    /**
+     * Constructor con todos los parámetros.
+     *
+     * @param name             el nombre del usuario
+     * @param lastName         los apellidos del usuario
+     * @param email            el correo electrónico del usuario
+     * @param password         la contraseña del usuario
+     * @param phone            el número de teléfono del usuario
+     * @param birthDate        la fecha de nacimiento del usuario
+     * @param registrationDate la fecha de registro del usuario
+     * @param gender           el género del usuario
+     * @param dni              el documento nacional de identidad del usuario
+     * @param profilePicture   la imagen de perfil del usuario
+     * @param bio              la biografía del usuario
+     * @param isAdmin          indica si el usuario es administrador
+     */
     public User(String name, String lastName, String email, String password, String phone, LocalDate birthDate, LocalDateTime registrationDate, Gender gender, String dni, byte[] profilePicture, String bio, boolean isAdmin) {
         this.name = name;
         this.lastName = lastName;
@@ -62,7 +94,7 @@ public class User implements Serializable {
         this.password = password;
         this.phone = phone;
         this.birthDate = birthDate;
-        this.registrationDate= registrationDate;
+        this.registrationDate = registrationDate;
         this.gender = gender;
         this.dni = dni;
         this.profilePicture = profilePicture;
@@ -71,14 +103,6 @@ public class User implements Serializable {
     }
 
     // Getters y setters
-
-    public LocalDateTime getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(LocalDateTime registrationDate) {
-        this.registrationDate = registrationDate;
-    }
 
     public Long getUserId() {
         return userId;
@@ -134,6 +158,14 @@ public class User implements Serializable {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public LocalDateTime getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(LocalDateTime registrationDate) {
+        this.registrationDate = registrationDate;
     }
 
     public Gender getGender() {
@@ -232,8 +264,7 @@ public class User implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, name, lastName, email, password, phone, birthDate, registrationDate, // Actualizado
-                gender, dni, profilePicture, bio, isAdmin);
+        return Objects.hash(userId, name, lastName, email, password, phone, birthDate, registrationDate, gender, dni, bio, isAdmin) + Arrays.hashCode(profilePicture);
     }
 
     @Override
@@ -246,10 +277,10 @@ public class User implements Serializable {
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
                 ", birthDate=" + birthDate +
-                ", registrationDate=" + registrationDate + // Actualizado
+                ", registrationDate=" + registrationDate +
                 ", gender=" + gender +
                 ", dni='" + dni + '\'' +
-                ", profilePicture='" + profilePicture + '\'' +
+                ", profilePicture=" + Arrays.toString(profilePicture) +
                 ", bio='" + bio + '\'' +
                 ", isAdmin=" + isAdmin +
                 '}';

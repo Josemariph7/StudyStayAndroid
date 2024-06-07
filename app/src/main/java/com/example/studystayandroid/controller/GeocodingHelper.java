@@ -11,13 +11,28 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Clase auxiliar para realizar operaciones de geocodificación.
+ */
 public class GeocodingHelper {
     private Context context;
 
+    /**
+     * Constructor para inicializar el GeocodingHelper.
+     *
+     * @param context el contexto de la aplicación
+     */
     public GeocodingHelper(Context context) {
         this.context = context;
     }
 
+    /**
+     * Obtiene las coordenadas LatLng a partir de una ciudad y una dirección.
+     *
+     * @param city    la ciudad de la dirección
+     * @param address la dirección
+     * @return un objeto LatLng con las coordenadas de la dirección, o null si no se pudo obtener
+     */
     public LatLng getLatLngFromAddress(String city, String address) {
         Geocoder geocoder = new Geocoder(context, Locale.getDefault());
         try {

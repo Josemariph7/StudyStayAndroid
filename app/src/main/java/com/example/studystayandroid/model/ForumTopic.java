@@ -18,9 +18,21 @@ public class ForumTopic implements Serializable {
 
     // Constructores
 
+    /**
+     * Constructor por defecto.
+     */
     public ForumTopic() {
     }
 
+    /**
+     * Constructor con parámetros.
+     *
+     * @param topicId     el identificador único del tema
+     * @param title       el título del tema
+     * @param description la descripción del tema
+     * @param author      el autor del tema
+     * @param dateTime    la fecha y hora de creación del tema
+     */
     public ForumTopic(Long topicId, String title, String description, User author, LocalDateTime dateTime) {
         this.topicId = topicId;
         this.title = title;

@@ -16,6 +16,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Clase para manejar peticiones multipart en Volley.
+ */
 public class VolleyMultipartRequest extends Request<NetworkResponse> {
 
     private final String TAG = VolleyMultipartRequest.class.getSimpleName();
@@ -27,6 +30,14 @@ public class VolleyMultipartRequest extends Request<NetworkResponse> {
     private final String twoHyphens = "--";
     private final String lineEnd = "\r\n";
 
+    /**
+     * Constructor para inicializar la solicitud multipart de Volley.
+     *
+     * @param method        el método HTTP para la solicitud
+     * @param url           la URL de la solicitud
+     * @param listener      el listener para manejar la respuesta
+     * @param errorListener el listener para manejar los errores
+     */
     public VolleyMultipartRequest(int method, String url,
                                   Response.Listener<NetworkResponse> listener,
                                   Response.ErrorListener errorListener) {
@@ -95,6 +106,12 @@ public class VolleyMultipartRequest extends Request<NetworkResponse> {
         mErrorListener.onErrorResponse(error);
     }
 
+    /**
+     * Método para obtener los datos en bytes para la carga útil.
+     *
+     * @return un mapa de los datos en bytes
+     * @throws AuthFailureError si hay un error de autenticación
+     */
     protected Map<String, DataPart> getByteData() throws AuthFailureError {
         return null;
     }
@@ -150,6 +167,9 @@ public class VolleyMultipartRequest extends Request<NetworkResponse> {
         dataOutputStream.writeBytes(lineEnd);
     }
 
+    /**
+     * Clase interna para representar los datos de una parte de un formulario.
+     */
     public static class DataPart {
         private String fileName;
         private byte[] content;

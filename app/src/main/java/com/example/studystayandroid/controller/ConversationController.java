@@ -22,6 +22,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controlador para gestionar las operaciones relacionadas con las conversaciones.
+ */
 public class ConversationController {
 
     private static final String URL_GET_CONVERSATIONS = "http://" + Constants.IP + "/studystay/conversation/getConversations.php";
@@ -32,11 +35,22 @@ public class ConversationController {
     private RequestQueue requestQueue;
     private Context context;
 
+    /**
+     * Constructor para inicializar el controlador de conversaciones.
+     *
+     * @param context el contexto de la aplicación
+     */
     public ConversationController(Context context) {
         this.context = context;
         this.requestQueue = Volley.newRequestQueue(context);
     }
 
+    /**
+     * Obtiene la lista de conversaciones de un usuario específico desde el servidor.
+     *
+     * @param userId   el ID del usuario
+     * @param callback el callback para manejar la respuesta
+     */
     public void getConversations(Long userId, final ConversationListCallback callback) {
         String url = URL_GET_CONVERSATIONS + "?userId=" + userId;
 
@@ -78,6 +92,12 @@ public class ConversationController {
         requestQueue.add(jsonArrayRequest);
     }
 
+    /**
+     * Crea una nueva conversación.
+     *
+     * @param conversation la conversación a ser creada
+     * @param callback     el callback para manejar la respuesta
+     */
     public void createConversation(Conversation conversation, final ConversationCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CREATE_CONVERSATION,
                 response -> {
@@ -100,6 +120,12 @@ public class ConversationController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Elimina una conversación por su ID.
+     *
+     * @param conversationId el ID de la conversación a ser eliminada
+     * @param callback       el callback para manejar la respuesta
+     */
     public void deleteConversation(Long conversationId, final ConversationCallback callback) {
         String url = URL_DELETE_CONVERSATION + "?conversationId=" + conversationId;
 
@@ -117,13 +143,18 @@ public class ConversationController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Interfaz para manejar una sola conversación.
+     */
     public interface ConversationCallback {
         void onSuccess(Conversation createdConversation);
-
         void onSuccess(Object result);
         void onError(String error);
     }
 
+    /**
+     * Interfaz para manejar la lista de conversaciones.
+     */
     public interface ConversationListCallback {
         void onSuccess(List<Conversation> conversations);
         void onError(String error);

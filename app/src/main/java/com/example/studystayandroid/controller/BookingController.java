@@ -22,6 +22,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controlador para gestionar las operaciones relacionadas con las reservas de alojamiento.
+ */
 public class BookingController {
 
     private static final String URL_GET_BOOKINGS = "http://" + Constants.IP + "/studystay/booking/getBookings.php";
@@ -34,11 +37,21 @@ public class BookingController {
     private RequestQueue requestQueue;
     private Context context;
 
+    /**
+     * Constructor para inicializar el controlador de reservas de alojamiento.
+     *
+     * @param context el contexto de la aplicación
+     */
     public BookingController(Context context) {
         this.context = context;
         this.requestQueue = Volley.newRequestQueue(context);
     }
 
+    /**
+     * Obtiene la lista de reservas desde el servidor.
+     *
+     * @param callback el callback para manejar la respuesta
+     */
     public void getBookings(final BookingListCallback callback) {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URL_GET_BOOKINGS, null,
                 response -> {
@@ -109,6 +122,12 @@ public class BookingController {
         requestQueue.add(jsonArrayRequest);
     }
 
+    /**
+     * Obtiene una reserva específica por su ID.
+     *
+     * @param bookingId el ID de la reserva
+     * @param callback el callback para manejar la respuesta
+     */
     public void getBookingById(Long bookingId, final BookingCallback callback) {
         String url = URL_GET_BOOKING_BY_ID + "?bookingId=" + bookingId;
 
@@ -176,6 +195,12 @@ public class BookingController {
         requestQueue.add(jsonArrayRequest);
     }
 
+    /**
+     * Crea una nueva reserva.
+     *
+     * @param booking la reserva a ser creada
+     * @param callback el callback para manejar la respuesta
+     */
     public void createBooking(Booking booking, final BookingCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CREATE_BOOKING,
                 response -> {
@@ -201,6 +226,12 @@ public class BookingController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Actualiza una reserva existente.
+     *
+     * @param booking la reserva a ser actualizada
+     * @param callback el callback para manejar la respuesta
+     */
     public void updateBooking(Booking booking, final BookingCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE_BOOKING,
                 response -> {
@@ -227,6 +258,12 @@ public class BookingController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Elimina una reserva por su ID.
+     *
+     * @param bookingId el ID de la reserva a ser eliminada
+     * @param callback el callback para manejar la respuesta
+     */
     public void deleteBooking(Long bookingId, final BookingCallback callback) {
         String url = URL_DELETE_BOOKING + "?bookingId=" + bookingId;
 
@@ -244,11 +281,17 @@ public class BookingController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Interfaz para manejar una sola reserva.
+     */
     public interface BookingCallback {
         void onSuccess(Object result);
         void onError(String error);
     }
 
+    /**
+     * Interfaz para manejar la lista de reservas.
+     */
     public interface BookingListCallback {
         void onSuccess(List<Booking> bookings);
         void onError(String error);

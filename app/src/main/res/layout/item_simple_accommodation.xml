@@ -4,7 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:paddingLeft="12dp"
+    android:paddingTop="8dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="12dp">
 
     <TextView
         android:id="@+id/address"
@@ -69,6 +72,6 @@
             android:layout_height="26dp"
             android:layout_weight="1"
             android:translationX="-64dp"
-            app:srcCompat="@drawable/iconestrella"/>
-</LinearLayout>
+            app:srcCompat="@drawable/iconestrella" />
+    </LinearLayout>
 </LinearLayout>

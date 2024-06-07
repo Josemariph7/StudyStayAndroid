@@ -1,8 +1,5 @@
 package com.example.studystayandroid.model;
 
-import com.example.studystayandroid.controller.ForumTopicController;
-import com.example.studystayandroid.controller.UserController;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -19,9 +16,20 @@ public class ForumComment implements Serializable {
 
     // Constructores
 
+    /**
+     * Constructor por defecto.
+     */
     public ForumComment() {
     }
 
+    /**
+     * Constructor con parámetros.
+     *
+     * @param topic    el tema al que pertenece el comentario
+     * @param author   el autor del comentario
+     * @param content  el contenido del comentario
+     * @param dateTime la fecha y hora de creación del comentario
+     */
     public ForumComment(ForumTopic topic, User author, String content, LocalDateTime dateTime) {
         this.topic = topic;
         this.author = author;
@@ -29,6 +37,15 @@ public class ForumComment implements Serializable {
         this.dateTime = dateTime;
     }
 
+    /**
+     * Constructor con todos los parámetros.
+     *
+     * @param commentId el identificador único del comentario
+     * @param topic     el tema al que pertenece el comentario
+     * @param author    el autor del comentario
+     * @param content   el contenido del comentario
+     * @param dateTime  la fecha y hora de creación del comentario
+     */
     public ForumComment(long commentId, ForumTopic topic, User author, String content, LocalDateTime dateTime) {
         this.commentId = commentId;
         this.topic = topic;

@@ -3,14 +3,26 @@ package com.example.studystayandroid.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Clase que representa una foto de un alojamiento.
+ */
 public class AccommodationPhoto implements Serializable {
     private Long photoId;
     private Accommodation accommodation;
     private byte[] photoData;
 
+    /**
+     * Constructor por defecto.
+     */
     public AccommodationPhoto() {
     }
 
+    /**
+     * Constructor con parámetros.
+     *
+     * @param accommodation el alojamiento al que pertenece la foto
+     * @param photoData     los datos de la foto en formato byte[]
+     */
     public AccommodationPhoto(Accommodation accommodation, byte[] photoData) {
         this.accommodation = accommodation;
         this.photoData = photoData;

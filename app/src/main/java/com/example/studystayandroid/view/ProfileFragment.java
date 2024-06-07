@@ -83,19 +83,6 @@ public class ProfileFragment extends Fragment {
         // Configurar TabLayout y ViewPager2
         TabLayout tabLayout = view.findViewById(R.id.tabLayout);
         ViewPager2 viewPager = view.findViewById(R.id.viewPager);
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity());
-        viewPager.setAdapter(adapter);
-
-        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
-            switch (position) {
-                case 0:
-                    tab.setText("Rented");
-                    break;
-                case 1:
-                    tab.setText("Listed");
-                    break;
-            }
-        }).attach();
 
         // Obtener el usuario actual de SharedPreferences
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
@@ -112,14 +99,34 @@ public class ProfileFragment extends Fragment {
             public void onSuccess(Object result) {
                 currentUser = (User) result;
                 updateProfileUI();
-                adapter.setUser(currentUser); // Pasar el usuario al adaptador del ViewPager
+                setupViewPager(viewPager, currentUser);
+                new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
+                    switch (position) {
+                        case 0:
+                            tab.setText("Rented");
+                            break;
+                        case 1:
+                            tab.setText("Listed");
+                            break;
+                    }
+                }).attach();
             }
 
             @Override
             public void onSuccess(User user) {
                 currentUser = user;
                 updateProfileUI();
-                adapter.setUser(currentUser); // Pasar el usuario al adaptador del ViewPager
+                setupViewPager(viewPager, currentUser);
+                new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
+                    switch (position) {
+                        case 0:
+                            tab.setText("Rented");
+                            break;
+                        case 1:
+                            tab.setText("Listed");
+                            break;
+                    }
+                }).attach();
             }
 
             @Override
@@ -131,6 +138,10 @@ public class ProfileFragment extends Fragment {
         contactButton.setOnClickListener(v -> showProfileSettingsDialog());
     }
 
+    private void setupViewPager(ViewPager2 viewPager, User user) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity(), user);
+        viewPager.setAdapter(adapter);
+    }
 
     private void updateProfileUI() {
         if (currentUser != null) {
@@ -198,8 +209,6 @@ public class ProfileFragment extends Fragment {
 
         settingsDialog.show();
     }
-
-
 
     private void changeProfilePicture() {
         Intent intent = new Intent();
@@ -385,8 +394,6 @@ public class ProfileFragment extends Fragment {
 
         deleteAccountDialog.show();
     }
-
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

@@ -26,9 +26,21 @@ public class Booking implements Serializable {
 
     // Constructores
 
+    /**
+     * Constructor por defecto.
+     */
     public Booking() {
     }
 
+    /**
+     * Constructor con parámetros.
+     *
+     * @param accommodation el alojamiento reservado
+     * @param user          el usuario que realizó la reserva
+     * @param startDate     la fecha y hora de inicio de la reserva
+     * @param endDate       la fecha y hora de fin de la reserva
+     * @param status        el estado de la reserva
+     */
     public Booking(Accommodation accommodation, User user, LocalDateTime startDate, LocalDateTime endDate, BookingStatus status) {
         this.accommodation = accommodation;
         this.user = user;

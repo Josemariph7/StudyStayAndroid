@@ -25,6 +25,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controlador para gestionar las operaciones relacionadas con los usuarios.
+ */
 public class UserController {
 
     private static final String URL_LOGIN = "http://" + Constants.IP + "/studystay/user/login.php";
@@ -41,11 +44,23 @@ public class UserController {
     private RequestQueue requestQueue;
     private Context context;
 
+    /**
+     * Constructor para inicializar el controlador de usuarios.
+     *
+     * @param context el contexto de la aplicación
+     */
     public UserController(Context context) {
         this.context = context;
         this.requestQueue = Volley.newRequestQueue(context);
     }
 
+    /**
+     * Inicia sesión con el correo electrónico y la contraseña proporcionados.
+     *
+     * @param email    el correo electrónico del usuario
+     * @param password la contraseña del usuario
+     * @param callback el callback para manejar la respuesta
+     */
     public void login(String email, String password, final UserCallback callback) {
         String url = URL_LOGIN + "?email=" + email + "&password=" + password;
 
@@ -75,6 +90,12 @@ public class UserController {
         requestQueue.add(jsonObjectRequest);
     }
 
+    /**
+     * Registra un nuevo usuario.
+     *
+     * @param user     el usuario a ser registrado
+     * @param callback el callback para manejar la respuesta
+     */
     public void register(User user, final UserCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGISTER,
                 response -> {
@@ -102,6 +123,12 @@ public class UserController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Obtiene los detalles de un usuario por su ID.
+     *
+     * @param userId   el ID del usuario
+     * @param callback el callback para manejar la respuesta
+     */
     public void getUserById(Long userId, final UserCallback callback) {
         String url = URL_GET_USER + "?userId=" + userId;
 
@@ -146,6 +173,12 @@ public class UserController {
         requestQueue.add(jsonObjectRequest);
     }
 
+    /**
+     * Actualiza los detalles de un usuario.
+     *
+     * @param user     el usuario a ser actualizado
+     * @param callback el callback para manejar la respuesta
+     */
     public void updateUser(User user, final UserCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE_USER,
                 response -> {
@@ -173,6 +206,13 @@ public class UserController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Actualiza la contraseña de un usuario.
+     *
+     * @param userId      el ID del usuario
+     * @param newPassword la nueva contraseña
+     * @param callback    el callback para manejar la respuesta
+     */
     public void updateUserPassword(Long userId, String newPassword, final UserCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE_USER_PASSWORD,
                 response -> {
@@ -193,6 +233,12 @@ public class UserController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Elimina un usuario por su ID.
+     *
+     * @param userId   el ID del usuario a ser eliminado
+     * @param callback el callback para manejar la respuesta
+     */
     public void deleteUser(Long userId, final UserCallback callback) {
         String url = URL_DELETE_USER + "?userId=" + userId;
 
@@ -208,6 +254,11 @@ public class UserController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Obtiene una lista de todos los usuarios desde el servidor.
+     *
+     * @param callback el callback para manejar la respuesta
+     */
     public void getAllUsers(final UserListCallback callback) {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URL_GET_ALL_USERS, null,
                 response -> {
@@ -239,6 +290,13 @@ public class UserController {
         requestQueue.add(jsonArrayRequest);
     }
 
+    /**
+     * Actualiza la foto de perfil de un usuario.
+     *
+     * @param userId         el ID del usuario
+     * @param profilePicture la nueva foto de perfil en formato byte[]
+     * @param callback       el callback para manejar la respuesta
+     */
     public void updateUserProfilePicture(Long userId, byte[] profilePicture, final UserCallback callback) {
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, URL_UPDATE_USER_PROFILE_PICTURE,
                 response -> {
@@ -269,6 +327,11 @@ public class UserController {
         requestQueue.add(volleyMultipartRequest);
     }
 
+    /**
+     * Guarda el ID del usuario en las preferencias compartidas.
+     *
+     * @param userId el ID del usuario
+     */
     public void saveUserId(Long userId) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -276,11 +339,19 @@ public class UserController {
         editor.apply();
     }
 
+    /**
+     * Obtiene el ID del usuario desde las preferencias compartidas.
+     *
+     * @return el ID del usuario guardado, o -1 si no se encuentra
+     */
     public Long getUserId() {
         SharedPreferences sharedPreferences = context.getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE);
         return sharedPreferences.getLong(USER_ID, -1);
     }
 
+    /**
+     * Elimina el ID del usuario de las preferencias compartidas.
+     */
     public void clearUserId() {
         SharedPreferences sharedPreferences = context.getSharedPreferences(USER_PREFS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -288,14 +359,18 @@ public class UserController {
         editor.apply();
     }
 
+    /**
+     * Interfaz para manejar un solo usuario.
+     */
     public interface UserCallback {
         void onSuccess(Object result);
-
         void onSuccess(User author);
-
         void onError(String error);
     }
 
+    /**
+     * Interfaz para manejar la lista de usuarios.
+     */
     public interface UserListCallback {
         void onSuccess(List<User> users);
         void onError(String error);

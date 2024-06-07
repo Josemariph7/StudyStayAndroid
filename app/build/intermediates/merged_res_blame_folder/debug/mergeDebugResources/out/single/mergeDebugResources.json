@@ -156,6 +156,14 @@
         "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\registerradius.xml"
     },
     {
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_fragment_accommodation_list.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\fragment_accommodation_list.xml"
+    },
+    {
+        "merged": "com.example.studystayandroid.app-debug-38:/layout_dialog_rented_accommodation_detail.xml.flat",
+        "source": "com.example.studystayandroid.app-main-40:/layout/dialog_rented_accommodation_detail.xml"
+    },
+    {
         "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_dialog_options.xml.flat",
         "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\dialog_options.xml"
     },
@@ -412,6 +420,10 @@
         "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-xxhdpi\\ic_launcher_background.webp"
     },
     {
+        "merged": "com.example.studystayandroid.app-debug-38:/layout_dialog_listed_accommodation_detail.xml.flat",
+        "source": "com.example.studystayandroid.app-main-40:/layout/dialog_listed_accommodation_detail.xml"
+    },
+    {
         "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_bg_message_received.xml.flat",
         "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\bg_message_received.xml"
     },
@@ -480,10 +492,6 @@
         "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\item_accommodation.xml"
     },
     {
-        "merged": "com.example.studystayandroid.app-debug-38:/layout_item_review.xml.flat",
-        "source": "com.example.studystayandroid.app-main-40:/layout/item_review.xml"
-    },
-    {
         "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_activity_dashboard.xml.flat",
         "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\activity_dashboard.xml"
     },
@@ -504,11 +512,15 @@
         "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\item_message_sent.xml"
     },
     {
-        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_indicator_drawable_unselected.xml.flat",
-        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\indicator_drawable_unselected.xml"
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_dialog_options_rented_accommodation.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\dialog_options_rented_accommodation.xml"
     },
     {
         "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_item_simple_accommodation.xml.flat",
         "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\item_simple_accommodation.xml"
+    },
+    {
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_indicator_drawable_unselected.xml.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\indicator_drawable_unselected.xml"
     }
 ]

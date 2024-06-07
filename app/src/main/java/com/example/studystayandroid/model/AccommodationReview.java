@@ -17,9 +17,21 @@ public class AccommodationReview implements Serializable {
 
     // Constructores
 
+    /**
+     * Constructor por defecto.
+     */
     public AccommodationReview() {
     }
 
+    /**
+     * Constructor con parámetros.
+     *
+     * @param accommodation el alojamiento al que pertenece la reseña
+     * @param author        el autor de la reseña
+     * @param rating        la calificación de la reseña
+     * @param comment       el comentario de la reseña
+     * @param dateTime      la fecha y hora de la reseña
+     */
     public AccommodationReview(Accommodation accommodation, User author, double rating, String comment, LocalDateTime dateTime) {
         this.accommodation = accommodation;
         this.author = author;
@@ -85,10 +97,10 @@ public class AccommodationReview implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccommodationReview that = (AccommodationReview) o;
-        return Objects.equals(reviewId, that.reviewId) &&
+        return Double.compare(that.rating, rating) == 0 &&
+                Objects.equals(reviewId, that.reviewId) &&
                 Objects.equals(accommodation, that.accommodation) &&
                 Objects.equals(author, that.author) &&
-                Objects.equals(rating, that.rating) &&
                 Objects.equals(comment, that.comment) &&
                 Objects.equals(dateTime, that.dateTime);
     }

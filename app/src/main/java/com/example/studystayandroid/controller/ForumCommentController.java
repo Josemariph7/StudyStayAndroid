@@ -22,6 +22,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controlador para gestionar las operaciones relacionadas con los comentarios del foro.
+ */
 public class ForumCommentController {
 
     private static final String URL_GET_COMMENTS = "http://" + Constants.IP + "/studystay/comment/getComments.php";
@@ -34,11 +37,22 @@ public class ForumCommentController {
     private RequestQueue requestQueue;
     private Context context;
 
+    /**
+     * Constructor para inicializar el controlador de comentarios del foro.
+     *
+     * @param context el contexto de la aplicación
+     */
     public ForumCommentController(Context context) {
         this.context = context;
         this.requestQueue = Volley.newRequestQueue(context);
     }
 
+    /**
+     * Obtiene la lista de comentarios de un tema específico desde el servidor.
+     *
+     * @param topicId  el ID del tema del foro
+     * @param callback el callback para manejar la respuesta
+     */
     public void getComments(Long topicId, final CommentListCallback callback) {
         String url = URL_GET_COMMENTS + "?topicId=" + topicId;
 
@@ -102,6 +116,12 @@ public class ForumCommentController {
         requestQueue.add(jsonArrayRequest);
     }
 
+    /**
+     * Obtiene un comentario específico por su ID.
+     *
+     * @param commentId el ID del comentario
+     * @param callback  el callback para manejar la respuesta
+     */
     public void getCommentById(Long commentId, final CommentCallback callback) {
         String url = URL_GET_COMMENT_BY_ID + "?commentId=" + commentId;
 
@@ -162,6 +182,12 @@ public class ForumCommentController {
         requestQueue.add(jsonArrayRequest);
     }
 
+    /**
+     * Crea un nuevo comentario.
+     *
+     * @param comment  el comentario a ser creado
+     * @param callback el callback para manejar la respuesta
+     */
     public void createComment(ForumComment comment, final CommentCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CREATE_COMMENT,
                 response -> {
@@ -186,6 +212,12 @@ public class ForumCommentController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Actualiza un comentario existente.
+     *
+     * @param comment  el comentario a ser actualizado
+     * @param callback el callback para manejar la respuesta
+     */
     public void updateComment(ForumComment comment, final CommentCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE_COMMENT,
                 response -> {
@@ -211,6 +243,12 @@ public class ForumCommentController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Elimina un comentario por su ID.
+     *
+     * @param commentId el ID del comentario a ser eliminado
+     * @param callback  el callback para manejar la respuesta
+     */
     public void deleteComment(Long commentId, final CommentCallback callback) {
         String url = URL_DELETE_COMMENT + "?commentId=" + commentId;
 
@@ -228,13 +266,18 @@ public class ForumCommentController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Interfaz para manejar un solo comentario.
+     */
     public interface CommentCallback {
         void onSuccess(ForumComment comment);
-
         void onSuccess(Object result);
         void onError(String error);
     }
 
+    /**
+     * Interfaz para manejar la lista de comentarios.
+     */
     public interface CommentListCallback {
         void onSuccess(List<ForumComment> comments);
         void onError(String error);

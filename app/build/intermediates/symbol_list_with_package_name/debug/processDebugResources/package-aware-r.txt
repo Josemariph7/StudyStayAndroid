@@ -3386,7 +3386,6 @@ id chain2
 id chains
 id changePasswordButton
 id changeProfilePictureButton
-id chatButton
 id checkbox
 id checked
 id chronometer
@@ -3436,6 +3435,7 @@ id design_menu_item_action_area
 id design_menu_item_action_area_stub
 id design_menu_item_text
 id design_navigation_view
+id detailedAccommodationButton
 id dialogMessage
 id dialogTitle
 id dialog_button
@@ -4062,11 +4062,13 @@ layout dialog_contact_options
 layout dialog_delete_account
 layout dialog_delete_confirmation
 layout dialog_error
+layout dialog_listed_accommodation_detail
 layout dialog_map
 layout dialog_new_comment
 layout dialog_new_topic
 layout dialog_options
 layout dialog_profile_settings
+layout dialog_rented_accommodation_detail
 layout dialog_success
 layout dialog_update_user_info
 layout dialog_view_profile

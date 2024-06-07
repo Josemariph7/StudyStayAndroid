@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Clase que representa un alojamiento.
+ */
 public class Accommodation implements Serializable {
     private Long accommodationId;
     private User owner;
@@ -22,11 +25,25 @@ public class Accommodation implements Serializable {
     private List<User> tenants;
     private List<AccommodationPhoto> photos;
 
+    /**
+     * Constructor por defecto.
+     */
     public Accommodation() {
         tenants = new ArrayList<>();
         photos = new ArrayList<>();
     }
 
+    /**
+     * Constructor con parámetros.
+     *
+     * @param owner       el propietario del alojamiento
+     * @param address     la dirección del alojamiento
+     * @param city        la ciudad del alojamiento
+     * @param price       el precio del alojamiento
+     * @param description la descripción del alojamiento
+     * @param capacity    la capacidad del alojamiento
+     * @param services    los servicios ofrecidos por el alojamiento
+     */
     public Accommodation(User owner, String address, String city, BigDecimal price, String description, int capacity, String services) {
         this.owner = owner;
         this.address = address;
@@ -42,8 +59,6 @@ public class Accommodation implements Serializable {
     }
 
     // Getters and setters
-
-
 
     public Long getAccommodationId() {
         return accommodationId;
@@ -157,7 +172,12 @@ public class Accommodation implements Serializable {
         this.photos = photos;
     }
 
-    // Método para agregar inquilino
+    /**
+     * Agrega un inquilino al alojamiento.
+     *
+     * @param tenant el inquilino a agregar
+     * @return true si el inquilino fue agregado exitosamente, false si no hay espacio disponible
+     */
     public boolean addTenant(User tenant) {
         if (tenants.size() < capacity) {
             tenants.add(tenant);

@@ -20,6 +20,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controlador para gestionar las operaciones relacionadas con los temas del foro.
+ */
 public class ForumTopicController {
 
     private static final String URL_GET_TOPICS = "http://" + Constants.IP + "/studystay/forum/getTopics.php";
@@ -32,11 +35,21 @@ public class ForumTopicController {
     private RequestQueue requestQueue;
     private Context context;
 
+    /**
+     * Constructor para inicializar el controlador de temas del foro.
+     *
+     * @param context el contexto de la aplicación
+     */
     public ForumTopicController(Context context) {
         this.context = context;
         this.requestQueue = Volley.newRequestQueue(context);
     }
 
+    /**
+     * Obtiene la lista de temas del foro desde el servidor.
+     *
+     * @param callback el callback para manejar la respuesta
+     */
     public void getTopics(final TopicListCallback callback) {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URL_GET_TOPICS, null,
                 response -> {
@@ -79,6 +92,12 @@ public class ForumTopicController {
         requestQueue.add(jsonArrayRequest);
     }
 
+    /**
+     * Crea un nuevo tema del foro.
+     *
+     * @param topic    el tema del foro a ser creado
+     * @param callback el callback para manejar la respuesta
+     */
     public void createTopic(ForumTopic topic, final TopicCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CREATE_TOPIC,
                 response -> {
@@ -103,6 +122,12 @@ public class ForumTopicController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Actualiza un tema del foro existente.
+     *
+     * @param topic    el tema del foro a ser actualizado
+     * @param callback el callback para manejar la respuesta
+     */
     public void updateTopic(ForumTopic topic, final TopicCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE_TOPIC,
                 response -> {
@@ -128,6 +153,12 @@ public class ForumTopicController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Elimina un tema del foro por su ID.
+     *
+     * @param topicId  el ID del tema del foro a ser eliminado
+     * @param callback el callback para manejar la respuesta
+     */
     public void deleteTopic(Long topicId, final TopicCallback callback) {
         String url = URL_DELETE_TOPIC + "?topicId=" + topicId;
 
@@ -145,6 +176,12 @@ public class ForumTopicController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Obtiene un tema del foro específico por su ID.
+     *
+     * @param topicId  el ID del tema del foro
+     * @param callback el callback para manejar la respuesta
+     */
     public void getTopicById(Long topicId, final TopicCallback callback) {
         String url = URL_GET_TOPIC_BY_ID + "?topicId=" + topicId;
 
@@ -166,7 +203,7 @@ public class ForumTopicController {
                                 public void onSuccess(Object result) {}
                                 @Override
                                 public void onSuccess(User author) {
-                                    ForumTopic topic = new ForumTopic( id, title, description, author, dateTime);
+                                    ForumTopic topic = new ForumTopic(id, title, description, author, dateTime);
                                     callback.onSuccess(topic);
                                 }
                                 @Override
@@ -187,13 +224,18 @@ public class ForumTopicController {
         requestQueue.add(jsonArrayRequest);
     }
 
+    /**
+     * Interfaz para manejar un solo tema del foro.
+     */
     public interface TopicCallback {
         void onSuccess(ForumTopic topic);
-
         void onSuccess(Object result);
         void onError(String error);
     }
 
+    /**
+     * Interfaz para manejar la lista de temas del foro.
+     */
     public interface TopicListCallback {
         void onSuccess(List<ForumTopic> topics);
         void onError(String error);

@@ -20,6 +20,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controlador para gestionar las operaciones relacionadas con los alojamientos.
+ */
 public class AccommodationController {
     private static final String URL_GET_ACCOMMODATIONS = "http://" + Constants.IP + "/studystay/accommodation/getAccommodations.php";
     private static final String URL_GET_ACCOMMODATION_BY_ID = "http://" + Constants.IP + "/studystay/accommodation/getAccommodationById.php";
@@ -30,30 +33,47 @@ public class AccommodationController {
     private RequestQueue requestQueue;
     private UserController userController;
 
+    /**
+     * Constructor para inicializar el controlador de alojamientos.
+     *
+     * @param context el contexto de la aplicación
+     */
     public AccommodationController(Context context) {
         requestQueue = Volley.newRequestQueue(context);
         userController = new UserController(context);
     }
 
+    /**
+     * Interfaz para manejar la lista de alojamientos.
+     */
     public interface AccommodationListCallback {
         void onSuccess(List<Accommodation> accommodations);
         void onError(String error);
     }
 
+    /**
+     * Interfaz para manejar un único alojamiento.
+     */
     public interface AccommodationCallback {
         void onSuccess(Object result);
-
         void onSuccess(Accommodation accommodation);
         void onError(String error);
     }
 
+    /**
+     * Interfaz para manejar operaciones simples con alojamiento.
+     */
     public interface SimpleCallback {
         void onSuccess(Accommodation accommodation);
-
         void onSuccess();
         void onError(String error);
     }
 
+    /**
+     * Obtiene la lista de alojamientos desde el servidor.
+     *
+     * @param callback el callback para manejar la respuesta
+     */
     public void getAccommodations(final AccommodationListCallback callback) {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URL_GET_ACCOMMODATIONS, null,
                 response -> {
@@ -69,19 +89,14 @@ public class AccommodationController {
                             String description = accommodationObject.getString("Description");
                             int capacity = accommodationObject.getInt("Capacity");
                             String services = accommodationObject.getString("Services");
-                            boolean availability = false;
-                            if (accommodationObject.getInt("Availability")==1) {
-                                availability=true;
-                            }else if(accommodationObject.getInt("Availability")==0){
-                                availability=false;
-                            }
+                            boolean availability = accommodationObject.getInt("Availability") == 1;
                             double rating = accommodationObject.getDouble("Rating");
 
                             boolean finalAvailability = availability;
                             userController.getUserById(ownerId, new UserController.UserCallback() {
                                 @Override
                                 public void onSuccess(Object result) {
-                                    User user=(User)result;
+                                    User user = (User) result;
                                     Accommodation accommodation = new Accommodation(user, address, city, price, description, capacity, services);
                                     accommodation.setAccommodationId(accommodationId);
                                     accommodation.setAvailability(finalAvailability);
@@ -89,6 +104,7 @@ public class AccommodationController {
                                     accommodations.add(accommodation);
                                     callback.onSuccess(accommodations);
                                 }
+
                                 @Override
                                 public void onSuccess(User user) {
                                     Accommodation accommodation = new Accommodation(user, address, city, price, description, capacity, services);
@@ -98,6 +114,7 @@ public class AccommodationController {
                                     accommodations.add(accommodation);
                                     callback.onSuccess(accommodations);
                                 }
+
                                 @Override
                                 public void onError(String error) {
                                     callback.onError(error);
@@ -113,6 +130,12 @@ public class AccommodationController {
         requestQueue.add(jsonArrayRequest);
     }
 
+    /**
+     * Obtiene un alojamiento específico por su ID.
+     *
+     * @param id el ID del alojamiento
+     * @param callback el callback para manejar la respuesta
+     */
     public void getAccommodationById(Long id, final AccommodationCallback callback) {
         String url = URL_GET_ACCOMMODATION_BY_ID + "?accommodationId=" + id;
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
@@ -128,24 +151,20 @@ public class AccommodationController {
                             String description = accommodationObject.getString("Description");
                             int capacity = accommodationObject.getInt("Capacity");
                             String services = accommodationObject.getString("Services");
-                            boolean availability = false;
-                            if (accommodationObject.getInt("Availability")==1) {
-                                availability=true;
-                            }else if(accommodationObject.getInt("Availability")==0){
-                                availability=false;
-                            }
+                            boolean availability = accommodationObject.getInt("Availability") == 1;
                             double rating = accommodationObject.getDouble("Rating");
                             boolean finalAvailability = availability;
                             userController.getUserById(ownerId, new UserController.UserCallback() {
                                 @Override
                                 public void onSuccess(Object result) {
-                                    User user=(User) result;
+                                    User user = (User) result;
                                     Accommodation accommodation = new Accommodation(user, address, city, price, description, capacity, services);
                                     accommodation.setAccommodationId(accommodationId);
                                     accommodation.setAvailability(finalAvailability);
                                     accommodation.setRating(rating);
                                     callback.onSuccess(accommodation);
                                 }
+
                                 @Override
                                 public void onSuccess(User user) {
                                     Accommodation accommodation = new Accommodation(user, address, city, price, description, capacity, services);
@@ -154,6 +173,7 @@ public class AccommodationController {
                                     accommodation.setRating(rating);
                                     callback.onSuccess(accommodation);
                                 }
+
                                 @Override
                                 public void onError(String error) {
                                     callback.onError(error);
@@ -171,6 +191,12 @@ public class AccommodationController {
         requestQueue.add(jsonArrayRequest);
     }
 
+    /**
+     * Crea un nuevo alojamiento.
+     *
+     * @param accommodation el alojamiento a ser creado
+     * @param callback el callback para manejar la respuesta
+     */
     public void createAccommodation(Accommodation accommodation, final SimpleCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CREATE_ACCOMMODATION,
                 response -> callback.onSuccess(),
@@ -193,6 +219,12 @@ public class AccommodationController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Actualiza un alojamiento existente.
+     *
+     * @param accommodation el alojamiento a ser actualizado
+     * @param callback el callback para manejar la respuesta
+     */
     public void updateAccommodation(Accommodation accommodation, final SimpleCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE_ACCOMMODATION,
                 response -> callback.onSuccess(),
@@ -216,6 +248,12 @@ public class AccommodationController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Elimina un alojamiento por su ID.
+     *
+     * @param id el ID del alojamiento a ser eliminado
+     * @param callback el callback para manejar la respuesta
+     */
     public void deleteAccommodation(Long id, final AccommodationCallback callback) {
         String url = URL_DELETE_ACCOMMODATION + "?accommodationId=" + id;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

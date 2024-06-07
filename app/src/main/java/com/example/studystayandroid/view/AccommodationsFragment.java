@@ -432,7 +432,7 @@ public class AccommodationsFragment extends Fragment {
         View dialogView = inflater.inflate(R.layout.dialog_contact_options, null);
 
         Button callButton = dialogView.findViewById(R.id.callButton);
-        Button chatButton = dialogView.findViewById(R.id.chatButton);
+        Button chatButton = dialogView.findViewById(R.id.detailedAccommodationButton);
 
         androidx.appcompat.app.AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
                 .setView(dialogView)

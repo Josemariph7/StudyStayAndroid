@@ -103,7 +103,6 @@ id capacity_spinner
 id carousel_view_pager
 id changePasswordButton
 id changeProfilePictureButton
-id chatButton
 id city
 id city_spinner
 id commentInThisTopic
@@ -114,6 +113,7 @@ id deleteAccountButton
 id depositPaymentRadioButton
 id description
 id descriptionTopic
+id detailedAccommodationButton
 id dialogMessage
 id dialogTitle
 id dniTextView
@@ -247,11 +247,13 @@ layout dialog_contact_options
 layout dialog_delete_account
 layout dialog_delete_confirmation
 layout dialog_error
+layout dialog_listed_accommodation_detail
 layout dialog_map
 layout dialog_new_comment
 layout dialog_new_topic
 layout dialog_options
 layout dialog_profile_settings
+layout dialog_rented_accommodation_detail
 layout dialog_success
 layout dialog_update_user_info
 layout dialog_view_profile

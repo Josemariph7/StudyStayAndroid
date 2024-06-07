@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="25dp"
                     android:orientation="horizontal"
-                    android:paddingLeft="25dp">
+                    android:paddingLeft="22dp">
 
                     <ImageView
                         android:layout_width="43dp"
@@ -82,9 +82,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:paddingLeft="20dp"
-                        android:textColor="@color/SadBlue"
+                        android:paddingLeft="18dp"
                         android:text="Email"
+                        android:textColor="@color/SadBlue"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -204,7 +204,7 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="229dp"
+                android:layout_height="wrap_content"
                 android:background="@android:color/white"
                 android:orientation="vertical"
                 android:translationY="53dp" />

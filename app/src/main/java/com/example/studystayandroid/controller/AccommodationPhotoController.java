@@ -21,6 +21,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controlador para gestionar las operaciones relacionadas con las fotos de alojamiento.
+ */
 public class AccommodationPhotoController {
 
     private static final String URL_GET_PHOTOS = "http://" + Constants.IP + "/studystay/photo/getPhotos.php";
@@ -32,11 +35,21 @@ public class AccommodationPhotoController {
     private RequestQueue requestQueue;
     private Context context;
 
+    /**
+     * Constructor para inicializar el controlador de fotos de alojamiento.
+     *
+     * @param context el contexto de la aplicación
+     */
     public AccommodationPhotoController(Context context) {
         this.context = context;
         this.requestQueue = Volley.newRequestQueue(context);
     }
 
+    /**
+     * Obtiene la lista de fotos desde el servidor.
+     *
+     * @param callback el callback para manejar la respuesta
+     */
     public void getPhotos(final PhotoListCallback callback) {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URL_GET_PHOTOS, null,
                 response -> {
@@ -87,6 +100,12 @@ public class AccommodationPhotoController {
         requestQueue.add(jsonArrayRequest);
     }
 
+    /**
+     * Obtiene una foto específica por su ID.
+     *
+     * @param photoId el ID de la foto
+     * @param callback el callback para manejar la respuesta
+     */
     public void getPhotoById(Long photoId, final PhotoCallback callback) {
         String url = URL_GET_PHOTO_BY_ID + "?photoId=" + photoId;
 
@@ -132,6 +151,12 @@ public class AccommodationPhotoController {
         requestQueue.add(jsonArrayRequest);
     }
 
+    /**
+     * Actualiza una foto existente.
+     *
+     * @param photo la foto a ser actualizada
+     * @param callback el callback para manejar la respuesta
+     */
     public void updatePhoto(AccommodationPhoto photo, final PhotoCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE_PHOTO,
                 response -> {
@@ -155,6 +180,12 @@ public class AccommodationPhotoController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Crea una nueva foto.
+     *
+     * @param photo la foto a ser creada
+     * @param callback el callback para manejar la respuesta
+     */
     public void createPhoto(AccommodationPhoto photo, final PhotoCallback callback) {
         VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(Request.Method.POST, URL_CREATE_PHOTO,
                 response -> {
@@ -189,8 +220,12 @@ public class AccommodationPhotoController {
         requestQueue.add(multipartRequest);
     }
 
-
-
+    /**
+     * Elimina una foto por su ID.
+     *
+     * @param photoId el ID de la foto a ser eliminada
+     * @param callback el callback para manejar la respuesta
+     */
     public void deletePhoto(Long photoId, final PhotoCallback callback) {
         String url = URL_DELETE_PHOTO + "?photoId=" + photoId;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -206,12 +241,17 @@ public class AccommodationPhotoController {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Interfaz para manejar una sola foto.
+     */
     public interface PhotoCallback {
         void onSuccess(Object result);
-
         void onError(String error);
     }
 
+    /**
+     * Interfaz para manejar la lista de fotos.
+     */
     public interface PhotoListCallback {
         void onSuccess(List<AccommodationPhoto> photos);
         void onError(String error);
