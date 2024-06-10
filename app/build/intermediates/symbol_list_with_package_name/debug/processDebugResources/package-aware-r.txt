@@ -4062,6 +4062,7 @@ layout dialog_change_password
 layout dialog_confirm_delete
 layout dialog_confirmation
 layout dialog_contact_options
+layout dialog_custom
 layout dialog_delete_account
 layout dialog_delete_confirmation
 layout dialog_error

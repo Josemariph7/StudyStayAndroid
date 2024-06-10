@@ -199,21 +199,23 @@ public class UserController {
                 params.put("birthDate", user.getBirthDate().toString());
                 params.put("gender", user.getGender().name());
                 params.put("dni", user.getDni());
-                params.put("bio", user.getBio());
+                params.put("bio", user.getBio() != null ? user.getBio() : "");
                 return params;
             }
         };
         requestQueue.add(stringRequest);
     }
 
+
     /**
      * Actualiza la contraseña de un usuario.
      *
-     * @param userId      el ID del usuario
-     * @param newPassword la nueva contraseña
-     * @param callback    el callback para manejar la respuesta
+     * @param userId          el ID del usuario
+     * @param currentPassword la contraseña actual
+     * @param newPassword     la nueva contraseña
+     * @param callback        el callback para manejar la respuesta
      */
-    public void updateUserPassword(Long userId, String newPassword, final UserCallback callback) {
+    public void updateUserPassword(Long userId, String currentPassword, String newPassword, final UserCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE_USER_PASSWORD,
                 response -> {
                     if ("Password updated successfully".equals(response)) {
@@ -226,6 +228,7 @@ public class UserController {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("userId", userId.toString());
+                params.put("currentPassword", currentPassword);
                 params.put("newPassword", newPassword);
                 return params;
             }
@@ -234,25 +237,32 @@ public class UserController {
     }
 
     /**
-     * Elimina un usuario por su ID.
+     * Elimina un usuario por su ID y verifica la contraseña.
      *
      * @param userId   el ID del usuario a ser eliminado
+     * @param password la contraseña del usuario
      * @param callback el callback para manejar la respuesta
      */
-    public void deleteUser(Long userId, final UserCallback callback) {
-        String url = URL_DELETE_USER + "?userId=" + userId;
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+    public void deleteUser(Long userId, String password, final UserCallback callback) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DELETE_USER,
                 response -> {
                     if ("User deleted successfully".equals(response)) {
                         callback.onSuccess(null);
                     } else {
                         callback.onError(response);
                     }
-                }, error -> callback.onError(error.toString())
-        );
+                }, error -> callback.onError(error.toString())) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("userId", userId.toString());
+                params.put("password", password);
+                return params;
+            }
+        };
         requestQueue.add(stringRequest);
     }
+
 
     /**
      * Obtiene una lista de todos los usuarios desde el servidor.

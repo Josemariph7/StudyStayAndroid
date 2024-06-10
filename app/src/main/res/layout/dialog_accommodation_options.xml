@@ -13,21 +13,29 @@
         android:layout_height="wrap_content"
         android:text="Title"
         android:textSize="18sp"
+        android:textColor="@color/SadBlue"
         android:textStyle="bold"
         android:layout_marginBottom="8dp"/>
+
 
     <Button
         android:id="@+id/viewProfileButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="View Owner Profile"
-        style="@style/Widget.Material3.Button.IconButton.Filled" />
+        android:backgroundTint="@color/SadBlue"
+        android:padding="8dp"
+        android:paddingTop="10dp"
+        android:textColor="@color/white" />
 
     <Button
         android:id="@+id/viewMapButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="View on Map"
-        style="@style/Widget.Material3.Button.IconButton.Filled"
+        android:backgroundTint="@color/SadBlue"
+        android:padding="8dp"
+        android:paddingTop="10dp"
+        android:textColor="@color/white"
         android:layout_marginTop="8dp" />
 </LinearLayout>

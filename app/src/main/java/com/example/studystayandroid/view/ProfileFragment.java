@@ -31,7 +31,6 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.studystayandroid.R;
 import com.example.studystayandroid.controller.UserController;
 import com.example.studystayandroid.model.User;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -79,6 +78,7 @@ public class ProfileFragment extends Fragment {
         dniTextView = view.findViewById(R.id.dniTextView);
         profilePhoto = view.findViewById(R.id.profilePhoto);
         contactButton = view.findViewById(R.id.ContactButton);
+        navigationView = getActivity().findViewById(R.id.nav_view); // Inicializar navigationView
 
         // Configurar TabLayout y ViewPager2
         TabLayout tabLayout = view.findViewById(R.id.tabLayout);
@@ -233,12 +233,10 @@ public class ProfileFragment extends Fragment {
             String currentPassword = currentPasswordEditText.getText().toString();
             String newPassword = newPasswordEditText.getText().toString();
 
-            if (currentUser.getPassword() == null || !currentUser.getPassword().equals(currentPassword)) {
-                showErrorDialog("Current password is incorrect");
-            } else if (newPassword.length() < 6) {
+            if (newPassword.length() < 6) {
                 showErrorDialog("New password must be at least 6 characters long");
             } else {
-                userController.updateUserPassword(currentUser.getUserId(), newPassword, new UserController.UserCallback() {
+                userController.updateUserPassword(currentUser.getUserId(), currentPassword, newPassword, new UserController.UserCallback() {
                     @Override
                     public void onSuccess(Object result) {
                         changePasswordDialog.dismiss();
@@ -261,6 +259,26 @@ public class ProfileFragment extends Fragment {
 
         changePasswordDialog.show();
     }
+
+
+    private void showCustomDialog(String title, String message) {
+        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_custom, null);
+        AlertDialog customDialog = new AlertDialog.Builder(requireContext())
+                .setView(dialogView)
+                .create();
+
+        TextView dialogTitle = dialogView.findViewById(R.id.dialogTitle);
+        TextView dialogMessage = dialogView.findViewById(R.id.dialogMessage);
+        Button buttonConfirm = dialogView.findViewById(R.id.buttonConfirm);
+
+        dialogTitle.setText(title);
+        dialogMessage.setText(message);
+
+        buttonConfirm.setOnClickListener(v -> customDialog.dismiss());
+
+        customDialog.show();
+    }
+
 
     private void updateUserInfo() {
         View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_update_user_info, null);
@@ -294,52 +312,90 @@ public class ProfileFragment extends Fragment {
 
         buttonCancel.setOnClickListener(v -> updateUserInfoDialog.dismiss());
         buttonConfirm.setOnClickListener(v -> {
-            currentUser.setName(nameEditText.getText().toString());
-            currentUser.setLastName(lastNameEditText.getText().toString());
-            currentUser.setEmail(emailEditText.getText().toString());
-            currentUser.setPhone(phoneEditText.getText().toString());
-            currentUser.setBio(bioEditText.getText().toString());
-            currentUser.setGender(User.Gender.valueOf(genderSpinner.getSelectedItem().toString().toUpperCase()));
+            String name = nameEditText.getText().toString();
+            String lastName = lastNameEditText.getText().toString();
+            String email = emailEditText.getText().toString();
+            String phone = phoneEditText.getText().toString();
+            String bio = bioEditText.getText().toString();
+            String genderStr = genderSpinner.getSelectedItem().toString().toUpperCase();
 
-            userController.updateUser(currentUser, new UserController.UserCallback() {
-                @Override
-                public void onSuccess(Object result) {
-                    updateProfileUI();
-                    updateUserInfoDialog.dismiss();
-                    showSuccessDialog("User info updated successfully");
-                }
+            if (name.isEmpty() || lastName.isEmpty() || email.isEmpty() || phone.isEmpty() || "SELECT YOUR GENDER".equals(genderStr)) {
+                showErrorDialog("Please fill in all fields and select a valid gender.");
+                return;
+            }
 
-                @Override
-                public void onSuccess(User user) {
-                    updateProfileUI();
-                    updateUserInfoDialog.dismiss();
-                    showSuccessDialog("User info updated successfully");
-                }
+            try {
+                User.Gender gender = User.Gender.valueOf(genderStr);
+                currentUser.setName(name);
+                currentUser.setLastName(lastName);
+                currentUser.setEmail(email);
+                currentUser.setPhone(phone);
+                currentUser.setBio(bio);
+                currentUser.setGender(gender);
 
-                @Override
-                public void onError(String error) {
-                    showErrorDialog("Error updating user info: " + error);
-                }
-            });
+                userController.updateUser(currentUser, new UserController.UserCallback() {
+                    @Override
+                    public void onSuccess(Object result) {
+                        updateProfileUI();
+                        updateUserInfoDialog.dismiss();
+                        showSuccessDialog("User info updated successfully");
+                    }
+
+                    @Override
+                    public void onSuccess(User user) {
+                        updateProfileUI();
+                        updateUserInfoDialog.dismiss();
+                        showSuccessDialog("User info updated successfully");
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        showErrorDialog("Error updating user info: " + error);
+                    }
+                });
+            } catch (IllegalArgumentException e) {
+                showErrorDialog("Invalid gender selected.");
+            }
         });
 
         updateUserInfoDialog.show();
     }
 
+
     private void showErrorDialog(String message) {
-        new MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Error")
-                .setMessage(message)
-                .setPositiveButton("OK", null)
-                .show();
+        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_error, null);
+        AlertDialog errorDialog = new AlertDialog.Builder(requireContext())
+                .setView(dialogView)
+                .create();
+
+        TextView dialogTitle = dialogView.findViewById(R.id.dialogTitle);
+        TextView dialogMessage = dialogView.findViewById(R.id.dialogMessage);
+        Button buttonConfirm = dialogView.findViewById(R.id.buttonConfirm);
+
+        dialogTitle.setText("Error");
+        dialogMessage.setText(message);
+
+        buttonConfirm.setOnClickListener(v -> errorDialog.dismiss());
+
+        errorDialog.show();
     }
 
     private void showSuccessDialog(String message) {
-        new MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Success")
-                .setMessage(message)
-                .setPositiveButton("OK", null)
-                .show();
+        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_success, null);
+        AlertDialog successDialog = new AlertDialog.Builder(requireContext())
+                .setView(dialogView)
+                .create();
+
+        TextView dialogTitle = dialogView.findViewById(R.id.dialogTitle);
+        TextView dialogMessage = dialogView.findViewById(R.id.dialogMessage);
+        Button buttonConfirm = dialogView.findViewById(R.id.buttonConfirm);
+
+        dialogTitle.setText("Success");
+        dialogMessage.setText(message);
+
+        buttonConfirm.setOnClickListener(v -> successDialog.dismiss());
+
+        successDialog.show();
     }
 
     private void deleteAccount() {
@@ -356,10 +412,13 @@ public class ProfileFragment extends Fragment {
         buttonConfirm.setOnClickListener(v -> {
             String password = passwordEditText.getText().toString();
 
-            if (currentUser.getPassword().equals(password)) {
-                userController.deleteUser(currentUser.getUserId(), new UserController.UserCallback() {
+            if (currentUser.getPassword() == null || !currentUser.getPassword().equals(password)) {
+                showErrorDialog("Password is incorrect");
+            } else {
+                userController.deleteUser(currentUser.getUserId(), password, new UserController.UserCallback() {
                     @Override
                     public void onSuccess(Object result) {
+                        deleteAccountDialog.dismiss(); // Dismiss the dialog after successful deletion
                         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.remove("userId");
@@ -372,6 +431,7 @@ public class ProfileFragment extends Fragment {
 
                     @Override
                     public void onSuccess(User user) {
+                        deleteAccountDialog.dismiss(); // Dismiss the dialog after successful deletion
                         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.remove("userId");
@@ -387,13 +447,12 @@ public class ProfileFragment extends Fragment {
                         showErrorDialog("Error deleting account: " + error);
                     }
                 });
-            } else {
-                showErrorDialog("Password is incorrect");
             }
         });
 
         deleteAccountDialog.show();
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -415,12 +474,16 @@ public class ProfileFragment extends Fragment {
                                 .transform(new CircleCrop())
                                 .into(profilePhoto);
 
-                        View headerView = navigationView.getHeaderView(0);
-                        ImageView navImageView = headerView.findViewById(R.id.nav_user_photo);
-                        Glide.with(ProfileFragment.this)
-                                .load(imageUri)
-                                .transform(new CircleCrop())
-                                .into(navImageView);
+                        if (navigationView != null) {
+                            View headerView = navigationView.getHeaderView(0);
+                            if (headerView != null) {
+                                ImageView navImageView = headerView.findViewById(R.id.nav_user_photo);
+                                Glide.with(ProfileFragment.this)
+                                        .load(imageUri)
+                                        .transform(new CircleCrop())
+                                        .into(navImageView);
+                            }
+                        }
                     }
 
                     @Override
@@ -431,12 +494,16 @@ public class ProfileFragment extends Fragment {
                                 .transform(new CircleCrop())
                                 .into(profilePhoto);
 
-                        View headerView = navigationView.getHeaderView(0);
-                        ImageView navImageView = headerView.findViewById(R.id.nav_user_photo);
-                        Glide.with(ProfileFragment.this)
-                                .load(imageUri)
-                                .transform(new CircleCrop())
-                                .into(navImageView);
+                        if (navigationView != null) {
+                            View headerView = navigationView.getHeaderView(0);
+                            if (headerView != null) {
+                                ImageView navImageView = headerView.findViewById(R.id.nav_user_photo);
+                                Glide.with(ProfileFragment.this)
+                                        .load(imageUri)
+                                        .transform(new CircleCrop())
+                                        .into(navImageView);
+                            }
+                        }
                     }
 
                     @Override
