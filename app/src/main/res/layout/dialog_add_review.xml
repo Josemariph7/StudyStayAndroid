@@ -42,20 +42,22 @@
         android:orientation="horizontal">
 
         <RatingBar
-            android:id="@+id/ratingBar"
+            android:id="@+id/rating_bar_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="22dp"
             android:numStars="5"
-            android:backgroundTint="@android:color/black"
-            android:stepSize="0.5" />
+            android:progressTint="#FFCD14"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
+            android:stepSize="0.5"
+            android:translationY="-7dp" />
     </LinearLayout>
 
     <Button
         android:id="@+id/submitReviewButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:backgroundTint="@color/SadBlue"
         android:text="Submit Review"
         android:textColor="@android:color/white" />

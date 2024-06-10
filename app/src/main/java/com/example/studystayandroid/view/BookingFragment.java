@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -102,6 +103,17 @@ public class BookingFragment extends Fragment {
                 },
                 year, month, day
         );
+
+        datePickerDialog.setOnShowListener(dialog -> {
+            Button positiveButton = datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE);
+            Button negativeButton = datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE);
+            if (positiveButton != null && negativeButton != null) {
+                int color = ContextCompat.getColor(getContext(), R.color.SadBlue);
+                positiveButton.setTextColor(color);
+                negativeButton.setTextColor(color);
+            }
+        });
+
         datePickerDialog.show();
     }
 
@@ -121,6 +133,17 @@ public class BookingFragment extends Fragment {
                 },
                 year, month, day
         );
+
+        datePickerDialog.setOnShowListener(dialog -> {
+            Button positiveButton = datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE);
+            Button negativeButton = datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE);
+            if (positiveButton != null && negativeButton != null) {
+                int color = ContextCompat.getColor(getContext(), R.color.SadBlue);
+                positiveButton.setTextColor(color);
+                negativeButton.setTextColor(color);
+            }
+        });
+
         datePickerDialog.show();
     }
 
@@ -316,7 +339,6 @@ public class BookingFragment extends Fragment {
 
         successDialog.show();
     }
-
 
     private void clearForm() {
         startDateEditText.setText("");

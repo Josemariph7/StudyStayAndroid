@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.studystayandroid.R;
 import com.example.studystayandroid.controller.UserController;
@@ -295,10 +296,12 @@ public class MainActivity extends AppCompatActivity {
         spinnerGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                if (position == 0) {
-                    ((TextView) parentView.getChildAt(0)).setTextColor(Color.GRAY);
-                } else {
-                    ((TextView) parentView.getChildAt(0)).setTextColor(getResources().getColor(R.color.SadBlue));
+                if(parentView.getChildAt(0)!=null) {
+                    if (position == 0) {
+                        ((TextView) parentView.getChildAt(0)).setTextColor(Color.GRAY);
+                    } else {
+                        ((TextView) parentView.getChildAt(0)).setTextColor(getResources().getColor(R.color.SadBlue));
+                    }
                 }
             }
 
@@ -504,6 +507,15 @@ public class MainActivity extends AppCompatActivity {
                 },
                 year, month, day
         );
+        datePickerDialog.setOnShowListener(dialog -> {
+            Button positiveButton = datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE);
+            Button negativeButton = datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE);
+            if (positiveButton != null && negativeButton != null) {
+                int buttonTextColor = ContextCompat.getColor(MainActivity.this, R.color.SadBlue);
+                positiveButton.setTextColor(buttonTextColor);
+                negativeButton.setTextColor(buttonTextColor);
+            }
+        });
         datePickerDialog.show();
     }
 

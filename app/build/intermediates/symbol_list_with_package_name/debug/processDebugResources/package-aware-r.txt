@@ -3368,6 +3368,7 @@ id buttonPanel
 id buttonPost
 id buttonSend
 id buttonViewProfile
+id button_ok
 id cache_measures
 id callButton
 id callMeasure
@@ -3483,6 +3484,7 @@ id end
 id endToStart
 id enterAlways
 id enterAlwaysCollapsed
+id error_message
 id escape
 id exitUntilCollapsed
 id expand_activities_button
@@ -3713,8 +3715,8 @@ id progress_circular
 id progress_horizontal
 id radio
 id rating
-id ratingBar
 id rating_bar
+id rating_bar_add
 id ratio
 id rectangles
 id recyclerView
@@ -3909,6 +3911,7 @@ id view_tree_saved_state_registry_owner
 id view_tree_view_model_store_owner
 id visible
 id visible_removing_fragment_view_tag
+id visit_profile_button
 id west
 id wide
 id withText
@@ -4062,6 +4065,7 @@ layout dialog_contact_options
 layout dialog_delete_account
 layout dialog_delete_confirmation
 layout dialog_error
+layout dialog_error_review
 layout dialog_listed_accommodation_detail
 layout dialog_map
 layout dialog_new_comment
@@ -4069,6 +4073,7 @@ layout dialog_new_topic
 layout dialog_options
 layout dialog_profile_settings
 layout dialog_rented_accommodation_detail
+layout dialog_review_options
 layout dialog_success
 layout dialog_update_user_info
 layout dialog_view_profile
@@ -4668,6 +4673,7 @@ style CustomCalendar
 style CustomDatePickerDialog
 style CustomTextInputEditText
 style CustomTextInputLayout
+style DatePickerDialogButtonStyle
 style MaterialAlertDialog_Material3
 style MaterialAlertDialog_Material3_Animation
 style MaterialAlertDialog_Material3_Body_Text

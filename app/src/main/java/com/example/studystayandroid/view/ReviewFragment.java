@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.Toast;
@@ -52,7 +53,6 @@ public class ReviewFragment extends Fragment {
         addReviewButton = view.findViewById(R.id.add_review_button);
         backButton = view.findViewById(R.id.back_button);
 
-        // Retrieve accommodation and currentUser from arguments
         if (getArguments() != null) {
             accommodation = (Accommodation) getArguments().getSerializable("accommodation");
             currentUser = (User) getArguments().getSerializable("currentUser");
@@ -67,11 +67,7 @@ public class ReviewFragment extends Fragment {
         });
 
         addReviewButton.setOnClickListener(v -> {
-            if (currentUserHasBooking()) {
-                showAddReviewDialog();
-            } else {
-                showErrorDialog("You need to have a booking to leave a review.");
-            }
+            checkUserBookingAndShowReviewDialog();
         });
     }
 
@@ -90,7 +86,7 @@ public class ReviewFragment extends Fragment {
 
                 reviewListView.setOnItemLongClickListener((parent, view, position, id) -> {
                     AccommodationReview review = filteredReviews.get(position);
-                    showReviewOptionsDialog(review);
+                    showCustomReviewOptionsDialog(review);
                     return true;
                 });
             }
@@ -103,12 +99,11 @@ public class ReviewFragment extends Fragment {
     }
 
     private void showAddReviewDialog() {
-        // Custom dialog to add a review
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View dialogView = inflater.inflate(R.layout.dialog_add_review, null);
 
         TextInputEditText reviewContentEditText = dialogView.findViewById(R.id.editTextReviewContent);
-        RatingBar ratingBar = dialogView.findViewById(R.id.ratingBar);
+        RatingBar ratingBar = dialogView.findViewById(R.id.rating_bar_add);
         Button submitReviewButton = dialogView.findViewById(R.id.submitReviewButton);
 
         AlertDialog alertDialog = new MaterialAlertDialogBuilder(requireContext())
@@ -144,56 +139,79 @@ public class ReviewFragment extends Fragment {
         alertDialog.show();
     }
 
-    private void showReviewOptionsDialog(AccommodationReview review) {
-        new MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Review Options")
-                .setMessage("What would you like to do?")
-                .setPositiveButton("Visit Profile", (dialog, which) -> {
-                    // Handle visiting user profile
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("user", review.getAuthor());
-                    StrangeProfileFragment strangeProfileFragment = StrangeProfileFragment.newInstance(review.getAuthor());
-                    strangeProfileFragment.setArguments(bundle);
-                    getParentFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_container, strangeProfileFragment)
-                            .addToBackStack(null)
-                            .commit();
-                })
-                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
-                .show();
+    private void showCustomReviewOptionsDialog(AccommodationReview review) {
+        LayoutInflater inflater = LayoutInflater.from(requireContext());
+        View dialogView = inflater.inflate(R.layout.dialog_review_options, null);
+
+        Button visitProfileButton = dialogView.findViewById(R.id.visit_profile_button);
+        Button cancelButton = dialogView.findViewById(R.id.cancel_button);
+
+        AlertDialog alertDialog = new MaterialAlertDialogBuilder(requireContext())
+                .setView(dialogView)
+                .create();
+
+        visitProfileButton.setOnClickListener(v -> {
+            openUserProfile(review.getAuthor());
+            alertDialog.dismiss();
+        });
+
+        cancelButton.setOnClickListener(v -> alertDialog.dismiss());
+
+        alertDialog.show();
+    }
+
+    private void openUserProfile(User user) {
+        StrangeProfileFragment strangeProfileFragment = StrangeProfileFragment.newInstance(user);
+        getParentFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, strangeProfileFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     private void showErrorDialog(String message) {
-        new MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Error")
-                .setMessage(message)
-                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
-                .show();
+        LayoutInflater inflater = LayoutInflater.from(requireContext());
+        View dialogView = inflater.inflate(R.layout.dialog_error_review, null);
+
+        TextView errorMessageTextView = dialogView.findViewById(R.id.error_message);
+        Button okButton = dialogView.findViewById(R.id.button_ok);
+
+        AlertDialog alertDialog = new MaterialAlertDialogBuilder(requireContext())
+                .setView(dialogView)
+                .create();
+
+        errorMessageTextView.setText(message);
+
+        okButton.setOnClickListener(v -> alertDialog.dismiss());
+
+        alertDialog.show();
     }
 
-    private boolean currentUserHasBooking() {
-        // Check if the current user has a booking in the accommodation
+    private void checkUserBookingAndShowReviewDialog() {
         BookingController bookingController = new BookingController(requireContext());
-        final boolean[] hasBooking = {false};
 
         bookingController.getBookings(new BookingController.BookingListCallback() {
             @Override
             public void onSuccess(List<Booking> bookings) {
+                boolean hasBooking = false;
                 for (Booking booking : bookings) {
                     if (booking.getUser().getUserId().equals(currentUser.getUserId()) &&
                             booking.getAccommodation().getAccommodationId().equals(accommodation.getAccommodationId())) {
-                        hasBooking[0] = true;
+                        hasBooking = true;
                         break;
                     }
+                }
+                if (hasBooking) {
+                    showAddReviewDialog();
+                } else {
+                    showErrorDialog("You need to have a booking to leave a review.");
                 }
             }
 
             @Override
             public void onError(String error) {
                 Log.e("ReviewFragment", "Error checking bookings: " + error);
+                showErrorDialog("Error checking bookings.");
             }
         });
-
-        return hasBooking[0];
     }
 }

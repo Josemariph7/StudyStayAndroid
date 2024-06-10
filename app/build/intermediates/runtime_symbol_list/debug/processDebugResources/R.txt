@@ -3367,6 +3367,7 @@ int id buttonPanel 0x7f09007a
 int id buttonPost 0x7f09007b
 int id buttonSend 0x7f09007c
 int id buttonViewProfile 0x7f09007d
+int id button_ok 0x7f0902a7
 int id cache_measures 0x7f09007e
 int id callButton 0x7f09007f
 int id callMeasure 0x7f090080
@@ -3482,6 +3483,7 @@ int id end 0x7f0900ed
 int id endToStart 0x7f0900ee
 int id enterAlways 0x7f0900ef
 int id enterAlwaysCollapsed 0x7f0900f0
+int id error_message 0x7f0902a8
 int id escape 0x7f0900f1
 int id exitUntilCollapsed 0x7f0900f2
 int id expand_activities_button 0x7f0900f3
@@ -3712,8 +3714,8 @@ int id progress_circular 0x7f0901d3
 int id progress_horizontal 0x7f0901d4
 int id radio 0x7f0901d5
 int id rating 0x7f0901d6
-int id ratingBar 0x7f0901d7
 int id rating_bar 0x7f0901d8
+int id rating_bar_add 0x7f0902a5
 int id ratio 0x7f0901d9
 int id rectangles 0x7f0901da
 int id recyclerView 0x7f0901db
@@ -3908,6 +3910,7 @@ int id view_tree_saved_state_registry_owner 0x7f090297
 int id view_tree_view_model_store_owner 0x7f090298
 int id visible 0x7f090299
 int id visible_removing_fragment_view_tag 0x7f09029a
+int id visit_profile_button 0x7f0902a6
 int id west 0x7f09029b
 int id wide 0x7f09029c
 int id withText 0x7f09029d
@@ -4061,6 +4064,7 @@ int layout dialog_contact_options 0x7f0c0034
 int layout dialog_delete_account 0x7f0c0035
 int layout dialog_delete_confirmation 0x7f0c0036
 int layout dialog_error 0x7f0c0037
+int layout dialog_error_review 0x7f0c009b
 int layout dialog_listed_accommodation_detail 0x7f0c0038
 int layout dialog_map 0x7f0c0039
 int layout dialog_new_comment 0x7f0c003a
@@ -4068,6 +4072,7 @@ int layout dialog_new_topic 0x7f0c003b
 int layout dialog_options 0x7f0c003c
 int layout dialog_profile_settings 0x7f0c003d
 int layout dialog_rented_accommodation_detail 0x7f0c003e
+int layout dialog_review_options 0x7f0c009a
 int layout dialog_success 0x7f0c003f
 int layout dialog_update_user_info 0x7f0c0040
 int layout dialog_view_profile 0x7f0c0041
@@ -4667,6 +4672,7 @@ int style CustomCalendar 0x7f120128
 int style CustomDatePickerDialog 0x7f120129
 int style CustomTextInputEditText 0x7f12012a
 int style CustomTextInputLayout 0x7f12012b
+int style DatePickerDialogButtonStyle 0x7f120471
 int style MaterialAlertDialog_Material3 0x7f12012c
 int style MaterialAlertDialog_Material3_Animation 0x7f12012d
 int style MaterialAlertDialog_Material3_Body_Text 0x7f12012e

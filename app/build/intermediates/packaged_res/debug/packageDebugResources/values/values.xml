@@ -135,7 +135,6 @@
     </style>
     <style name="CustomDatePickerDialog" parent="Theme.MaterialComponents.Light.Dialog">
         <item name="colorAccent">@color/LightBlue</item>
-        <item name="android:textColor">@color/SadBlue</item>
         <item name="android:textColorPrimary">@color/SadBlue</item>
         <item name="android:textColorSecondary">@color/SadBlue</item>
         <item name="materialCalendarTheme">@style/CustomCalendar</item>
@@ -155,5 +154,8 @@
             <item name="android:clickable">true</item>
             <item name="android:cursorVisible">true</item>
         </style>
+    <style name="DatePickerDialogButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/SadBlue</item>
+    </style>
     <style name="Theme.StudyStayAndroid" parent="Base.Theme.StudyStayAndroid"/>
 </resources>

@@ -97,8 +97,10 @@ id buttonOption2
 id buttonPost
 id buttonSend
 id buttonViewProfile
+id button_ok
 id callButton
 id cancelButton
+id cancel_button
 id capacity_spinner
 id carousel_view_pager
 id changePasswordButton
@@ -131,6 +133,7 @@ id emailEditText
 id emailTextView
 id emptyViewListed
 id emptyViewRented
+id error_message
 id facebook_button
 id filter_availability
 id filter_button
@@ -176,8 +179,8 @@ id price
 id profileImageView
 id profilePhoto
 id rating
-id ratingBar
 id rating_bar
+id rating_bar_add
 id recyclerView
 id recyclerViewComments
 id recyclerViewConversations
@@ -235,6 +238,7 @@ id upload_photos_button
 id viewMapButton
 id viewPager
 id viewProfileButton
+id visit_profile_button
 layout activity_dashboard
 layout activity_main
 layout dialog_accommodation_detail
@@ -247,6 +251,7 @@ layout dialog_contact_options
 layout dialog_delete_account
 layout dialog_delete_confirmation
 layout dialog_error
+layout dialog_error_review
 layout dialog_listed_accommodation_detail
 layout dialog_map
 layout dialog_new_comment
@@ -254,6 +259,7 @@ layout dialog_new_topic
 layout dialog_options
 layout dialog_profile_settings
 layout dialog_rented_accommodation_detail
+layout dialog_review_options
 layout dialog_success
 layout dialog_update_user_info
 layout dialog_view_profile
@@ -315,6 +321,7 @@ style CustomCalendar
 style CustomDatePickerDialog
 style CustomTextInputEditText
 style CustomTextInputLayout
+style DatePickerDialogButtonStyle
 style Theme.StudyStayAndroid
 xml backup_rules
 xml data_extraction_rules

@@ -39,6 +39,7 @@ public class ReviewAdapter extends ArrayAdapter<AccommodationReview> {
             reviewerNameTextView.setText(review.getAuthor().getName());
             reviewContentTextView.setText(review.getComment());
             ratingBar.setRating((float) review.getRating());
+            ratingBar.setIsIndicator(true);
         }
 
         return convertView;

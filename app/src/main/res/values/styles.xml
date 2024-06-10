@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Otros atributos del tema -->
@@ -19,11 +19,14 @@
 
     <style name="CustomDatePickerDialog" parent="Theme.MaterialComponents.Light.Dialog">
         <item name="colorAccent">@color/LightBlue</item>
-        <item name="android:textColor">@color/SadBlue</item>
         <item name="android:textColorPrimary">@color/SadBlue</item>
         <item name="android:textColorSecondary">@color/SadBlue</item>
         <item name="materialCalendarTheme">@style/CustomCalendar</item>
         <item name="materialCalendarFullscreenTheme">@style/CustomCalendar</item>
+    </style>
+
+    <style name="DatePickerDialogButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/SadBlue</item>
     </style>
 
     <!-- Estilo personalizado para CalendarView en DatePickerDialog -->
