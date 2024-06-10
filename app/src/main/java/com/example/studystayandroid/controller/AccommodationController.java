@@ -197,9 +197,9 @@ public class AccommodationController {
      * @param accommodation el alojamiento a ser creado
      * @param callback el callback para manejar la respuesta
      */
-    public void createAccommodation(Accommodation accommodation, final SimpleCallback callback) {
+    public void createAccommodation(Accommodation accommodation, final AccommodationCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CREATE_ACCOMMODATION,
-                response -> callback.onSuccess(),
+                response -> callback.onSuccess(accommodation),
                 error -> callback.onError(error.toString())) {
             @Override
             protected Map<String, String> getParams() {

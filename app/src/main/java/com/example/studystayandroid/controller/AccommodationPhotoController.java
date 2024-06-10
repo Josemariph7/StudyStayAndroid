@@ -1,6 +1,7 @@
 package com.example.studystayandroid.controller;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -55,25 +56,15 @@ public class AccommodationPhotoController {
                 response -> {
                     try {
                         List<AccommodationPhoto> photos = new ArrayList<>();
-                        AccommodationController accommodationController = new AccommodationController(context);
+                        Log.d("AccommodationPhotoController", "Response: " + response.toString());
                         for (int i = 0; i < response.length(); i++) {
                             JSONObject photoObject = response.getJSONObject(i);
                             Long photoId = photoObject.getLong("PhotoId");
                             Long accommodationId = photoObject.getLong("AccommodationId");
                             byte[] photoData = photoObject.getString("PhotoData").getBytes();
 
+                            AccommodationController accommodationController = new AccommodationController(context);
                             accommodationController.getAccommodationById(accommodationId, new AccommodationController.AccommodationCallback() {
-                                @Override
-                                public void onSuccess(Object result) {
-                                    Accommodation accommodation = (Accommodation) result;
-                                    AccommodationPhoto photo = new AccommodationPhoto(accommodation, photoData);
-                                    photo.setPhotoId(photoId);
-                                    photos.add(photo);
-                                    if (photos.size() == response.length()) {
-                                        callback.onSuccess(photos);
-                                    }
-                                }
-
                                 @Override
                                 public void onSuccess(Accommodation accommodation) {
                                     AccommodationPhoto photo = new AccommodationPhoto(accommodation, photoData);
@@ -86,19 +77,32 @@ public class AccommodationPhotoController {
 
                                 @Override
                                 public void onError(String error) {
+                                    Log.e("AccommodationPhotoController", "Error getting accommodation by ID: " + error);
                                     callback.onError(error);
+                                }
+
+                                @Override
+                                public void onSuccess(Object result) {
+                                    // Not used
                                 }
                             });
                         }
                     } catch (JSONException e) {
+                        Log.e("AccommodationPhotoController", "JSON error: " + e.getMessage());
                         callback.onError(e.getMessage());
                     }
                 },
-                error -> callback.onError(error.toString())
+                error -> {
+                    Log.e("AccommodationPhotoController", "Volley error: " + error.toString());
+                    callback.onError(error.toString());
+                }
         );
 
         requestQueue.add(jsonArrayRequest);
     }
+
+
+
 
     /**
      * Obtiene una foto específica por su ID.
@@ -187,6 +191,11 @@ public class AccommodationPhotoController {
      * @param callback el callback para manejar la respuesta
      */
     public void createPhoto(AccommodationPhoto photo, final PhotoCallback callback) {
+        if (photo.getAccommodation() == null || photo.getAccommodation().getAccommodationId() == null) {
+            callback.onError("Accommodation ID is null");
+            return;
+        }
+
         VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(Request.Method.POST, URL_CREATE_PHOTO,
                 response -> {
                     try {
@@ -219,6 +228,9 @@ public class AccommodationPhotoController {
 
         requestQueue.add(multipartRequest);
     }
+
+
+
 
     /**
      * Elimina una foto por su ID.

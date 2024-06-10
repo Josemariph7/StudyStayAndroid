@@ -3096,7 +3096,6 @@ drawable common_google_signin_btn_text_light_focused
 drawable common_google_signin_btn_text_light_normal
 drawable common_google_signin_btn_text_light_normal_background
 drawable conversation_item_background
-drawable defaultaccommodation
 drawable defaultprofile
 drawable design_fab_background
 drawable design_ic_visibility
@@ -3546,6 +3545,7 @@ id imageView
 id imageView2
 id imageView3
 id imageViewProfile
+id image_view
 id immediateStop
 id included
 id indeterminate
@@ -4095,7 +4095,7 @@ layout item_accommodation
 layout item_comment
 layout item_conversation
 layout item_forum_topic
-layout item_image_carousel
+layout item_image
 layout item_message
 layout item_message_received
 layout item_message_sent

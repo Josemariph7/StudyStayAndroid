@@ -1,5 +1,7 @@
 package com.example.studystayandroid.view;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -92,6 +94,11 @@ public class AddAccommodationFragment extends Fragment {
         uploadPhotosButton.setOnClickListener(v -> openImagePicker());
         submitButton.setOnClickListener(v -> submitAccommodation());
 
+        submitButton.setOnClickListener(v -> {
+            submitButton.setEnabled(false);
+            submitAccommodation();
+        });
+
         // Retrieve currentUser from arguments
         if (getArguments() != null) {
             currentUser = (User) getArguments().getSerializable("currentUser");
@@ -120,16 +127,16 @@ public class AddAccommodationFragment extends Fragment {
     }
 
     private void openImagePicker() {
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.setType("image/*");
-        startActivityForResult(intent, PICK_IMAGES_REQUEST);
+        startActivityForResult(Intent.createChooser(intent, "Select Pictures"), PICK_IMAGES_REQUEST);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGES_REQUEST && data != null) {
+        if (requestCode == PICK_IMAGES_REQUEST && resultCode == RESULT_OK && data != null) {
             if (data.getClipData() != null) {
                 for (int i = 0; i < data.getClipData().getItemCount(); i++) {
                     Uri imageUri = data.getClipData().getItemAt(i).getUri();
@@ -155,7 +162,7 @@ public class AddAccommodationFragment extends Fragment {
         boolean isValid = validateInputs(address, city, price, description, capacity, services);
 
         if (isValid) {
-            // Check if the accommodation already exists
+            // Verificar si el alojamiento ya existe
             accommodationController.getAccommodations(new AccommodationController.AccommodationListCallback() {
                 @Override
                 public void onSuccess(List<Accommodation> accommodations) {
@@ -163,11 +170,12 @@ public class AddAccommodationFragment extends Fragment {
                         if (existingAccommodation.getOwner().getUserId().equals(currentUser.getUserId()) &&
                                 existingAccommodation.getAddress().equalsIgnoreCase(address)) {
                             Toast.makeText(getContext(), "Accommodation already exists at this address.", Toast.LENGTH_SHORT).show();
+                            submitButton.setEnabled(true);  // Rehabilitar el botón de envío
                             return;
                         }
                     }
 
-                    // Create new accommodation
+                    // Crear nuevo alojamiento si no existe duplicado
                     Accommodation accommodation = new Accommodation();
                     accommodation.setOwner(currentUser);
                     accommodation.setAddress(address);
@@ -179,7 +187,20 @@ public class AddAccommodationFragment extends Fragment {
                     accommodation.setAvailability(true);
                     accommodation.setRating(0.0);
 
-                    accommodationController.createAccommodation(accommodation, new AccommodationController.SimpleCallback() {
+                    accommodationController.createAccommodation(accommodation, new AccommodationController.AccommodationCallback() {
+                        @Override
+                        public void onSuccess(Object result) {
+                            Accommodation createdAccommodation = (Accommodation) result;
+                            if (selectedImagesUris.isEmpty()) {
+                                clearForm();
+                                navigateBackWithSuccess();
+                                Toast.makeText(getContext(), "Accommodation created successfully", Toast.LENGTH_SHORT).show();
+                            } else {
+                                uploadPhotos(createdAccommodation);
+                            }
+                            submitButton.setEnabled(true);  // Rehabilitar el botón de envío
+                        }
+
                         @Override
                         public void onSuccess(Accommodation createdAccommodation) {
                             if (selectedImagesUris.isEmpty()) {
@@ -189,16 +210,14 @@ public class AddAccommodationFragment extends Fragment {
                             } else {
                                 uploadPhotos(createdAccommodation);
                             }
-                        }
-
-                        @Override
-                        public void onSuccess() {
+                            submitButton.setEnabled(true);  // Rehabilitar el botón de envío
                         }
 
                         @Override
                         public void onError(String error) {
                             Log.e("AddAccommodationFragment", "Error creating accommodation: " + error);
                             Toast.makeText(getContext(), "Error creating accommodation: " + error, Toast.LENGTH_SHORT).show();
+                            submitButton.setEnabled(true);  // Rehabilitar el botón de envío
                         }
                     });
                 }
@@ -206,10 +225,14 @@ public class AddAccommodationFragment extends Fragment {
                 @Override
                 public void onError(String error) {
                     Log.e("AddAccommodationFragment", "Error checking accommodations: " + error);
+                    submitButton.setEnabled(true);  // Rehabilitar el botón de envío
                 }
             });
+        } else {
+            submitButton.setEnabled(true);  // Rehabilitar el botón de envío si hay errores de validación
         }
     }
+
 
     private boolean validateInputs(String address, String city, String price, String description, int capacity, String services) {
         boolean isValid = true;

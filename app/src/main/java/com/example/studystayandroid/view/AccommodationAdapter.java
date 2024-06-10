@@ -1,5 +1,10 @@
 package com.example.studystayandroid.view;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.studystayandroid.R;
+import com.example.studystayandroid.controller.AccommodationPhotoController;
 import com.example.studystayandroid.model.Accommodation;
 import com.example.studystayandroid.model.AccommodationPhoto;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator3;
@@ -23,9 +31,11 @@ public class AccommodationAdapter extends RecyclerView.Adapter<AccommodationAdap
     private static List<Accommodation> accommodationList;
     private OnItemClickListener listener;
     private OnItemLongClickListener longClickListener;
+    private byte[] defaultImageBytes;
 
-    public AccommodationAdapter(List<Accommodation> accommodationList) {
+    public AccommodationAdapter(List<Accommodation> accommodationList, Context context) {
         this.accommodationList = accommodationList;
+        this.defaultImageBytes = getDefaultImageBytes(context);
     }
 
     public interface OnItemClickListener {
@@ -44,6 +54,13 @@ public class AccommodationAdapter extends RecyclerView.Adapter<AccommodationAdap
         this.longClickListener = listener;
     }
 
+    private byte[] getDefaultImageBytes(Context context) {
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.accommodation);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        return stream.toByteArray();
+    }
+
     @NonNull
     @Override
     public AccommodationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -51,7 +68,6 @@ public class AccommodationAdapter extends RecyclerView.Adapter<AccommodationAdap
         return new AccommodationViewHolder(view, listener, longClickListener);
     }
 
-    @Override
     public void onBindViewHolder(@NonNull AccommodationViewHolder holder, int position) {
         Accommodation accommodation = accommodationList.get(position);
         holder.address.setText(accommodation.getAddress());
@@ -59,13 +75,33 @@ public class AccommodationAdapter extends RecyclerView.Adapter<AccommodationAdap
         holder.description.setText(accommodation.getDescription());
         holder.price.setText(String.format("$%.2f", accommodation.getPrice()));
 
-        List<byte[]> photos = new ArrayList<>();
-        for (AccommodationPhoto photo : accommodation.getPhotos()) {
-            photos.add(photo.getPhotoData());
-        }
-        ImageCarouselAdapter adapter = new ImageCarouselAdapter(photos, holder.itemView.getContext());
-        holder.carouselViewPager.setAdapter(adapter);
-        holder.indicator.setViewPager(holder.carouselViewPager);
+        AccommodationPhotoController controller = new AccommodationPhotoController(holder.itemView.getContext());
+        controller.getPhotos(new AccommodationPhotoController.PhotoListCallback() {
+            @Override
+            public void onSuccess(List<AccommodationPhoto> photos) {
+                List<byte[]> photoDataList = new ArrayList<>();
+                for (AccommodationPhoto photo : photos) {
+                    if (photo.getAccommodation().getAccommodationId().equals(accommodation.getAccommodationId())) {
+                        photoDataList.add(Base64.decode(photo.getPhotoData(), Base64.DEFAULT));
+                    }
+                }
+                if (photoDataList.isEmpty()) {
+                    Log.d("AccommodationAdapter", "No photos found for accommodation ID: " + accommodation.getAccommodationId());
+                    holder.carouselViewPager.setAdapter(new ImageCarouselAdapter(Collections.singletonList(defaultImageBytes), holder.itemView.getContext()));
+                } else {
+                    Log.d("AccommodationAdapter", "Photos found for accommodation ID: " + accommodation.getAccommodationId());
+                    ImageCarouselAdapter adapter = new ImageCarouselAdapter(photoDataList, holder.itemView.getContext());
+                    holder.carouselViewPager.setAdapter(adapter);
+                    holder.indicator.setViewPager(holder.carouselViewPager);
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.e("AccommodationAdapter", "Error loading photos: " + error);
+                holder.carouselViewPager.setAdapter(new ImageCarouselAdapter(Collections.singletonList(defaultImageBytes), holder.itemView.getContext()));
+            }
+        });
     }
 
     @Override

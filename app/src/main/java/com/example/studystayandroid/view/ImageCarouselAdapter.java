@@ -1,5 +1,4 @@
 package com.example.studystayandroid.view;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,42 +13,44 @@ import com.example.studystayandroid.R;
 
 import java.util.List;
 
-public class ImageCarouselAdapter extends RecyclerView.Adapter<ImageCarouselAdapter.ViewHolder> {
+public class ImageCarouselAdapter extends RecyclerView.Adapter<ImageCarouselAdapter.ImageViewHolder> {
 
-    private List<byte[]> photos;
+    private List<byte[]> photoDataList;
     private Context context;
 
-    public ImageCarouselAdapter(List<byte[]> photos, Context context) {
-        this.photos = photos;
+    public ImageCarouselAdapter(List<byte[]> photoDataList, Context context) {
+        this.photoDataList = photoDataList;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_image_carousel, parent, false);
-        return new ViewHolder(view);
+    public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image, parent, false);
+        return new ImageViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
+        byte[] photoData = photoDataList.get(position);
         Glide.with(context)
                 .asBitmap()
-                .load(photos.get(position))
+                .load(photoData)
+                .error(R.drawable.accommodation) // Asegúrate de tener una imagen de error o por defecto
                 .into(holder.imageView);
     }
 
     @Override
     public int getItemCount() {
-        return photos.size();
+        return photoDataList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ImageViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
 
-        public ViewHolder(@NonNull View itemView) {
+        ImageViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.imageView);
+            imageView = itemView.findViewById(R.id.image_view);
         }
     }
 }

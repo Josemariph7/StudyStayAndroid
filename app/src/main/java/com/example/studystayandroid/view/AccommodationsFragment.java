@@ -2,8 +2,11 @@ package com.example.studystayandroid.view;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +28,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.studystayandroid.R;
 import com.example.studystayandroid.controller.AccommodationController;
+import com.example.studystayandroid.controller.AccommodationPhotoController;
 import com.example.studystayandroid.controller.ConversationController;
 import com.example.studystayandroid.controller.UserController;
 import com.example.studystayandroid.model.Accommodation;
@@ -34,7 +38,9 @@ import com.example.studystayandroid.model.User;
 import com.example.studystayandroid.utils.Constants;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AccommodationsFragment extends Fragment {
@@ -90,7 +96,7 @@ public class AccommodationsFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         accommodationList = new ArrayList<>();
-        adapter = new AccommodationAdapter(accommodationList);
+        adapter = new AccommodationAdapter(accommodationList, getContext());
         recyclerView.setAdapter(adapter);
 
         filterCitySpinner = view.findViewById(R.id.filter_city_spinner);
@@ -128,8 +134,6 @@ public class AccommodationsFragment extends Fragment {
 
         adapter.setOnItemClickListener(this::showAccommodationDetailDialog);
         adapter.setOnItemLongClickListener(this::showAccommodationOptionsDialog);
-
-
     }
 
     private void toggleFiltersVisibility() {
@@ -253,7 +257,6 @@ public class AccommodationsFragment extends Fragment {
                 .commit();
     }
 
-
     private void showAccommodationDetailDialog(Accommodation accommodation) {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View dialogView = inflater.inflate(R.layout.dialog_accommodation_detail, null);
@@ -268,15 +271,40 @@ public class AccommodationsFragment extends Fragment {
         TextView ownerTextView = dialogView.findViewById(R.id.ownerName);
         Button bookButton = dialogView.findViewById(R.id.bookButton);
         Button contactButton = dialogView.findViewById(R.id.contactButton);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button mapButton = dialogView.findViewById(R.id.map_button2);
+        Button mapButton = dialogView.findViewById(R.id.map_button2);
         reviewButton = dialogView.findViewById(R.id.reviewButton);
 
-        List<byte[]> photos = new ArrayList<>();
-        for (AccommodationPhoto photo : accommodation.getPhotos()) {
-            photos.add(photo.getPhotoData());
-        }
-        ImageCarouselAdapter adapter = new ImageCarouselAdapter(photos, getContext());
-        imageCarousel.setAdapter(adapter);
+        // Obtener las fotos del alojamiento usando AccommodationPhotoController
+        AccommodationPhotoController controller = new AccommodationPhotoController(requireContext());
+        controller.getPhotos(new AccommodationPhotoController.PhotoListCallback() {
+            @Override
+            public void onSuccess(List<AccommodationPhoto> photos) {
+                List<byte[]> photoDataList = new ArrayList<>();
+                for (AccommodationPhoto photo : photos) {
+                    if (photo.getAccommodation().getAccommodationId().equals(accommodation.getAccommodationId())) {
+                        photoDataList.add(Base64.decode(photo.getPhotoData(), Base64.DEFAULT));
+                    }
+                }
+
+                if (photoDataList.isEmpty()) {
+                    Log.d("AccommodationsFragment", "No photos found for accommodation ID: " + accommodation.getAccommodationId());
+                    photoDataList.add(getDefaultImageBytes());
+                } else {
+                    Log.d("AccommodationsFragment", "Photos found for accommodation ID: " + accommodation.getAccommodationId());
+                }
+
+                // Crear y establecer el adaptador de carrusel de imágenes
+                ImageCarouselAdapter adapter = new ImageCarouselAdapter(photoDataList, getContext());
+                imageCarousel.setAdapter(adapter);
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.e("AccommodationsFragment", "Error loading photos: " + error);
+                List<byte[]> defaultImageList = Collections.singletonList(getDefaultImageBytes());
+                imageCarousel.setAdapter(new ImageCarouselAdapter(defaultImageList, getContext()));
+            }
+        });
 
         rating.setText(String.valueOf(accommodation.getRating()));
         availabilityTextView.setText(accommodation.isAvailability() ? "Available" : "Not Available");
@@ -291,7 +319,7 @@ public class AccommodationsFragment extends Fragment {
 
         backButton.setOnClickListener(v -> dialog.dismiss());
 
-        mapButton.setOnClickListener(v ->         showAccommodationOnMap(accommodation));
+        mapButton.setOnClickListener(v -> showAccommodationOnMap(accommodation));
 
         reviewButton.setOnClickListener(v -> {
             ReviewFragment reviewFragment = new ReviewFragment();
@@ -305,7 +333,6 @@ public class AccommodationsFragment extends Fragment {
                     .commit();
             dialog.dismiss();
         });
-
 
         bookButton.setOnClickListener(v -> {
             BookingFragment bookingFragment = new BookingFragment();
@@ -321,12 +348,18 @@ public class AccommodationsFragment extends Fragment {
             dialog.dismiss();
         });
 
-
         contactButton.setOnClickListener(v -> {
             showContactOptions(accommodation.getOwner(), dialog);
         });
 
         dialog.show();
+    }
+
+    private byte[] getDefaultImageBytes() {
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.accommodation);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        return stream.toByteArray();
     }
 
 
@@ -390,7 +423,6 @@ public class AccommodationsFragment extends Fragment {
 
         dialog.show();
     }
-
 
     private void deleteAccommodation(Accommodation accommodation) {
         accommodationController.deleteAccommodation(accommodation.getAccommodationId(), new AccommodationController.AccommodationCallback() {

@@ -28,7 +28,6 @@ drawable bg_message_received
 drawable bg_message_sent
 drawable circularimage
 drawable conversation_item_background
-drawable defaultaccommodation
 drawable defaultprofile
 drawable divider
 drawable fotoperfil
@@ -149,6 +148,7 @@ id imageView
 id imageView2
 id imageView3
 id imageViewProfile
+id image_view
 id indicator
 id invoiceTextView
 id lastNameEditText
@@ -279,7 +279,7 @@ layout item_accommodation
 layout item_comment
 layout item_conversation
 layout item_forum_topic
-layout item_image_carousel
+layout item_image
 layout item_message
 layout item_message_received
 layout item_message_sent
