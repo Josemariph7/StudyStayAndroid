@@ -102,7 +102,6 @@ public class AccommodationsFragment extends Fragment {
         applyFiltersButton = view.findViewById(R.id.apply_filters_button);
         filtersContainer = view.findViewById(R.id.filters_container);
 
-
         filterButton.setOnClickListener(v -> toggleFiltersVisibility());
         mapButton.setOnClickListener(v -> openMap());
         addAccommodationButton.setOnClickListener(v -> openAddAccommodationFragment(currentUser));

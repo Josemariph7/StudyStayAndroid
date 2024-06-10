@@ -33,6 +33,7 @@ public class ReviewFragment extends Fragment {
 
     private ListView reviewListView;
     private Button addReviewButton;
+    private Button backButton;
 
     private Accommodation accommodation;
     private User currentUser;
@@ -49,6 +50,7 @@ public class ReviewFragment extends Fragment {
 
         reviewListView = view.findViewById(R.id.review_list_view);
         addReviewButton = view.findViewById(R.id.add_review_button);
+        backButton = view.findViewById(R.id.back_button);
 
         // Retrieve accommodation and currentUser from arguments
         if (getArguments() != null) {
@@ -59,6 +61,10 @@ public class ReviewFragment extends Fragment {
         }
 
         loadReviews();
+
+        backButton.setOnClickListener(v -> {
+            getParentFragmentManager().popBackStack();
+        });
 
         addReviewButton.setOnClickListener(v -> {
             if (currentUserHasBooking()) {

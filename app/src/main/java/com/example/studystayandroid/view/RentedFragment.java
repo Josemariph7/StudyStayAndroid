@@ -40,6 +40,7 @@ public class RentedFragment extends Fragment {
     private TextView emptyView;
     private User currentUser;
 
+
     public static RentedFragment newInstance(User user) {
         RentedFragment fragment = new RentedFragment();
         Bundle args = new Bundle();
@@ -60,11 +61,12 @@ public class RentedFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recyclerViewRented);
         emptyView = view.findViewById(R.id.emptyViewRented);
+
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         adapter = new SimpleAccommodationAdapter();
         recyclerView.setAdapter(adapter);
-
         adapter.setOnItemClickListener(this::showAccommodationDetailDialog);
 
         getRentedAccommodations();
