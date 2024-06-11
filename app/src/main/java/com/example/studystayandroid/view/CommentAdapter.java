@@ -1,3 +1,23 @@
+/*
+ * StudyStay © 2024
+ *
+ * All rights reserved.
+ *
+ * This software and associated documentation files (the "Software") are owned by StudyStay. Unauthorized copying, distribution, or modification of this Software is strictly prohibited.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this Software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * StudyStay
+ * José María Pozo Hidalgo
+ * Email: josemariph7@gmail.com
+ *
+ *
+ */
+
 package com.example.studystayandroid.view;
 
 import android.annotation.SuppressLint;
@@ -25,6 +45,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * Adaptador para mostrar una lista de comentarios en un RecyclerView.
+ */
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
 
     private List<ForumComment> comments;
@@ -32,6 +55,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     private User currentUser;
     private DiscussionFragment discussionFragment;
 
+    /**
+     * Constructor del adaptador de comentarios.
+     *
+     * @param context            Contexto para acceder a los recursos.
+     * @param comments           Lista de comentarios a mostrar.
+     * @param currentUser        Usuario actual.
+     * @param discussionFragment Fragmento de discusión al que pertenece el adaptador.
+     */
     public CommentAdapter(Context context, List<ForumComment> comments, User currentUser, DiscussionFragment discussionFragment) {
         this.context = context;
         this.comments = comments;
@@ -79,6 +110,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         });
     }
 
+    /**
+     * Muestra el diálogo de opciones para el comentario seleccionado.
+     *
+     * @param comment El comentario seleccionado.
+     */
     private void showOptionsDialog(ForumComment comment) {
         if (comment.getAuthor().getUserId().equals(currentUser.getUserId())) {
             showDeleteCommentDialog(comment);
@@ -87,6 +123,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         }
     }
 
+    /**
+     * Muestra el diálogo de confirmación para eliminar un comentario.
+     *
+     * @param comment El comentario a eliminar.
+     */
     private void showDeleteCommentDialog(ForumComment comment) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View dialogView = inflater.inflate(R.layout.dialog_delete_confirmation, null);
@@ -129,6 +170,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         dialog.show();
     }
 
+    /**
+     * Muestra el diálogo para ver el perfil del autor del comentario.
+     *
+     * @param author El autor del comentario.
+     */
     private void showViewProfileDialog(User author) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View dialogView = inflater.inflate(R.layout.dialog_view_profile, null);
@@ -157,12 +203,20 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         return comments.size();
     }
 
+    /**
+     * ViewHolder para los comentarios.
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView authorTextView;
         public TextView contentTextView;
         public TextView dateTextView;
         public ImageView imageViewProfile;
 
+        /**
+         * Constructor del ViewHolder para los comentarios.
+         *
+         * @param itemView La vista del item.
+         */
         public ViewHolder(View itemView) {
             super(itemView);
             authorTextView = itemView.findViewById(R.id.tvCommentAuthor);

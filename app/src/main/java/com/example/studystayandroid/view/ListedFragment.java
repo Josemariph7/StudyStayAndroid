@@ -1,4 +1,23 @@
-// ListedFragment.java
+/*
+ * StudyStay © 2024
+ *
+ * All rights reserved.
+ *
+ * This software and associated documentation files (the "Software") are owned by StudyStay. Unauthorized copying, distribution, or modification of this Software is strictly prohibited.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this Software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * StudyStay
+ * José María Pozo Hidalgo
+ * Email: josemariph7@gmail.com
+ *
+ *
+ */
+
 package com.example.studystayandroid.view;
 
 import android.content.Intent;
@@ -31,6 +50,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Fragmento para mostrar los alojamientos listados por el usuario actual.
+ */
 public class ListedFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -38,6 +60,12 @@ public class ListedFragment extends Fragment {
     private TextView emptyView;
     private User currentUser;
 
+    /**
+     * Crea una nueva instancia de ListedFragment.
+     *
+     * @param user El usuario actual.
+     * @return Una nueva instancia de ListedFragment.
+     */
     public static ListedFragment newInstance(User user) {
         ListedFragment fragment = new ListedFragment();
         Bundle args = new Bundle();
@@ -68,6 +96,9 @@ public class ListedFragment extends Fragment {
         getListedAccommodations();
     }
 
+    /**
+     * Obtiene los alojamientos listados por el usuario actual.
+     */
     private void getListedAccommodations() {
         if (getArguments() != null) {
             currentUser = (User) getArguments().getSerializable("currentUser");
@@ -96,6 +127,11 @@ public class ListedFragment extends Fragment {
         });
     }
 
+    /**
+     * Actualiza la UI según la lista de alojamientos.
+     *
+     * @param accommodations Lista de alojamientos.
+     */
     private void updateUI(List<Accommodation> accommodations) {
         if (accommodations.isEmpty()) {
             recyclerView.setVisibility(View.GONE);
@@ -106,6 +142,11 @@ public class ListedFragment extends Fragment {
         }
     }
 
+    /**
+     * Muestra el diálogo de detalles del alojamiento.
+     *
+     * @param accommodation El alojamiento seleccionado.
+     */
     private void showAccommodationDetailDialog(Accommodation accommodation) {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View dialogView = inflater.inflate(R.layout.dialog_listed_accommodation_detail, null);
@@ -159,6 +200,12 @@ public class ListedFragment extends Fragment {
         dialog.show();
     }
 
+    /**
+     * Muestra las opciones de contacto con el propietario.
+     *
+     * @param owner El propietario del alojamiento.
+     * @param parentDialog El diálogo padre que debe cerrarse si es necesario.
+     */
     private void showContactOptions(User owner, AlertDialog parentDialog) {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View dialogView = inflater.inflate(R.layout.dialog_contact_options, null);
@@ -186,6 +233,12 @@ public class ListedFragment extends Fragment {
         dialog.show();
     }
 
+    /**
+     * Crea una nueva conversación y abre el fragmento de mensajes.
+     *
+     * @param owner El propietario del alojamiento.
+     * @param parentDialog El diálogo padre que debe cerrarse si es necesario.
+     */
     private void createConversationAndOpenMessageFragment(User owner, AlertDialog parentDialog) {
         ConversationController conversationController = new ConversationController(getContext());
         conversationController.getConversations(currentUser.getUserId(), new ConversationController.ConversationListCallback() {
@@ -210,6 +263,12 @@ public class ListedFragment extends Fragment {
         });
     }
 
+    /**
+     * Crea una nueva conversación.
+     *
+     * @param owner El propietario del alojamiento.
+     * @param parentDialog El diálogo padre que debe cerrarse si es necesario.
+     */
     private void createNewConversation(User owner, AlertDialog parentDialog) {
         Conversation newConversation = new Conversation(null, currentUser.getUserId(), owner.getUserId(), new ArrayList<>());
         ConversationController conversationController = new ConversationController(getContext());
@@ -232,6 +291,11 @@ public class ListedFragment extends Fragment {
         });
     }
 
+    /**
+     * Abre el fragmento de mensajes.
+     *
+     * @param conversation La conversación a mostrar.
+     */
     private void openMessageFragment(Conversation conversation) {
         MessageFragment messageFragment = MessageFragment.newInstance(conversation);
         getParentFragmentManager().beginTransaction()
@@ -240,6 +304,11 @@ public class ListedFragment extends Fragment {
                 .commit();
     }
 
+    /**
+     * Muestra la ubicación del alojamiento en el mapa.
+     *
+     * @param accommodation El alojamiento a mostrar en el mapa.
+     */
     private void showAccommodationOnMap(Accommodation accommodation) {
         List<Accommodation> singleAccommodationList = new ArrayList<>();
         singleAccommodationList.add(accommodation);

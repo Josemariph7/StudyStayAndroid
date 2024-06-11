@@ -1,3 +1,23 @@
+/*
+ * StudyStay © 2024
+ *
+ * All rights reserved.
+ *
+ * This software and associated documentation files (the "Software") are owned by StudyStay. Unauthorized copying, distribution, or modification of this Software is strictly prohibited.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this Software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * StudyStay
+ * José María Pozo Hidalgo
+ * Email: josemariph7@gmail.com
+ *
+ *
+ */
+
 package com.example.studystayandroid.view;
 
 import android.annotation.SuppressLint;
@@ -34,6 +54,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Fragmento para manejar la visualización y envío de mensajes dentro de una conversación.
+ */
 public class MessageFragment extends Fragment {
 
     private static final String ARG_CONVERSATION = "arg_conversation";
@@ -53,6 +76,12 @@ public class MessageFragment extends Fragment {
     private MessageController messageController;
     private Long currentUserId;
 
+    /**
+     * Crea una nueva instancia de MessageFragment con una conversación específica.
+     *
+     * @param conversation La conversación que se va a manejar.
+     * @return Una nueva instancia de MessageFragment.
+     */
     public static MessageFragment newInstance(Conversation conversation) {
         MessageFragment fragment = new MessageFragment();
         Bundle args = new Bundle();
@@ -109,14 +138,15 @@ public class MessageFragment extends Fragment {
 
         buttonSend.setOnClickListener(v -> sendMessage());
 
-        button3.setOnClickListener(v -> {
-            getParentFragmentManager().popBackStack();
-        });
+        button3.setOnClickListener(v -> getParentFragmentManager().popBackStack());
 
         fetchMessages(conversation.getConversationId());
         loadUserProfile();
     }
 
+    /**
+     * Abre el perfil del usuario contrario en la conversación.
+     */
     private void openUserProfile() {
         Long otherUserId = conversation.getUser2Id().equals(currentUserId) ? conversation.getUser1Id() : conversation.getUser2Id();
         UserController userController = new UserController(getContext());
@@ -149,6 +179,11 @@ public class MessageFragment extends Fragment {
         });
     }
 
+    /**
+     * Obtiene los mensajes de una conversación específica.
+     *
+     * @param conversationId ID de la conversación.
+     */
     private void fetchMessages(Long conversationId) {
         messageController.getMessages(conversationId, new MessageController.MessageListCallback() {
             @Override
@@ -165,6 +200,9 @@ public class MessageFragment extends Fragment {
         });
     }
 
+    /**
+     * Envía un mensaje en la conversación actual.
+     */
     private void sendMessage() {
         String content = editTextMessage.getText().toString();
         if (content.isEmpty()) {
@@ -189,6 +227,9 @@ public class MessageFragment extends Fragment {
         });
     }
 
+    /**
+     * Carga el perfil del usuario contrario en la conversación.
+     */
     private void loadUserProfile() {
         Long otherUserId = conversation.getUser2Id();
         if (otherUserId.equals(currentUserId)) {
@@ -200,7 +241,7 @@ public class MessageFragment extends Fragment {
         userController.getUserById(otherUserId, new UserController.UserCallback() {
             @Override
             public void onSuccess(Object result) {
-                User user=(User) result;
+                User user = (User) result;
                 textViewUser.setText(user.getName() + " " + user.getLastName());
                 byte[] profileImageBytes = user.getProfilePicture();
                 if (profileImageBytes != null && profileImageBytes.length > 0) {

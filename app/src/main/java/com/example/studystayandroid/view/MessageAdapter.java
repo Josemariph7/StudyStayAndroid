@@ -1,3 +1,23 @@
+/*
+ * StudyStay © 2024
+ *
+ * All rights reserved.
+ *
+ * This software and associated documentation files (the "Software") are owned by StudyStay. Unauthorized copying, distribution, or modification of this Software is strictly prohibited.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this Software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * StudyStay
+ * José María Pozo Hidalgo
+ * Email: josemariph7@gmail.com
+ *
+ *
+ */
+
 package com.example.studystayandroid.view;
 
 import android.content.Context;
@@ -20,6 +40,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * Adapter para manejar la lista de mensajes en una RecyclerView.
+ */
 public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int VIEW_TYPE_SENT = 1;
@@ -30,6 +53,13 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private Context context;
     private MessageController messageController;
 
+    /**
+     * Constructor para el adaptador de mensajes.
+     *
+     * @param messageList   Lista de mensajes.
+     * @param currentUserId ID del usuario actual.
+     * @param context       Contexto de la aplicación.
+     */
     public MessageAdapter(List<Message> messageList, Long currentUserId, Context context) {
         this.messageList = messageList;
         this.currentUserId = currentUserId;
@@ -37,6 +67,12 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         this.messageController = new MessageController(context);
     }
 
+    /**
+     * Determina el tipo de vista para el mensaje basado en el ID del remitente.
+     *
+     * @param position La posición del mensaje en la lista.
+     * @return El tipo de vista (enviado o recibido).
+     */
     @Override
     public int getItemViewType(int position) {
         Message message = messageList.get(position);
@@ -81,6 +117,12 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return messageList.size();
     }
 
+    /**
+     * Muestra un cuadro de diálogo de confirmación para eliminar un mensaje.
+     *
+     * @param message  El mensaje a eliminar.
+     * @param position La posición del mensaje en la lista.
+     */
     private void showDeleteDialog(Message message, int position) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View dialogView = inflater.inflate(R.layout.dialog_delete_confirmation, null);
@@ -117,6 +159,9 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         dialog.show();
     }
 
+    /**
+     * ViewHolder para los mensajes enviados.
+     */
     class SentMessageViewHolder extends RecyclerView.ViewHolder {
         TextView textViewContent;
         TextView textViewDateTime;
@@ -133,6 +178,9 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
+    /**
+     * ViewHolder para los mensajes recibidos.
+     */
     class ReceivedMessageViewHolder extends RecyclerView.ViewHolder {
         TextView textViewContent;
         TextView textViewDateTime;

@@ -1,3 +1,23 @@
+/*
+ * StudyStay © 2024
+ *
+ * All rights reserved.
+ *
+ * This software and associated documentation files (the "Software") are owned by StudyStay. Unauthorized copying, distribution, or modification of this Software is strictly prohibited.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this Software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * StudyStay
+ * José María Pozo Hidalgo
+ * Email: josemariph7@gmail.com
+ *
+ *
+ */
+
 package com.example.studystayandroid.view;
 
 import android.content.Context;
@@ -5,7 +25,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +44,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.List;
 
+/**
+ * Adaptador para mostrar una lista de conversaciones en un RecyclerView.
+ */
 public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapter.ConversationViewHolder> {
 
     private List<Conversation> conversationList;
@@ -33,6 +55,13 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     private Context context;
     private Long currentUserId;
 
+    /**
+     * Constructor del adaptador de conversaciones.
+     *
+     * @param conversationList Lista de conversaciones a mostrar.
+     * @param currentUserId    ID del usuario actual.
+     * @param context          Contexto para acceder a los recursos.
+     */
     public ConversationAdapter(List<Conversation> conversationList, Long currentUserId, Context context) {
         this.conversationList = conversationList;
         this.context = context;
@@ -51,13 +80,13 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     public void onBindViewHolder(@NonNull ConversationViewHolder holder, int position) {
         Conversation conversation = conversationList.get(position);
 
-        // Aquí obtenemos el ID del usuario contrario en la conversación
+        // Obtener el ID del otro usuario en la conversación
         Long otherUserId = conversation.getUser2Id();
         if (otherUserId.equals(currentUserId)) {
             otherUserId = conversation.getUser1Id();
         }
 
-        // Usamos el UserController para obtener la información del usuario
+        // Usar UserController para obtener la información del usuario
         UserController userController = new UserController(context);
         Long finalOtherUserId = otherUserId;
         userController.getUserById(otherUserId, new UserController.UserCallback() {
@@ -115,32 +144,53 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         return conversationList.size();
     }
 
+    /**
+     * Configura el listener de clic en un item.
+     *
+     * @param listener Listener a configurar.
+     */
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
 
+    /**
+     * Interfaz para el listener de clic en un item.
+     */
+    public interface OnItemClickListener {
+        void onItemClick(Conversation conversation);
+    }
+
+    /**
+     * Interfaz para el listener de clic largo en un item.
+     */
     public interface OnItemLongClickListener {
         void onItemLongClick(Conversation conversation);
     }
 
     private OnItemLongClickListener longClickListener;
 
+    /**
+     * Configura el listener de clic largo en un item.
+     *
+     * @param listener Listener a configurar.
+     */
     public void setOnItemLongClickListener(OnItemLongClickListener listener) {
         this.longClickListener = listener;
     }
 
-    public void setOnItemLongClickListener(AdapterView.OnItemLongClickListener listener) {
-        this.longClickListener = (OnItemLongClickListener) listener;
-    }
-    public interface OnItemClickListener {
-        void onItemClick(Conversation conversation);
-    }
-
+    /**
+     * ViewHolder para los items de conversación.
+     */
     class ConversationViewHolder extends RecyclerView.ViewHolder {
         TextView textViewUser;
         TextView textViewLastMessage;
         ImageView imageViewProfile;
 
+        /**
+         * Constructor del ViewHolder para las conversaciones.
+         *
+         * @param itemView La vista del item.
+         */
         ConversationViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewUser = itemView.findViewById(R.id.textViewUser);
@@ -149,6 +199,12 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         }
     }
 
+    /**
+     * Muestra el diálogo de opciones para la conversación seleccionada.
+     *
+     * @param conversation La conversación seleccionada.
+     * @param position     La posición de la conversación en la lista.
+     */
     private void showOptionsDialog(Conversation conversation, int position) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View dialogView = inflater.inflate(R.layout.dialog_options, null);
@@ -181,6 +237,11 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         dialog.show();
     }
 
+    /**
+     * Abre el perfil del usuario de la conversación seleccionada.
+     *
+     * @param conversation La conversación seleccionada.
+     */
     private void openUserProfile(Conversation conversation) {
         Long otherUserId = conversation.getUser1Id().equals(currentUserId) ? conversation.getUser2Id() : conversation.getUser1Id();
         UserController userController = new UserController(context);
@@ -189,7 +250,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
             public void onSuccess(Object result) {
                 User user = (User) result;
                 StrangeProfileFragment profileFragment = StrangeProfileFragment.newInstance(user);
-                // Assuming you have a method in the activity to handle fragment transactions
+                // Asumimos que tienes un método en la actividad para manejar transacciones de fragmentos
                 ((DashboardActivity) context).getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, profileFragment)
@@ -214,7 +275,12 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         });
     }
 
-
+    /**
+     * Muestra el diálogo de confirmación para eliminar una conversación.
+     *
+     * @param conversation La conversación a eliminar.
+     * @param position     La posición de la conversación en la lista.
+     */
     private void showDeleteDialog(Conversation conversation, int position) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View dialogView = inflater.inflate(R.layout.dialog_delete_confirmation, null);

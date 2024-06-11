@@ -1,4 +1,23 @@
-// RentedFragment.java
+/*
+ * StudyStay © 2024
+ *
+ * All rights reserved.
+ *
+ * This software and associated documentation files (the "Software") are owned by StudyStay. Unauthorized copying, distribution, or modification of this Software is strictly prohibited.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this Software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * StudyStay
+ * José María Pozo Hidalgo
+ * Email: josemariph7@gmail.com
+ *
+ *
+ */
+
 package com.example.studystayandroid.view;
 
 import android.content.Intent;
@@ -33,6 +52,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Fragment to display a list of accommodations rented by the current user.
+ */
 public class RentedFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -40,7 +62,12 @@ public class RentedFragment extends Fragment {
     private TextView emptyView;
     private User currentUser;
 
-
+    /**
+     * Creates a new instance of RentedFragment with the specified user.
+     *
+     * @param user The current user.
+     * @return A new instance of RentedFragment.
+     */
     public static RentedFragment newInstance(User user) {
         RentedFragment fragment = new RentedFragment();
         Bundle args = new Bundle();
@@ -62,9 +89,7 @@ public class RentedFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerViewRented);
         emptyView = view.findViewById(R.id.emptyViewRented);
 
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         adapter = new SimpleAccommodationAdapter();
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(this::showAccommodationDetailDialog);
@@ -72,6 +97,9 @@ public class RentedFragment extends Fragment {
         getRentedAccommodations();
     }
 
+    /**
+     * Retrieves the list of accommodations rented by the current user.
+     */
     private void getRentedAccommodations() {
         if (getArguments() != null) {
             currentUser = (User) getArguments().getSerializable("currentUser");
@@ -118,6 +146,11 @@ public class RentedFragment extends Fragment {
         });
     }
 
+    /**
+     * Updates the UI based on the list of rented accommodations.
+     *
+     * @param accommodations The list of rented accommodations.
+     */
     private void updateUI(List<Accommodation> accommodations) {
         if (accommodations.isEmpty()) {
             recyclerView.setVisibility(View.GONE);
@@ -128,6 +161,11 @@ public class RentedFragment extends Fragment {
         }
     }
 
+    /**
+     * Shows a detailed dialog for the selected accommodation.
+     *
+     * @param accommodation The selected accommodation.
+     */
     private void showAccommodationDetailDialog(Accommodation accommodation) {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View dialogView = inflater.inflate(R.layout.dialog_rented_accommodation_detail, null);
@@ -184,6 +222,12 @@ public class RentedFragment extends Fragment {
         dialog.show();
     }
 
+    /**
+     * Shows a dialog with contact options for the accommodation owner.
+     *
+     * @param owner The owner of the accommodation.
+     * @param parentDialog The parent dialog to be dismissed after showing the contact options.
+     */
     private void showContactOptions(User owner, AlertDialog parentDialog) {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View dialogView = inflater.inflate(R.layout.dialog_contact_options, null);
@@ -211,6 +255,12 @@ public class RentedFragment extends Fragment {
         dialog.show();
     }
 
+    /**
+     * Creates a conversation and opens the message fragment.
+     *
+     * @param owner The owner of the accommodation.
+     * @param parentDialog The parent dialog to be dismissed after creating the conversation.
+     */
     private void createConversationAndOpenMessageFragment(User owner, AlertDialog parentDialog) {
         ConversationController conversationController = new ConversationController(getContext());
         conversationController.getConversations(currentUser.getUserId(), new ConversationController.ConversationListCallback() {
@@ -235,6 +285,12 @@ public class RentedFragment extends Fragment {
         });
     }
 
+    /**
+     * Creates a new conversation between the current user and the owner.
+     *
+     * @param owner The owner of the accommodation.
+     * @param parentDialog The parent dialog to be dismissed after creating the conversation.
+     */
     private void createNewConversation(User owner, AlertDialog parentDialog) {
         Conversation newConversation = new Conversation(null, currentUser.getUserId(), owner.getUserId(), new ArrayList<>());
         ConversationController conversationController = new ConversationController(getContext());
@@ -257,6 +313,11 @@ public class RentedFragment extends Fragment {
         });
     }
 
+    /**
+     * Opens the MessageFragment for the given conversation.
+     *
+     * @param conversation The conversation to open.
+     */
     private void openMessageFragment(Conversation conversation) {
         MessageFragment messageFragment = MessageFragment.newInstance(conversation);
         getParentFragmentManager().beginTransaction()
@@ -265,6 +326,11 @@ public class RentedFragment extends Fragment {
                 .commit();
     }
 
+    /**
+     * Shows the accommodation on a map.
+     *
+     * @param accommodation The accommodation to show on the map.
+     */
     private void showAccommodationOnMap(Accommodation accommodation) {
         List<Accommodation> singleAccommodationList = new ArrayList<>();
         singleAccommodationList.add(accommodation);

@@ -1,3 +1,23 @@
+/*
+ * StudyStay © 2024
+ *
+ * All rights reserved.
+ *
+ * This software and associated documentation files (the "Software") are owned by StudyStay. Unauthorized copying, distribution, or modification of this Software is strictly prohibited.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this Software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * StudyStay
+ * José María Pozo Hidalgo
+ * Email: josemariph7@gmail.com
+ *
+ *
+ */
+
 package com.example.studystayandroid.view;
 
 import android.content.Context;
@@ -28,6 +48,9 @@ import com.example.studystayandroid.controller.UserController;
 import com.example.studystayandroid.model.User;
 import com.google.android.material.navigation.NavigationView;
 
+/**
+ * Actividad principal del tablero que maneja la navegación entre fragmentos.
+ */
 public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
@@ -60,6 +83,9 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         loadUserDetails();
     }
 
+    /**
+     * Carga los detalles del usuario desde las preferencias compartidas.
+     */
     private void loadUserDetails() {
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
         Long userId = sharedPreferences.getLong("userId", -1);
@@ -88,6 +114,9 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         }
     }
 
+    /**
+     * Actualiza la interfaz de usuario con los detalles del usuario actual.
+     */
     private void updateUI() {
         View headerView = navigationView.getHeaderView(0);
         TextView navUserName = headerView.findViewById(R.id.nav_user_name);
@@ -116,7 +145,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment selectedFragment = null;
         Bundle bundle = new Bundle();
-        bundle.putSerializable("currentUser", currentUser); // Pass the currentUser object
+        bundle.putSerializable("currentUser", currentUser); // Pasar el objeto currentUser
 
         switch (item.getItemId()) {
             case R.id.Accommodations:
@@ -142,7 +171,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         }
 
         if (selectedFragment != null) {
-            selectedFragment.setArguments(bundle); // Set the arguments to the fragment
+            selectedFragment.setArguments(bundle); // Configurar los argumentos al fragmento
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
         }
 
@@ -150,7 +179,9 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         return true;
     }
 
-
+    /**
+     * Muestra un cuadro de diálogo de confirmación de cierre de sesión.
+     */
     private void showLogoutConfirmationDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -177,7 +208,9 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         dialog.show();
     }
 
-
+    /**
+     * Cierra la sesión del usuario actual.
+     */
     private void logout() {
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -189,6 +222,9 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         finish();
     }
 
+    /**
+     * Muestra un cuadro de diálogo de confirmación de salida de la aplicación.
+     */
     private void showExitConfirmationDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -218,8 +254,6 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
         dialog.show();
     }
-
-
 
     @Override
     public void onBackPressed() {

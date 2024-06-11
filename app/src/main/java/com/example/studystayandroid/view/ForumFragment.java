@@ -1,3 +1,23 @@
+/*
+ * StudyStay © 2024
+ *
+ * All rights reserved.
+ *
+ * This software and associated documentation files (the "Software") are owned by StudyStay. Unauthorized copying, distribution, or modification of this Software is strictly prohibited.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this Software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * StudyStay
+ * José María Pozo Hidalgo
+ * Email: josemariph7@gmail.com
+ *
+ *
+ */
+
 package com.example.studystayandroid.view;
 
 import android.app.AlertDialog;
@@ -31,6 +51,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Fragmento para mostrar y gestionar los temas del foro.
+ */
 public class ForumFragment extends Fragment {
 
     private List<ForumTopic> topicsList = new ArrayList<>();
@@ -40,7 +63,7 @@ public class ForumFragment extends Fragment {
     private User currentUser;
 
     public ForumFragment() {
-        // Required empty public constructor
+        // Constructor público vacío requerido
     }
 
     @Override
@@ -80,6 +103,11 @@ public class ForumFragment extends Fragment {
         buttonAddTopic.setOnClickListener(v -> showNewTopicDialog());
     }
 
+    /**
+     * Obtiene el usuario actual desde las preferencias compartidas.
+     *
+     * @return El usuario actual.
+     */
     private User getCurrentUser() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
         User user = new User();
@@ -91,6 +119,11 @@ public class ForumFragment extends Fragment {
         return user;
     }
 
+    /**
+     * Abre el fragmento de discusión para el tema seleccionado.
+     *
+     * @param topic El tema del foro que se va a discutir.
+     */
     private void openDiscussionFragment(ForumTopic topic) {
         DiscussionFragment discussionFragment = DiscussionFragment.newInstance(topic);
         getParentFragmentManager()
@@ -100,6 +133,9 @@ public class ForumFragment extends Fragment {
                 .commit();
     }
 
+    /**
+     * Muestra el cuadro de diálogo para añadir un nuevo tema.
+     */
     private void showNewTopicDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = getLayoutInflater();
@@ -175,6 +211,9 @@ public class ForumFragment extends Fragment {
         dialog.show();
     }
 
+    /**
+     * Carga los temas del foro desde el controlador y los muestra en la lista.
+     */
     private void loadTopics() {
         forumTopicController.getTopics(new ForumTopicController.TopicListCallback() {
             @Override
@@ -194,13 +233,17 @@ public class ForumFragment extends Fragment {
 
             @Override
             public void onError(String error) {
-                // Handle error
+                // Manejar el error
                 Log.e("ForumFragment", "Error fetching topics: " + error);
             }
         });
     }
 
-
+    /**
+     * Abre el perfil de un usuario ajeno.
+     *
+     * @param user El usuario cuyo perfil se va a mostrar.
+     */
     public void openStrangeProfile(User user) {
         StrangeProfileFragment strangeProfileFragment = StrangeProfileFragment.newInstance(user);
         getParentFragmentManager()
@@ -210,6 +253,9 @@ public class ForumFragment extends Fragment {
                 .commit();
     }
 
+    /**
+     * Recarga los temas del foro.
+     */
     public void reloadTopics() {
         loadTopics();
     }

@@ -1,3 +1,23 @@
+/*
+ * StudyStay © 2024
+ *
+ * All rights reserved.
+ *
+ * This software and associated documentation files (the "Software") are owned by StudyStay. Unauthorized copying, distribution, or modification of this Software is strictly prohibited.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this Software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * StudyStay
+ * José María Pozo Hidalgo
+ * Email: josemariph7@gmail.com
+ *
+ *
+ */
+
 package com.example.studystayandroid.view;
 
 import android.app.AlertDialog;
@@ -30,6 +50,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Fragmento para mostrar y gestionar los comentarios de un tema del foro.
+ */
 public class DiscussionFragment extends Fragment {
 
     private static final String ARG_TOPIC = "arg_topic";
@@ -45,6 +68,11 @@ public class DiscussionFragment extends Fragment {
     private List<ForumComment> commentList = new ArrayList<>();
     private User currentUser;
 
+    /**
+     * Crea una nueva instancia de DiscussionFragment.
+     * @param topic El tema del foro que se va a discutir.
+     * @return Una nueva instancia de DiscussionFragment.
+     */
     public static DiscussionFragment newInstance(ForumTopic topic) {
         DiscussionFragment fragment = new DiscussionFragment();
         Bundle args = new Bundle();
@@ -104,6 +132,9 @@ public class DiscussionFragment extends Fragment {
         loadComments();
     }
 
+    /**
+     * Carga los comentarios del tema actual.
+     */
     void loadComments() {
         Log.d("DiscussionFragment", "loadComments: Loading comments for topic ID: " + topic.getTopicId());
         Log.d("DiscussionFragment", topic.toString());
@@ -131,7 +162,9 @@ public class DiscussionFragment extends Fragment {
         });
     }
 
-
+    /**
+     * Muestra el cuadro de diálogo para añadir un nuevo comentario.
+     */
     private void showNewCommentDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = getLayoutInflater();
@@ -198,6 +231,10 @@ public class DiscussionFragment extends Fragment {
         dialog.show();
     }
 
+    /**
+     * Obtiene el usuario actual desde las preferencias compartidas.
+     * @return El usuario actual.
+     */
     private User getCurrentUser() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
         User user = new User();
@@ -209,6 +246,10 @@ public class DiscussionFragment extends Fragment {
         return user;
     }
 
+    /**
+     * Abre el perfil de un usuario ajeno.
+     * @param user El usuario cuyo perfil se va a mostrar.
+     */
     public void openStrangeProfile(User user) {
         StrangeProfileFragment strangeProfileFragment = StrangeProfileFragment.newInstance(user);
         getParentFragmentManager()

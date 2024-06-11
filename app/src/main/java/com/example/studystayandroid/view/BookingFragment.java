@@ -1,3 +1,23 @@
+/*
+ * StudyStay © 2024
+ *
+ * All rights reserved.
+ *
+ * This software and associated documentation files (the "Software") are owned by StudyStay. Unauthorized copying, distribution, or modification of this Software is strictly prohibited.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this Software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * StudyStay
+ * José María Pozo Hidalgo
+ * Email: josemariph7@gmail.com
+ *
+ *
+ */
+
 package com.example.studystayandroid.view;
 
 import android.annotation.SuppressLint;
@@ -35,6 +55,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * Fragmento para gestionar las reservas de alojamiento.
+ */
 public class BookingFragment extends Fragment {
 
     private TextInputEditText startDateEditText;
@@ -73,12 +96,12 @@ public class BookingFragment extends Fragment {
         startDateEditText.setOnClickListener(v -> showDatePickerDialogStart());
         endDateEditText.setOnClickListener(v -> showDatePickerDialogEnd());
 
-        // Update invoice when payment option changes
+        // Actualizar factura cuando cambia la opción de pago
         paymentRadioGroup.setOnCheckedChangeListener((group, checkedId) -> updateInvoice());
 
         confirmBookingButton.setOnClickListener(v -> confirmBooking());
 
-        // Retrieve accommodation and currentUser from arguments
+        // Recuperar alojamiento y currentUser de los argumentos
         if (getArguments() != null) {
             accommodation = (Accommodation) getArguments().getSerializable("accommodation");
             currentUser = (User) getArguments().getSerializable("currentUser");
@@ -87,6 +110,9 @@ public class BookingFragment extends Fragment {
         }
     }
 
+    /**
+     * Muestra el diálogo de selección de fecha para la fecha de inicio.
+     */
     private void showDatePickerDialogStart() {
         final Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -117,6 +143,9 @@ public class BookingFragment extends Fragment {
         datePickerDialog.show();
     }
 
+    /**
+     * Muestra el diálogo de selección de fecha para la fecha de fin.
+     */
     private void showDatePickerDialogEnd() {
         final Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -147,6 +176,9 @@ public class BookingFragment extends Fragment {
         datePickerDialog.show();
     }
 
+    /**
+     * Actualiza la factura en función de las fechas seleccionadas y la opción de pago.
+     */
     @SuppressLint("DefaultLocale")
     private void updateInvoice() {
         String startDateStr = startDateEditText.getText().toString().trim();
@@ -180,7 +212,7 @@ public class BookingFragment extends Fragment {
             BigDecimal dailyCost = pricePerMonth.divide(BigDecimal.valueOf(30), BigDecimal.ROUND_HALF_UP);
 
             if (fullPaymentRadioButton.isChecked()) {
-                // Full payment
+                // Pago completo
                 BigDecimal totalCost = pricePerMonth.multiply(BigDecimal.valueOf(monthsBetween)).add(dailyCost.multiply(BigDecimal.valueOf(extraDays)));
                 BigDecimal commission = totalCost.multiply(BigDecimal.valueOf(0.03));
                 BigDecimal finalCost = totalCost.add(commission);
@@ -197,7 +229,7 @@ public class BookingFragment extends Fragment {
                                 "Total: €%.2f",
                         monthsBetween, pricePerMonth, extraDays, dailyCost, totalCost, commission, finalCost));
             } else if (depositPaymentRadioButton.isChecked()) {
-                // Deposit + First month
+                // Depósito + Primer mes
                 BigDecimal deposit = pricePerMonth;
                 BigDecimal firstMonth = pricePerMonth.add(dailyCost.multiply(BigDecimal.valueOf(extraDays)));
                 BigDecimal commission = firstMonth.multiply(BigDecimal.valueOf(0.03));
@@ -221,6 +253,9 @@ public class BookingFragment extends Fragment {
         }
     }
 
+    /**
+     * Confirma la reserva verificando las fechas y la disponibilidad.
+     */
     private void confirmBooking() {
         String startDateStr = startDateEditText.getText().toString().trim();
         String endDateStr = endDateEditText.getText().toString().trim();
@@ -247,7 +282,7 @@ public class BookingFragment extends Fragment {
                 return;
             }
 
-            // Check availability
+            // Verificar disponibilidad
             new BookingController(requireContext()).getBookings(new BookingController.BookingListCallback() {
                 @Override
                 public void onSuccess(List<Booking> bookings) {
@@ -275,20 +310,23 @@ public class BookingFragment extends Fragment {
         }
     }
 
+    /**
+     * Simula el proceso de pago y confirma la reserva.
+     */
     private void simulatePaymentAndConfirmBooking() {
-        // Simulate payment process
+        // Simular el proceso de pago
         AlertDialog progressDialog = new AlertDialog.Builder(requireContext())
                 .setTitle("Processing Payment")
                 .setMessage("Redirecting to payment gateway...")
                 .setCancelable(false)
                 .show();
 
-        // Delay to simulate payment process
+        // Retraso para simular el proceso de pago
         new Handler().postDelayed(() -> {
-            // Close payment simulation dialog
+            // Cerrar el diálogo de simulación de pago
             progressDialog.dismiss();
 
-            // Create booking
+            // Crear la reserva
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
             LocalDate startDate = LocalDate.parse(startDateEditText.getText().toString(), formatter);
             LocalDate endDate = LocalDate.parse(endDateEditText.getText().toString(), formatter);
@@ -299,7 +337,7 @@ public class BookingFragment extends Fragment {
                 public void onSuccess(Object result) {
                     clearForm();
 
-                    // Show success dialog and redirect to accommodation fragment
+                    // Mostrar diálogo de éxito y redirigir al fragmento de alojamiento
                     showSuccessDialog();
                 }
 
@@ -308,9 +346,12 @@ public class BookingFragment extends Fragment {
                     showErrorDialog("Error creating booking: " + error);
                 }
             });
-        }, 7000); // Increased delay to 7 seconds
+        }, 7000); // Retraso aumentado a 7 segundos
     }
 
+    /**
+     * Muestra un diálogo de éxito.
+     */
     private void showSuccessDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         @SuppressLint("InflateParams")
@@ -328,7 +369,7 @@ public class BookingFragment extends Fragment {
 
         buttonConfirm.setOnClickListener(v -> {
             successDialog.dismiss();
-            // Redirect to accommodation fragment
+            // Redirigir al fragmento de alojamiento
             FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
             fragmentManager.popBackStack();
             fragmentManager.beginTransaction()
@@ -340,6 +381,9 @@ public class BookingFragment extends Fragment {
         successDialog.show();
     }
 
+    /**
+     * Limpia los campos del formulario.
+     */
     private void clearForm() {
         startDateEditText.setText("");
         endDateEditText.setText("");
@@ -347,6 +391,11 @@ public class BookingFragment extends Fragment {
         paymentRadioGroup.clearCheck();
     }
 
+    /**
+     * Muestra un diálogo de error.
+     *
+     * @param message Mensaje de error a mostrar.
+     */
     private void showErrorDialog(String message) {
         new AlertDialog.Builder(requireContext())
                 .setTitle("Error")

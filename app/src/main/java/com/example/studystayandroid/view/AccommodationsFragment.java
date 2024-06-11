@@ -1,3 +1,23 @@
+/*
+ * StudyStay © 2024
+ *
+ * All rights reserved.
+ *
+ * This software and associated documentation files (the "Software") are owned by StudyStay. Unauthorized copying, distribution, or modification of this Software is strictly prohibited.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this Software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * StudyStay
+ * José María Pozo Hidalgo
+ * Email: josemariph7@gmail.com
+ *
+ *
+ */
+
 package com.example.studystayandroid.view;
 
 import android.annotation.SuppressLint;
@@ -43,6 +63,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Fragmento para mostrar y gestionar alojamientos.
+ */
 public class AccommodationsFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -64,8 +87,11 @@ public class AccommodationsFragment extends Fragment {
 
     private static final String URL_ACCOMMODATIONS = "http://" + Constants.IP + "/studystay/getAccommodations.php";
 
+    /**
+     * Constructor público y vacío requerido.
+     */
     public AccommodationsFragment() {
-        // Required empty public constructor
+        // Constructor vacío requerido
     }
 
     @Override
@@ -136,6 +162,9 @@ public class AccommodationsFragment extends Fragment {
         adapter.setOnItemLongClickListener(this::showAccommodationOptionsDialog);
     }
 
+    /**
+     * Alterna la visibilidad de las opciones de filtro.
+     */
     private void toggleFiltersVisibility() {
         if (filtersContainer.getVisibility() == View.VISIBLE) {
             filtersContainer.setVisibility(View.GONE);
@@ -144,6 +173,9 @@ public class AccommodationsFragment extends Fragment {
         }
     }
 
+    /**
+     * Configura los spinners para los filtros de ciudad y capacidad.
+     */
     private void setupSpinners() {
         ArrayAdapter<CharSequence> cityAdapter = ArrayAdapter.createFromResource(
                 getContext(),
@@ -160,6 +192,9 @@ public class AccommodationsFragment extends Fragment {
         filterCapacitySpinner.setAdapter(capacityAdapter);
     }
 
+    /**
+     * Obtiene la lista de alojamientos.
+     */
     private void fetchAccommodations() {
         accommodationController.getAccommodations(new AccommodationController.AccommodationListCallback() {
             @Override
@@ -176,6 +211,11 @@ public class AccommodationsFragment extends Fragment {
         });
     }
 
+    /**
+     * Muestra un diálogo de éxito con un mensaje dado.
+     *
+     * @param message El mensaje a mostrar.
+     */
     private void showSuccessDialog(String message) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View dialogView = inflater.inflate(R.layout.dialog_success, null);
@@ -196,6 +236,9 @@ public class AccommodationsFragment extends Fragment {
         dialog.show();
     }
 
+    /**
+     * Aplica los filtros seleccionados a la lista de alojamientos.
+     */
     private void applyFilters() {
         String selectedCity = filterCitySpinner.getSelectedItem().toString();
         String selectedCapacityStr = filterCapacitySpinner.getSelectedItem().toString();
@@ -237,11 +280,19 @@ public class AccommodationsFragment extends Fragment {
         toggleFiltersVisibility();
     }
 
+    /**
+     * Abre el mapa para mostrar los alojamientos.
+     */
     private void openMap() {
         MapDialogFragment mapDialogFragment = new MapDialogFragment(accommodationList);
         mapDialogFragment.show(getParentFragmentManager(), "MapDialogFragment");
     }
 
+    /**
+     * Abre el fragmento para agregar un nuevo alojamiento.
+     *
+     * @param currentUser El usuario actual.
+     */
     private void openAddAccommodationFragment(User currentUser) {
         AddAccommodationFragment fragment = new AddAccommodationFragment();
 
@@ -257,6 +308,11 @@ public class AccommodationsFragment extends Fragment {
                 .commit();
     }
 
+    /**
+     * Muestra el diálogo de detalles del alojamiento.
+     *
+     * @param accommodation El alojamiento para mostrar los detalles.
+     */
     private void showAccommodationDetailDialog(Accommodation accommodation) {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View dialogView = inflater.inflate(R.layout.dialog_accommodation_detail, null);
@@ -355,6 +411,11 @@ public class AccommodationsFragment extends Fragment {
         dialog.show();
     }
 
+    /**
+     * Obtiene los bytes de la imagen por defecto desde los recursos.
+     *
+     * @return Array de bytes de la imagen por defecto.
+     */
     private byte[] getDefaultImageBytes() {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.accommodation);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -362,7 +423,11 @@ public class AccommodationsFragment extends Fragment {
         return stream.toByteArray();
     }
 
-
+    /**
+     * Muestra el diálogo de opciones del alojamiento.
+     *
+     * @param accommodation El alojamiento para mostrar opciones.
+     */
     private void showAccommodationOptionsDialog(Accommodation accommodation) {
         if (accommodation.getOwner().getUserId().equals(currentUser.getUserId())) {
             showDeleteConfirmationDialog(accommodation);
@@ -371,6 +436,11 @@ public class AccommodationsFragment extends Fragment {
         }
     }
 
+    /**
+     * Muestra un diálogo con opciones para el alojamiento seleccionado.
+     *
+     * @param accommodation El alojamiento seleccionado.
+     */
     private void showOptionsDialog(Accommodation accommodation) {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View dialogView = inflater.inflate(R.layout.dialog_accommodation_options, null);
@@ -398,6 +468,11 @@ public class AccommodationsFragment extends Fragment {
         dialog.show();
     }
 
+    /**
+     * Muestra un diálogo de confirmación de eliminación para el alojamiento seleccionado.
+     *
+     * @param accommodation El alojamiento seleccionado.
+     */
     private void showDeleteConfirmationDialog(Accommodation accommodation) {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View dialogView = inflater.inflate(R.layout.dialog_delete_confirmation, null);
@@ -424,11 +499,16 @@ public class AccommodationsFragment extends Fragment {
         dialog.show();
     }
 
+    /**
+     * Elimina el alojamiento seleccionado.
+     *
+     * @param accommodation El alojamiento a eliminar.
+     */
     private void deleteAccommodation(Accommodation accommodation) {
         accommodationController.deleteAccommodation(accommodation.getAccommodationId(), new AccommodationController.AccommodationCallback() {
             @Override
             public void onSuccess(Object result) {
-                fetchAccommodations(); // Refresh the list after deletion
+                fetchAccommodations(); // Refrescar la lista después de la eliminación
             }
 
             @Override
@@ -443,6 +523,11 @@ public class AccommodationsFragment extends Fragment {
         });
     }
 
+    /**
+     * Abre el perfil del propietario del alojamiento.
+     *
+     * @param owner El propietario del alojamiento.
+     */
     private void openOwnerProfile(User owner) {
         StrangeProfileFragment fragment = StrangeProfileFragment.newInstance(owner);
         getParentFragmentManager().beginTransaction()
@@ -451,6 +536,11 @@ public class AccommodationsFragment extends Fragment {
                 .commit();
     }
 
+    /**
+     * Muestra el alojamiento seleccionado en un mapa.
+     *
+     * @param accommodation El alojamiento seleccionado.
+     */
     private void showAccommodationOnMap(Accommodation accommodation) {
         List<Accommodation> singleAccommodationList = new ArrayList<>();
         singleAccommodationList.add(accommodation);
@@ -458,6 +548,12 @@ public class AccommodationsFragment extends Fragment {
         mapDialogFragment.show(getParentFragmentManager(), "MapDialogFragment");
     }
 
+    /**
+     * Muestra opciones de contacto para el propietario del alojamiento.
+     *
+     * @param owner        El propietario del alojamiento.
+     * @param parentDialog El diálogo padre.
+     */
     private void showContactOptions(User owner, androidx.appcompat.app.AlertDialog parentDialog) {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View dialogView = inflater.inflate(R.layout.dialog_contact_options, null);
@@ -474,7 +570,7 @@ public class AccommodationsFragment extends Fragment {
             intent.setData(Uri.parse("tel:" + owner.getPhone()));
             startActivity(intent);
             dialog.dismiss();
-            parentDialog.dismiss(); // Close the parent dialog as well
+            parentDialog.dismiss(); // Cerrar también el diálogo padre
         });
 
         chatButton.setOnClickListener(v -> {
@@ -485,6 +581,12 @@ public class AccommodationsFragment extends Fragment {
         dialog.show();
     }
 
+    /**
+     * Crea una conversación y abre el fragmento de mensajes.
+     *
+     * @param owner        El propietario del alojamiento.
+     * @param parentDialog El diálogo padre.
+     */
     private void createConversationAndOpenMessageFragment(User owner, androidx.appcompat.app.AlertDialog parentDialog) {
         ConversationController conversationController = new ConversationController(getContext());
         conversationController.getConversations(currentUser.getUserId(), new ConversationController.ConversationListCallback() {
@@ -494,7 +596,7 @@ public class AccommodationsFragment extends Fragment {
                     if ((conversation.getUser1Id().equals(currentUser.getUserId()) && conversation.getUser2Id().equals(owner.getUserId())) ||
                             (conversation.getUser1Id().equals(owner.getUserId()) && conversation.getUser2Id().equals(currentUser.getUserId()))) {
                         openMessageFragment(conversation);
-                        parentDialog.dismiss(); // Close the parent dialog
+                        parentDialog.dismiss(); // Cerrar el diálogo padre
                         return;
                     }
                 }
@@ -509,6 +611,12 @@ public class AccommodationsFragment extends Fragment {
         });
     }
 
+    /**
+     * Crea una nueva conversación con el propietario del alojamiento.
+     *
+     * @param owner        El propietario del alojamiento.
+     * @param parentDialog El diálogo padre.
+     */
     private void createNewConversation(User owner, androidx.appcompat.app.AlertDialog parentDialog) {
         Conversation newConversation = new Conversation(null, currentUser.getUserId(), owner.getUserId(), new ArrayList<>());
         ConversationController conversationController = new ConversationController(getContext());
@@ -516,12 +624,12 @@ public class AccommodationsFragment extends Fragment {
             @Override
             public void onSuccess(Conversation createdConversation) {
                 openMessageFragment(createdConversation);
-                parentDialog.dismiss(); // Close the parent dialog
+                parentDialog.dismiss(); // Cerrar el diálogo padre
             }
 
             @Override
             public void onSuccess(Object result) {
-                // Handle any optional logic if needed
+                // Manejar cualquier lógica opcional si es necesario
             }
 
             @Override
@@ -531,6 +639,11 @@ public class AccommodationsFragment extends Fragment {
         });
     }
 
+    /**
+     * Abre el fragmento de mensajes para la conversación especificada.
+     *
+     * @param conversation La conversación a abrir.
+     */
     private void openMessageFragment(Conversation conversation) {
         MessageFragment messageFragment = MessageFragment.newInstance(conversation);
         getParentFragmentManager().beginTransaction()

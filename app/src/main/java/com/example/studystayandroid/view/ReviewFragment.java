@@ -1,3 +1,23 @@
+/*
+ * StudyStay © 2024
+ *
+ * All rights reserved.
+ *
+ * This software and associated documentation files (the "Software") are owned by StudyStay. Unauthorized copying, distribution, or modification of this Software is strictly prohibited.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this Software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * StudyStay
+ * José María Pozo Hidalgo
+ * Email: josemariph7@gmail.com
+ *
+ *
+ */
+
 package com.example.studystayandroid.view;
 
 import android.os.Bundle;
@@ -6,9 +26,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,6 +50,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Fragment to display and manage reviews for an accommodation.
+ */
 public class ReviewFragment extends Fragment {
 
     private ListView reviewListView;
@@ -71,6 +94,9 @@ public class ReviewFragment extends Fragment {
         });
     }
 
+    /**
+     * Loads the reviews for the current accommodation and sets them to the ListView.
+     */
     private void loadReviews() {
         new AccommodationReviewController(requireContext()).getReviews(new AccommodationReviewController.ReviewListCallback() {
             @Override
@@ -98,6 +124,9 @@ public class ReviewFragment extends Fragment {
         });
     }
 
+    /**
+     * Shows a dialog for the user to add a new review.
+     */
     private void showAddReviewDialog() {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View dialogView = inflater.inflate(R.layout.dialog_add_review, null);
@@ -139,6 +168,11 @@ public class ReviewFragment extends Fragment {
         alertDialog.show();
     }
 
+    /**
+     * Shows a custom dialog with options for the selected review.
+     *
+     * @param review The selected review.
+     */
     private void showCustomReviewOptionsDialog(AccommodationReview review) {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View dialogView = inflater.inflate(R.layout.dialog_review_options, null);
@@ -160,6 +194,11 @@ public class ReviewFragment extends Fragment {
         alertDialog.show();
     }
 
+    /**
+     * Opens the profile of the specified user.
+     *
+     * @param user The user whose profile is to be opened.
+     */
     private void openUserProfile(User user) {
         StrangeProfileFragment strangeProfileFragment = StrangeProfileFragment.newInstance(user);
         getParentFragmentManager().beginTransaction()
@@ -168,6 +207,11 @@ public class ReviewFragment extends Fragment {
                 .commit();
     }
 
+    /**
+     * Shows an error dialog with the specified message.
+     *
+     * @param message The error message.
+     */
     private void showErrorDialog(String message) {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View dialogView = inflater.inflate(R.layout.dialog_error_review, null);
@@ -186,6 +230,9 @@ public class ReviewFragment extends Fragment {
         alertDialog.show();
     }
 
+    /**
+     * Checks if the user has a booking for the accommodation and shows the review dialog if they do.
+     */
     private void checkUserBookingAndShowReviewDialog() {
         BookingController bookingController = new BookingController(requireContext());
 

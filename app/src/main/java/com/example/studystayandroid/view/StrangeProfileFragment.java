@@ -1,3 +1,23 @@
+/*
+ * StudyStay © 2024
+ *
+ * All rights reserved.
+ *
+ * This software and associated documentation files (the "Software") are owned by StudyStay. Unauthorized copying, distribution, or modification of this Software is strictly prohibited.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this Software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * StudyStay
+ * José María Pozo Hidalgo
+ * Email: josemariph7@gmail.com
+ *
+ *
+ */
+
 package com.example.studystayandroid.view;
 
 import android.content.Context;
@@ -29,6 +49,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Fragment to display the profile of a user that is not the current user.
+ */
 public class StrangeProfileFragment extends Fragment {
 
     private static final String ARG_USER = "arg_user";
@@ -43,10 +66,17 @@ public class StrangeProfileFragment extends Fragment {
     private Button contactButton;
     private Long currentUserId;
 
+    /**
+     * Required empty public constructor.
+     */
     public StrangeProfileFragment() {
-        // Required empty public constructor
     }
 
+    /**
+     * Create a new instance of StrangeProfileFragment.
+     * @param user The user whose profile will be displayed.
+     * @return A new instance of StrangeProfileFragment.
+     */
     public static StrangeProfileFragment newInstance(User user) {
         StrangeProfileFragment fragment = new StrangeProfileFragment();
         Bundle args = new Bundle();
@@ -65,12 +95,12 @@ public class StrangeProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Cambiar el título de la ActionBar
+        // Change ActionBar title
         if (getActivity() != null) {
             getActivity().setTitle("StudyStay - Profile");
         }
 
-        // Inicializar vistas
+        // Initialize views
         nameTextView = view.findViewById(R.id.nameTextViewProfile);
         emailTextView = view.findViewById(R.id.emailTextView);
         phoneTextView = view.findViewById(R.id.phoneTextView);
@@ -80,7 +110,7 @@ public class StrangeProfileFragment extends Fragment {
         contactButton = view.findViewById(R.id.ContactButton);
         ImageButton backButton = view.findViewById(R.id.button3);
 
-        // Obtener el usuario actual de SharedPreferences
+        // Get current user from SharedPreferences
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
         currentUserId = sharedPreferences.getLong("userId", -1);
 
@@ -89,7 +119,7 @@ public class StrangeProfileFragment extends Fragment {
         }
 
         if (currentUserId == -1 || otherUser == null) {
-            Log.e("StrangeProfileFragment", "Error: Usuario no autenticado o usuario ajeno no especificado.");
+            Log.e("StrangeProfileFragment", "Error: Unauthenticated user or no other user specified.");
             return;
         }
 
@@ -99,6 +129,9 @@ public class StrangeProfileFragment extends Fragment {
         backButton.setOnClickListener(v -> getParentFragmentManager().popBackStack());
     }
 
+    /**
+     * Update the UI with the details of the other user.
+     */
     private void updateProfileUI() {
         if (otherUser != null) {
             nameTextView.setText(otherUser.getName() + " " + otherUser.getLastName());
@@ -106,7 +139,7 @@ public class StrangeProfileFragment extends Fragment {
             phoneTextView.setText(otherUser.getPhone());
             birthDateTextView.setText(otherUser.getBirthDate() != null ? otherUser.getBirthDate().toString() : "N/A");
 
-            if (otherUser.getBio() != null && !otherUser.getBio().isEmpty() && otherUser.getBio().length() > 0 && otherUser.getBio() != "null") {
+            if (otherUser.getBio() != null && !otherUser.getBio().isEmpty() && !otherUser.getBio().equals("null")) {
                 bioTextView.setText(otherUser.getBio());
             } else {
                 bioTextView.setTextColor(getResources().getColor(android.R.color.darker_gray));
@@ -128,6 +161,9 @@ public class StrangeProfileFragment extends Fragment {
         }
     }
 
+    /**
+     * Show a dialog with contact options (Call or Message).
+     */
     private void showContactOptionsDialog() {
         new MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Contact Options")
@@ -148,6 +184,9 @@ public class StrangeProfileFragment extends Fragment {
                 .show();
     }
 
+    /**
+     * Create a new conversation or find an existing one, then open the message fragment.
+     */
     private void createConversationAndOpenMessageFragment() {
         ConversationController conversationController = new ConversationController(getContext());
         conversationController.getConversations(currentUserId, new ConversationController.ConversationListCallback() {
@@ -172,6 +211,9 @@ public class StrangeProfileFragment extends Fragment {
         });
     }
 
+    /**
+     * Create a new conversation between the current user and the other user.
+     */
     private void createNewConversation() {
         Conversation conversation = new Conversation(null, currentUserId, otherUser.getUserId(), new ArrayList<>());
         ConversationController conversationController = new ConversationController(getContext());
@@ -197,6 +239,10 @@ public class StrangeProfileFragment extends Fragment {
         });
     }
 
+    /**
+     * Navigate to the MessageFragment for the given conversation.
+     * @param conversation The conversation to open.
+     */
     private void navigateToMessageFragment(Conversation conversation) {
         MessageFragment messageFragment = MessageFragment.newInstance(conversation);
         getParentFragmentManager()

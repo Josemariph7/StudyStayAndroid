@@ -1,3 +1,23 @@
+/*
+ * StudyStay © 2024
+ *
+ * All rights reserved.
+ *
+ * This software and associated documentation files (the "Software") are owned by StudyStay. Unauthorized copying, distribution, or modification of this Software is strictly prohibited.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this Software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * StudyStay
+ * José María Pozo Hidalgo
+ * Email: josemariph7@gmail.com
+ *
+ *
+ */
+
 package com.example.studystayandroid.view;
 
 import static android.app.Activity.RESULT_OK;
@@ -36,6 +56,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * Fragmento para agregar un nuevo alojamiento.
+ */
 public class AddAccommodationFragment extends Fragment {
 
     private static final int PICK_IMAGES_REQUEST = 1;
@@ -56,8 +79,11 @@ public class AddAccommodationFragment extends Fragment {
     private List<Uri> selectedImagesUris;
     private User currentUser;
 
+    /**
+     * Constructor público y vacío requerido.
+     */
     public AddAccommodationFragment() {
-        // Required empty public constructor
+        // Constructor vacío requerido
     }
 
     @Nullable
@@ -92,40 +118,44 @@ public class AddAccommodationFragment extends Fragment {
         setupSpinners();
 
         uploadPhotosButton.setOnClickListener(v -> openImagePicker());
-        submitButton.setOnClickListener(v -> submitAccommodation());
-
         submitButton.setOnClickListener(v -> {
             submitButton.setEnabled(false);
             submitAccommodation();
         });
 
-        // Retrieve currentUser from arguments
+        // Recuperar el usuario actual de los argumentos
         if (getArguments() != null) {
             currentUser = (User) getArguments().getSerializable("currentUser");
             Log.d("AddAccommodationFragment", "Current user: " + currentUser);
         }
     }
 
+    /**
+     * Configura los spinners de ciudad y capacidad con estilos personalizados.
+     */
     private void setupSpinners() {
-        // Set up city spinner with custom styles
+        // Configurar el spinner de ciudad con estilos personalizados
         ArrayAdapter<CharSequence> cityAdapter = ArrayAdapter.createFromResource(
                 getContext(),
                 R.array.cities_array,
-                R.layout.spinner_item);  // Using custom layout
+                R.layout.spinner_item);  // Usando diseño personalizado
 
-        cityAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);  // Using custom dropdown layout
+        cityAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);  // Usando diseño desplegable personalizado
         citySpinner.setAdapter(cityAdapter);
 
-        // Set up capacity spinner with custom styles
+        // Configurar el spinner de capacidad con estilos personalizados
         ArrayAdapter<CharSequence> capacityAdapter = ArrayAdapter.createFromResource(
                 getContext(),
                 R.array.capacity_array,
-                R.layout.spinner_item);  // Using custom layout
+                R.layout.spinner_item);  // Usando diseño personalizado
 
-        capacityAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);  // Using custom dropdown layout
+        capacityAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);  // Usando diseño desplegable personalizado
         capacitySpinner.setAdapter(capacityAdapter);
     }
 
+    /**
+     * Abre el selector de imágenes para seleccionar fotos del alojamiento.
+     */
     private void openImagePicker() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
@@ -150,6 +180,9 @@ public class AddAccommodationFragment extends Fragment {
         }
     }
 
+    /**
+     * Envía los detalles del alojamiento al servidor.
+     */
     private void submitAccommodation() {
         String address = addressEditText.getText().toString().trim();
         String city = citySpinner.getSelectedItem() != null ? citySpinner.getSelectedItem().toString() : "All";
@@ -233,7 +266,17 @@ public class AddAccommodationFragment extends Fragment {
         }
     }
 
-
+    /**
+     * Valida los datos de entrada del usuario.
+     *
+     * @param address     La dirección del alojamiento.
+     * @param city        La ciudad del alojamiento.
+     * @param price       El precio del alojamiento.
+     * @param description La descripción del alojamiento.
+     * @param capacity    La capacidad del alojamiento.
+     * @param services    Los servicios proporcionados por el alojamiento.
+     * @return true si todos los datos de entrada son válidos, false en caso contrario.
+     */
     private boolean validateInputs(String address, String city, String price, String description, int capacity, String services) {
         boolean isValid = true;
 
@@ -284,6 +327,11 @@ public class AddAccommodationFragment extends Fragment {
         return isValid;
     }
 
+    /**
+     * Sube las fotos seleccionadas del alojamiento.
+     *
+     * @param accommodation El alojamiento para subir las fotos.
+     */
     private void uploadPhotos(Accommodation accommodation) {
         AccommodationPhotoController photoController = new AccommodationPhotoController(requireContext());
 
@@ -291,7 +339,7 @@ public class AddAccommodationFragment extends Fragment {
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), uri);
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream); // Adjust compression as needed
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream); // Ajustar la compresión según sea necesario
                 byte[] photoData = byteArrayOutputStream.toByteArray();
 
                 AccommodationPhoto photo = new AccommodationPhoto(accommodation, photoData);
@@ -318,12 +366,18 @@ public class AddAccommodationFragment extends Fragment {
         }
     }
 
+    /**
+     * Navega de regreso con un mensaje de éxito.
+     */
     private void navigateBackWithSuccess() {
         getParentFragmentManager().popBackStack();
-        // Notify the AccommodationsFragment to show success dialog
+        // Notificar al AccommodationsFragment para mostrar el diálogo de éxito
         getParentFragmentManager().setFragmentResult("accommodationResult", new Bundle());
     }
 
+    /**
+     * Limpia los campos del formulario.
+     */
     private void clearForm() {
         addressEditText.setText("");
         priceEditText.setText("");

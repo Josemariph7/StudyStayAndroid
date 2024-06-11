@@ -1,3 +1,23 @@
+/*
+ * StudyStay © 2024
+ *
+ * All rights reserved.
+ *
+ * This software and associated documentation files (the "Software") are owned by StudyStay. Unauthorized copying, distribution, or modification of this Software is strictly prohibited.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this Software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * StudyStay
+ * José María Pozo Hidalgo
+ * Email: josemariph7@gmail.com
+ *
+ *
+ */
+
 package com.example.studystayandroid.view;
 
 import static android.app.Activity.RESULT_OK;
@@ -39,6 +59,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Fragmento para mostrar y editar el perfil del usuario.
+ */
 public class ProfileFragment extends Fragment {
 
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -55,6 +78,9 @@ public class ProfileFragment extends Fragment {
     private Button contactButton;
     private NavigationView navigationView;
 
+    /**
+     * Constructor público requerido vacío.
+     */
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -138,11 +164,20 @@ public class ProfileFragment extends Fragment {
         contactButton.setOnClickListener(v -> showProfileSettingsDialog());
     }
 
+    /**
+     * Configura el ViewPager2 con un adaptador para mostrar los fragmentos de "Rented" y "Listed".
+     *
+     * @param viewPager El ViewPager2 a configurar.
+     * @param user      El usuario actual.
+     */
     private void setupViewPager(ViewPager2 viewPager, User user) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity(), user);
         viewPager.setAdapter(adapter);
     }
 
+    /**
+     * Actualiza la UI del perfil con los datos del usuario actual.
+     */
     private void updateProfileUI() {
         if (currentUser != null) {
             nameTextView.setText(currentUser.getName() + " " + currentUser.getLastName());
@@ -173,6 +208,9 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    /**
+     * Muestra un cuadro de diálogo con las opciones de configuración del perfil.
+     */
     private void showProfileSettingsDialog() {
         View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_profile_settings, null);
         AlertDialog settingsDialog = new AlertDialog.Builder(requireContext())
@@ -210,6 +248,9 @@ public class ProfileFragment extends Fragment {
         settingsDialog.show();
     }
 
+    /**
+     * Inicia la actividad para seleccionar una nueva foto de perfil.
+     */
     private void changeProfilePicture() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -217,6 +258,9 @@ public class ProfileFragment extends Fragment {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
 
+    /**
+     * Muestra un cuadro de diálogo para cambiar la contraseña del usuario.
+     */
     private void changePassword() {
         View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_change_password, null);
         AlertDialog changePasswordDialog = new AlertDialog.Builder(requireContext())
@@ -260,7 +304,12 @@ public class ProfileFragment extends Fragment {
         changePasswordDialog.show();
     }
 
-
+    /**
+     * Muestra un cuadro de diálogo personalizado con un mensaje.
+     *
+     * @param title   El título del cuadro de diálogo.
+     * @param message El mensaje del cuadro de diálogo.
+     */
     private void showCustomDialog(String title, String message) {
         View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_custom, null);
         AlertDialog customDialog = new AlertDialog.Builder(requireContext())
@@ -279,7 +328,9 @@ public class ProfileFragment extends Fragment {
         customDialog.show();
     }
 
-
+    /**
+     * Muestra un cuadro de diálogo para actualizar la información del usuario.
+     */
     private void updateUserInfo() {
         View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_update_user_info, null);
         AlertDialog updateUserInfoDialog = new AlertDialog.Builder(requireContext())
@@ -361,7 +412,11 @@ public class ProfileFragment extends Fragment {
         updateUserInfoDialog.show();
     }
 
-
+    /**
+     * Muestra un cuadro de diálogo de error con un mensaje.
+     *
+     * @param message El mensaje de error a mostrar.
+     */
     private void showErrorDialog(String message) {
         View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_error, null);
         AlertDialog errorDialog = new AlertDialog.Builder(requireContext())
@@ -380,6 +435,11 @@ public class ProfileFragment extends Fragment {
         errorDialog.show();
     }
 
+    /**
+     * Muestra un cuadro de diálogo de éxito con un mensaje.
+     *
+     * @param message El mensaje de éxito a mostrar.
+     */
     private void showSuccessDialog(String message) {
         View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_success, null);
         AlertDialog successDialog = new AlertDialog.Builder(requireContext())
@@ -398,6 +458,9 @@ public class ProfileFragment extends Fragment {
         successDialog.show();
     }
 
+    /**
+     * Muestra un cuadro de diálogo para eliminar la cuenta del usuario.
+     */
     private void deleteAccount() {
         View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_delete_account, null);
         AlertDialog deleteAccountDialog = new AlertDialog.Builder(requireContext())
@@ -453,7 +516,6 @@ public class ProfileFragment extends Fragment {
         deleteAccountDialog.show();
     }
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -464,7 +526,6 @@ public class ProfileFragment extends Fragment {
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
                 byte[] imageBytes = byteArrayOutputStream.toByteArray();
-
                 userController.updateUserProfilePicture(currentUser.getUserId(), imageBytes, new UserController.UserCallback() {
                     @Override
                     public void onSuccess(Object result) {
@@ -517,3 +578,4 @@ public class ProfileFragment extends Fragment {
         }
     }
 }
+

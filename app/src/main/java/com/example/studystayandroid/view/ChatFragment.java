@@ -1,3 +1,23 @@
+/*
+ * StudyStay © 2024
+ *
+ * All rights reserved.
+ *
+ * This software and associated documentation files (the "Software") are owned by StudyStay. Unauthorized copying, distribution, or modification of this Software is strictly prohibited.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this Software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * StudyStay
+ * José María Pozo Hidalgo
+ * Email: josemariph7@gmail.com
+ *
+ *
+ */
+
 package com.example.studystayandroid.view;
 
 import android.content.Context;
@@ -28,6 +48,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Fragmento para mostrar y gestionar las conversaciones de chat.
+ */
 public class ChatFragment extends Fragment {
 
     private RecyclerView recyclerViewConversations;
@@ -37,8 +60,11 @@ public class ChatFragment extends Fragment {
     private ConversationController conversationController;
     private Long currentUserId;
 
+    /**
+     * Constructor público y vacío requerido.
+     */
     public ChatFragment() {
-        // Required empty public constructor
+        // Constructor vacío requerido
     }
 
     @Override
@@ -71,10 +97,13 @@ public class ChatFragment extends Fragment {
 
         fetchConversations();
 
-        conversationAdapter.setOnItemClickListener(conversation -> openMessageFragment(conversation));
-        conversationAdapter.setOnItemLongClickListener(conversation -> showConversationOptions(conversation));
+        conversationAdapter.setOnItemClickListener(this::openMessageFragment);
+        conversationAdapter.setOnItemLongClickListener(this::showConversationOptions);
     }
 
+    /**
+     * Obtiene las conversaciones del usuario actual.
+     */
     private void fetchConversations() {
         conversationController.getConversations(currentUserId, new ConversationController.ConversationListCallback() {
             @Override
@@ -107,6 +136,11 @@ public class ChatFragment extends Fragment {
         });
     }
 
+    /**
+     * Muestra las opciones para la conversación seleccionada.
+     *
+     * @param conversation La conversación seleccionada.
+     */
     private void showConversationOptions(Conversation conversation) {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View dialogView = inflater.inflate(R.layout.dialog_options, null);
@@ -139,6 +173,11 @@ public class ChatFragment extends Fragment {
         dialog.show();
     }
 
+    /**
+     * Elimina la conversación seleccionada.
+     *
+     * @param conversation La conversación a eliminar.
+     */
     private void deleteConversation(Conversation conversation) {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View dialogView = inflater.inflate(R.layout.dialog_delete_confirmation, null);
@@ -180,13 +219,18 @@ public class ChatFragment extends Fragment {
         dialog.show();
     }
 
+    /**
+     * Abre el perfil del usuario en la conversación.
+     *
+     * @param conversation La conversación seleccionada.
+     */
     private void openUserProfile(Conversation conversation) {
         Long otherUserId = conversation.getUser1Id().equals(currentUserId) ? conversation.getUser2Id() : conversation.getUser1Id();
         UserController userController = new UserController(getContext());
         userController.getUserById(otherUserId, new UserController.UserCallback() {
             @Override
             public void onSuccess(Object result) {
-                User user=(User) result;
+                User user = (User) result;
                 StrangeProfileFragment profileFragment = StrangeProfileFragment.newInstance(user);
                 getParentFragmentManager()
                         .beginTransaction()
@@ -212,6 +256,11 @@ public class ChatFragment extends Fragment {
         });
     }
 
+    /**
+     * Abre el fragmento de mensajes para la conversación seleccionada.
+     *
+     * @param conversation La conversación seleccionada.
+     */
     private void openMessageFragment(Conversation conversation) {
         MessageFragment messageFragment = MessageFragment.newInstance(conversation);
         getParentFragmentManager()
@@ -220,6 +269,4 @@ public class ChatFragment extends Fragment {
                 .addToBackStack(null)
                 .commit();
     }
-
-
 }
