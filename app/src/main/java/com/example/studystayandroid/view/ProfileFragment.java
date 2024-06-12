@@ -77,6 +77,7 @@ public class ProfileFragment extends Fragment {
     private ImageView profilePhoto;
     private Button contactButton;
     private NavigationView navigationView;
+    private Long Id;
 
     /**
      * Constructor público requerido vacío.
@@ -124,35 +125,47 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onSuccess(Object result) {
                 currentUser = (User) result;
-                updateProfileUI();
-                setupViewPager(viewPager, currentUser);
-                new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
-                    switch (position) {
-                        case 0:
-                            tab.setText("Rented");
-                            break;
-                        case 1:
-                            tab.setText("Listed");
-                            break;
-                    }
-                }).attach();
+                Id=currentUser.getUserId();
+                Log.d("ProfileFragment", "User loaded successfully:" + currentUser.toString());
+                if (currentUser != null) {
+                    updateProfileUI();
+                    setupViewPager(viewPager, currentUser);
+                    new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
+                        switch (position) {
+                            case 0:
+                                tab.setText("Rented");
+                                break;
+                            case 1:
+                                tab.setText("Listed");
+                                break;
+                        }
+                    }).attach();
+                } else {
+                    Log.e("ProfileFragment", "Error: currentUser is null after getUserById.");
+                }
             }
 
             @Override
             public void onSuccess(User user) {
                 currentUser = user;
-                updateProfileUI();
-                setupViewPager(viewPager, currentUser);
-                new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
-                    switch (position) {
-                        case 0:
-                            tab.setText("Rented");
-                            break;
-                        case 1:
-                            tab.setText("Listed");
-                            break;
-                    }
-                }).attach();
+                Id=currentUser.getUserId();
+                Log.d("ProfileFragment", "User loaded successfully:" + currentUser.toString());
+                if (currentUser != null) {
+                    updateProfileUI();
+                    setupViewPager(viewPager, currentUser);
+                    new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
+                        switch (position) {
+                            case 0:
+                                tab.setText("Rented");
+                                break;
+                            case 1:
+                                tab.setText("Listed");
+                                break;
+                        }
+                    }).attach();
+                } else {
+                    Log.e("ProfileFragment", "Error: currentUser is null after getUserById.");
+                }
             }
 
             @Override
@@ -178,6 +191,9 @@ public class ProfileFragment extends Fragment {
     /**
      * Actualiza la UI del perfil con los datos del usuario actual.
      */
+    /**
+     * Actualiza la UI del perfil con los datos del usuario actual.
+     */
     private void updateProfileUI() {
         if (currentUser != null) {
             nameTextView.setText(currentUser.getName() + " " + currentUser.getLastName());
@@ -194,19 +210,23 @@ public class ProfileFragment extends Fragment {
             }
 
             dniTextView.setText(currentUser.getDni());
-            if (currentUser.getProfilePicture() != null) {
+
+            byte[] profilePicture = currentUser.getProfilePicture();
+            if (profilePicture != null && profilePicture.length > 0) {
                 Glide.with(this)
-                        .load(currentUser.getProfilePicture())
+                        .load(profilePicture)
                         .transform(new CircleCrop())
                         .into(profilePhoto);
             } else {
                 Glide.with(this)
-                        .load(R.drawable.defaultprofile)
+                        .load(R.drawable.defaultprofile)  // Asegúrate de que la imagen por defecto esté en drawable
                         .transform(new CircleCrop())
                         .into(profilePhoto);
             }
         }
     }
+
+
 
     /**
      * Muestra un cuadro de diálogo con las opciones de configuración del perfil.
@@ -230,7 +250,7 @@ public class ProfileFragment extends Fragment {
 
         changePasswordButton.setOnClickListener(v -> {
             settingsDialog.dismiss();
-            changePassword();
+            changePassword(currentUser);
         });
 
         updateUserInfoButton.setOnClickListener(v -> {
@@ -261,7 +281,8 @@ public class ProfileFragment extends Fragment {
     /**
      * Muestra un cuadro de diálogo para cambiar la contraseña del usuario.
      */
-    private void changePassword() {
+    private void changePassword(User user) {
+        Log.d("ProfileFragment", "User: " + user.toString());
         View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_change_password, null);
         AlertDialog changePasswordDialog = new AlertDialog.Builder(requireContext())
                 .setView(dialogView)
@@ -273,24 +294,49 @@ public class ProfileFragment extends Fragment {
         Button buttonConfirm = dialogView.findViewById(R.id.buttonConfirm);
 
         buttonCancel.setOnClickListener(v -> changePasswordDialog.dismiss());
+        Log.d("CONTRASEÑA","CONTRA:"+user.getPassword());
         buttonConfirm.setOnClickListener(v -> {
-            String currentPassword = currentPasswordEditText.getText().toString();
-            String newPassword = newPasswordEditText.getText().toString();
-
-            if (newPassword.length() < 6) {
+            boolean hasError = false;
+            String currentPassword = currentPasswordEditText.getText().toString().trim();
+            String newPassword = newPasswordEditText.getText().toString().trim();
+            Log.d("CONTRASEÑAACTUAL","contra:"+user.getPassword());
+            Log.d("CONTRASEÑANUEVA","contra:"+newPassword);
+            // Validaciones de errores
+            if (currentPassword.isEmpty() && newPassword.isEmpty()) {
+                showErrorDialog("Current and new password cannot be empty");
+                hasError = true;
+            } else if (currentPassword.isEmpty()) {
+                showErrorDialog("Current password cannot be empty");
+                hasError = true;
+            } else if (newPassword.isEmpty()) {
+                showErrorDialog("New password cannot be empty");
+                hasError = true;
+            } else if (user.getPassword() == null) {
+                showErrorDialog("Current password is not set. Please contact support.");
+                hasError = true;
+            } else if (!currentPassword.equals(user.getPassword())) {
+                showErrorDialog("Current password is incorrect");
+                hasError = true;
+            } else if (newPassword.length() < 6) {
                 showErrorDialog("New password must be at least 6 characters long");
-            } else {
-                userController.updateUserPassword(currentUser.getUserId(), currentPassword, newPassword, new UserController.UserCallback() {
+                hasError = true;
+            }
+
+            // Si no hay errores, procede a cambiar la contraseña
+            if (!hasError) {
+                userController.updateUserPassword(user.getUserId(), currentPassword, newPassword, new UserController.UserCallback() {
                     @Override
                     public void onSuccess(Object result) {
-                        changePasswordDialog.dismiss();
+                        currentUser.setPassword(newPassword);
                         showSuccessDialog("Password changed successfully");
+                        changePasswordDialog.dismiss();
                     }
 
                     @Override
                     public void onSuccess(User user) {
-                        changePasswordDialog.dismiss();
+                        currentUser.setPassword(newPassword);
                         showSuccessDialog("Password changed successfully");
+                        changePasswordDialog.dismiss();
                     }
 
                     @Override
@@ -302,30 +348,6 @@ public class ProfileFragment extends Fragment {
         });
 
         changePasswordDialog.show();
-    }
-
-    /**
-     * Muestra un cuadro de diálogo personalizado con un mensaje.
-     *
-     * @param title   El título del cuadro de diálogo.
-     * @param message El mensaje del cuadro de diálogo.
-     */
-    private void showCustomDialog(String title, String message) {
-        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_custom, null);
-        AlertDialog customDialog = new AlertDialog.Builder(requireContext())
-                .setView(dialogView)
-                .create();
-
-        TextView dialogTitle = dialogView.findViewById(R.id.dialogTitle);
-        TextView dialogMessage = dialogView.findViewById(R.id.dialogMessage);
-        Button buttonConfirm = dialogView.findViewById(R.id.buttonConfirm);
-
-        dialogTitle.setText(title);
-        dialogMessage.setText(message);
-
-        buttonConfirm.setOnClickListener(v -> customDialog.dismiss());
-
-        customDialog.show();
     }
 
     /**
@@ -481,7 +503,7 @@ public class ProfileFragment extends Fragment {
                 userController.deleteUser(currentUser.getUserId(), password, new UserController.UserCallback() {
                     @Override
                     public void onSuccess(Object result) {
-                        deleteAccountDialog.dismiss(); // Dismiss the dialog after successful deletion
+                        deleteAccountDialog.dismiss();
                         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.remove("userId");
@@ -494,7 +516,7 @@ public class ProfileFragment extends Fragment {
 
                     @Override
                     public void onSuccess(User user) {
-                        deleteAccountDialog.dismiss(); // Dismiss the dialog after successful deletion
+                        deleteAccountDialog.dismiss();
                         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.remove("userId");

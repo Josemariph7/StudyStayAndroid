@@ -161,6 +161,7 @@ public class UserController {
                         user.setUserId(response.getLong("UserId"));
                         user.setName(response.getString("Name"));
                         user.setLastName(response.getString("LastName"));
+                        user.setPassword(response.getString("Password"));
                         user.setEmail(response.getString("Email"));
                         user.setPhone(response.getString("Phone"));
                         user.setBirthDate(response.has("BirthDate") && !response.isNull("BirthDate") ? LocalDate.parse(response.getString("BirthDate")) : null);
@@ -282,6 +283,7 @@ public class UserController {
         };
         requestQueue.add(stringRequest);
     }
+
 
 
     /**

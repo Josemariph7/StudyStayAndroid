@@ -1,29 +1,10 @@
-/*
- * StudyStay © 2024
- *
- * All rights reserved.
- *
- * This software and associated documentation files (the "Software") are owned by StudyStay. Unauthorized copying, distribution, or modification of this Software is strictly prohibited.
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this Software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- *
- * StudyStay
- * José María Pozo Hidalgo
- * Email: josemariph7@gmail.com
- *
- *
- */
-
 package com.example.studystayandroid.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,12 +35,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Fragmento para manejar la visualización y envío de mensajes dentro de una conversación.
- */
 public class MessageFragment extends Fragment {
 
     private static final String ARG_CONVERSATION = "arg_conversation";
+    private static final int POLLING_INTERVAL_MS = 1000;
 
     private Conversation conversation;
     private RecyclerView recyclerViewMessages;
@@ -76,12 +55,9 @@ public class MessageFragment extends Fragment {
     private MessageController messageController;
     private Long currentUserId;
 
-    /**
-     * Crea una nueva instancia de MessageFragment con una conversación específica.
-     *
-     * @param conversation La conversación que se va a manejar.
-     * @return Una nueva instancia de MessageFragment.
-     */
+    private Handler handler;
+    private Runnable pollingRunnable;
+
     public static MessageFragment newInstance(Conversation conversation) {
         MessageFragment fragment = new MessageFragment();
         Bundle args = new Bundle();
@@ -108,7 +84,6 @@ public class MessageFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Inicializa todas las vistas aquí
         recyclerViewMessages = view.findViewById(R.id.recyclerViewMessages);
         messageInputLayout = view.findViewById(R.id.messageInputLayout);
         editTextMessage = view.findViewById(R.id.editTextMessage);
@@ -127,7 +102,6 @@ public class MessageFragment extends Fragment {
             return;
         }
 
-        // Configura los listeners después de inicializar las vistas
         textViewUser.setOnClickListener(v -> openUserProfile());
         imageViewProfile.setOnClickListener(v -> openUserProfile());
 
@@ -142,11 +116,34 @@ public class MessageFragment extends Fragment {
 
         fetchMessages(conversation.getConversationId());
         loadUserProfile();
+
+        // Inicializar el Handler y el Runnable para el polling
+        handler = new Handler();
+        pollingRunnable = new Runnable() {
+            @Override
+            public void run() {
+                fetchMessages(conversation.getConversationId());
+                handler.postDelayed(this, POLLING_INTERVAL_MS);
+            }
+        };
+
+        startPolling();
     }
 
-    /**
-     * Abre el perfil del usuario contrario en la conversación.
-     */
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        stopPolling();
+    }
+
+    private void startPolling() {
+        handler.post(pollingRunnable);
+    }
+
+    private void stopPolling() {
+        handler.removeCallbacks(pollingRunnable);
+    }
+
     private void openUserProfile() {
         Long otherUserId = conversation.getUser2Id().equals(currentUserId) ? conversation.getUser1Id() : conversation.getUser2Id();
         UserController userController = new UserController(getContext());
@@ -179,11 +176,12 @@ public class MessageFragment extends Fragment {
         });
     }
 
-    /**
-     * Obtiene los mensajes de una conversación específica.
-     *
-     * @param conversationId ID de la conversación.
-     */
+    private void scrollToBottom() {
+        if (messageList.size() > 0) {
+            recyclerViewMessages.smoothScrollToPosition(messageList.size() - 1);
+        }
+    }
+
     private void fetchMessages(Long conversationId) {
         messageController.getMessages(conversationId, new MessageController.MessageListCallback() {
             @Override
@@ -191,6 +189,7 @@ public class MessageFragment extends Fragment {
                 messageList.clear();
                 messageList.addAll(messages);
                 messageAdapter.notifyDataSetChanged();
+                scrollToBottom(); // Asegúrate de hacer scroll al final después de cargar los mensajes
             }
 
             @Override
@@ -200,9 +199,6 @@ public class MessageFragment extends Fragment {
         });
     }
 
-    /**
-     * Envía un mensaje en la conversación actual.
-     */
     private void sendMessage() {
         String content = editTextMessage.getText().toString();
         if (content.isEmpty()) {
@@ -212,6 +208,7 @@ public class MessageFragment extends Fragment {
         Message message = new Message(null, conversation.getConversationId(), currentUserId, conversation.getUser2Id(), content, LocalDateTime.now());
         messageList.add(message);
         messageAdapter.notifyDataSetChanged();
+        scrollToBottom(); // Asegúrate de hacer scroll al final después de enviar un mensaje
         editTextMessage.setText("");
 
         messageController.createMessage(message, new MessageController.MessageCallback() {
@@ -227,9 +224,7 @@ public class MessageFragment extends Fragment {
         });
     }
 
-    /**
-     * Carga el perfil del usuario contrario en la conversación.
-     */
+
     private void loadUserProfile() {
         Long otherUserId = conversation.getUser2Id();
         if (otherUserId.equals(currentUserId)) {
