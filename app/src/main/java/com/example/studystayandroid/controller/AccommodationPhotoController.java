@@ -250,8 +250,6 @@ public class AccommodationPhotoController {
     }
 
 
-
-
     /**
      * Elimina una foto por su ID.
      *

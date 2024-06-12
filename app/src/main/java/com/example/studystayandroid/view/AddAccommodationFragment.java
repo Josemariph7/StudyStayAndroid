@@ -195,69 +195,44 @@ public class AddAccommodationFragment extends Fragment {
         boolean isValid = validateInputs(address, city, price, description, capacity, services);
 
         if (isValid) {
-            // Verificar si el alojamiento ya existe
-            accommodationController.getAccommodations(new AccommodationController.AccommodationListCallback() {
+            Accommodation accommodation = new Accommodation();
+            accommodation.setOwner(currentUser);
+            accommodation.setAddress(address);
+            accommodation.setCity(city);
+            accommodation.setPrice(new BigDecimal(price));
+            accommodation.setDescription(description);
+            accommodation.setCapacity(capacity);
+            accommodation.setServices(services);
+            accommodation.setAvailability(true);
+            accommodation.setRating(0.0);
+
+            accommodationController.createAccommodation(accommodation, new AccommodationController.AccommodationCallback() {
                 @Override
-                public void onSuccess(List<Accommodation> accommodations) {
-                    for (Accommodation existingAccommodation : accommodations) {
-                        if (existingAccommodation.getOwner().getUserId().equals(currentUser.getUserId()) &&
-                                existingAccommodation.getAddress().equalsIgnoreCase(address)) {
-                            Toast.makeText(getContext(), "Accommodation already exists at this address.", Toast.LENGTH_SHORT).show();
-                            submitButton.setEnabled(true);  // Rehabilitar el botón de envío
-                            return;
-                        }
+                public void onSuccess(Object result) {
+                    Accommodation createdAccommodation = (Accommodation) result;
+                    if (selectedImagesUris.isEmpty()) {
+                        clearForm();
+                        navigateBackWithSuccess();
+                    } else {
+                        uploadPhotos(createdAccommodation);
                     }
+                    submitButton.setEnabled(true);  // Rehabilitar el botón de envío
+                }
 
-                    // Crear nuevo alojamiento si no existe duplicado
-                    Accommodation accommodation = new Accommodation();
-                    accommodation.setOwner(currentUser);
-                    accommodation.setAddress(address);
-                    accommodation.setCity(city);
-                    accommodation.setPrice(new BigDecimal(price));
-                    accommodation.setDescription(description);
-                    accommodation.setCapacity(capacity);
-                    accommodation.setServices(services);
-                    accommodation.setAvailability(true);
-                    accommodation.setRating(0.0);
-
-                    accommodationController.createAccommodation(accommodation, new AccommodationController.AccommodationCallback() {
-                        @Override
-                        public void onSuccess(Object result) {
-                            Accommodation createdAccommodation = (Accommodation) result;
-                            if (selectedImagesUris.isEmpty()) {
-                                clearForm();
-                                navigateBackWithSuccess();
-                                Toast.makeText(getContext(), "Accommodation created successfully", Toast.LENGTH_SHORT).show();
-                            } else {
-                                uploadPhotos(createdAccommodation);
-                            }
-                            submitButton.setEnabled(true);  // Rehabilitar el botón de envío
-                        }
-
-                        @Override
-                        public void onSuccess(Accommodation createdAccommodation) {
-                            if (selectedImagesUris.isEmpty()) {
-                                clearForm();
-                                navigateBackWithSuccess();
-                                Toast.makeText(getContext(), "Accommodation created successfully", Toast.LENGTH_SHORT).show();
-                            } else {
-                                uploadPhotos(createdAccommodation);
-                            }
-                            submitButton.setEnabled(true);  // Rehabilitar el botón de envío
-                        }
-
-                        @Override
-                        public void onError(String error) {
-                            Log.e("AddAccommodationFragment", "Error creating accommodation: " + error);
-                            Toast.makeText(getContext(), "Error creating accommodation: " + error, Toast.LENGTH_SHORT).show();
-                            submitButton.setEnabled(true);  // Rehabilitar el botón de envío
-                        }
-                    });
+                @Override
+                public void onSuccess(Accommodation createdAccommodation) {
+                    if (selectedImagesUris.isEmpty()) {
+                        clearForm();
+                        navigateBackWithSuccess();
+                    } else {
+                        uploadPhotos(createdAccommodation);
+                    }
+                    submitButton.setEnabled(true);  // Rehabilitar el botón de envío
                 }
 
                 @Override
                 public void onError(String error) {
-                    Log.e("AddAccommodationFragment", "Error checking accommodations: " + error);
+                    Log.e("AddAccommodationFragment", "Error creating accommodation: " + error);
                     submitButton.setEnabled(true);  // Rehabilitar el botón de envío
                 }
             });
@@ -265,6 +240,7 @@ public class AddAccommodationFragment extends Fragment {
             submitButton.setEnabled(true);  // Rehabilitar el botón de envío si hay errores de validación
         }
     }
+
 
     /**
      * Valida los datos de entrada del usuario.
@@ -288,7 +264,6 @@ public class AddAccommodationFragment extends Fragment {
         }
 
         if (city.equals("All")) {
-            Toast.makeText(getContext(), "Please select a city.", Toast.LENGTH_SHORT).show();
             isValid = false;
         }
 
@@ -320,7 +295,6 @@ public class AddAccommodationFragment extends Fragment {
         }
 
         if (capacity <= 0) {
-            Toast.makeText(getContext(), "Please select a valid capacity.", Toast.LENGTH_SHORT).show();
             isValid = false;
         }
 
@@ -334,7 +308,7 @@ public class AddAccommodationFragment extends Fragment {
      */
     private void uploadPhotos(Accommodation accommodation) {
         AccommodationPhotoController photoController = new AccommodationPhotoController(requireContext());
-
+        Log.d("AddAccommodationFragment", "Accommodation: " + accommodation);
         for (Uri uri : selectedImagesUris) {
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), uri);
@@ -350,14 +324,12 @@ public class AddAccommodationFragment extends Fragment {
                         if (selectedImagesUris.indexOf(uri) == selectedImagesUris.size() - 1) {
                             clearForm();
                             navigateBackWithSuccess();
-                            Toast.makeText(getContext(), "Accommodation and photos created successfully", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onError(String error) {
                         Log.e("AddAccommodationFragment", "Error uploading photo: " + error);
-                        Toast.makeText(getContext(), "Error uploading photo: " + error, Toast.LENGTH_SHORT).show();
                     }
                 });
             } catch (IOException e) {
@@ -365,6 +337,7 @@ public class AddAccommodationFragment extends Fragment {
             }
         }
     }
+
 
     /**
      * Navega de regreso con un mensaje de éxito.

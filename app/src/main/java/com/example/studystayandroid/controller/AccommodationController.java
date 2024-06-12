@@ -219,7 +219,20 @@ public class AccommodationController {
      */
     public void createAccommodation(Accommodation accommodation, final AccommodationCallback callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CREATE_ACCOMMODATION,
-                response -> callback.onSuccess(accommodation),
+                response -> {
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        if (jsonResponse.getString("status").equals("success")) {
+                            long accommodationId = jsonResponse.getLong("accommodationId");
+                            accommodation.setAccommodationId(accommodationId);
+                            callback.onSuccess(accommodation);
+                        } else {
+                            callback.onError(jsonResponse.getString("message"));
+                        }
+                    } catch (JSONException e) {
+                        callback.onError(e.getMessage());
+                    }
+                },
                 error -> callback.onError(error.toString())) {
             @Override
             protected Map<String, String> getParams() {
@@ -238,6 +251,7 @@ public class AccommodationController {
         };
         requestQueue.add(stringRequest);
     }
+
 
     /**
      * Actualiza un alojamiento existente.
