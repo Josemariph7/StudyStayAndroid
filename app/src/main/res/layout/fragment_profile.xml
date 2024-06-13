@@ -122,11 +122,11 @@
                     <TextView
                         android:id="@+id/birthDateTextView"
                         android:layout_width="wrap_content"
-                        android:textColor="@color/SadBlue"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:paddingLeft="20dp"
                         android:text="BirthDate"
+                        android:textColor="@color/SadBlue"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -145,11 +145,11 @@
                     <TextView
                         android:id="@+id/phoneTextView"
                         android:layout_width="wrap_content"
-                        android:textColor="@color/SadBlue"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:paddingLeft="20dp"
                         android:text="Phone"
+                        android:textColor="@color/SadBlue"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -169,10 +169,10 @@
                         android:id="@+id/registerDateTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/SadBlue"
                         android:layout_gravity="center_vertical"
                         android:paddingLeft="20dp"
                         android:text="RegistrationDate"
+                        android:textColor="@color/SadBlue"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -192,10 +192,10 @@
                         android:id="@+id/dniTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/SadBlue"
                         android:layout_gravity="center_vertical"
                         android:paddingLeft="20dp"
                         android:text="Dni"
+                        android:textColor="@color/SadBlue"
                         android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
