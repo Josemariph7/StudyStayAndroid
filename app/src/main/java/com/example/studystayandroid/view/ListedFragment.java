@@ -36,7 +36,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.studystayandroid.R;
 import com.example.studystayandroid.controller.AccommodationController;
@@ -152,7 +151,6 @@ public class ListedFragment extends Fragment {
         View dialogView = inflater.inflate(R.layout.dialog_listed_accommodation_detail, null);
 
         Button backButton = dialogView.findViewById(R.id.back_button);
-        ViewPager2 imageCarousel = dialogView.findViewById(R.id.imageCarousel);
         TextView addressTextView = dialogView.findViewById(R.id.address);
         TextView descriptionTextView = dialogView.findViewById(R.id.description);
         TextView rating = dialogView.findViewById(R.id.rating);
@@ -166,8 +164,6 @@ public class ListedFragment extends Fragment {
         for (AccommodationPhoto photo : accommodation.getPhotos()) {
             photos.add(photo.getPhotoData());
         }
-        ImageCarouselAdapter adapter = new ImageCarouselAdapter(photos, getContext());
-        imageCarousel.setAdapter(adapter);
 
         rating.setText(String.valueOf(accommodation.getRating()));
         availabilityTextView.setText(accommodation.isAvailability() ? "Available" : "Not Available");

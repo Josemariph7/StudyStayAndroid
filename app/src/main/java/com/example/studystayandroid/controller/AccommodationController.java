@@ -244,7 +244,7 @@ public class AccommodationController {
                 params.put("description", accommodation.getDescription());
                 params.put("capacity", String.valueOf(accommodation.getCapacity()));
                 params.put("services", accommodation.getServices());
-                params.put("availability", String.valueOf(accommodation.isAvailability()));
+                params.put("availability", String.valueOf(1));
                 params.put("rating", String.valueOf(accommodation.getRating()));
                 return params;
             }

@@ -66,17 +66,11 @@
     </LinearLayout>
 
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/imageCarousel"
-        android:layout_width="match_parent"
-        android:background="@android:color/transparent"
-        android:layout_height="200dp"
-       />
-
     <TextView
         android:id="@+id/address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:paddingTop="2dp"
         android:paddingBottom="2dp"
         android:text="Address"
