@@ -3398,7 +3398,6 @@ id clip_vertical
 id clockwise
 id closest
 id collapseActionView
-id commentInThisTopic
 id compress
 id confirmBookingButton
 id confirm_button

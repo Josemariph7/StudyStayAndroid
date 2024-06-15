@@ -16,12 +16,12 @@
         "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\item_image.xml"
     },
     {
-        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_iconaccommodation.png.flat",
-        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\iconaccommodation.png"
-    },
-    {
         "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_dialog_update_user_info.xml.flat",
         "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\dialog_update_user_info.xml"
+    },
+    {
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_iconaccommodation.png.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\iconaccommodation.png"
     },
     {
         "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_fotoperfil.jpg.flat",
@@ -32,12 +32,12 @@
         "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\dialog_add_review.xml"
     },
     {
-        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-xhdpi_ic_launcher_foreground.webp.flat",
-        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-xhdpi\\ic_launcher_foreground.webp"
-    },
-    {
         "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_iconfacebook.png.flat",
         "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\iconfacebook.png"
+    },
+    {
+        "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-xhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-xhdpi\\ic_launcher_foreground.webp"
     },
     {
         "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
@@ -116,6 +116,10 @@
         "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\logofondoazuloscurosimple.png"
     },
     {
+        "merged": "com.example.studystayandroid.app-debug-38:/layout_item_forum_topic.xml.flat",
+        "source": "com.example.studystayandroid.app-main-40:/layout/item_forum_topic.xml"
+    },
+    {
         "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_dialog_rented_accommodation_detail.xml.flat",
         "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\layout\\dialog_rented_accommodation_detail.xml"
     },
@@ -154,10 +158,6 @@
     {
         "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\drawable_registerradius.xml.flat",
         "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\drawable\\registerradius.xml"
-    },
-    {
-        "merged": "com.example.studystayandroid.app-debug-38:/layout_dialog_rented_accommodation_detail.xml.flat",
-        "source": "com.example.studystayandroid.app-main-40:/layout/dialog_rented_accommodation_detail.xml"
     },
     {
         "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_dialog_options.xml.flat",
@@ -426,10 +426,6 @@
     {
         "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\mipmap-xxhdpi_ic_launcher_background.webp.flat",
         "source": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-main-40:\\mipmap-xxhdpi\\ic_launcher_background.webp"
-    },
-    {
-        "merged": "com.example.studystayandroid.app-debug-38:/layout_dialog_listed_accommodation_detail.xml.flat",
-        "source": "com.example.studystayandroid.app-main-40:/layout/dialog_listed_accommodation_detail.xml"
     },
     {
         "merged": "C:\\Users\\6003102\\.gradle\\daemon\\8.6\\com.example.studystayandroid.app-debug-38:\\layout_dialog_listed_accommodation_detail.xml.flat",

@@ -87,7 +87,6 @@ public class BookingController {
                             String startDateString = bookingObject.getString("StartDate");
                             String endDateString = bookingObject.getString("EndDate");
                             String statusString = bookingObject.getString("Status");
-
                             LocalDateTime startDate = LocalDateTime.parse(startDateString, DATE_TIME_FORMATTER);
                             LocalDateTime endDate = LocalDateTime.parse(endDateString, DATE_TIME_FORMATTER);
                             Booking.BookingStatus status = Booking.BookingStatus.valueOf(statusString);

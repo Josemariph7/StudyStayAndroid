@@ -106,7 +106,6 @@ id changePasswordButton
 id changeProfilePictureButton
 id city
 id city_spinner
-id commentInThisTopic
 id confirmBookingButton
 id contactButton
 id currentPasswordEditText
